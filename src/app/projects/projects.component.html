@@ -1,0 +1,12 @@
+
+<app-loading [isLoading]="isLoading">
+    <div *ngIf="projects.length > 0; else noProjects">
+        <mat-card *ngFor="let project of projects">
+            <mat-card-title>{{project.name}}</mat-card-title>
+            </mat-card>
+    </div>  
+    <ng-template #noProjects>
+      :(
+    </ng-template>
+</app-loading>
+
