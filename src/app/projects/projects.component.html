@@ -1,12 +1,15 @@
-
 <app-loading [isLoading]="isLoading">
-    <div *ngIf="projects.length > 0; else noProjects">
-        <mat-card *ngFor="let project of projects">
-            <mat-card-title>{{project.name}}</mat-card-title>
-            </mat-card>
-    </div>  
-    <ng-template #noProjects>
-      :(
-    </ng-template>
+    <div class="owners" *ngFor="let owner of owners">
+        <h3>{{owner.name}}</h3>
+        <div class="projects" *ngIf="owner.projects; else noProjects">
+            <a [routerLink]="project.id" *ngFor="let project of owner.projects">
+                <mat-card class="item">
+                    <mat-card-title>{{project.name}}</mat-card-title>
+                </mat-card>
+            </a>
+        </div>
+        <ng-template #noProjects>
+            Aun no has existen proyectos :(
+        </ng-template>
+    </div>
 </app-loading>
-

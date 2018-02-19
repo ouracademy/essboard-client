@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'projects', loadChildren: 'app/projects/routing.module#RoutingModule' }
+      { path: 'projects', loadChildren: 'app/projects/module#Module' }
     ]
   }
 ];
