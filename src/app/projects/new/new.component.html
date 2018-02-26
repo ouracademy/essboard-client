@@ -1,0 +1,33 @@
+<!-- TODO create project from template-->
+<div class="info">
+    <h3>New project</h3>
+    <p>A project is where you house your files (repository), plan your work (issues),
+    and publish your documentation (wiki), among other things.</p>
+    <p>All features are enabled when you create a project, but you can disable the
+    ones you don’t need in the project settings.</p>
+</div>
+<div>
+    <p>Name</p>
+    <mat-form-field>
+        <input matInput placeholder="your-project-name"> 
+    </mat-form-field>
+  
+    
+    <p>Description (optional)</p>
+    <textarea placeholder="Make a short description of your project"></textarea>
+    
+    <p>Visibility</p>
+    <div>
+        <input type="checkbox">
+        <span>Private</span>
+        Project access must be granted explicitly to each user.
+    </div>
+    <div>
+        <input type="checkbox">
+        <span>Public</span>
+        The project can be accessed without any authentication.
+    </div>
+    
+    <button mat-raised-button color="primary">Create project</button>
+    <a routerLink="/projects" mat-raised-button>Cancel</a>
+</div>
