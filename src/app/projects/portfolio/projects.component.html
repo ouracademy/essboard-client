@@ -4,7 +4,7 @@
 <app-loading [isLoading]="isLoading">
     <div class="owners" *ngFor="let owner of owners">
         <h3>{{owner.name}}</h3>
-        <div class="projects" *ngIf="owner.projects; else noProjects">
+        <div  fxLayout *ngIf="owner.projects; else noProjects">
             <a [routerLink]="project.id" *ngFor="let project of owner.projects">
                 <mat-card class="item">
                     <mat-card-title>{{project.name}}</mat-card-title>

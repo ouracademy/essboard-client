@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+$spacer: 2rem;
+
+.p-0 {
+  padding: 0;
+}
+
+.p-1 {
+  padding: $spacer * 0.25;
+}
+
+.p-2 {
+  padding: $spacer * 0.5;
+}
+
+.p-3 {
+  padding: $spacer;
+}
+
+label{
+    font-weight:500;
+    display:block;
+}
+textarea{
+    outline-color: #c7daf0;
+}
