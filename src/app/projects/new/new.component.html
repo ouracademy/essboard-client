@@ -6,27 +6,50 @@
             among other things.</p>
         <p>All features are enabled when you create a project, but you can disable the ones you don’t need in the project settings.</p>
     </div>
-    <div class="form p-2" fxFlex fxLayout="column">
-        <label>Name</label>
-        <mat-form-field floatLabel="never">
-            <input matInput placeholder="your-proyect-name">
-        </mat-form-field>
-
-        <label>Description (optional)</label>
-        <textarea  placeholder="Make a short description of your project"  col="50" rows="4"></textarea>
-
-
-        <p>Visibility</p>
-        <div>
-            <input type="checkbox">
-            <span>Private</span> Project access must be granted explicitly to each user.
+    <form class="p-2" fxFlex fxLayout="column"
+        [formGroup]="form" (ngSubmit)="create()" novalidate>
+        <div class="form-control">
+            <label>Name</label>
+            <mat-form-field floatLabel="never">
+                <input matInput formControlName="name" 
+                    placeholder="your-proyect-name" >
+            </mat-form-field>
         </div>
-        <div>
-            <input type="checkbox">
-            <span>Public</span> The project can be accessed without any authentication.
+        <div class="form-control">
+            <label>Description (optional)</label>
+            <textarea formControlName="description" 
+                placeholder="Make a short description of your project"  
+                col="50" rows="4"></textarea>
         </div>
 
-        <button mat-raised-button color="primary">Create project</button>
-        <a routerLink="/projects" mat-raised-button>Cancel</a>
-    </div>
+        <div class="form-control">
+            <label>Visibility</label>
+            <mat-radio-group formControlName="visibility" fxLayout="column">
+                <mat-radio-button value="public" >
+                    <div fxLayout fxLayoutGap="10px" fxLayoutAlign="start center">
+                        <mat-icon>public</mat-icon>
+                        <div fxLayout="column">
+                            <label>Public</label>
+                            <span>The project can be accessed without any authentication.</span>
+                        </div>
+                    </div>
+                </mat-radio-button>
+            
+                <mat-radio-button value="private">
+                    <div fxLayout fxLayoutGap="10px" fxLayoutAlign="start center">
+                        <mat-icon>lock_outline</mat-icon>
+                        <div fxLayout="column">
+                            <label>Private</label>
+                            <span>Project access must be granted explicitly to each user.</span>
+                        </div>
+                    </div>
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="p-1">
+            <button type="submit" mat-raised-button color="primary"
+                [disabled]="!form.valid" >Create project</button>
+            <a routerLink="/projects" mat-raised-button>Cancel</a>
+        </div>    
+    </form>
 </div>
