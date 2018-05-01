@@ -5,7 +5,7 @@
     <div class="owners" *ngFor="let owner of owners">
         <h3>{{owner.name}}</h3>
         <div  fxLayout *ngIf="owner.projects; else noProjects">
-            <a [routerLink]="project.id" *ngFor="let project of owner.projects">
+            <a routerLink="see/{{project.id}}" *ngFor="let project of owner.projects">
                 <mat-card class="item">
                     <mat-card-title>{{project.name}}</mat-card-title>
                 </mat-card>

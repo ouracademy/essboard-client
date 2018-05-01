@@ -15,15 +15,16 @@ export class NewComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      name: ['', Validators.required],
+      name: [null, Validators.required],
       description: '',
-      visibility: ['', Validators.required], // o isPublic?
+      visibility: [null, Validators.required], // o isPublic?
     })
   }
   
   create() {
+    const id = 'some-super-id-created-after-go-to-server'
     console.log('Creado :P', this.form.value)
-    // ir al la ruta del proyect creado
-    this.router.navigate('proyect','nameProyect')
+    // , { relativeTo: this.route }
+    this.router.navigate(['/projects/see',id ])
   }
 }

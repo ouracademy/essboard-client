@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { RoutingModule } from './app-routing.module';
+import { RoutingModule } from './routing.module';
 
 
 @NgModule({

@@ -20,6 +20,10 @@ import { RoutingModule } from './routing.module';
 
 import { ProjectsComponent } from './portfolio/projects.component'
 import { NewComponent } from './new/new.component';
+import { DetailComponent } from './detail/detail.component';
+// TODO only used in detail component!
+import {TimeAgoPipe} from 'time-ago-pipe';
+import { ErrorMessageModule } from 'ng-error-messages';
 
 
 @NgModule({
@@ -37,11 +41,14 @@ import { NewComponent } from './new/new.component';
     FlexLayoutModule,
     
     LoadingModule,
-    RoutingModule
+    RoutingModule,
+    ErrorMessageModule
   ],
   declarations: [
     ProjectsComponent,
-    NewComponent
+    NewComponent,
+    DetailComponent,
+    TimeAgoPipe
   ],
   exports: [ProjectsComponent]
 })

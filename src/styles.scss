@@ -38,3 +38,8 @@ $config: mat-typography-config();
       font-family: mat-font-family($config);
   }
 }
+
+
+.circle{
+  border-radius:50%;
+}
