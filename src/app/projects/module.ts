@@ -52,4 +52,6 @@ import { ErrorMessageModule } from 'ng-error-messages';
   ],
   exports: [ProjectsComponent]
 })
+
+
 export class Module { }

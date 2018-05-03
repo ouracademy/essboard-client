@@ -6,7 +6,13 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'projects', loadChildren: 'app/projects/module#Module' }
+      { path: '', loadChildren: 'app/landing/index.module#LandingModule' }
+    ]
+  },
+  {
+    path: 'projects',
+    children: [
+      { path: '', loadChildren: 'app/projects/module#Module' }
     ]
   }
 ];

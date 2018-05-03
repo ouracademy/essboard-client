@@ -1,0 +1,15 @@
+<div class="main-page">
+    <h1>Monitorea tu desarrollo en base a estados universales</h1>
+    <h3>Essboard es la herramienta que te ayudara a usar Esencia en tu desarrollo</h3>
+    <a class="button-main" routerLink="/login">Inicia tu monitoreo ahora</a>
+    <div class="container-icons">
+        <div class="icons">
+            <div class="icon" *ngFor="let item of kernelIcons">
+                <div class="icon-image" [ngStyle]="{ 
+                    'background': getBackground(item)
+                }"></div>
+                <p class="name">{{item.name}}</p>
+            </div>
+        </div>
+    </div>       
+</div>
