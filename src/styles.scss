@@ -1,35 +1,19 @@
 @import 'theming';
 @import 'assets/styles/main';
 
-$spacer: 2rem;
 
-.p-0 {
-  padding: 0;
-}
-
-.p-1 {
-  padding: $spacer * 0.25;
-}
-
-.p-2 {
-  padding: $spacer * 0.5;
-}
-
-.p-3 {
-  padding: $spacer;
-}
 
 $config: mat-typography-config();
 
 .form-control {
-  display: flex;    
+  display: flex;
   flex-direction: column;
-  
+
   >label{
       font-weight:500;
       display:block;
   }
-  
+
   textarea {
       margin: 1rem 0;
       outline-color: #c7daf0;

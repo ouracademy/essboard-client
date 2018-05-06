@@ -4,23 +4,19 @@
     <a mat-button color="primary" routerLink="/signup">Registrate</a>
   </right-content>
 </app-header>
+<coo></coo>
 <div fxLayout="column" fxLayoutAlign="center center">
-    <h1 class="title center">{{ labels.slogan }}</h1>
-    <h3 class="subtitle middle-width center">{{ labels.description }}</h3>
-    <br>
-    <br>
-    <a mat-raised-button color="accent" routerLink="/login">{{ labels.start }} </a>
-    <br>
-    <br>
-    <br>
-    <div class="all-width">
+    <h1 class="mat-display-2 title center">{{ labels.slogan }}</h1>
+    <h3 class="mat-display-1 subtitle middle-width center">{{ labels.description }}</h3>
+    <a class="p-2" mat-raised-button color="accent" routerLink="/login">{{ labels.start }} </a>
+    <div class="all-width p-2">
         <div fxLayout="row wrap" fxLayoutAlign="center center" >
             <div fxLayout="row wrap" fxFlex.xs="60" fxFlex.md="70"  fxFlex.sm="70" fxLayoutAlign="space-around center">
                 <div class="icon" *ngFor="let item of kernelIcons">
                     <div class="icon-image" [ngStyle]="{
                     'background': getBackground(item)
                  }"></div>
-                    <p class="name">{{item.name}}</p>
+                    <h3 class="subtitle">{{item.name}}</h3>
                 </div>
             </div>
         </div>

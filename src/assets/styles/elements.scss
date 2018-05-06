@@ -1,19 +1,46 @@
+$spacer: 3rem;
+*{
+  box-sizing: border-box;
+}
+.p-0 {
+  padding: 0;
+}
+
+.p-1 {
+  padding: $spacer * 0.25;
+}
+
+.p-2 {
+  padding: $spacer * 0.5;
+}
+
+.p-3 {
+  padding: $spacer;
+}
+
+.m-1{
+  margin: $spacer * 0.25;
+}
+.m-2{
+  margin: $spacer * 0.5;
+}
+.m-3{
+  margin: $spacer ;
+}
 .title{
     color: $primary;
-    font-weight: bold;
-  }
+}
 .subtitle{
     color: $label;
-    font-weight: bold;
-  }
+}
 
 
-  .all-width{
-      width:100%;
-  }
-  .middle-width{
-      width:40%;
-  }
-  .center{
+.all-width{
+  width:100%;
+}
+.middle-width{
+   width:50%;
+}
+.center{
       text-align:center;
-  }
+}
