@@ -1,24 +1,24 @@
 <app-header>
   <right-content>
-    <a mat-button color="primary" routerLink="/login">Ingresa</a>
-    <a mat-button color="primary" routerLink="/signup">Registrate</a>
+    <a class="button" mat-button color="primary" routerLink="/login">Ingresa</a>
+    <a class="button" mat-button color="primary" routerLink="/signup">Registrate</a>
   </right-content>
 </app-header>
 <coo></coo>
 <div fxLayout="column" fxLayoutAlign="center center">
-    <h1 class="mat-display-2 title center">{{ labels.slogan }}</h1>
-    <h3 class="mat-display-1 subtitle middle-width center">{{ labels.description }}</h3>
-    <a class="p-2" mat-raised-button color="accent" routerLink="/login">{{ labels.start }} </a>
-    <div class="all-width p-2">
-        <div fxLayout="row wrap" fxLayoutAlign="center center" >
-            <div fxLayout="row wrap" fxFlex.xs="60" fxFlex.md="70"  fxFlex.sm="70" fxLayoutAlign="space-around center">
-                <div class="icon" *ngFor="let item of kernelIcons">
-                    <div class="icon-image" [ngStyle]="{
-                    'background': getBackground(item)
-                 }"></div>
-                    <h3 class="subtitle">{{item.name}}</h3>
-                </div>
-            </div>
+  <h1 class="mat-display-2 primary center">{{ labels.slogan }}</h1>
+  <h4 class="mat-display-1 info middle-width center">{{ labels.description }}</h4>
+  <a class="p-2" mat-raised-button color="accent" routerLink="/login">{{ labels.start }} </a>
+  <div class="all-width p-2">
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+      <div fxLayout="row wrap" fxFlex.xs="60" fxFlex.md="70" fxFlex.sm="70" fxLayoutAlign="space-around center">
+        <div class="icon" *ngFor="let item of kernelIcons">
+          <div class="icon-image" [ngStyle]="{
+                    'background': getBackground(item)}">
+          </div>
+          <h3 class="info">{{item.name}}</h3>
         </div>
+      </div>
     </div>
+  </div>
 </div>
