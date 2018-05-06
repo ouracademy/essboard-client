@@ -78,7 +78,7 @@ $blue-essboard: (
 
 
 
-$app-primary: mat-palette($mat-blue, A200, 200, 400);
+$app-primary: mat-palette($blue-essboard);
 $app-accent:  mat-palette($green-essboard);
 
 // Create the theme object (a Sass map containing all of the palettes).

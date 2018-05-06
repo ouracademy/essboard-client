@@ -1,4 +1,5 @@
 @import 'theming';
+@import 'assets/styles/main';
 
 $spacer: 2rem;
 
@@ -40,3 +41,5 @@ $config: mat-typography-config();
 .circle{
   border-radius:50%;
 }
+
+
