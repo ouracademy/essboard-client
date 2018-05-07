@@ -1,6 +1,9 @@
-
-<!--<main class="mat-typography">
-  <a routerLink="projects">Ver proyectos</a>
-    
-</main>-->
-<router-outlet></router-outlet>
+<app-header>
+    <right-content>
+        <a class="button" mat-button color="primary" routerLink="/login">Ingresa</a>
+        <a class="button" mat-button color="primary" routerLink="/signup">Registrate</a>
+    </right-content>
+</app-header>
+<main class="mat-typography">
+    <router-outlet></router-outlet>
+</main>
