@@ -6,7 +6,8 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: '', loadChildren: 'app/landing/index.module#LandingModule' }
+      { path: '', loadChildren: 'app/landing/index.module#LandingModule' },
+      { path: 'login', loadChildren: 'app/login/index.module#LoginModule' }
     ]
   },
   {
@@ -15,6 +16,8 @@ const routes: Routes = [
       { path: '', loadChildren: 'app/projects/module#Module' }
     ]
   }
+
+
 ];
 
 @NgModule({

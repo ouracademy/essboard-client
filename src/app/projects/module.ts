@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { 
+import {
   MatCardModule,
   MatButtonModule,
   // TODO: only used in new component (move to its own module)
   MatFormFieldModule,
-  MatInputModule, 
+  MatInputModule,
   MatRadioModule,
   MatIconModule
 } from '@angular/material'
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms'
 
+import { ReactiveFormsModule } from '@angular/forms'
 
 import { LoadingModule } from '../shared/loading/loading.module';
 import { RoutingModule } from './routing.module';
@@ -26,17 +26,17 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 @NgModule({
   imports: [
     CommonModule,
-    
+
     ReactiveFormsModule,
-    
+
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule, 
+    MatInputModule,
     MatRadioModule,
     MatIconModule,
     FlexLayoutModule,
-    
+
     LoadingModule,
     RoutingModule
   ],
