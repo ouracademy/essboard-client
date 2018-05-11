@@ -4,3 +4,20 @@ body{
 
 @import 'variables';
 @import 'elements';
+
+html {
+  @media (min-width: 20rem) {
+    font-size: 14px;
+  }
+  @media (min-width: 30em) {
+    font-size: 10px;
+  }
+}
+
+.responsive{
+  width : 100%;
+  height: auto;
+}
+.width-70{
+  width: 70%;
+}

@@ -8,10 +8,10 @@ import { SharedService } from "@core/shared.service";
 @Component({
   selector: "app-login",
   template: `
-  <div  class="viewport" fxLayout="column" fxLayoutAlign="center center">
-    <img src='assets/images/logo/logo-horizontal.png' alt='Essboard'>
+
+  <app-auth-layout>
     <p class=''>Ingresa con tus credenciales</p>
-    <mat-card >
+    <mat-card>
         <mat-card-content fxLayout="column" fxLayoutGap="20px">
             <form  class="center" [formGroup]='loginForm' (ngSubmit)='onSubmit()'>
               <mat-form-field floatLabel='never' class='all-width'>
@@ -32,7 +32,7 @@ import { SharedService } from "@core/shared.service";
             </div>
         </mat-card-content>
     </mat-card>
-  </div>
+  </app-auth-layout>
   `
 })
 export class LoginComponent implements OnInit {

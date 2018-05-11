@@ -22,4 +22,7 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should create form', () => {
+    expect(component).toBeTruthy();
+  });
 });

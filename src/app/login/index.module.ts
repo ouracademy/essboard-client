@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms'
 
-
+import { LayoutAuthModule } from '../layouts/auth/layout.component'
 import { CommonAppModule } from '@shared/common';
 import { LoginComponent } from './components/index/index.component';
 
@@ -17,7 +17,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         ReactiveFormsModule,
         CommonModule,
-        CommonAppModule,
+        CommonAppModule, LayoutAuthModule,
         MatButtonModule,MatCardModule,MatFormFieldModule, MatInputModule
     ],
     exports: [],
