@@ -1,0 +1,18 @@
+<div>
+    <a routerLink="new" mat-raised-button>Nuevo</a>
+</div>
+<app-loading [isLoading]="isLoading">
+    <div class="owners" *ngFor="let owner of owners">
+        <h3>{{owner.name}}</h3>
+        <div  fxLayout *ngIf="owner.projects; else noProjects">
+            <a routerLink="see/{{project.id}}" *ngFor="let project of owner.projects">
+                <mat-card class="item">
+                    <mat-card-title>{{project.name}}</mat-card-title>
+                </mat-card>
+            </a>
+        </div>
+        <ng-template #noProjects>
+            Aun no has existen proyectos :(
+        </ng-template>
+    </div>
+</app-loading>

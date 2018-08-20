@@ -46,11 +46,11 @@
   <p>Conoce que areas abarca tu desarrollo y las cosas esenciales que debes monitorear</p>
   <div class="wrapper">
     <div class="areas">
-      <md-card *ngFor="let area of areas" [className]="area.nameCSSClass" (click)="showDimensions(area.name)">
-        <md-card-content>
+      <mat-card *ngFor="let area of areas" [className]="area.nameCSSClass" (click)="showDimensions(area.name)">
+        <mat-card-content>
           <p>{{area.name}}</p>
-        </md-card-content>
-      </md-card>
+        </mat-card-content>
+      </mat-card>
     </div>
     <div *ngIf="!areaSelected">
       <div class="wrapper">

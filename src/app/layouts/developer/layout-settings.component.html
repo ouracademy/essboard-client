@@ -3,12 +3,12 @@
                 col-sm-6
                 col-md-4
                 col-lg-4">
-        <md-list>
-            <md-list-item *ngFor="let option of settingOptions">
-                <md-icon md-list-avatar>{{option.icon}}</md-icon>
+        <mat-list>
+            <mat-list-item *ngFor="let option of settingOptions">
+                <mat-icon md-list-avatar>{{option.icon}}</mat-icon>
                 <h4 md-line><a routerLink="{{option.route}}">{{option.name}}</a></h4>
-            </md-list-item>
-        </md-list>
+            </mat-list-item>
+        </mat-list>
     </div>
     <div class="col-xs-6
                 col-sm-6

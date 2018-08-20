@@ -14,8 +14,8 @@
         <td class="check">
           <!--<div [className]="checkpoint.isAchieved ? 'box-check achieved':'box-check no-achieved'" >
           </div>-->
-          <md-checkbox (click)="vote(checkpoint)">  
-          </md-checkbox>
+          <mat-checkbox (click)="vote(checkpoint)">  
+          </mat-checkbox>
           <button md-button (click)="quitVote(checkpoint)">X</button>
           <td class="check">
             <avatar-letter *ngFor="let vote of checkpoint.votes" [text]="vote.member" [options]="options">

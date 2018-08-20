@@ -1,19 +1,19 @@
 <div *ngIf="session">
-    <md-toolbar class="detail">
+    <mat-toolbar class="detail">
         <span> Session:</span><span>{{session.num}}</span>
         <span> {{ session.date | date:'d/M/y' }}  </span>
         <span class="fill-remaining"></span>
         <button md-icon-button>
-            <md-icon class="md-24" (click)="delete()" >delete_forever</md-icon>
+            <mat-icon class="md-24" (click)="delete()" >delete_forever</mat-icon>
         </button>
         <button md-icon-button (click)="showChat()">
-            <md-icon class="md-24">chat</md-icon>
+            <mat-icon class="md-24">chat</mat-icon>
         </button>
         <button md-button (click)="goToProject()">Ir a mi proyecto</button>
-    </md-toolbar>
+    </mat-toolbar>
 
-    <md-tab-group class="steps-tab-group ">
-        <md-tab>
+    <mat-tab-group class="steps-tab-group ">
+        <mat-tab>
             <template md-tab-label>
                 <i class="material-icons">looks_one</i>
                 <span md-tooltip="Podras ver holisticamente tu proyecto" tooltip-position="below">Estado actual</span>
@@ -23,8 +23,8 @@
                 <h2 class="title">Mira las conecciones </h2>
                 <alpha-connections *ngIf="session" [kernel]="session.kernel"></alpha-connections>
             </div>
-        </md-tab>
-        <md-tab>
+        </mat-tab>
+        <mat-tab>
             <template md-tab-label>
                 <i class="material-icons">looks_two</i>
                 <span>Determina tu estado</span>
@@ -36,18 +36,18 @@
                         <h4 class="subtitle">Pasos : Selecciona una dimension -> Determina el estado que tu crees se encuentra</h4>
                     </div>
                     <div class="col-md-9">
-                        <md-button-toggle-group name="dimensions-name">
-                            <md-button-toggle value="" *ngFor="let alpha of kernel.alphasSummary" class="dimension-name" (click)="chooseAlpha(alpha)">
+                        <mat-button-toggle-group name="dimensions-name">
+                            <mat-button-toggle value="" *ngFor="let alpha of kernel.alphasSummary" class="dimension-name" (click)="chooseAlpha(alpha)">
                                 {{alpha.name}}
-                            </md-button-toggle>
-                        </md-button-toggle-group>
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
                     </div>
                 </div>
                 <set-current-state [dimension]="session.getDimension(alphaSelect)" [idSession]="session.id"></set-current-state>
             </div>
 
-        </md-tab>
-        <md-tab>
+        </mat-tab>
+        <mat-tab>
             <template md-tab-label>
                 <i class="material-icons">looks_3</i>
                 <span>Establece las metas</span>
@@ -55,8 +55,8 @@
             <div class="content">
                 <set-goal-state [kernel]="session.kernel" [sessionId]="session.id" ></set-goal-state>
             </div>
-        </md-tab>
-        <md-tab>
+        </mat-tab>
+        <mat-tab>
             <template md-tab-label>
                 <i class="material-icons">looks_4</i>
                 <span>Decide como lograrlo</span>
@@ -65,8 +65,8 @@
             <div class="content">
                 <how-reach-goals [sessionId]="session.id" [sessionNumber]="session.num"  ></how-reach-goals>
             </div>
-        </md-tab>
-    </md-tab-group>
+        </mat-tab>
+    </mat-tab-group>
 
     <comments *ngIf="isJoinedToChat" [sessionId]="session.id"> </comments>
 </div>

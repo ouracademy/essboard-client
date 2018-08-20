@@ -3,14 +3,16 @@
     <state-card-view *ngIf="goal.goalState" [state]="goal.goalState" [classCSS]="'normal'"></state-card-view>
   </div>
   <div class="col-lg-9 col-md-9 col-sm-9">
-      <md-textarea maxlength="200" class="full-width" placeholder="¿Que debo hacer?" [(ngModel)]="action" (keyup.enter)="add()"></md-textarea>
-      <md-card *ngFor="let action of goal.actions" class="action">
-        <md-card-content>
+      <mat-form-field appearance="outline">   
+        <textarea matInput maxlength="200" class="full-width" placeholder="¿Que debo hacer?" [(ngModel)]="action" (keyup.enter)="add()"></textarea>
+      </mat-form-field>
+      <mat-card *ngFor="let action of goal.actions" class="action">
+        <mat-card-content>
           <input [(ngModel)]="action.name" (blur)="save(action)">
           <button class="transparent">
-            <md-icon class="md-24" (click)="delete(action)" >delete_forever</md-icon>
+            <mat-icon class="md-24" (click)="delete(action)" >delete_forever</mat-icon>
         </button>
-        </md-card-content>
-      </md-card>
+        </mat-card-content>
+      </mat-card>
   </div>
 </div>

@@ -1,14 +1,14 @@
-<md-card>
-  <md-card-title>¿Que debo hacer?</md-card-title>
-  <md-card-content>
-    <md-list>
-      <md-list-item *ngFor="let action of actions">
+<mat-card>
+  <mat-card-title>¿Que debo hacer?</mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let action of actions">
         <p md-line>{{action.name}}</p>
-      </md-list-item>
-    </md-list>
-  </md-card-content>
-  <md-card-actions >
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions >
     <button class="main" (click)="initConectTrello()">Trabajar con Trello</button>
-  </md-card-actions>
-</md-card>
+  </mat-card-actions>
+</mat-card>
 <trello *ngIf="isConectionInit" [apiKey]="apiKey" [actions]="actions" [sessionNumber]="sessionNumber"> </trello>

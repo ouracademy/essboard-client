@@ -1,21 +1,21 @@
 <div *ngIf="user">
-    <md-toolbar class="project-detail">
+    <mat-toolbar class="project-detail">
         <button md-icon-button>
-            <md-icon class="md-24">settings</md-icon>
+            <mat-icon class="md-24">settings</mat-icon>
         </button>
         <span> Usuario : {{user.email}}</span>
         <span> {{ user.createdAt | date:'d/M/y' }}  </span>
         <span class="fill-remaining"></span>
         <button md-icon-button>
-            <md-icon class="md-24" (click)="delete()" >delete_forever</md-icon>
+            <mat-icon class="md-24" (click)="delete()" >delete_forever</mat-icon>
         </button>
         <button md-icon-button>
-            <md-icon class="md-24">update</md-icon>
+            <mat-icon class="md-24">update</mat-icon>
         </button>
-    </md-toolbar>
+    </mat-toolbar>
   
 </div>
-<md-input placeholder="escriba algo" (keyup)="onKey($event)"  [(ngModel)]="word" ></md-input>
+<mat-form-field appearance="outline"><input matInput  placeholder="escriba algo" (keyup)="onKey($event)"  [(ngModel)]="word" ></mat-form-field>
 <p>{{hash}}</p>
 <svg width="200" height="200" [attr.data-jdenticon-hash]="hash">>
 
