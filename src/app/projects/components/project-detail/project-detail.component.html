@@ -1,0 +1,51 @@
+<div *ngIf="project">
+    <md-sidenav-layout>
+        <md-sidenav #start mode="side" (open)="true">
+            <div class="menu-vertical">
+                <button class="exit" (click)="start.close()"><md-icon class="md-24" >close</md-icon></button>
+                <h3 class="title-menu">Proyecto</h3>
+                <div class="option selectable">
+                    <p>
+                        <md-icon class="md-24">visibility</md-icon>
+                    </p>
+                </div>
+                <h3 class="title-menu">Sesiones</h3>
+                <button class="main" (click)="addSession()"><md-icon class="md-24" >add</md-icon></button>
+                <div class="option selectable" *ngFor="let session of project.sessions" (click)="goSession(session)">
+                    <p>
+                        <md-icon class="md-24">{{session.getIcon()}}</md-icon>
+                    </p>
+                </div>
+            </div>
+        </md-sidenav>
+        <md-toolbar class="project-detail">
+            <button class="transparent" (click)="start.toggle()">
+                  <md-icon class="md-24">chevron_right</md-icon>
+            </button>
+            <md-input placeholder="Nombre del proyecto" maxlength="200" [(ngModel)]="project.name" #name (keyup.enter)="setName(name.value)"
+                (blur)="setName(name.value);">
+            </md-input>
+            <md-input placeholder="Descripcion del proyecto" maxlength="350" [(ngModel)]="project.description" #description (keyup.enter)="setDescription(description.value)"
+                (blur)="setDescription(description.value);">
+            </md-input>
+            <span class="fill-remaining"></span>
+            <span>Creado el: {{ project.createdAt | date:'d/M/y' }}  </span>
+            <button md-icon-button md-tooltip="Elimina este proyecto" (click)="delete()"><md-icon class="md-24"  >delete_forever</md-icon></button>
+            <button md-icon-button md-tooltip="Comparte este proyecto" (click)="share()"><md-icon class="md-24">share</md-icon></button>
+        </md-toolbar>
+        <div class="content">
+            <project-share-form *ngIf="showShare" [project]="project" (onCloseForm)="closeSharedForm($event)"> </project-share-form>
+            <div class="row">
+                <div class="col-lg-3">
+                    <h2 class="title">Tus sesiones de trabajo</h2>
+                    <button class="main" (click)="addSession()"><md-icon class="md-24" >add</md-icon></button>
+                    <tiles-sessions  *ngIf="project.sessions" [sessions]="project.sessions"></tiles-sessions>   
+                </div>
+                <div class="col-lg-9">
+                    <h2 class="title">Tu proyecto holisticamente</h2>
+                    <alpha-connections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-connections>
+                </div>
+            </div>
+        </div>
+    </md-sidenav-layout>
+</div>

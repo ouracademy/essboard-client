@@ -1,0 +1,31 @@
+
+
+.area-select{
+    text-align: center;
+    margin: auto;
+    padding: 5px;
+    border: solid 1px #58ce85;
+    color: #59bbce;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10%;
+}
+select:focus{
+  border: 1px solid #58ce85;
+  outline:none;
+}
+span{
+  color: #58ce85;
+  font-weight: 600;
+}
+select option {
+    background: transparent;
+    color: #969693;
+} 
+rel-space-alpha-for-area{
+  margin:auto;
+}
+img{
+    width: 90%;
+}
+

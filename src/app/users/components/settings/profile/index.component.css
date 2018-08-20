@@ -1,0 +1,84 @@
+.sessions {
+    text-align: center;
+}
+
+.session a{
+    font-weight: 100;
+    letter-spacing: 0.01em;
+    line-height: 2px;
+    margin-bottom: 1em;
+    font-size: 15px;
+    color: white;
+
+}
+.session .date{
+    color: #8ce9cf;
+    font-style: inherit;
+    font-weight: 500;
+
+}
+.sessions md-list{
+    margin: auto;
+}
+.session  {
+    background-color: #b8a4a4;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;
+    max-width: 100px;
+    text-align: center;
+    margin: auto;
+    margin: 8px;
+    width: 150px;
+    margin: 5px;
+    padding: 0px 5px 0px 5px;
+    border: solid 2px #92c1a4;
+}
+.session md-card-title{
+    text-align: center;
+    margin-bottom: 5px;
+    color: #6c8b7b;
+}
+.session md-card-content{
+     text-align: center;
+    color: #2d7332;
+}
+.session p{
+    font-weight: 100;
+    letter-spacing: 0.01em;
+    line-height: 2px;
+    margin-bottom: 1em;
+    font-size: 15px;
+
+}
+.main{
+    background-color: #7cb987;
+    color: white;
+}
+.project-detail span{
+    margin-right: 10px;
+}
+.message-create {
+    margin-left: 10px;
+    border-bottom-style: solid;
+    border-color: #ddd;
+}
+.dimension-name{
+    border: 1px solid;
+    border-color: #99b098;
+    padding: 3px;
+    margin: 3px;
+    background-color: #a0b7a4;
+    color: white;
+}
+
+.title { 
+    border: #4e804e solid 1px;
+    border-radius: 5px;
+    background: white;
+}
+
+
+

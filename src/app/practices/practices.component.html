@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-6 center">
+    <h3 class="title">Espacios de actividad</h3>
+    <img src="assets/img/kernel/activitySpace.PNG">
+  </div>
+  <div class="col-md-6 center">
+    <h3 class="title">¿Que estados logro si realizo actividades de un espacio de actividad?</h3>
+    <div class="center">
+      <span>Escoja una area de interes : </span>
+      <select class="area-select" #cho (change)="getAreChoosen($event.target.value)">
+        <option *ngFor="let area of areas" class ="option-select" >{{area.name}}</option>
+      </select>
+    </div>
+    <rel-space-alpha-for-area *ngIf="areaChoosen" [area]="areaChoosen" (onParameterForSearchPractice)="getParametersForSearchPractice($event)">
+    </rel-space-alpha-for-area>
+  </div>
+  <button md-button>content</button>
+</div>
+<div class="row center">
+  <div class="col-md-6">
+    <practice-catalog [spaceActivity]="spaceChoose"></practice-catalog>
+  </div>
+</div>

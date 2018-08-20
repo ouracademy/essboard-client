@@ -1,0 +1,27 @@
+<div class="col-md-6 csstransforms no-csstransforms">
+  <table class="table table-header-rotated">
+    <thead>
+      <tr>
+        <th class="headForRow" rowspan="2">Estados del Alpha/ Espacios de actividad
+        </th>
+        <th colspan="6" *ngFor="let alpha of area.dimensions">{{alpha.name}}</th>
+      </tr>
+      <tr>
+        <th class="rotate" *ngFor="let state of statesForAlpha">
+          <div><span>{{state.name}}</span></div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let activitySpace of activitySpaces">
+        <th class="row-header">{{activitySpace.name}}</th>
+        <td *ngFor="let item of getActivyAlphasRelationshipFor(activitySpace)" 
+        [ngClass]="{'completion':item.condition,
+                    'no-completion': !item.condition}" (click)="showPractices(item)">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="col-md-6">  
+</div>

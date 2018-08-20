@@ -1,0 +1,31 @@
+
+.sidenav-content{
+    overflow: initial;
+}
+.box{
+    text-align:center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: solid 1px #dcdcda;
+}
+.option {
+    border: 1px solid #73d699;
+    text-align: center;
+    padding: 8px;
+    width: 200px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.option a{
+    color: #8cd0dd;
+    font-size: 18px;
+    text-decoration: none;
+}
+.content-title{
+    width: 200px;
+    margin: auto;
+}
+.title{
+    color: #9d9d9a;
+    border-bottom: #5fbed0 solid 3px;
+}

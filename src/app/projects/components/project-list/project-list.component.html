@@ -1,0 +1,27 @@
+<div class="content-app">
+    <md-toolbar>
+        <span class="title">{{title}}</span>
+        <span class="fill-remaining"></span>
+        <button md-icon-button class="main" (click)="showForm()"><md-icon  >add</md-icon></button>
+        <button md-icon-button class="main"><md-icon class="md-24">help_outline</md-icon></button>
+    </md-toolbar>
+    <div class="main-content">
+        <project-form [hidden]="hideForm" (onCloseForm)="closeCreateForm($event)"></project-form>
+        <div *ngIf="projects.length == 0" class="empty-proyects">
+            <md-card>
+                <md-card-content>
+                    <div class="col-lg-offset-7 col-lg-5">
+                        <p>No tienes ningun proyecto creado</p>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div *ngIf="!(projects.length == 0)">
+            <div class="wrapper">
+                <div class="selectable project" *ngFor="let project of projects">
+                    <project-card [project]="project" [user]="user"></project-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

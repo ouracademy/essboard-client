@@ -1,0 +1,29 @@
+<div *ngIf="state" class="state-card ">
+  <div class="checkpoints col-xs-12
+                col-sm-12
+                col-md-9
+                col-lg-10">
+    <table class="table table-bordered">
+      <tr>
+        <th>¿Lo realizaste?</th>
+        <th>¿Lo realizamos?</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+      </tr>
+      <tr *ngFor="let checkpoint of state.checklist">
+        <td class="check">
+          <!--<div [className]="checkpoint.isAchieved ? 'box-check achieved':'box-check no-achieved'" >
+          </div>-->
+          <md-checkbox (click)="vote(checkpoint)">  
+          </md-checkbox>
+          <button md-button (click)="quitVote(checkpoint)">X</button>
+          <td class="check">
+            <avatar-letter *ngFor="let vote of checkpoint.votes" [text]="vote.member" [options]="options">
+            </avatar-letter>
+          </td>
+          <td class="name">{{checkpoint.info.name}}</td>
+          <td clas="description">{{checkpoint.info.description}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

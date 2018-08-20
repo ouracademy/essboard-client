@@ -1,0 +1,26 @@
+<div class="auth">
+    <img src="assets/img/logos/logo-horizontal.png" alt="Essboard">
+    <p class="intro-message">Ingresa con tus credenciales</p>
+    <md-card class="content">
+        <md-card-content>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <md-input type="email" formControlName="email" class="full-width" placeholder="Correo electrónico" required dividerColor="{{ errors.email ? 'warn' : 'primary' }}">
+                    <md-hint *ngIf="errors.email" align="end">
+                        <span>{{ errors.email  }}</span>
+                    </md-hint>
+                </md-input>
+                <md-input type="password" formControlName="password" class="full-width" placeholder="Contraseña" required dividerColor="{{ errors.password ? 'warn' : 'primary' }}">
+                    <md-hint *ngIf="errors.password" align="end">
+                        <span>{{ errors.password  }}</span>
+                    </md-hint>
+                </md-input>
+                <button type="submit" [disabled]="!loginForm.valid" md-raised-button class="main">Ingresa</button>
+                <div class="more-options">
+                    <!--TODO-->
+                    <!--<span><a routerLink="/">Olvidaste la contraseña</a></span>-->
+                    <span><a routerLink="/signup">No tienes una cuenta</a></span>
+                </div>
+            </form>
+        </md-card-content>
+    </md-card>
+</div>

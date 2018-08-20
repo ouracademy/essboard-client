@@ -1,0 +1,9 @@
+<md-card (click)="select()">
+    <md-card-actions *ngIf="isInvited" align="end">
+        <md-icon>folder_shared</md-icon>
+   </md-card-actions>
+    <md-card-title>{{project.name}} </md-card-title>
+    <md-card-content>
+        <md-progress-bar mode="determinate" value={{project.percent}}></md-progress-bar>
+    </md-card-content>
+</md-card>

@@ -1,0 +1,30 @@
+<div class="content-app">
+    <div class="row ">
+        <div class="col-xs-6 col-md-8">
+            <md-toolbar class="green">
+                <span>Opciones</span>
+            </md-toolbar>
+            <div class="options">
+                <div class="selectable " *ngFor="let option of optionsForUser" (click)="goTo(option)">
+                    <md-card class="optionOfMainView">
+                        <md-card-title>{{option.name}} </md-card-title>
+                        <md-card-content>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-4">
+            <md-toolbar color="primary">
+                <span>Ultimos proyectos</span>
+            </md-toolbar>
+            <md-list>
+                <md-list-item *ngFor="let folder of folders">
+                    <md-icon md-list-avatar>folder</md-icon>
+                    <h4 md-line>{{folder.name}}</h4>
+                    <p md-line class="demo-2"> 10/11/12 </p>
+                </md-list-item>
+            </md-list>
+        </div>
+    </div>
+</div>

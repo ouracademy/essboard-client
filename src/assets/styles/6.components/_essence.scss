@@ -1,0 +1,151 @@
+
+
+.fill-remaining {
+     flex: 1 1 auto;
+}
+.full-width {
+    width: 100%;
+}
+.selectable{
+    cursor: pointer;
+    opacity: 0.7;
+}
+.selectable:hover {
+    opacity: 1;
+    box-shadow: 0px 0px 1px #aabe8e;
+}
+
+md-list-item.selectable:hover{
+    color: #77a880;
+}
+a.selectable:hover{
+    color: #77a880;
+}
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 20px;
+}
+.item-wrapper{
+  margin : 10px 5px 5px 5px;
+}
+
+/** Material 2 : The overlay-container is an invisible element which contains all individual overlays. */
+.md-overlay-container {
+    top: 60px;
+    left: -40px;
+    height: 100px;
+}
+.md-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 1000; 
+}
+.container-center-overlay {
+    margin: 50px 23%;
+    text-align: center;
+}
+/* buttons*/
+button{
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    cursor: hand;
+}
+* {
+    font-family: Roboto, sans-serif;
+}
+
+md-input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+md-hint {
+    position: absolute;
+    font-size: 75%;
+    bottom: -0.5em;
+}
+
+/*TODO remove this in an angular 2 material future release*/
+md-input.ng-invalid {
+    color: #f44336;
+}
+md-input.ng-pristine {
+    color: #91b270;
+}
+.md-sidenav-content{
+  overflow:initial;
+}
+.content-app{
+    min-height : 320px;
+}
+/*background*/
+.white{
+    background: white;
+}
+
+/*icons*/
+[md-icon-button]{
+  background-color: transparent;
+}
+/* buttons*/
+
+
+.main{
+    background-color: #7cb987;
+    color: white;
+    margin:auto;
+}
+
+/* essence color */
+.customer{
+    background: #c1ecc1;
+} 
+.endeavor{
+    background: #d4e6f0;
+} 
+.solution{
+    background : #ffff99;
+}
+/*disables*/
+.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.title{
+    color: #87b890;
+    text-align: center;
+}
+.subtitle{
+    color: #64c0d1;
+    margin-left: 10px;
+    margin-top: 8px;
+}
+.row{
+    margin-right: 0rem;
+    margin-left: 0rem;
+}
+.transparent{
+    background-color: transparent;
+}
+.md-tab-active{
+    border-bottom: solid 3px #5bbcce;
+}
+.center{
+    text-align:center;
+}
+.center img{
+    margin:auto;
+}
+app-root{
+    z-index: 10000;
+}
+
+/*toolbar details*/
+.detail span{
+    margin-right: 10px;
+}

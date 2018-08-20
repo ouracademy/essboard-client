@@ -1,0 +1,71 @@
+<div class="main-page">
+  <h1 >Monitorea tu desarrollo en base a estados universales</h1>
+  <h3 >Essboard es la herramienta que te ayudara a usar Esencia en tu desarrollo</h3>
+  <a class="button-main " routerLink="/login">Inicia tu monitoreo ahora</a>
+  <div class="container-icons">
+    <div class="icons">
+      <div class="icon"><img src="assets/img/dimensions/oportunity.png" alt="Essboard">
+        <p class="name">Oportunidad</p>
+      </div>
+      <div class="icon"><img src="assets/img/dimensions/stakeholder.png" alt="Essboard">
+        <p class="name">Interesado</p>
+      </div>
+      <div class="icon"><img src="assets/img/dimensions/req.png" alt="Essboard">
+        <p class="name">Requerimientos</p>
+      </div>
+      <div class="icon"><img src="assets/img/dimensions/system-software.png" alt="Essboard">
+        <p class="name">Sistema de Software</p>
+      </div>
+      <div class="icon"><img src="assets/img/dimensions/team.png" alt="Essboard">
+        <p class="name">Equipo</p>
+      </div>
+      <div class="icon"><img src="assets/img/dimensions/work.png" alt="Essboard">
+        <p class="name">Trabajo</p>
+      </div>
+      <div class="icon"><img src="assets/img/dimensions/way-work.png" alt="Essboard">
+        <p class="name">Forma de trabajo</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+    <div class='wrapper'>
+        <div class='container' [dragula]='"first-bag"'>
+            <div>You can move these elements between these two containers</div>
+            <div>Moving them anywhere else isn't quite possible</div>
+            <div>There's also the possibility of moving elements around in the same container, changing their position</div>
+        </div>
+        <div class='container' [dragula]='"first-bag"'>
+            <div>This is the default use case. You only need to specify the containers you want to use</div>
+            <div>More interactive use cases lie ahead</div>
+            <div>Make sure to check out the <a href='https://github.com/bevacqua/dragula#readme'>documentation on GitHub!</a></div>
+        </div>
+    </div>
+
+<div class="how-essence-works">
+  <p>Conoce que areas abarca tu desarrollo y las cosas esenciales que debes monitorear</p>
+  <div class="wrapper">
+    <div class="areas">
+      <md-card *ngFor="let area of areas" [className]="area.nameCSSClass" (click)="showDimensions(area.name)">
+        <md-card-content>
+          <p>{{area.name}}</p>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div *ngIf="!areaSelected">
+      <div class="wrapper">
+        <div class="nothing">
+          <p>message</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="areaSelected">
+      <div class="wrapper">
+        <div *ngFor="let dimension of areaSelected.dimensions">
+          <alpha-card [dimension]="dimension" [CSSClass]="areaSelected.nameCSSClass"></alpha-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->

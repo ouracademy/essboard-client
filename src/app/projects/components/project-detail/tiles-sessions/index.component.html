@@ -1,0 +1,11 @@
+<md-card>
+    <md-card-title>Sesiones de trabajo</md-card-title>
+    <md-card-content>
+        <md-grid-list [cols]="fixedCols" [rowHeight]="fixedRowHeight">
+            <md-grid-tile *ngFor="let session of sessionsTiles" (click)="goSession(session)" [colspan]="session.cols" [rowspan]="session.rows"
+                [style.background]="session.color">
+                <md-icon class="md-24">{{session.data.getIcon()}}</md-icon>
+            </md-grid-tile>
+        </md-grid-list>
+    </md-card-content>
+</md-card>

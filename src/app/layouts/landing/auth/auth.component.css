@@ -1,0 +1,37 @@
+.auth{
+    margin:10%;
+    text-align:center;
+}
+.content{
+    margin: auto;
+    width: 50%;
+}
+.more-options{
+    margin-top: 10px;
+}
+.more-options span{
+    margin: 10px;
+}
+.more-options a{
+    color: #337ab7;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.intro-message{
+    font-size: 14px;
+    color: #989DAB;
+    margin-top: 5px;
+}
+.btn-auth{
+    background: #bfecc2;
+    color: white;
+}
+.main{
+    background-color: #7cb987;
+    color: white;
+}
+[disabled]{
+    background-color: #b7ddcd;
+    color: white;
+}

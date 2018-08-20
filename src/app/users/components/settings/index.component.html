@@ -1,0 +1,13 @@
+<md-card>
+    <md-card-title>Perfil de usuario</md-card-title>
+    <md-card-content>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <md-input type="text" formControlName="name" class="full-width" placeholder="name" required dividerColor="{{ errors.name ? 'warn' : 'primary' }}">
+                <md-hint *ngIf="errors.name" align="end">
+                    <span>{{ errors.name }}</span>
+                </md-hint>
+            </md-input>
+            <button type="submit" [disabled]="!userForm.valid" md-raised-button class="main">Actualizar perfil</button>
+        </form>
+    </md-card-content>
+</md-card>

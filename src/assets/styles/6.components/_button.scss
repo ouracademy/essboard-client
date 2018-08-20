@@ -1,0 +1,108 @@
+.btn {
+  border: 1px solid $white;
+  padding: .6rem 1.6rem;
+  border-radius: 3px;
+  box-shadow: 0px 3px 6px rgba(black, 0.2);
+  color: $grey-800;
+  background-color: $white;
+  transition: 0.5s;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit !important; // margin: 1px;
+  &:hover {
+    box-shadow: 0px 4px 8px rgba(black, 0.3);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.btn-navy {
+  border: 1px solid $navy;
+  background: $navy;
+  color: $white;
+}
+
+.btn-navy--clear {
+  border: 1px solid $navy;
+  background: $white;
+  color: $navy;
+}
+
+.btn-navy--blur {
+  border: 1px solid $navy;
+  background: $navy;
+  color: $white;
+  box-shadow: 0px 5px 15px 2px rgba($navy, .5);
+}
+
+.btn-green {
+  border: 1px solid $green;
+  background: $green;
+  color: $white;
+}
+
+.btn-green--clear {
+  border: 1px solid $green;
+  background: $white;
+  color: $green;
+}
+
+.btn-skyblue {
+  border: 1px solid $skyblue;
+  background: $skyblue;
+  color: $white;
+}
+
+.btn-skyblue--clear {
+  border: 1px solid $skyblue;
+  background: $white;
+  color: $skyblue;
+}
+
+.btn-yellow {
+  border: 1px solid #f29f43;
+  background: #f29f43;
+  color: $white;
+}
+
+.btn-yellow--clear {
+  border: 1px solid #f29f43;  
+  background: $white;
+  color: #f29f43;
+}
+
+.btn-skyblue--blur {
+  border: 1px solid $skyblue;
+  background: $skyblue;
+  color: $white;
+  box-shadow: 0px 5px 15px 2px rgba($skyblue, .5);
+}
+
+.btn-red {
+  border: 1px solid $red;
+  background: $red;
+  color: $white;
+}
+
+.btn-red--clear {
+  background: $white;
+  color: $red;
+}
+
+.btn-back {
+  background: $white;
+  color: black;
+  border-radius: 30px;
+}
+
+.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  &:hover {
+    box-shadow: unset;
+  }
+  &:active {
+    transform: none;
+  }
+}

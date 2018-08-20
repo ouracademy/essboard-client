@@ -1,0 +1,28 @@
+<div class="auth">
+  <img src="assets/img/logos/logo-horizontal.png" alt="Essboard">
+   <md-card class="content">
+    <md-card-content>
+       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <md-input type="name" formControlName="name" class="full-width" placeholder="Nombre de usuario" required dividerColor="{{ errors.name ? 'warn' : 'primary' }}">
+          <md-hint *ngIf="errors.name" align="end">
+            <span>{{ errors.name  }}</span>
+          </md-hint>
+        </md-input>
+        <md-input type="email" formControlName="email" class="full-width" placeholder="Correo electrónico" required dividerColor="{{ errors.email ? 'warn' : 'primary' }}">
+          <md-hint *ngIf="errors.email" align="end">
+            <span>{{ errors.email  }}</span>
+          </md-hint>
+        </md-input>
+        <md-input type="password" formControlName="password" class="full-width" placeholder="Contraseña" required dividerColor="{{ errors.password ? 'warn' : 'primary' }}">
+          <md-hint *ngIf="errors.password" align="end">
+            <span>{{ errors.password  }}</span>
+          </md-hint>
+        </md-input>
+        <button type="submit" [disabled]="!signupForm.valid" md-raised-button class="main">Registrate</button>   
+        <div class="more-options">
+          <span><a routerLink="/login">Ya tengo una cuenta</a></span>
+        </div>
+      </form>
+    </md-card-content>
+  </md-card>
+</div>

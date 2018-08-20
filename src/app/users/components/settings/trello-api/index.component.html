@@ -1,0 +1,15 @@
+<md-card>
+    <md-card-title>Configuracion de la App key Trello</md-card-title>
+    <md-card-content>
+        <p><a href="https://trello.com/app-key">1. Ingresa a este link</a></p>
+        <p>2. Copia el valor del campo Tecla o Key</p>
+        <form [formGroup]="appKeyForm" (ngSubmit)="onSubmit()">
+            <md-input type="text" formControlName="appKey" class="full-width" placeholder="App Key Trello" required dividerColor="{{ errors.appKey ? 'warn' : 'primary' }}">
+                <md-hint *ngIf="errors.appKey" align="end">
+                    <span>{{ errors.appKey }}</span>
+                </md-hint>
+            </md-input>
+            <button type="submit" [disabled]="!appKeyForm.valid" md-raised-button class="main">Establecer API Key Trello</button>
+        </form>
+    </md-card-content>
+</md-card>

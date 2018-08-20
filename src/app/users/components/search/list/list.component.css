@@ -1,0 +1,24 @@
+
+.project {
+    width: 300px;
+    height:auto;
+    margin : 8px;
+}
+.main{
+    background-color: #7cb987;
+    color: white;
+    margin: 10px;
+}
+
+.main-content{
+	text-align: center;
+    margin: auto;
+    padding-top: 10px;
+}
+.main-content .container{
+	width: 50%;
+}
+
+
+
+

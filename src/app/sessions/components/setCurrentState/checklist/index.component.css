@@ -1,0 +1,56 @@
+state-card-view{
+    width: 28%;
+}
+.checkpoints{
+	width: 72%;
+}
+
+.checkpoints table{
+	    background-color: white;
+		border: 2px solid #a5d2b1;
+		margin:0px auto auto auto;
+		width: 98%;
+}
+.checkpoints table th{
+	color: #64c0d1;
+}
+.checkpoints table td{
+	color: #a09f9f;
+    font-size: 13px;
+	padding-top: 10px;
+
+}
+.checkpoints button{
+	margin:auto;
+}
+
+
+
+.w-700{
+	width: 700px;
+}
+.name {
+	width:25%;
+}
+.description {
+	width:60%;
+}
+.check{
+	width:15%;
+	text-align:center;
+}
+.box-check{
+   border: solid 1px #a5d2b1;
+   height:15px;
+   width:15px;
+   margin :auto;
+   display: inline-block;
+}
+.achieved{
+  background-color: #a5d2b1;
+}
+.no-achieved{
+ background-color: #fff;
+}
+
+

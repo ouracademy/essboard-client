@@ -1,0 +1,78 @@
+
+/* For use in src/lib/core/theming/_palette.scss */
+$mat-primary: (
+    50 : #eeeeee,
+    100 : #d4d5d5,
+    200 : #b7b9b9,
+    300 : #9a9c9c,
+    400 : #858787,
+    500 : #6f7272,
+    600 : #676a6a,
+    700 : #5c5f5f,
+    800 : #525555,
+    900 : #404242,
+    A100 : #a8f6f6,
+    A200 : #7af2f2,
+    A400 : #3affff,
+    A700 : #20ffff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$mat-accent: (
+    50 : #eff4f5,
+    100 : #d6e4e7,
+    200 : #bbd2d7,
+    300 : #9fc0c7,
+    400 : #8bb3bb,
+    500 : #76a5af,
+    600 : #6e9da8,
+    700 : #63939f,
+    800 : #598a96,
+    900 : #467986,
+    A100 : #e0f9ff,
+    A200 : #adeeff,
+    A400 : #7ae3ff,
+    A700 : #61ddff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
+// mandatory stuff for theming
+$theme-primary: mat-palette($mat-primary);
+$theme-accent:  mat-palette($mat-accent);
+$theme-warn:    mat-palette($mat-red,400);
+
+// include the custom theme components into a theme object
+$dark-theme: mat-dark-theme($theme-primary, $theme-accent,$theme-warn);
+

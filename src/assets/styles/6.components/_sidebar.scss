@@ -1,0 +1,23 @@
+.menu {
+  background-color: #00324C;
+  &__item {
+    color: $white;
+    transition: .5s; 
+    cursor: pointer;
+    font-weight: 600;
+    font-weight: .9rem;
+    &:hover {
+      background-color: #f29f43; 
+      color: white;
+    }
+  }
+  &__title-section {
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+}
+
+.menu__item--active {
+  background-color: #f29f43;
+  color: white;
+}

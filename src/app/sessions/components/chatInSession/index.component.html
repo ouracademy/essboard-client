@@ -1,0 +1,18 @@
+<md-card class="chat">
+    <div class="header" (click)="showWindow()">
+        <div>Conversacion</div>
+    </div>
+    <md-card-content *ngIf="show">
+        <div class="messages" #scrollMe>
+            <md-list>
+                <md-list-item *ngFor="let comment of comments">
+                    <img md-list-avatar src="{{comment.userAvatar}}">
+                    <p md-line>
+                        <span>{{comment.text}} </span>
+                    </p>
+                </md-list-item>
+            </md-list>
+        </div>
+        <md-input class="full-width" placeholder="Escriba aqui su mensaje" maxlength="100"  [(ngModel)]="message" (keyup.enter)="save()"></md-input>
+    </md-card-content>
+</md-card>

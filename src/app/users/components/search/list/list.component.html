@@ -1,0 +1,30 @@
+<md-toolbar>
+    <span>{{title}}</span>
+    <span class="fill-remaining"></span>
+    <button md-icon-button class="main" (click)="showForm()">
+      <md-icon  >add</md-icon>
+    </button>
+    <button md-icon-button class="main">
+      <md-icon class="md-24">find_in_page</md-icon>
+    </button>
+    <button md-icon-button  class="main">
+        <md-icon class="md-24">help_outline</md-icon>
+    </button>
+</md-toolbar>
+<div class="main-content">
+    <button md-button (click)="show()">content</button>
+
+    <form-user [hidden]="hideForm"></form-user>
+    <div class="wrapper">
+        <div class="selectable project" *ngFor="let user of users" (click)="onSelect(user)">
+            <md-card>
+                <md-card-title>{{user.email}} </md-card-title>
+                <md-card-content>
+              </md-card-content>
+                <md-card-actions>
+                    <button md-button>Conocelo</button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </div>
+</div>

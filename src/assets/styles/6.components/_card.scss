@@ -1,0 +1,40 @@
+.cmp-card {
+  background-color: #D8E4FD;
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: .5s;
+  color: #4486F9;
+  .cmp-card__icon {
+    background-image: url('/assets/images/icons/footprint.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+  }
+  h4 {
+    text-transform: uppercase;
+  }
+  &:hover {
+    box-shadow: 0 3px 6px rgba(black, .2);
+  }
+}
+
+.cmp-card--red {
+  background-color: #FFDEE4;
+  color: #FF5F7D;
+  .cmp-card__icon {
+    background-image: url('/assets/images/icons/oath.svg');
+  }
+}
+
+.cmp-card--yellow {
+  background-color: #FFEFDC;
+  color: #FFB25A;
+  .cmp-card__icon {
+    background-image: url('/assets/images/icons/handshake.svg');
+  }
+}
+
+//blue #4486F9
+//blue #D8E4FD
+//red #FF5F7D
+//red #FFDEE4

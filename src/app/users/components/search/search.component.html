@@ -1,0 +1,14 @@
+<md-card>
+    <md-card-content>
+        <md-input [(ngModel)]="keyToSearch" (keyup)="onKey($event)" placeholder="Escribe aqui su correo" value="value"></md-input>
+        <md-list class="md-overlay-pane white">
+            <md-list-item *ngFor="let user of users" class="selectable" (click)="select(user)">
+                <img md-list-avatar src="{{user.avatar()}}" alt="{{user.name}}">
+                <h3 md-line> {{user.name}} </h3>
+                <p md-line>
+                    <span> {{user.email}} </span>
+                </p>
+            </md-list-item>
+        </md-list>
+    </md-card-content>
+</md-card>

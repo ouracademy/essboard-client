@@ -1,0 +1,44 @@
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+.material-calendar {
+    background: white !important;
+    .cal-month-view {
+        .cal-day-cell {
+            height: 50px !important;
+            min-height: 40px !important;
+            .cal-events {
+                display: none !important;
+            }
+            .cal-cell-top {
+                min-height: 60% !important;
+                position: relative;
+                .cal-day-badge {
+                    top: 0;
+                    left: 0;
+                    margin: 0 !important;
+                    background: $pastel-second;
+                }
+                .cal-month-view .cal-day-number {
+                    margin: 0;
+                }
+            }
+        }
+        .cal-cell {
+            text-transform: uppercase;
+        }
+        .cal-day-number{
+            .cal-month-view .cal-day-number {
+                margin: 0px !important;
+            }
+        }
+    }
+}
+.ui-calendar{ 
+    .ui-inputtext {
+        background: transparent;
+    }
+    button, .ui-button {
+        border: 1px solid #002e4c;
+        color: #FFFFFF;
+        background: #002e4c;
+    }
+}
