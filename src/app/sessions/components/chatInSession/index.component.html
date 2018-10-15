@@ -6,8 +6,8 @@
         <div class="messages" #scrollMe>
             <mat-list>
                 <mat-list-item *ngFor="let comment of comments">
-                    <img md-list-avatar src="{{comment.userAvatar}}">
-                    <p md-line>
+                    <img mat-list-avatar src="{{comment.userAvatar}}">
+                    <p mat-line>
                         <span>{{comment.text}} </span>
                     </p>
                 </mat-list-item>

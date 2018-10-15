@@ -3,9 +3,9 @@
         <mat-form-field appearance="outline"><input matInput  [(ngModel)]="keyToSearch" (keyup)="onKey($event)" placeholder="Escribe aqui su correo" value="value"></mat-form-field>
         <mat-list class="md-overlay-pane white">
             <mat-list-item *ngFor="let user of users" class="selectable" (click)="select(user)">
-                <img md-list-avatar src="{{user.avatar()}}" alt="{{user.name}}">
-                <h3 md-line> {{user.name}} </h3>
-                <p md-line>
+                <img mat-list-avatar src="{{user.avatar()}}" alt="{{user.name}}">
+                <h3 mat-line> {{user.name}} </h3>
+                <p mat-line>
                     <span> {{user.email}} </span>
                 </p>
             </mat-list-item>

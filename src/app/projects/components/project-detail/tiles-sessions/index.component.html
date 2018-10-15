@@ -1,11 +1,9 @@
 <mat-card>
     <mat-card-title>Sesiones de trabajo</mat-card-title>
     <mat-card-content>
-        <mat-grid-list [cols]="fixedCols" [rowHeight]="fixedRowHeight">
-            <mat-grid-tile *ngFor="let session of sessionsTiles" (click)="goSession(session)" [colspan]="session.cols" [rowspan]="session.rows"
+            <div *ngFor="let session of sessionsTiles" (click)="goSession(session)" 
                 [style.background]="session.color">
                 <mat-icon class="md-24">{{session.data.getIcon()}}</mat-icon>
-            </mat-grid-tile>
-        </mat-grid-list>
+            </div>
     </mat-card-content>
 </mat-card>

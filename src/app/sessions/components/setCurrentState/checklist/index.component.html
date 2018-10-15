@@ -16,7 +16,7 @@
           </div>-->
           <mat-checkbox (click)="vote(checkpoint)">  
           </mat-checkbox>
-          <button md-button (click)="quitVote(checkpoint)">X</button>
+          <button mat-button (click)="quitVote(checkpoint)">X</button>
           <td class="check">
             <avatar-letter *ngFor="let vote of checkpoint.votes" [text]="vote.member" [options]="options">
             </avatar-letter>

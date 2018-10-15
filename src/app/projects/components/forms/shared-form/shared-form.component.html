@@ -2,7 +2,7 @@
   <mat-card class="md-overlay-pane white">
     <mat-card-title>Comparte el proyecto a tus amigos</mat-card-title>
     <mat-card-content>
-      <search-user (onSelect)="getSelect($event)"></search-user>
+      <!--<search-user (onSelect)="getSelect($event)"></search-user> -->
       <p>{{message}}</p>
       <table class="table table-bordered">
         <tr>
@@ -12,7 +12,7 @@
         <tr *ngFor="let invited of inviteds">
           <td>{{invited.email}}
           </td>
-          <td> <button md-icon-button (click)="delete(invited)"><mat-icon class="md-24" >delete_forever</mat-icon>
+          <td> <button mat-icon-button (click)="delete(invited)"><mat-icon class="md-24" >delete_forever</mat-icon>
                </button>
           </td>
         </tr>

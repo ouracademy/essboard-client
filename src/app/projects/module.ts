@@ -2,21 +2,26 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import {
   MatCardModule,
+  MatProgressBarModule,
   MatButtonModule,
-  // TODO: only used in new component (move to its own module)
+  MatToolbarModule,
   MatFormFieldModule,
   MatInputModule,
   MatRadioModule,
-  MatIconModule
+  MatIconModule,
+  MatSidenavModule
 } from '@angular/material'
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ReactiveFormsModule } from '@angular/forms'
 
+import { FormsModule } from '@angular/forms';
+import  { KernelModule } from '@shared/kernel/kernel.module'
+
 import { LoadingModule } from '../shared/loading/loading.module';
+import { InsideLayoutModule  } from '@layouts/inside'
 import { RoutingModule } from './routing.module';
 
-import { UsersModule } from '../users/index.module';
 
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { ProjectDetailComponent,ConfirmationDialog} from './components/project-detail/project-detail.component';
@@ -48,10 +53,18 @@ import { ProjectsSocketService } from './services/projects-socket.service';
     MatInputModule,
     MatRadioModule,
     MatIconModule,
+    MatToolbarModule,
+    MatProgressBarModule,
+    MatSidenavModule,
+
     FlexLayoutModule,
 
     LoadingModule,
-    RoutingModule
+    RoutingModule,
+    InsideLayoutModule,
+
+    FormsModule,
+    KernelModule
   ],
   declarations: [
     ProjectListComponent,

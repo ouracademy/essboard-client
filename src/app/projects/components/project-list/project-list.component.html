@@ -2,8 +2,8 @@
     <mat-toolbar>
         <span class="title">{{title}}</span>
         <span class="fill-remaining"></span>
-        <button md-icon-button class="main" (click)="showForm()"><mat-icon  >add</mat-icon></button>
-        <button md-icon-button class="main"><mat-icon class="md-24">help_outline</mat-icon></button>
+        <button mat-icon-button class="main" (click)="showForm()"><mat-icon  >add</mat-icon></button>
+        <button mat-icon-button class="main"><mat-icon class="md-24">help_outline</mat-icon></button>
     </mat-toolbar>
     <div class="main-content">
         <project-form [hidden]="hideForm" (onCloseForm)="closeCreateForm($event)"></project-form>

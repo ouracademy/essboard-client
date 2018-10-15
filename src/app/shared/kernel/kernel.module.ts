@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatIconModule } from '@angular/material';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { StateCardView } from './components/state-card-view/index';
@@ -20,7 +20,7 @@ import { PracticeMockService } from './services/mock-practices/index.service';
 @NgModule({
   imports: [
     CommonModule,
-    MatCardModule,
+    MatCardModule,MatIconModule,
     ChartsModule
   ],
   declarations: [

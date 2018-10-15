@@ -1,7 +1,7 @@
 <div class="alpha-card">
-    <md-card [className]="dimension.getType()">
-        <md-card-title>{{dimension.info.name}} </md-card-title>
-        <md-card-content>
+    <mat-card [className]="dimension.getType()">
+        <mat-card-title>{{dimension.info.name}} </mat-card-title>
+        <mat-card-content>
             <div class="state" *ngFor="let state of dimension.states" (click)="select(state)">
                 <p [ngClass]="{'achieved':state.isAchaived,
                     'noAchieved': !state.isAchaived,
@@ -9,6 +9,6 @@
                     'selected': isSelected(state)}">
                     {{state.info.name}}</p>
             </div>
-        </md-card-content>
-    </md-card>
+        </mat-card-content>
+    </mat-card>
 </div>

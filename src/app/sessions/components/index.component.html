@@ -3,20 +3,20 @@
         <span> Session:</span><span>{{session.num}}</span>
         <span> {{ session.date | date:'d/M/y' }}  </span>
         <span class="fill-remaining"></span>
-        <button md-icon-button>
+        <button mat-icon-button>
             <mat-icon class="md-24" (click)="delete()" >delete_forever</mat-icon>
         </button>
-        <button md-icon-button (click)="showChat()">
+        <button mat-icon-button (click)="showChat()">
             <mat-icon class="md-24">chat</mat-icon>
         </button>
-        <button md-button (click)="goToProject()">Ir a mi proyecto</button>
+        <button mat-button (click)="goToProject()">Ir a mi proyecto</button>
     </mat-toolbar>
 
     <mat-tab-group class="steps-tab-group ">
         <mat-tab>
-            <template md-tab-label>
+            <template mat-tab-label>
                 <i class="material-icons">looks_one</i>
-                <span md-tooltip="Podras ver holisticamente tu proyecto" tooltip-position="below">Estado actual</span>
+                <span mat-tooltip="Podras ver holisticamente tu proyecto" tooltip-position="below">Estado actual</span>
             </template>
 
             <div class="content">
@@ -25,7 +25,7 @@
             </div>
         </mat-tab>
         <mat-tab>
-            <template md-tab-label>
+            <template mat-tab-label>
                 <i class="material-icons">looks_two</i>
                 <span>Determina tu estado</span>
             </template>
@@ -48,7 +48,7 @@
 
         </mat-tab>
         <mat-tab>
-            <template md-tab-label>
+            <template mat-tab-label>
                 <i class="material-icons">looks_3</i>
                 <span>Establece las metas</span>
             </template>
@@ -57,7 +57,7 @@
             </div>
         </mat-tab>
         <mat-tab>
-            <template md-tab-label>
+            <template mat-tab-label>
                 <i class="material-icons">looks_4</i>
                 <span>Decide como lograrlo</span>
             </template>

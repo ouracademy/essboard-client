@@ -1,5 +1,5 @@
 <div *ngIf="project">
-    <mat-sidenav-layout>
+    <mat-sidenav-container>
         <mat-sidenav #start mode="side" (open)="true">
             <div class="menu-vertical">
                 <button class="exit" (click)="start.close()"><mat-icon class="md-24" >close</mat-icon></button>
@@ -18,34 +18,37 @@
                 </div>
             </div>
         </mat-sidenav>
-        <mat-toolbar class="project-detail">
-            <button class="transparent" (click)="start.toggle()">
-                  <mat-icon class="md-24">chevron_right</mat-icon>
-            </button>
-            <mat-form-field appearance="outline"><input matInput  placeholder="Nombre del proyecto" maxlength="200" [(ngModel)]="project.name" #name (keyup.enter)="setName(name.value)"
-                (blur)="setName(name.value);">
-            </mat-form-field>
-            <mat-form-field appearance="outline"><input matInput  placeholder="Descripcion del proyecto" maxlength="350" [(ngModel)]="project.description" #description (keyup.enter)="setDescription(description.value)"
-                (blur)="setDescription(description.value);">
-            </mat-form-field>
-            <span class="fill-remaining"></span>
-            <span>Creado el: {{ project.createdAt | date:'d/M/y' }}  </span>
-            <button md-icon-button md-tooltip="Elimina este proyecto" (click)="delete()"><mat-icon class="md-24"  >delete_forever</mat-icon></button>
-            <button md-icon-button md-tooltip="Comparte este proyecto" (click)="share()"><mat-icon class="md-24">share</mat-icon></button>
-        </mat-toolbar>
-        <div class="content">
-            <project-share-form *ngIf="showShare" [project]="project" (onCloseForm)="closeSharedForm($event)"> </project-share-form>
-            <div class="row">
-                <div class="col-lg-3">
-                    <h2 class="title">Tus sesiones de trabajo</h2>
-                    <button class="main" (click)="addSession()"><mat-icon class="md-24" >add</mat-icon></button>
-                    <tiles-sessions  *ngIf="project.sessions" [sessions]="project.sessions"></tiles-sessions>   
-                </div>
-                <div class="col-lg-9">
-                    <h2 class="title">Tu proyecto holisticamente</h2>
-                    <alpha-connections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-connections>
+        <mat-sidenav-content>
+            <mat-toolbar class="project-detail">
+                <button class="transparent" (click)="start.toggle()">
+                    <mat-icon class="md-24">chevron_right</mat-icon>
+                </button>
+                <mat-form-field appearance="outline">
+                    <input matInput  placeholder="Nombre del proyecto" maxlength="200" [(ngModel)]="project.name" #name (keyup.enter)="setName(name.value)"
+                    (blur)="setName(name.value);">
+                </mat-form-field>
+                <mat-form-field appearance="outline"><input matInput  placeholder="Descripcion del proyecto" maxlength="350" [(ngModel)]="project.description" #description (keyup.enter)="setDescription(description.value)"
+                    (blur)="setDescription(description.value);">
+                </mat-form-field>
+                <span class="fill-remaining"></span>
+                <span>Creado el: {{ project.createdAt | date:'d/M/y' }}  </span>
+                <button mat-icon-button mat-tooltip="Elimina este proyecto" (click)="delete()"><mat-icon class="md-24"  >delete_forever</mat-icon></button>
+                <button mat-icon-button mat-tooltip="Comparte este proyecto" (click)="share()"><mat-icon class="md-24">share</mat-icon></button>
+            </mat-toolbar>
+            <div class="content">
+                <project-share-form *ngIf="showShare" [project]="project" (onCloseForm)="closeSharedForm($event)"> </project-share-form>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h2 class="title">Tus sesiones de trabajo</h2>
+                        <button class="main" (click)="addSession()"><mat-icon class="md-24" >add</mat-icon></button>
+                        <tiles-sessions  *ngIf="project.sessions" [sessions]="project.sessions"></tiles-sessions>   
+                    </div>
+                    <div class="col-lg-9">
+                        <h2 class="title">Tu proyecto holisticamente</h2>
+                        <alpha-connections *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-connections>
+                    </div>
                 </div>
             </div>
-        </div>
-    </mat-sidenav-layout>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>

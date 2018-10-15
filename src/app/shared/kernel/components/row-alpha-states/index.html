@@ -9,7 +9,7 @@
         <p *ngIf="!stateGoal && isForSelected">Hacer click en un estado y se visualizara aqui</p>
         <div *ngIf="stateGoal">
             <state-card-view [state]="stateGoal" [classCSS]="'small'"></state-card-view>
-            <button class="quit" (click)="noSelect()"><md-icon class="md-24" >close</md-icon></button>
+            <button class="quit" (click)="noSelect()"><mat-icon class="md-24" >close</mat-icon></button>
         </div>
     </div>
     <div class="no-achieved">
