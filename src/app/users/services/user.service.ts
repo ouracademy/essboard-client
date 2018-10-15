@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { User } from '../model/user';
 
 export abstract class UserService {
-     usersOb: Observable<any>;
-     currentUserOb: Observable<any>;
+     users$: Subject<any>;
+     currentUser$: Subject<any>;
     abstract getUsers();
     abstract get(id: number | string);
     abstract delete(id: number | string);

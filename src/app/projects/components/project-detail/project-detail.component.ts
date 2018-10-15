@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { MdDialog, MdDialogRef } from '@angular/material';
-import { Project, Session } from '../../../../shared/models/project';
+import { MatDialog, MatDialogRef } from '@angular/material';
+
+import { Project, Session } from '@no-module/models/project';
 import { ProjectService } from '../../services/project.service';
-import { NotificationsService } from 'angular2-notifications';
+import { SharedService } from '@core/shared.service';
 
 
 @Component({
@@ -18,15 +19,15 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   showShare: boolean = false;
   selectedSession: Session;
   private subscription: Subscription;
-  dialogRef: MdDialogRef<ConfirmationDialog>;
+  dialogRef: MatDialogRef<ConfirmationDialog>;
   lastCloseResult: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: ProjectService,
-    private notification: NotificationsService,
-    public dialog: MdDialog) { }
+    private sharedService: SharedService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.subscription = this.service.currentProject.subscribe((item: Project) => {
@@ -80,7 +81,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
 
   private onError(error: string) {
-    this.notification.error('Upps!', error);
+    this.sharedService.showError('Upps!', error);
   }
 
 
@@ -94,5 +95,5 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   <button type="button" (click)="dialogRef.close('no')">No</button>`
 })
 export class ConfirmationDialog {
-  constructor(public dialogRef: MdDialogRef<ConfirmationDialog>) { }
+  constructor(public dialogRef: MatDialogRef<ConfirmationDialog>) { }
 }

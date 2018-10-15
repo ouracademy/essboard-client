@@ -1,6 +1,6 @@
 
-import { User } from '../../model/user';
-import { UserService } from '../../services/user.service';
+import { User } from '@no-module/models/user';
+import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -21,7 +21,7 @@ export class ListComponent implements OnInit {
     ) { }
     
     ngOnInit(): void {
-        this.subscription = this.userService.usersOb.subscribe((items: User[]) => {
+        this.subscription = this.userService.users$.subscribe((items: User[]) => {
             this.users = items;
         });
        this.getUsers();

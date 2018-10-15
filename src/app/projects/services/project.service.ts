@@ -1,8 +1,8 @@
 
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export abstract class ProjectService {
-    currentProject: Observable<any>;
+    currentProject: Subject<any>;
     abstract setName (name : string);
     abstract setDescription(description :string);
     abstract getProject(id: string);

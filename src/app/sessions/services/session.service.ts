@@ -1,8 +1,8 @@
 
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export abstract class SessionService {
-    currentSession: Observable<any>;
+    currentSession$: Subject<any>;
     abstract getSession(id: string);
     abstract delete(id);
     abstract setCheckpointTo(id, dimensionId, stateId, checkpointId, condition);

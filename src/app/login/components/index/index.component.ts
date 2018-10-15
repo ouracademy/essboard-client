@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 
 import { AuthService } from "@core/auth.service";
 import { SharedService } from "@core/shared.service";
-
+import { Credentials } from '@no-module/models/user';
 @Component({
   selector: "app-login",
   template: `
@@ -14,26 +14,26 @@ import { SharedService } from "@core/shared.service";
     <mat-card>
         <mat-card-content fxLayout="column" fxLayoutGap="20px">
             <form  class="center" [formGroup]='loginForm' (ngSubmit)='onSubmit()'>
-              <mat-form-field floatLabel='never' class='all-width'>
+              <mat-form-field floatLabel='never' appearance="outline" class='all-width'>
                   <input matInput formControlName='email'
                       placeholder='Correo Electrónico'>
                   <mat-error errorMessage='email' ></mat-error>
               </mat-form-field>
-              <mat-form-field floatLabel='never' class='all-width'>
+              <mat-form-field floatLabel='never' appearance="outline" class='all-width'>
                 <input matInput formControlName='password'
-                    placeholder='Contraseña'>
-                <mat-error errorMessage='password' ></mat-error>
+                    placeholder='Contraseña' type='password'>
+                <mat-error errorMessage='password' appearance="outline" ></mat-error>
               </mat-form-field>
-              <button class="auto middle-width" type='submit' [disabled]='!loginForm.valid' mat-raised-button class='main'>Ingresa</button>
+              <button class="width-100 mar-0-1 btn-big" type='submit' [disabled]='!loginForm.valid' mat-raised-button  color="accent" >Ingresa</button>
             </form>
             <div fxLayout fxLayoutAlign="space-around center">
-                <span class="info"><a routerLink='/'>Olvidaste la contraseña</a></span>
                 <span class="info"><a routerLink='/signup'>No tienes una cuenta</a></span>
             </div>
         </mat-card-content>
     </mat-card>
   </app-auth-layout>
   `
+
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -59,23 +59,19 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.auth
-      .login(this.loginForm.value["email"], this.loginForm.value["password"])
-      .subscribe(
-        () => this.onSuccess(),
-        error =>
-          this.onError(
-            `Lo sentimos, Essboard no renoce
-        a estas credenciales como un usuario.`
-          )
-      );
+    this.auth.login(new Credentials(this.loginForm.value['email'], this.loginForm.value['password'])
+    ).then(() => this.onSuccess())
+     .catch((error) => this.onError(error));
+        
   }
 
   private onSuccess() {
     this.router.navigate([this.auth.redirectURL]);
   }
 
-  private onError(error: string) {
-    this.sharedService.showError("Upps!", error);
+  private onError(error: any) {
+    this.sharedService.showError("Upps!",  `Lo sentimos, Essboard no renoce
+    a estas credenciales como un usuario.`);
+    
   }
 }

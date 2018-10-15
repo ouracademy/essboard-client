@@ -1,0 +1,92 @@
+/* alpha-card*/
+.alpha-card md-card {
+	width: 180px;
+	height: 275px;
+	border-style: groove;
+	padding: 0;
+}
+.alpha-card md-card-content {
+	background: white;
+}
+.state p{
+  color: #878686;
+}
+.alpha-card md-card-title{
+	text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 19px;
+    height: 30px;
+    padding: 2% 0 2% 0;
+}
+.alpha-card .alpha-name {
+	border-style: groove;
+	border-radius: 5px;
+	text-align: center;
+	margin: 5px 30px;
+	padding: 7px;
+}
+.alpha-card .state {
+    text-align: center;
+	padding: 1px 3px 0px 3px;
+	cursor: pointer;
+}
+.alpha-card .state p{
+	margin: 0 0 5px;
+}
+.alpha-card .customer p{
+	border-style : solid;
+	border-color: #c1ecc1;
+}
+.alpha-card .solution p{
+	border-style : solid;
+	border-color: #ffff99;
+}
+.alpha-card .endeavor p{
+	border-style : solid;
+	border-color: #d4e6f0;
+}
+.alpha-card .customer p:hover{
+	border-style : solid;
+	background-color: #c1ecc1;
+}
+.alpha-card .solution p:hover{
+	border-style : solid;
+	background-color: #ffff99;
+}
+.alpha-card .endeavor p:hover{
+	border-style : solid;
+	background-color: #d4e6f0;
+}
+.solution .achieved{
+   	border-style : solid;
+	background-color: #ffff99;
+}
+.customer .achieved{
+    border-style : solid;
+	background-color: #c1ecc1;
+}
+.endeavor .achieved{
+    border-style : solid;
+	background-color: #d4e6f0;
+}
+.solution .working{
+   	border-style : solid;
+	background-color: #fff000;
+}
+.customer .working{
+    border: solid 4px #6dd084;
+    background-color: #d7f5d7;
+}
+.endeavor .working{
+    border-style : solid;
+	background-color: #d4e6f8;
+}
+
+.noAchieved{
+    background-color: transparent;
+}
+.selected{
+	box-shadow: 1px 2px 30px 13px rgba(202,188,188,0.79);
+}
+

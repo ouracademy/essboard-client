@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.subscription = this.userService.usersOb.subscribe((users: User[]) => {
+        this.subscription = this.userService.users$.subscribe((users: User[]) => {
             this.users = users;
         });
     }

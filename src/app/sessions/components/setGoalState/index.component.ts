@@ -1,9 +1,9 @@
 import { Component, OnInit, OnChanges, Input, EventEmitter, Output } from '@angular/core';
-import { Kernel } from '../../../../shared/modules/kernel/model/kernel';
-import { BagGoal } from '../../../../shared/models/goal';
+import { Kernel } from '@shared/kernel/model/kernel';
+import { BagGoal } from '@no-module/models/goal';
 import { GoalService } from '../../services/goal.service';
 import { Subscription } from 'rxjs/Subscription';
-import { StateMetadata } from '../../../../shared/models/kernel/kernel';
+import { StateMetadata } from '@no-module/models/kernel/kernel';
 @Component({
     selector: 'set-goal-state',
     templateUrl: 'index.component.html',

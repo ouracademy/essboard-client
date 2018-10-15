@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BagGoal } from '../../../../shared/models/goal';
+import { BagGoal } from '@no-module/models/goal';
 import { GoalService } from '../../services/goal.service';
 import { Subscription } from 'rxjs/Subscription';
 @Component({

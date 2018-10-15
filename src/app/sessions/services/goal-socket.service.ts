@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BagGoal } from '../../../shared/models/goal';
-import { ToBagGoal } from '../../../shared/transforms/to-goal';
-import { Observable } from 'rxjs';
+import { BagGoal } from '@no-module/models/goal';
+import { ToBagGoal } from '@no-module/transforms/to-goal';
+import { Observable, Subject } from 'rxjs';
 import { GoalService } from './goal.service';
-import { SocketService } from '../../../shared/services/socket-io';
+import { SocketService } from '@core/socket.service';
 
 @Injectable()
 export class GoalSocketService extends GoalService {
-    bagGoalsObserver: any;
-    bagGoalsCompleteObserver: any;
+    bagGoals$: any;
+    bagGoalsComplete$: any;
     bagGoals: BagGoal;
     _app: any;
     service: any;
@@ -19,8 +19,8 @@ export class GoalSocketService extends GoalService {
         this._app = this.socketService.init();
         this.service = this._app.service('goals');
         this.service.on('patched', (newItem) => this.onPatched(newItem));
-        this.bagGoalsObservable = new Observable(observer => this.bagGoalsObserver = observer).share();
-        this.bagGoalsCompleteObservable = new Observable(observer => this.bagGoalsCompleteObserver = observer).share();
+        this.bagGoalsObservable = new Subject<any>();
+        this.bagGoalsComplete$ =  new Subject<any>();
     }
 
     private transform(obj: any) {
@@ -38,7 +38,7 @@ export class GoalSocketService extends GoalService {
                 if (err) return console.error(err);
                 if (!!items.data[0]) {
                     this.bagGoals = this.transform(items.data[0]);
-                    this.bagGoalsObserver.next(this.bagGoals);
+                    this.bagGoals$.next(this.bagGoals);
                 }
             })
         });
@@ -51,7 +51,7 @@ export class GoalSocketService extends GoalService {
                 if (err) return console.error(err);
                 if (!!items.data[0]) {
                     this.bagGoals = this.transformComplete(items.data[0]);
-                    this.bagGoalsCompleteObserver.next(this.bagGoals);
+                    this.bagGoalsComplete$.next(this.bagGoals);
                 }
             })
         });
@@ -64,7 +64,7 @@ export class GoalSocketService extends GoalService {
                 data)
                 .then((result) => {
                     this.bagGoals = this.transform(result);
-                    this.bagGoalsObserver.next(this.bagGoals);
+                    this.bagGoals$.next(this.bagGoals);
                 })
                 .catch(function (error) {
                     console.error('Error', error);
@@ -115,8 +115,8 @@ export class GoalSocketService extends GoalService {
     private onPatched(item: any) {
         if (this.bagGoals.id === item._id) {
             this.bagGoals = this.transform(item);
-            this.bagGoalsObserver.next(this.bagGoals);
-            this.bagGoalsCompleteObserver.next(this.transformComplete(item));
+            this.bagGoals$.next(this.bagGoals);
+            this.bagGoalsComplete$.next(this.transformComplete(item));
         }
     }
 

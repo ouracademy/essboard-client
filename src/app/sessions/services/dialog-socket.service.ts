@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Comment } from '../model/comment';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { DialogService } from './dialog.service';
-import { SocketService } from '../../../shared/services/socket-io';
+import { SocketService } from '@core/socket.service';
 
 @Injectable()
 export class DialogSocketService extends DialogService {
-    commentsObserver: any;
+
     comments: Comment[] = [];
     _app: any;
     service: any;
@@ -17,7 +17,7 @@ export class DialogSocketService extends DialogService {
         this._app = this.socketService.init();
         this.service = this._app.service('dialog-sessions');
         this.service.on('created', (newItem) => this.onCreated(newItem));
-        this.items = new Observable(observer => this.commentsObserver = observer).share();
+        this.comments$ = new Subject<any>()
     }
 
     private transform(obj: any) {
@@ -31,7 +31,7 @@ export class DialogSocketService extends DialogService {
             }, (err, items: any) => {
                 if (err) return console.error(err);
                 this.comments = items.data.map((obj) => this.transform(obj));
-                this.commentsObserver.next(this.comments);
+                this.comments$.next(this.comments);
             })
         });
     }
@@ -55,7 +55,7 @@ export class DialogSocketService extends DialogService {
 
     private onCreated(newItem: any) {
         this.comments.push(this.transform(newItem));
-        this.commentsObserver.next(this.comments);
+        this.comments$.next(this.comments);
     }
 
 }

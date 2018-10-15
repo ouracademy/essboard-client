@@ -1,0 +1,13 @@
+<h4>Dimensiones del proyecto</h4>
+<div *ngIf="kernel.dimensions">
+    <div class="wrapper ">
+        <div class="selectable " *ngFor="let dimension of project.dimensions" (click)="showCardStatesOfDimension(dimension)">
+            <alpha-card [dimension]="dimension"></alpha-card>
+        </div>
+    </div>
+</div>
+<!--
+<div *ngIf="selectDimension">
+    <alpha-states [dimension]="selectDimension"></alpha-states>
+</div>
+-->

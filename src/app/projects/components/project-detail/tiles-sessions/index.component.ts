@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Session } from '../../../../../shared/models/project';
+import { Session } from '@no-module/models/project';
 
 @Component({
   selector: 'tiles-sessions',

@@ -1,7 +1,7 @@
 import { OnInit, Component, Input, EventEmitter, Output } from '@angular/core';
-import { StateMetadata, CheckpointMetadata } from '../../../../shared/models/kernel/kernel';
-import { Alpha, State, Checkpoint } from '../../../../shared/modules/kernel/model/kernel';
-import { Goal } from '../../../../shared/models/goal';
+import { StateMetadata, CheckpointMetadata } from '@no-module/models/kernel/kernel';
+import { Alpha, State, Checkpoint } from '@shared/kernel/model/kernel';
+import { Goal } from '@no-module/models/goal';
 @Component({
   selector: 'how-reach-goal',
   templateUrl: 'index.component.html',

@@ -1,11 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ValidationMessagesService, MessageBag } from 'ng2-custom-validation';
+
 import { User } from '../../../model/user';
 import { UserService } from '../../../services/user.service';
-import { AuthService } from '../../../../../auth.service';
-import { NotificationsService } from 'angular2-notifications';
+import { AuthService } from '@core/auth.service';
+import { SharedService } from '@core/shared.service';
 
 @Component({
   selector: 'trello-settings',
@@ -14,14 +14,13 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class TrelloSettingsComponent implements OnInit {
   appKeyForm: FormGroup;
-  errors = new MessageBag();
+
   user: User;
 
   constructor(
     private service: UserService,
     private auth: AuthService,
-    private validation: ValidationMessagesService,
-    private notification: NotificationsService,
+    private sharedService: SharedService,
     private fb: FormBuilder) {
   }
 
@@ -39,10 +38,6 @@ export class TrelloSettingsComponent implements OnInit {
       ]
       ]
     });
-
-    this.validation
-      .seeForErrors(this.appKeyForm)
-      .subscribe((errors: MessageBag) => this.errors = errors);
   }
 
   onSubmit() {
@@ -55,10 +50,10 @@ export class TrelloSettingsComponent implements OnInit {
 
   private onSuccess() {
     this.auth.user = this.user;
-    this.notification.success(':)', 'App Key establecido');
+    this.sharedService.showSucces(':)', 'App Key establecido');
   }
 
   private onError(error: string) {
-    this.notification.error('Upps!', error);
+    this.sharedService.showError('Upps!', error);
   }
 }

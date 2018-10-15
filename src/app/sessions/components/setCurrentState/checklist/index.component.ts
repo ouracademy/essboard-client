@@ -1,6 +1,6 @@
 import { OnInit, Component, Input, EventEmitter, Output } from '@angular/core';
-import { StateMetadata, CheckpointMetadata } from '../../../../../shared/models/kernel/kernel';
-import { Alpha, State, Checkpoint } from '../../../../../shared/models/project-kernel';
+import { StateMetadata, CheckpointMetadata } from '@no-module/models/kernel/kernel';
+import { Alpha, State, Checkpoint } from '@no-module/models/project-kernel';
 
 @Component({
   selector: 'checklist',

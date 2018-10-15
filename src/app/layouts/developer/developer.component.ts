@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { OptionGoTo } from '../../shared/models/option-go-to';
+import { OptionGoTo } from '@no-module/models/option-go-to';
 @Component({
     selector: 'app-user',
     templateUrl: 'developer.component.html',

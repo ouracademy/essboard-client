@@ -1,9 +1,9 @@
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { SocketService } from '../../shared/services/socket-io';
-import { User } from '../models/user';
-import { Credentials } from '../models/credentials';
+import { Observable, Subject } from 'rxjs';
+import { SocketService } from '@core/socket.service';
+import { User } from '@no-module/models/user';
+import { Credentials } from '@no-module/models/user';
 
 @Injectable()
 export class UserService  {
@@ -22,10 +22,10 @@ export class UserService  {
         this.userService.on('created', (newItem) => this.onCreated(newItem));
         this.userService.on('updated', (updatedItem) => this.onUpdated(updatedItem));
         this.userService.on('removed', (removedItem) => this.onRemoved(removedItem));
-        this.items$ = new Observable(observer => this.itemsObserver = observer)
-            .share();
+        this.items$ = new Subject<any>()
         this.dataStore = { items: [] };
     }
+    
     public find() {
         this.userService.find((err, items: User[]) => {
             if (err) return console.error(err);
@@ -43,7 +43,7 @@ export class UserService  {
     public login(credentials: Credentials) {
         this._app.authenticate({
             type: 'local',
-            'email': credentials.name,
+            'email': credentials.email,
             'password': credentials.password
         }).then( (result) => {
             this.user = new User(result.data.id,result.data.email,result.data.avatar);

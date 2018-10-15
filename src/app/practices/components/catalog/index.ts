@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { PRACTICES } from '../../../../shared/models/kernel/mock-practices/mock';
-import { PracticeMockService } from '../../../../shared/modules/kernel/services/index';
+import { PRACTICES } from '@no-module/models/kernel/mock-practices/mock';
+import { PracticeMockService } from '@shared/kernel/services/index';
 @Component({
   selector: 'practice-catalog',
   templateUrl: 'index.html',

@@ -1,6 +1,6 @@
 import { OnInit, Component, Input, EventEmitter, Output } from '@angular/core';
-import { AuthService } from '../../../../auth.service';
-import { Goal } from '../../../../shared/models/goal';
+import { AuthService } from '@core/auth.service';
+import { Goal } from '@no-module/models/goal';
 @Component({
   selector: 'activity-list',
   templateUrl: 'index.component.html',

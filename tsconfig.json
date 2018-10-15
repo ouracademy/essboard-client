@@ -15,6 +15,15 @@
       ],
       "@core/*": [
         "app/core-module/*"
+      ],
+      "@no-module/*": [
+        "app/shared/no-module/*"
+      ],
+      "@layouts/*": [
+        "app/layouts/*"
+      ],
+      "@env/*": [
+        "environments/*"
       ]
     },
     "typeRoots": [

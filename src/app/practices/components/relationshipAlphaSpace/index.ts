@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import { ActivitySpaceMetadata } from '../../../../shared/models/kernel/kernel';
+import { ActivitySpaceMetadata } from '@no-module/models/kernel/kernel';
 @Component({
   selector: 'rel-space-alpha-for-area',
   templateUrl: 'index.html',

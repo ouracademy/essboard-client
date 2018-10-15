@@ -1,0 +1,20 @@
+<div *ngIf="state" class="state-card selectable">
+  <div [className]="classCSS">
+    <md-card [className]="state.dimension.getType()">
+      <div>
+        <md-card-title>{{state.dimension.name}}</md-card-title>
+      </div>
+      <md-card-content>
+        <p class="state-name">{{state.name}}</p>
+        <ul>
+          <li *ngFor="let checkpoint of state.getMainChecklist()">
+            {{checkpoint.name}}
+          </li>
+        </ul>
+        <div class="footer-card">
+          <p>1-6</p>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

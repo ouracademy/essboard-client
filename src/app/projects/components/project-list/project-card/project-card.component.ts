@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Project } from '../../../../../shared/models/project';
-import { User } from '../../../../users/model/user';
+import { Project } from '@no-module/models/project';
+import { User } from '@no-module/models/user';
 
 @Component({
     selector: 'project-card',

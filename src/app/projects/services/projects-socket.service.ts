@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { ProjectsService } from './projects.service';
-import { SocketService } from '../../../shared/services/socket-io';
-import { Project } from '../../../shared/models/project';
+import { SocketService } from '@core/socket.service';
+import { Project } from '@no-module/models/project';
 
 @Injectable()
 export class ProjectsSocketService extends ProjectsService {
-    projectsObserver: any;
+
     projects: Project[];
     _app: any;
     service: any;
+    items$ : Subject<any>;
     constructor(public socketService: SocketService, private router: Router) {
         super();
         this._app = this.socketService.init();
         this.service = this._app.service('projects');
         this.service.on('created', (newItem) => this.onCreated(newItem));
-        this.items = new Observable(observer => this.projectsObserver = observer).share();
+        this.items$ = new Subject()
         this.projects = [];
     }
 
@@ -36,7 +37,7 @@ export class ProjectsSocketService extends ProjectsService {
             }, (err, items: any) => {
                 if (err) return console.error(err);
                 this.projects = items.data.map((obj) => this.transformSourceToProject(obj));
-                this.projectsObserver.next(this.projects);
+                this.items$.next(this.projects);
             })
         });
     }
@@ -70,7 +71,6 @@ export class ProjectsSocketService extends ProjectsService {
             });
     }
     public desinviteTo(project, invited) {
-        console.log(invited);
         this.service.patch(
             project.id,
             { $pull: { members: invited.id } },
@@ -84,6 +84,6 @@ export class ProjectsSocketService extends ProjectsService {
     }
     private onCreated(newItem: any) {
         this.projects.unshift(this.transformSourceToProject(newItem));
-        this.projectsObserver.next(this.projects);
+        this.items$.next(this.projects);
     }
 }

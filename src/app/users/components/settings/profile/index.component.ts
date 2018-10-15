@@ -2,12 +2,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ValidationMessagesService, MessageBag } from 'ng2-custom-validation';
+
 import { User } from '../../../model/user';
 import { UserService } from '../../../services/user.service';
-import { AuthService } from '../../../../../auth.service';
+import { AuthService } from '@core/auth.service';
+import { SharedService } from '@core/shared.service';
 import { Subscription } from 'rxjs/Subscription';
-import { NotificationsService } from 'angular2-notifications';
+
 
 @Component({
   selector: 'my-user-detail',
@@ -16,14 +17,12 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class ProfileSettingsComponent implements OnInit {
   userForm: FormGroup;
-  errors = new MessageBag();
   user: User;
 
   constructor(
     private service: UserService,
     private auth: AuthService,
-    private validation: ValidationMessagesService,
-    private notification: NotificationsService,
+    private sharedService: SharedService,
     private fb: FormBuilder) {
   }
 
@@ -47,9 +46,6 @@ export class ProfileSettingsComponent implements OnInit {
       ]
     });
 
-    this.validation
-      .seeForErrors(this.userForm)
-      .subscribe((errors: MessageBag) => this.errors = errors);
   }
 
   onSubmit() {
@@ -66,10 +62,10 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   private onSuccess() {
-    this.notification.success(':)', 'Usuario actualizado');
+    this.sharedService.showSucces(':)', 'Usuario actualizado');
   }
 
   private onError(error: string) {
-    this.notification.error('Upps!', error);
+    this.sharedService.showError('Upps!', error);
   }
 }

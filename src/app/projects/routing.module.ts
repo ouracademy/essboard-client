@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ProjectsComponent } from './portfolio/projects.component';
-import { NewComponent } from './new/new.component';
-import { DetailComponent } from './detail/detail.component';
+import { AuthGuardService } from '@core/auth-guard.service';
+import { ProjectListComponent, ProjectDetailComponent } from './components';
+import { InsideLayoutComponent } from '@layouts/inside/layout.component'
 
 const routes: Routes = [
-  {path: '', component: ProjectsComponent},
-  {path: 'new', component: NewComponent},
-  {path: 'see/:id', component: DetailComponent }
-];
+{
+  path: '',
+  component: InsideLayoutComponent,
+  canActivate: [AuthGuardService],
+  children: [
+    { path: '', component: ProjectListComponent },
+    { path: ':id', component: ProjectDetailComponent }
+  ]
+}];
 
 @NgModule({
   imports: [

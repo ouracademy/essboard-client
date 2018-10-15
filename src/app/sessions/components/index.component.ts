@@ -3,13 +3,13 @@
 import { Component, OnInit, AfterContentChecked, OnChanges, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { Session } from '../../../shared/models/project';
-import { Alpha, State, Checkpoint } from '../../../shared/modules/kernel/model/kernel';
+import { Session } from '@no-module/models/project';
+import { Alpha, State, Checkpoint } from '@shared/kernel/model/kernel';
 import { SessionService } from '../services/session.service';
-import { AuthService } from '../../../auth.service';
-import { PrimaryKernelMockService } from '../../../shared/modules/kernel/services/index';
-import { AlphaMetadata, StateMetadata } from '../../../shared/models/kernel/kernel';
-import { BagGoal } from '../../../shared/models/goal';
+import { AuthService } from '@core/auth.service';
+import { PrimaryKernelMockService } from '@shared/kernel/services/index';
+import { AlphaMetadata, StateMetadata } from '@no-module/models/kernel/kernel';
+import { BagGoal } from '@no-module/models/goal';
 
 
 @Component({
@@ -34,7 +34,7 @@ export class SessionComponent implements OnInit{
     this.alphaSelect = null;
   }
   ngOnInit() {
-    this.subscription = this.service.currentSession.subscribe((session: Session) => {
+    this.subscription = this.service.currentSession$.subscribe((session: Session) => {
       this.session = session;
       //put init work session in method colaborate
     });

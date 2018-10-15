@@ -31,6 +31,8 @@ export class LandingComponent implements OnInit {
         { name: 'Forma de trabajo', x: -254, y: -10 }
     ]
 
+    
+
     constructor() { }
 
     getBackground(item) {

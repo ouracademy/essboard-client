@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { UserService } from './user.service';
 import { User } from '../model/user';
-import { SocketService, FeathersApp, FeathersService } from '../../../shared/services/socket-io';
+import { SocketService, FeathersApp, FeathersService } from '@core/socket.service';
 
 @Injectable()
 export class UserSocketService extends UserService {
-    usersObserver: any;
-    userObserver: any;
-    userOb: Observable<any>;
+ 
 
     user: User;
     users: User[];
@@ -22,8 +20,8 @@ export class UserSocketService extends UserService {
         this._app = this.socketService.init();
         this.service = this._app.service('users');
 
-        this.usersOb = new Observable(observer => this.usersObserver = observer).share();
-        this.currentUserOb = new Observable(observer => this.userObserver = observer).share();
+        this.users$ = new Subject<any>()
+        this.currentUser$ = new Subject<any>()
 
         this.user = null;
         this.users = [];
@@ -39,7 +37,7 @@ export class UserSocketService extends UserService {
                 if (err) return console.error(err);
                 this.users = items.data.map((x) =>
                     this.toUser(x));
-                this.usersObserver.next(this.users);
+                this.users$.next(this.users);
             });
         });
     }
@@ -51,7 +49,7 @@ export class UserSocketService extends UserService {
                 (err, x: any) => {
                     if (err) return console.error(err);
                     this.user = new User(x._id, x.username, x.email, x.createdAt);
-                    this.userObserver.next(this.user);
+                    this.currentUser$.next(this.user);
                     console.log('item of server ', x);
                 })
         });
@@ -66,13 +64,13 @@ export class UserSocketService extends UserService {
         }, (err, item: any) => {
             if (err) return console.error('error', err);
             this.user = this.toUser(item.data[0]);
-            this.userObserver.next(this.user);
+            this.currentUser$.next(this.user);
         });
     }
 
     delete(id: number | number) {
         this.users.splice(id, 1);
-        this.usersObserver.next(this.users);
+        this.users$.next(this.users);
         this.service.remove(id)
             .then((result) => {
                 this.router.navigate(['admin/users']);
@@ -114,7 +112,7 @@ export class UserSocketService extends UserService {
             }, (err, items: any) => {
                 if (err) { return console.error('error', err); }
                 this.users = items.data.map((x) => this.toUser(x));
-                this.usersObserver.next(this.users);
+                this.users$.next(this.users);
             });
         });
     }

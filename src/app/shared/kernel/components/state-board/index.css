@@ -1,0 +1,18 @@
+
+.info-board{
+    height: 40px;
+}
+.info-board span{
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    background-color: #acc8ab;
+    width: 180px;
+}
+.info-board .left{
+    left: 60px;
+}
+.info-board .right{
+    right: 60px;
+}

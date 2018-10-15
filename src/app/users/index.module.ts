@@ -1,8 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
-import { AvatarLetterModule } from '../../shared/modules/avatar-letter/index.module';
+import {
+  MatCardModule,
+  MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatRadioModule,
+  MatIconModule
+} from '@angular/material'
+import { AvatarLetterModule } from '@shared/avatar-letter/index.module';
 
 import { ListComponent } from './components/list/list.component';
 import { SearchComponent } from './components/search/search.component';
@@ -21,7 +28,14 @@ import { UserSocketService } from './services/user-socket.service';
     FormsModule,
     ReactiveFormsModule,
     indexRouting,
-    MaterialModule,
+
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatIconModule,
+    
     AvatarLetterModule
   ],
   declarations: [

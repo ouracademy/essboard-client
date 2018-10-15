@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { ProjectService } from './project.service';
-import { SocketService } from '../../../shared/services/socket-io';
-import { Project, Session } from '../../../shared/models/project';
-import { ToProject } from '../../../shared/transforms/to-project';
-import { BuildDataToServer } from '../../../shared/util/build-data-to-server';
+import { SocketService } from '@core/socket.service';
+import { Project, Session } from '@no-module/models/project';
+import { ToProject } from '@no-module/transforms/to-project';
+import { BuildDataToServer } from '@no-module/util/build-data-to-server';
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {
-    projectObserver: any;
+    project$: Subject<any>;
     project: Project;
     _app: any;
     service: any;
@@ -21,7 +21,7 @@ export class ProjectSocketService extends ProjectService {
         this.service = this._app.service('projects');
         this.service.on('removed', (removedItem) => this.onRemoved(removedItem));
         this.service.on('patched', (patchedItem) => this.onPatched(patchedItem));
-        this.currentProject = new Observable(observer => this.projectObserver = observer).share();
+        this.currentProject = new Subject<any>()
         this.project = null;
     }
     getProject(id: string) {
@@ -30,7 +30,7 @@ export class ProjectSocketService extends ProjectService {
                 (err, item: any) => {
                     if (err) return console.error(err);
                     this.project = ToProject.transformCompleteToProject(item);
-                    this.projectObserver.next(this.project);
+                    this.project$.next(this.project);
                 });
         });
     }
@@ -92,7 +92,7 @@ export class ProjectSocketService extends ProjectService {
     private onPatched(patchedItem: any) {
         if (patchedItem._id === this.project.id) {
             this.project = ToProject.transformCompleteToProject(patchedItem);
-            this.projectObserver.next(this.project);
+            this.project$.next(this.project);
         }
     }
 

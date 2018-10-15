@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export abstract class GoalService {
-    bagGoalsObservable: Observable<any>;
-    bagGoalsCompleteObservable: Observable<any>;
+    bagGoalsObservable: Subject<any>;
+    bagGoalsCompleteObservable: Subject<any>;
     abstract getBagGoals(sessionId);
     abstract addStateGoal(stateGoalId:number);
     abstract quitStateGoal(stateGoalId:number);

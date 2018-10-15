@@ -28,7 +28,7 @@ export class DialogComponent implements OnInit {
         } catch (err) { }
     }
     ngOnInit() {
-        this.subscription = this.dialogService.items.subscribe((comments) => {
+        this.subscription = this.dialogService.comments$.subscribe((comments) => {
             this.comments = comments;
         });
         this.dialogService.getComments(this.sessionId);

@@ -1,0 +1,15 @@
+.separator { 
+    width: 250px;
+    height: auto;
+    margin: 0px 5px 20px 5px;
+    position:relative;
+}
+.container-selected{
+    border: dashed;
+}
+.quit{
+    position: absolute;
+    bottom: 1px;
+    right: 0;
+}
+

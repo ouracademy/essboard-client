@@ -1,0 +1,208 @@
+<div class="row">
+  <div id="radar-chart" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <canvas class="chart" [datasets]="radarChartData" [labels]="radarChartLabels" [options]="options" [chartType]="'radar'" (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)" baseChart> </canvas>
+  </div>
+  <div id="alpha-relationships" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="normal-svg-container">
+      <svg class="svg-content" height="100%" preserveAspectRatio="xMinYMin meet" version="1.1" viewBox="0 0 900 900" width="100%">
+        <g groupmode="layer" id="layer1" label="alpha-conection" style="" transform="translate(0,-30)">
+          <rect class="rect-all" height="100%" id="background" width="100%" x="0" y="0"></rect>
+          <g class="area-e" transform="translate(0,0)">
+            <rect class="rect rect-customer" height="171" id="customer-area-of-concern" rx="20" ry="20" style="" width="100%" x="0" y="38"></rect>
+            <a (click)="test()">
+              <g style="" transform="translate(50,80)">
+                <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
+                  id="alpha-01"></path>
+                <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="72" y="50">Interesado </text>
+                <rect *ngFor="let state of kernel.dimensions[0].states" height="20" rx="0" ry="0" class="state-square" width="30" [attr.x]="state.getX()"
+                  [attr.y]="state.getY()" [class.hightlight]="state.isAcheived"></rect>
+
+                <g transform="translate(100,90)">
+                  <a>
+                    <polyline points="0,0  30,0  15,30" style="/* stroke: #b1b8b1; */fill: #b8b1b1;" transform="rotate(0)"></polyline>
+                  </a>
+                </g>
+              </g>
+            </a>
+            <a (click)="test()">
+              <g style="" transform="translate(590,80)">
+                <line stroke="black" stroke-width="2" x1="0" x2="-300" y1="45" y2="45"></line>
+                <g transform="translate(-270,30)">
+                  <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #887f7f;" transform="rotate(90)"></polyline>
+                </g>
+
+
+
+
+
+                <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
+                  id="alpha-01"></path>
+                <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="72" y="50">Oportunidad</text>
+                <rect *ngFor="let state of kernel.dimensions[1].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
+                  width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+                <g transform="translate(-6,30)">
+                  <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(90)"></polyline>
+                </g>
+                <g transform="translate(-6,65)">
+                  <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(50)"></polyline>
+                </g>
+
+                <g transform="translate(270,30)">
+                  <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(0)"></polyline>
+                </g>
+                <g transform="translate(100,90)">
+                  <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(0)"></polyline>
+                </g>
+
+              </g>
+            </a>
+          </g>
+          <g class="area-e" transform="translate(0,210)">
+            <rect class="rect rect-solution" height="171" id="customer-area-of-concern" rx="20" ry="20" width="100%" x="0" y="38"></rect>
+            <g style="" transform="translate(50,80)">
+              <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
+                id="alpha-01"></path>
+              <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="52" y="50">Requerimientos</text>
+              <rect *ngFor="let state of kernel.dimensions[2].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
+                width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+              <g transform="translate(100,90)">
+                <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(0)"></polyline>
+              </g>
+
+            </g>
+            <g style="" transform="translate(590,80)">
+              <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
+                id="alpha-01"></path>
+              <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="28" y="50">Sistema de Software</text>
+              <rect *ngFor="let state of kernel.dimensions[3].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
+                width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+              <g transform="translate(-6,30)">
+                <polyline points="0,0  30,0  15,40" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(90)"></polyline>
+              </g>
+              <g transform="translate(18,-5)">
+                <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(130)"></polyline>
+              </g>
+
+            </g>
+          </g>
+          <g class="area-e" transform="translate(0,420)">
+            <rect class="rect rect-endeavor" height="320" id="customer-area-of-concern" rx="20" ry="20" width="100%" x="0" y="38"></rect>
+            <g style="" transform="translate(50,80)">
+              <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
+                id="alpha-01"></path>
+              <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="90" y="50">Equipo</text>
+              <rect *ngFor="let state of kernel.dimensions[4].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
+                width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+              <g transform="translate(-6,60)">
+                <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(180)"></polyline>
+              </g>
+              <g transform="translate(235,15)">
+                <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(230)"></polyline>
+              </g>
+
+
+
+            </g>
+            <g style="" transform="translate(590,80)">
+              <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
+                id="alpha-01"></path>
+              <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="45" y="50">Forma de trabajo</text>
+              <rect *ngFor="let state of kernel.dimensions[5].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
+                width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+              <g transform="translate(-6,30)">
+                <polyline points="0,0  30,0  15,40" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(90)"></polyline>
+              </g>
+              <g transform="translate(130,-5)">
+                <polyline points="0,0  30,0  15,40" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(180)"></polyline>
+              </g>
+              <g transform="translate(-6,65)">
+                <polyline points="0,0  30,0  15,40" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(50)"></polyline>
+              </g>
+
+            </g>
+            <g style="" transform="translate(320,260)">
+              <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
+                id="alpha-01"></path>
+              <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="85" y="50">Trabajo</text>
+              <rect *ngFor="let state of kernel.dimensions[6].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
+                width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+              <g transform="translate(18,-5)">
+                <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(130)"></polyline>
+              </g>
+
+            </g>
+          </g>
+
+          <g class="line horizontal" transform="translate(300,125) rotate(0)">
+            <line stroke="black" stroke-width="2" x1="0" x2="250" y1="0" y2="0"></line>
+          </g>
+          <g class="line horizontal" transform="translate(300,335) rotate(0)">
+            <line stroke="black" stroke-width="2" x1="0" x2="270" y1="0" y2="0"></line>
+          </g>
+          <g class="line horizontal" transform="translate(300,545) rotate(0)">
+            <line stroke="black" stroke-width="2" x1="0" x2="270" y1="0" y2="0"></line>
+          </g>
+          <g class="line vertical" transform="translate(165,180) rotate(90)">
+            <line stroke="black" stroke-width="2" x1="0" x2="100" y1="0" y2="0"></line>
+          </g>
+          <g class="line vertical" transform="translate(705,180) rotate(90)">
+            <line stroke="black" stroke-width="2" x1="0" x2="100" y1="0" y2="0"></line>
+          </g>
+          <g class="line vertical" transform="translate(165,390) rotate(90)">
+            <line stroke="black" stroke-width="2" x1="0" x2="100" y1="0" y2="0"></line>
+          </g>
+          <g class="line vertical" transform="translate(705,390) rotate(90)">
+            <line stroke="black" stroke-width="2" x1="0" x2="100" y1="0" y2="0"></line>
+          </g>
+          <g class="line oblicua" transform="translate(300,140) rotate(27)">
+            <line stroke="black" stroke-width="2" x1="0" x2="300" y1="0" y2="0"></line>
+          </g>
+          <g class="line oblicua" transform="translate(570,140) rotate(153)">
+            <line stroke="black" stroke-width="2" x1="0" x2="300" y1="0" y2="0"></line>
+          </g>
+          <g class="line oblicua" transform="translate(570,350) rotate(153)">
+            <line stroke="black" stroke-width="2" x1="0" x2="300" y1="0" y2="0"></line>
+          </g>
+
+          <g class="line oblicua" transform="translate(570,600) rotate(130)">
+            <line stroke="black" stroke-width="2" x1="0" x2="100" y1="0" y2="0"></line>
+          </g>
+          <g class="line oblicua" transform="translate(300,600) rotate(50)">
+            <line stroke="black" stroke-width="2" x1="0" x2="100" y1="0" y2="0"></line>
+          </g>
+
+          <g class="line extremo" transform="translate(30,120) rotate(90)">
+            <line stroke="black" stroke-width="2" x1="0" x2="440" y1="0" y2="0"></line>
+          </g>
+          <g class="line extremo" transform="translate(875,120) rotate(90)">
+            <line stroke="black" stroke-width="2" x1="0" x2="440" y1="0" y2="0"></line>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--
+<div class="svg-container">
+  <svg version="1.1" viewBox="0 0 1178.6191 792.51808" preserveAspectRatio="xMinYMin meet" class="svg-content" width="100%" height="100%" >
+    <g label="Ebene 1" groupmode="layer" id="layer1" transform="translate(212.37761,-22.631302)">
+      <rect class="rect-all" id="background" width="1178.6191" height="792.51807" x="-212.37761" y="22.631302"></rect>
+      <rect class="rect rect-endeavor" rx="20" ry="20" id="endeavor-area-of-concern"
+        width="1135.4115" height="347.77914" x="-193.94928" y="451.76056"> </rect>
+      <rect class="rect rect-solution"  rx="20" ry="20" y="241.78087" x="-191.92897" height="189.73769" width="1137.4319" id="solution-area-of-concern" ></rect>
+      <rect class="rect rect-customer" rx="20" ry="20" id="customer-area-of-concern"
+        width="1137.4318" height="181.25465" x="-193.9493" y="38.38467" (click)="test()" ></rect>
+      <path *ngFor="let alpha of alphas" [attr.d]="alpha.path" 
+        id="alpha-01"  class="alpha-graph alpha droppable" [class.hightlight]="isHightlight(alpha.name)"></path>
+       <path class="line" *ngFor="let line of lines"
+        [attr.d]="line.path" ></path>
+      </g>
+    </svg>
+</div>
+-->

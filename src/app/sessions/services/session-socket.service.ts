@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Session } from '../../../shared/models/project';
-import { Observable } from 'rxjs';
+import { Session } from '@no-module/models/project';
+import { Observable, Subject } from 'rxjs';
 import { SessionService } from './session.service';
-import { SocketService } from '../../../shared/services/socket-io';
-import { ToSession } from '../../../shared/transforms/to-session';
-import { GetKeys } from '../../../shared/util/get-keys-from-object';
-import { AuthService } from '../../../auth.service';
+import { SocketService } from '@core/socket.service';
+import { ToSession } from '@no-module/transforms/to-session';
+import { GetKeys } from '@no-module/util/get-keys-from-object';
+import { AuthService } from '@core/auth.service';
 
 @Injectable()
 export class SessionSocketService extends SessionService {
@@ -21,7 +21,7 @@ export class SessionSocketService extends SessionService {
         this._app = this.socketService.init();
         this.service = this._app.service('sessions');
         this.service.on('patched', (patchedItem) => this.onPatched(patchedItem));
-        this.currentSession = new Observable(observer => this.sessionObserver = observer).share();
+        this.currentSession$ = new Subject<any>();
         this.session = null;
     }
     getSession(id: string) {
@@ -30,7 +30,7 @@ export class SessionSocketService extends SessionService {
                 if (err) return console.error(err);
                 this.session = ToSession.withCompleteTransformation(item);
                 GetKeys.setSource(item.alphas);
-                this.sessionObserver.next(this.session);
+                this.currentSession$.next(this.session);
             });
     }
     colaboreUsingUserIdInProject(idSession: string, idProject: string) {
@@ -109,7 +109,7 @@ export class SessionSocketService extends SessionService {
         if (patchedItem._id === this.session.id) {
             this.session = ToSession.withCompleteTransformation(patchedItem);
             GetKeys.setSource(patchedItem.alphas);
-            this.sessionObserver.next(this.session);
+            this.currentSession$.next(this.session);
         }
     }
     public colaboreUsingSessionsIdInUser(idSession) {

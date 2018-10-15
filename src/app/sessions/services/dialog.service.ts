@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 
 export abstract class DialogService {
-    items: Observable<any>;
+    comments$: Subject<any>;
     abstract getComments(sessionId);
     abstract add(text,sessionId);
 }

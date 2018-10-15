@@ -1,0 +1,21 @@
+<div class="wrapper" >
+    <div class="achieved">
+        <div class="wrapper">
+            <state-card-view *ngFor="let state of alpha.statesFulfilled" [state]="state" [classCSS]="'small'" (click)="select(state)"
+                [className]="isPosibleToSelect(state)? 'active' : 'disabled' "></state-card-view>
+        </div>
+    </div>
+    <div [ngClass]="{'separator':true,'container-selected':isForSelected}">
+        <p *ngIf="!stateGoal && isForSelected">Hacer click en un estado y se visualizara aqui</p>
+        <div *ngIf="stateGoal">
+            <state-card-view [state]="stateGoal" [classCSS]="'small'"></state-card-view>
+            <button class="quit" (click)="noSelect()"><md-icon class="md-24" >close</md-icon></button>
+        </div>
+    </div>
+    <div class="no-achieved">
+        <div class="wrapper">
+            <state-card-view *ngFor="let state of alpha.statesUnfulfilled" [state]="state" [classCSS]="'small'" (click)="select(state)"
+                [className]="isPosibleToSelect(state) ? 'active' : 'disabled' "></state-card-view>
+        </div>
+    </div>
+</div>

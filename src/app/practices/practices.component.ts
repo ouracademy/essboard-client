@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PrimaryKernelMockService } from '../../shared/modules/kernel/services/index';
+import { PrimaryKernelMockService } from '@shared/kernel/services/index';
 @Component({
   selector: 'practices',
   templateUrl: './practices.component.html',

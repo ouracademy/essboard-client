@@ -1,0 +1,100 @@
+.alpha {
+    opacity: .4;
+}
+
+.alpha-graph {
+    fill: #ffffff;
+    fill-rule: evenodd;
+    stroke: #a08e8e;
+    stroke-width: 4;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    stroke-miterlimit: 4;
+    stroke-dasharray: none;
+    stroke-opacity: 1;
+}
+
+ .small-svg-container  {
+    display: inline-block;
+    position: relative;
+    width: 440px;
+    height: 340px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    vertical-align: top;
+}
+.normal-svg-container {
+    display: inline-block;
+    position: relative;
+    width: 500px;
+    height: 470px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 3;
+    left: 0;
+}
+
+.conection-name {
+    font-size: 23px;
+    font-family: Arial;
+    -inkscape-font-specification: 'Arial Condensed';
+    fill: #a59595;
+}
+
+.rect {
+    fill-opacity: 1;
+    stroke-width: 4;
+    stroke-width: 1;
+    stroke-miterlimit: 4;
+    stroke-dasharray: none;
+}
+
+.rect-all {
+    fill: transparent;
+    fill-opacity: 1;
+    stroke-width: 4;
+    stroke-miterlimit: 4;
+    stroke-dasharray: none;
+}
+
+.rect-endeavor {
+    fill: #d4e6f0;
+    stroke: #abb2c1;
+}
+
+.rect-solution {
+    fill: #ffff99;
+    stroke: #e6ea73;
+}
+
+.rect-customer {
+    fill: #c4ecbe;
+    stroke: #b0dab9;
+}
+
+.line{
+    fill: none;
+    fill-rule: evenodd;
+    stroke: #959292;
+    stroke-width: 1;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    stroke-miterlimit: 4;
+    stroke-dasharray: none;
+    stroke-opacity: 1;
+}
+.hightlight{
+    stroke-width: 3;
+}
+
+
+/*state */
+.state-square{
+    fill: #d6ebca;stroke: #7cd767;text-align: center;
+}

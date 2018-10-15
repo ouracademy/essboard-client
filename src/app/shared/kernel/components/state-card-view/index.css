@@ -1,0 +1,135 @@
+/* size normal*/
+.state-card .normal md-card {
+	width: 225px;
+	height: auto;
+	padding: 0px;
+	margin-bottom:3px;
+}
+.state-card .normal md-card-content {
+	background: white;
+	margin:0px;
+	padding-top: 3px;
+}
+.state-card .normal md-card-title{
+	text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 19px;
+    height: 30px;
+    padding: 2% 0 2% 0;
+}
+.state-card .normal md-card-content p  {
+	border-style: solid;
+    border-radius: 5px;
+    text-align: center;
+    margin: 5px 30px;
+    padding: 7px;
+    margin: auto;
+    width: 80%;
+}
+.state-card .normal li{
+	font-weight: 100;
+    margin-top: 1px;
+    font-size: 13px;
+    text-align: initial;
+}
+/*colors*/
+.state-card  .customer p{
+	border-style : solid;
+	border-color: #c1ecc1;
+}
+.state-card  .solution p{
+	border-style : solid;
+	border-color: #ffff99;
+}
+.state-card .endeavor p{
+	border-style : solid;
+	border-color: #d4e6f0;
+}
+/*footer*/
+.footer-card .normal p {
+	border-style : solid;
+	margin: auto;
+    width: 80%;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+
+
+
+
+/* size small*/
+.state-card  .small md-card {
+    width: 130px;
+    height: 160px;
+    padding: 0px;
+    margin-bottom: 3px;
+	margin: auto;
+}
+
+.state-card .small md-card-content {
+	background: white;
+    margin: 0px;
+    height: 83%;
+    padding-top: 3px;
+}
+.state-card .small md-card-title{
+	text-align: center;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 19px;
+    height: 10px;
+    padding: 2% 0 2% 0;
+}
+.state-card .small md-card-content p  {
+	border-style: solid;
+    border-radius: 5px;
+    text-align: center;
+    margin: 5px 30px;
+    padding: 1px;
+    margin: auto;
+    width: 80%;
+}
+.state-card .small md-card-content ul{
+	height: 64%;
+    margin-top: 2px;
+    padding-left: 15px;
+}
+.state-card .small md-card-content  li{
+	font-weight: 100;
+    margin-top: 1px;
+    font-size: 7px;
+    text-align: initial;
+}
+.state-card .small md-card-header {
+	margin:0px;
+	height: 21%;
+	padding-top: 3px;
+}
+.small  .state-name {
+	border-style: groove;
+	border-radius: 5px;
+	text-align: center;
+	margin: 5px 30px;
+	padding: 0px;
+	margin: auto;
+    width: 80%;
+}
+.small .footer-card {
+	bottom: 8px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    padding: 0px;
+    height: 20px;
+}
+.small .footer-card  p  {
+	border-style: solid;
+    margin: 1px auto 1px auto;
+    width: 80%;
+    text-align: center;
+}
+
+
+

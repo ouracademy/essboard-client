@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, ElementRef, Output, ViewChild } from '@angular/core';
-import { Alpha, State, Checkpoint } from '../../../../shared/models/project-kernel';
+import { Alpha, State, Checkpoint } from '@no-module/models/project-kernel';
 import { SessionService } from '../../services/session.service';
 import { Subscription } from 'rxjs/Subscription';
 @Component({

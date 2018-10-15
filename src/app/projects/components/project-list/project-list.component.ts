@@ -1,10 +1,10 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Project } from '../../../../shared/models/project';
+import { Project } from '@no-module/models/project';
 import { ProjectsService } from '../../services/projects.service';
-import { AuthService } from '../../../../auth.service';
-import { User } from '../../../users/model/user';
+import { AuthService } from '@core/auth.service';
+import { User } from '@no-module/models/user';
 
 @Component({
     selector: 'my-app',
@@ -26,7 +26,7 @@ export class ProjectListComponent implements OnInit {
 
     ngOnInit(): void {
         this.user = this.auth.user;
-        this.subscription = this.projectsService.items.subscribe((items: Project[]) => {
+        this.subscription = this.projectsService.items$.subscribe((items: Project[]) => {
             this.projects = items;
         });
 

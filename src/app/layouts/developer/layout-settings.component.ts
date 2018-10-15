@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OptionGoTo } from '../../shared/models/option-go-to';
+import { OptionGoTo } from '@no-module/models/option-go-to';
 
 @Component({
   selector: 'app-developer',
