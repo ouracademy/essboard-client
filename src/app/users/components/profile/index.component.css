@@ -17,7 +17,7 @@
     font-weight: 500;
 
 }
-.sessions md-list{
+.sessions mat-list{
     margin: auto;
 }
 .session  {
@@ -36,12 +36,12 @@
     padding: 0px 5px 0px 5px;
     border: solid 2px #92c1a4;
 }
-.session md-card-title{
+.session mat-card-title{
     text-align: center;
     margin-bottom: 5px;
     color: #6c8b7b;
 }
-.session md-card-content{
+.session mat-card-content{
      text-align: center;
     color: #2d7332;
 }
@@ -84,10 +84,10 @@
   border: 1px solid #e0e0e0;
 }
 
-.demo-tab-group .md-tab-header {
+.demo-tab-group .mat-tab-header {
     background: #f9f9f9;
   }
-  .demo-tab-group  .md-tab-body {
+  .demo-tab-group  .mat-tab-body {
     padding: 12px;
   }
 

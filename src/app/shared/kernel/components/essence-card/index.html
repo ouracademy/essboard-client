@@ -1,0 +1,10 @@
+<div [ngStyle]="{'color': mmappingAreaWithColor[area]}" class="essence-card">
+    <div class="essence-card-header row middle-xs center-xs">{{name}} </div>
+    <div class="essence-card-content">
+        <ng-content select="content"></ng-content>  
+    </div>
+    <div class="essence-card-footer">
+        <ng-content select="footer"></ng-content>
+    </div>
+      
+</div>

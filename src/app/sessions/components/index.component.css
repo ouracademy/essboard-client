@@ -1,8 +1,5 @@
 
-.dimension-name{
-    border: solid 2px #7cb987;
-    margin-right:2px;
-}
+
 
 /*arrow*/
 
@@ -68,6 +65,7 @@ state-card{
     margin: 10px 5px 5px 5px;
 }
 
-.content{
+.content-tab{
+  margin: 2rem;
   min-height: 400px;
 }

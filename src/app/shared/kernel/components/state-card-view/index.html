@@ -1,20 +1,17 @@
-<div *ngIf="state" class="state-card selectable">
-  <div [className]="classCSS">
-    <mat-card [className]="state.dimension.getType()">
-      <div>
-        <mat-card-title>{{state.dimension.name}}</mat-card-title>
+
+<essence-card *ngIf="state" class="state-card selectable" [name]="state.dimension.name" [area]="state.dimension.getType()">
+    <content>
+      <div class="state-card-wrapper">
+        <div class="state-name   row middle-xs center-xs">
+            <div>{{state.name}}</div>
+          </div>
+            <ul class="checkpoints">
+              <li *ngFor="let checkpoint of state.getMainChecklist()">
+                {{checkpoint.name}}
+              </li>
+            </ul>
       </div>
-      <mat-card-content>
-        <p class="state-name">{{state.name}}</p>
-        <ul>
-          <li *ngFor="let checkpoint of state.getMainChecklist()">
-            {{checkpoint.name}}
-          </li>
-        </ul>
-        <div class="footer-card">
-          <p>1-6</p>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
+    </content>
+    <footer>
+    </footer>
+</essence-card>

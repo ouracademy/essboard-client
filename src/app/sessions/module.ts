@@ -77,6 +77,8 @@ import { GoalSocketService } from './services/goal-socket.service';
     DialogComponent,
     TrelloComponent
   ],
+
+  
   entryComponents: [],
   providers: [
     { provide: SessionService, useClass: SessionSocketService },

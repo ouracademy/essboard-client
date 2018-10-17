@@ -14,7 +14,7 @@
     box-shadow: 0px 0px 1px #aabe8e;
 }
 
-md-list-item.selectable:hover{
+mat-list-item.selectable:hover{
     color: #77a880;
 }
 a.selectable:hover{
@@ -30,12 +30,12 @@ a.selectable:hover{
 }
 
 /** Material 2 : The overlay-container is an invisible element which contains all individual overlays. */
-.md-overlay-container {
+.mat-overlay-container {
     top: 60px;
     left: -40px;
     height: 100px;
 }
-.md-overlay-pane {
+.mat-overlay-pane {
   position: absolute;
   pointer-events: auto;
   box-sizing: border-box;
@@ -57,25 +57,25 @@ button{
     font-family: Roboto, sans-serif;
 }
 
-md-input {
+mat-input {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-md-hint {
+mat-hint {
     position: absolute;
     font-size: 75%;
     bottom: -0.5em;
 }
 
 /*TODO remove this in an angular 2 material future release*/
-md-input.ng-invalid {
+mat-input.ng-invalid {
     color: #f44336;
 }
-md-input.ng-pristine {
+mat-input.ng-pristine {
     color: #91b270;
 }
-.md-sidenav-content{
+.mat-sidenav-content{
   overflow:initial;
 }
 .content-app{
@@ -87,7 +87,7 @@ md-input.ng-pristine {
 }
 
 /*icons*/
-[md-icon-button]{
+[mat-icon-button]{
   background-color: transparent;
 }
 /* buttons*/
@@ -131,7 +131,7 @@ md-input.ng-pristine {
 .transparent{
     background-color: transparent;
 }
-.md-tab-active{
+.mat-tab-active{
     border-bottom: solid 3px #5bbcce;
 }
 .center{

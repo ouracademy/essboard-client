@@ -1,6 +1,26 @@
 /* alpha-card*/
 
 
+.essence-card {
+	width: 17vw;
+	height: 37vh;
+	border: solid 1px currentColor;
+	background-color: currentColor;
+}
+
+.essence-card-header{
+	height: 5vh;
+	width: 100%;
+	color: black !important;
+}
+.essence-card-content{
+	background: white;
+	height: 29vh;
+}
+.essence-card-footer{
+	height: 3vh;
+}
+
 .state-wrapper{
 	padding: 3px 4px;
 }
@@ -18,7 +38,7 @@
 
 
 
-.state:hover{
+.essence-card  .state:hover{
 	border-style : solid;
 	background-color: currentColor;
 }

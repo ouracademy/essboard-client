@@ -236,4 +236,24 @@ mat-form-field {
 }
 
 
+.alpha-buttons{
+  .mat-button-toggle-button{
+    border: solid 2px #7cb987 !important;
+    width: 11rem;
+  }
+  .mat-button-toggle{
+    margin-right: 9px !important;
+  }
+  .mat-button-toggle-group{
+    box-shadow: none !important;
+  }
+  .mat-button-toggle-checked{
+    background-color: #d7f5d7;
+    color: #4a6950;
+  }
+}
+
+
+
+
    

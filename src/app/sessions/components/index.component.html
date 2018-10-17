@@ -19,7 +19,7 @@
                 <span mat-tooltip="Podras ver holisticamente tu proyecto" tooltip-position="below">Estado actual</span>
             </ng-template>
 
-            <div class="content">
+            <div class="content-tab">
                 <h2 class="title">Mira las conecciones </h2>
                 <alpha-connections *ngIf="session" [kernel]="session.kernel"></alpha-connections>
             </div>
@@ -29,22 +29,26 @@
                 <i class="material-icons">looks_two</i>
                 <span>Determina tu estado</span>
             </ng-template>
-            <div class="content">
-                <h2 class="title">Determina el estado de cualquier dimension</h2>
+            <div class="content-tab">
+            <div class="row middle-xs center-xs">
+              <h2 class="title">Determina el estado de cualquier dimension</h2> 
+              <h4 class="subtitle">( Selecciona una dimension y luego selecciona el estado que tú consideras )</h4>
+            </div>
+              
                 <div class="row">
-                    <div class="col-md-3">
-                        <h4 class="subtitle">Pasos : Selecciona una dimension -> Determina el estado que tu crees se encuentra</h4>
-                    </div>
-                    <div class="col-md-9">
+                    <div class="alpha-buttons">
                         <mat-button-toggle-group name="dimensions-name">
-                            <mat-button-toggle value="" *ngFor="let alpha of kernel.alphasSummary" class="dimension-name" (click)="chooseAlpha(alpha)">
+                            <mat-button-toggle value="" *ngFor="let alpha of kernel.alphasSummary"  (click)="chooseAlpha(alpha)">
                                 {{alpha.name}}
                             </mat-button-toggle>
                         </mat-button-toggle-group>
                     </div>
                 </div>
-                <set-current-state [dimension]="session.getDimension(alphaSelect)" [idSession]="session.id"></set-current-state>
+                <div class="pad-1">
+                      <set-current-state [dimension]="session.getDimension(alphaSelect)" [idSession]="session.id"></set-current-state>
+                </div>
             </div>
+
 
         </mat-tab>
         <mat-tab>
@@ -52,7 +56,7 @@
                 <i class="material-icons">looks_3</i>
                 <span>Establece las metas</span>
             </ng-template>
-            <div class="content">
+            <div class="content-tab">
                 <set-goal-state [kernel]="session.kernel" [sessionId]="session.id" ></set-goal-state>
             </div>
         </mat-tab>
@@ -62,7 +66,7 @@
                 <span>Decide como lograrlo</span>
             </ng-template>
 
-            <div class="content">
+            <div class="content-tab">
                 <how-reach-goals [sessionId]="session.id" [sessionNumber]="session.num"  ></how-reach-goals>
             </div>
         </mat-tab>

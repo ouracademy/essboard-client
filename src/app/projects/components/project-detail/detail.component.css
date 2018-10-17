@@ -1,7 +1,7 @@
 
 
 /*menu vertical*/
-md-sidenav{
+mat-sidenav{
     width:80px;
     background-color: #f5f5f5;
 }
@@ -42,7 +42,7 @@ md-sidenav{
     font-size: 15px;
 }
 /*menu horixzontal*/
-md-toolbar{
+mat-toolbar{
      box-shadow: 5px 0px 5px #adb1ae;
      font-size:14px;
 }
@@ -54,7 +54,7 @@ md-toolbar{
 .project-detail span{
     margin-right: 10px;
 }
-.project-detail md-input{
+.project-detail mat-input{
     border: 1px solid transparent;
     border-radius: 2px!important;
     color: #7e7a7a;
@@ -65,10 +65,10 @@ md-toolbar{
     padding: 2px 7px;
     background-color: transparent;
 }
-.project-detail md-input:focus{
+.project-detail mat-input:focus{
     border:1px solid #a0b7a4;
 }
-.project-detail md-input:hover{
+.project-detail mat-input:hover{
     border:1px solid #e5e5e5;
 }
 /*content*/
