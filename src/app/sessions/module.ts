@@ -7,11 +7,19 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatRadioModule,
-  MatIconModule
+  MatIconModule,
+  MatToolbarModule,
+  MatCheckboxModule,
+  MatTabsModule,
+  MatButtonToggleModule,
+  MatListModule
 } from '@angular/material'
 
 import 'hammerjs';
 import { DragulaModule, DragulaService } from 'ng2-dragula/ng2-dragula';
+import { RoutingModule } from './routing.module';
+
+
 
 import { KernelModule } from '@shared/kernel/kernel.module';
 import { UsersModule } from '../users/index.module';
@@ -48,9 +56,15 @@ import { GoalSocketService } from './services/goal-socket.service';
     MatInputModule,
     MatRadioModule,
     MatIconModule,
+    MatToolbarModule,
+    MatCheckboxModule,
+    MatTabsModule,
+    MatButtonToggleModule,
+    MatListModule,
 
     DragulaModule,
-    AvatarLetterModule
+    AvatarLetterModule,
+    RoutingModule
   ],
   declarations: [
     SetCurrentStateComponent,
@@ -78,4 +92,4 @@ import { GoalSocketService } from './services/goal-socket.service';
     TrelloComponent
   ]
 })
-export class SessionsModule { }
+export class Module { }

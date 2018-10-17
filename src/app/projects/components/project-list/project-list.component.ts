@@ -7,7 +7,7 @@ import { AuthService } from '@core/auth.service';
 import { User } from '@no-module/models/user';
 
 @Component({
-    selector: 'my-app',
+    selector: 'project-list',
     templateUrl: 'project-list.component.html',
     styleUrls: ['list.component.css']
 })
@@ -15,6 +15,7 @@ export class ProjectListComponent implements OnInit {
     title = 'Mis proyectos';
     hideForm: boolean = true;
     projects: Project[] = [];
+    loaded = false;
     private subscription: Subscription;
 
     user: User;
@@ -28,6 +29,7 @@ export class ProjectListComponent implements OnInit {
         this.user = this.auth.user;
         this.subscription = this.projectsService.items$.subscribe((items: Project[]) => {
             this.projects = items;
+            this.loaded = true
         });
 
         this.projectsService.getProjects();

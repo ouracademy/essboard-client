@@ -14,10 +14,10 @@
 
     <mat-tab-group class="steps-tab-group ">
         <mat-tab>
-            <template mat-tab-label>
+            <ng-template mat-tab-label>
                 <i class="material-icons">looks_one</i>
                 <span mat-tooltip="Podras ver holisticamente tu proyecto" tooltip-position="below">Estado actual</span>
-            </template>
+            </ng-template>
 
             <div class="content">
                 <h2 class="title">Mira las conecciones </h2>
@@ -25,10 +25,10 @@
             </div>
         </mat-tab>
         <mat-tab>
-            <template mat-tab-label>
+            <ng-template mat-tab-label>
                 <i class="material-icons">looks_two</i>
                 <span>Determina tu estado</span>
-            </template>
+            </ng-template>
             <div class="content">
                 <h2 class="title">Determina el estado de cualquier dimension</h2>
                 <div class="row">
@@ -48,19 +48,19 @@
 
         </mat-tab>
         <mat-tab>
-            <template mat-tab-label>
+            <ng-template mat-tab-label>
                 <i class="material-icons">looks_3</i>
                 <span>Establece las metas</span>
-            </template>
+            </ng-template>
             <div class="content">
                 <set-goal-state [kernel]="session.kernel" [sessionId]="session.id" ></set-goal-state>
             </div>
         </mat-tab>
         <mat-tab>
-            <template mat-tab-label>
+            <ng-template mat-tab-label>
                 <i class="material-icons">looks_4</i>
                 <span>Decide como lograrlo</span>
-            </template>
+            </ng-template>
 
             <div class="content">
                 <how-reach-goals [sessionId]="session.id" [sessionNumber]="session.num"  ></how-reach-goals>

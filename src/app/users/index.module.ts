@@ -7,7 +7,10 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatRadioModule,
-  MatIconModule
+  MatIconModule,
+  MatToolbarModule,
+  MatListModule,
+  MatTabsModule
 } from '@angular/material'
 import { AvatarLetterModule } from '@shared/avatar-letter/index.module';
 
@@ -35,7 +38,9 @@ import { UserSocketService } from './services/user-socket.service';
     MatInputModule,
     MatRadioModule,
     MatIconModule,
-    
+    MatToolbarModule,
+    MatListModule,
+    MatTabsModule,
     AvatarLetterModule
   ],
   declarations: [

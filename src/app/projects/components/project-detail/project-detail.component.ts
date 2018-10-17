@@ -30,7 +30,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.subscription = this.service.currentProject.subscribe((item: Project) => {
+    this.subscription = this.service.currentProject$.subscribe((item: Project) => {
       this.project = item;
     });
     this.subscription = this.route.params.subscribe(params => {

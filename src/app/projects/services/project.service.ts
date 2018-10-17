@@ -2,7 +2,7 @@
 import { Subject } from 'rxjs';
 
 export abstract class ProjectService {
-    currentProject: Subject<any>;
+    currentProject$: Subject<any>;
     abstract setName (name : string);
     abstract setDescription(description :string);
     abstract getProject(id: string);

@@ -9,7 +9,8 @@ import {
   MatInputModule,
   MatRadioModule,
   MatIconModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatDialogModule
 } from '@angular/material'
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -19,7 +20,7 @@ import { FormsModule } from '@angular/forms';
 import  { KernelModule } from '@shared/kernel/kernel.module'
 
 import { LoadingModule } from '../shared/loading/loading.module';
-import { InsideLayoutModule  } from '@layouts/inside'
+
 import { RoutingModule } from './routing.module';
 
 
@@ -56,12 +57,13 @@ import { ProjectsSocketService } from './services/projects-socket.service';
     MatToolbarModule,
     MatProgressBarModule,
     MatSidenavModule,
+    MatDialogModule,
 
     FlexLayoutModule,
 
     LoadingModule,
     RoutingModule,
-    InsideLayoutModule,
+
 
     FormsModule,
     KernelModule

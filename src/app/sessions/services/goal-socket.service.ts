@@ -19,7 +19,7 @@ export class GoalSocketService extends GoalService {
         this._app = this.socketService.init();
         this.service = this._app.service('goals');
         this.service.on('patched', (newItem) => this.onPatched(newItem));
-        this.bagGoalsObservable = new Subject<any>();
+        this.bagGoals$ = new Subject<any>();
         this.bagGoalsComplete$ =  new Subject<any>();
     }
 

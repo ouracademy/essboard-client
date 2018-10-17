@@ -9,7 +9,7 @@ import { BuildDataToServer } from '@no-module/util/build-data-to-server';
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {
-    project$: Subject<any>;
+    currentProject$: Subject<any>;
     project: Project;
     _app: any;
     service: any;
@@ -21,7 +21,7 @@ export class ProjectSocketService extends ProjectService {
         this.service = this._app.service('projects');
         this.service.on('removed', (removedItem) => this.onRemoved(removedItem));
         this.service.on('patched', (patchedItem) => this.onPatched(patchedItem));
-        this.currentProject = new Subject<any>()
+        this.currentProject$ = new Subject<any>()
         this.project = null;
     }
     getProject(id: string) {
@@ -30,7 +30,7 @@ export class ProjectSocketService extends ProjectService {
                 (err, item: any) => {
                     if (err) return console.error(err);
                     this.project = ToProject.transformCompleteToProject(item);
-                    this.project$.next(this.project);
+                    this.currentProject$.next(this.project);
                 });
         });
     }
@@ -92,7 +92,7 @@ export class ProjectSocketService extends ProjectService {
     private onPatched(patchedItem: any) {
         if (patchedItem._id === this.project.id) {
             this.project = ToProject.transformCompleteToProject(patchedItem);
-            this.project$.next(this.project);
+            this.currentProject$.next(this.project);
         }
     }
 

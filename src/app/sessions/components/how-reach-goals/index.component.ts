@@ -17,7 +17,7 @@ export class HowReachGoals {
   constructor(private service: GoalService) {
   }
   ngOnInit() {
-    this.subscription = this.service.bagGoalsCompleteObservable.subscribe((bagGoals: BagGoal) => {
+    this.subscription = this.service.bagGoalsComplete$.subscribe((bagGoals: BagGoal) => {
       this.bagGoals = bagGoals;
     });
     this.service.getBagGoalsComplete(this.sessionId);

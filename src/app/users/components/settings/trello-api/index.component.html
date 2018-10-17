@@ -4,7 +4,7 @@
         <p><a href="https://trello.com/app-key">1. Ingresa a este link</a></p>
         <p>2. Copia el valor del campo Tecla o Key</p>
         <form [formGroup]="appKeyForm" (ngSubmit)="onSubmit()">
-            <mat-form-field appearance="outline"><input matInput  type="text" formControlName="appKey" class="full-width" placeholder="App Key Trello" required dividerColor="{{ errors.appKey ? 'warn' : 'primary' }}">
+            <mat-form-field appearance="outline"><input matInput  type="text" formControlName="appKey" class="full-width" placeholder="App Key Trello" required >
                 <mat-hint *ngIf="errors.appKey" align="end">
                     <span>{{ errors.appKey }}</span>
                 </mat-hint>

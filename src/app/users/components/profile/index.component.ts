@@ -7,6 +7,7 @@ import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 //import { md5 } from '@no-module/models/md5';
 
+
 @Component({
   selector: 'my-user-detail',
   templateUrl: 'index.component.html',

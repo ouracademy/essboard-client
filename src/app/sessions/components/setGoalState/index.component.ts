@@ -20,7 +20,7 @@ export class SetGoalStateComponent implements OnInit, OnChanges {
     constructor(private service: GoalService) {
     }
     ngOnInit() {
-        this.subscription = this.service.bagGoalsObservable.subscribe((bagGoals: BagGoal) => {
+        this.subscription = this.service.bagGoals$.subscribe((bagGoals: BagGoal) => {
             this.bagGoals = bagGoals;
         });
         this.service.getBagGoals(this.sessionId);

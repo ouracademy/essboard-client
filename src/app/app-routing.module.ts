@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-
+import { InsideLayoutComponent } from '@layouts/inside/layout.component'
 
 
 const routes: Routes = [
@@ -13,7 +13,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'me',
+    path: 'me', 
+    component: InsideLayoutComponent, 
     children: [
       { path: 'projects', loadChildren: 'app/projects/module#Module' },
       { path: 'sessions', loadChildren: 'app/sessions/module#Module' },
