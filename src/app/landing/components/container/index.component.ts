@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@core/auth.service';
 
 @Component({
     selector: 'app-landing',
@@ -33,7 +34,7 @@ export class LandingComponent implements OnInit {
 
     
 
-    constructor() { }
+    constructor( public auth: AuthService) { }
 
     getBackground(item) {
         return `url(assets/images/kernel-icons.png) ${item.x}px ${item.y}px`

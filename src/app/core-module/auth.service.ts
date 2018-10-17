@@ -36,6 +36,7 @@ export class AuthService {
 
 
     public get isLoggedIn(): boolean {
+        console.log( 'user', window.localStorage.getItem('user'))
         return !!window.localStorage.getItem('user');
     }
 

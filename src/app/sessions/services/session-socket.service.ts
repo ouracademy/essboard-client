@@ -28,6 +28,7 @@ export class SessionSocketService extends SessionService {
         this.service.get(id,
             (err, item: any) => {
                 if (err) return console.error(err);
+                console.log('sobre una sesion', item)
                 this.session = ToSession.withCompleteTransformation(item);
                 GetKeys.setSource(item.alphas);
                 this.currentSession$.next(this.session);
@@ -86,6 +87,7 @@ export class SessionSocketService extends SessionService {
                 id, data,
                 params)
                 .then((result) => {
+                    console.log('edited', result)
                 })
                 .catch(function (error) {
                     console.log(error)

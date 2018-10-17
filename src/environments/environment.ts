@@ -7,8 +7,4 @@ export const environment = {
   production: false
 };
 
-export const api = {
-  second: 'https://essboard-backend-marthur.c9users.io/',
-  local: 'http://localhost:3030',
-  main: 'https://essboard-backend.herokuapp.com/',
-};
+export const api = 'http://localhost:3030';

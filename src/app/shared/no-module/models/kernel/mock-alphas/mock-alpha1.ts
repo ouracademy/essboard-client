@@ -11,6 +11,29 @@ export const state12: StateMetadata = new StateMetadata('Representado', 12, stat
 export const state11: StateMetadata = new StateMetadata('Reconocido', 11, state12, []);
 
 
+/* Lo basico
+Ver holisticamente el estado de un proyecto
+Compartir a mi equipo mi proyecto
+
+Ver en que estado se determino se quedo un meeting (cualquier meeting)
+/ esto implica que el meeting tiene una duracion (un intervalo de tiempo corto) 
+
+para la determinacion del estado, de las metas y como lograrlas
+
+qUE QUIERES VALIDAR!!
+SI QUIERS VALIDAR que tiene caracteristicas colaborativas
+entonces haz una lista de caracteristicas colaborativas  (como un checklis)
+vez que tanto tu software es colaborativo
+
+https://s3.amazonaws.com/academia.edu.documents/42258187/cscw2011_cored.pdf?AWSAccessKeyId=AKIAIWOWYYGZ2Y53UL3A&Expires=1539818406&Signature=rRgnnXh4WBUM63QnCx9wujeIauQ%3D&response-content-disposition=inline%3B%20filename%3DCoRED.pdf
+https://www.researchgate.net/profile/Steven_Ross7/publication/221321743_Jazz_a_collaborative_application_development_environment/links/544514810cf2dccf30b81287/Jazz-a-collaborative-application-development-environment.pdf
+
+
+si quieres validar 
+
+
+*/ 
+
 export const checkpointsForState11: CheckpointMetadata[] = [
   {
     identifier: '1-1-1',

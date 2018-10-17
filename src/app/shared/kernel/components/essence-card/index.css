@@ -2,14 +2,14 @@
 
 
 .essence-card {
-	width: 17vw;
-	height: 37vh;
+	width: 16vw;
+	height: 38vh;
 	border: solid 1px currentColor;
 	background-color: currentColor;
 }
 
 .essence-card-header{
-	height: 5vh;
+	height: 6vh;
 	width: 100%;
 	color: black !important;
 }
@@ -42,21 +42,22 @@
 	border-style : solid;
 	background-color: currentColor;
 }
+.noAchieved{
+    background-color: transparent;
+}
 
 .achieved{
    	border-style : solid;
 	background-color: currentColor;
 }
 
-.working{
-   	border-style : solid;
-	background-color: currentColor;
+.working{	
+	border-style : solid;
+	background-color: currentColor !important;
 }
 
 
-.noAchieved{
-    background-color: transparent;
-}
+
 .selected{
 	box-shadow: 1px 2px 30px 13px rgba(202,188,188,0.79);
 }

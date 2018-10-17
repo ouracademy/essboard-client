@@ -1,13 +1,18 @@
 <app-header>
   <right-content>
+  <div *ngIf="!auth.isLoggedIn; else userLogged">
       <a class="button" mat-button color="primary" routerLink="/login">Ingresa</a>
       <a class="button" mat-button color="primary" routerLink="/signup">Registrate</a>
+  </div>
+  <ng-template #userLogged>
+        <a class="button" mat-button color="primary" routerLink="/me/projects">Entrar</a>
+  </ng-template>
   </right-content>
 </app-header>
 <div fxLayout="column" fxLayoutAlign="center center">
   <h1 class="mat-display-1 primary center width-70">{{ labels.slogan }}</h1>
   <h4 class="mat-display-1 info middle-width center">{{ labels.description }}</h4>
-  <a class="btn-big " mat-stroked-button  color="accent" routerLink="/projects">{{ labels.start }} </a>
+  <a class="btn-big " mat-stroked-button  color="accent" routerLink="/login">{{ labels.start }} </a>
   <div class="all-width p-2">
     <div fxLayout="row wrap" fxLayoutAlign="center center">
       <div fxLayout="row wrap" fxFlex.xs="60" fxFlex.md="70" fxFlex.sm="70" fxLayoutAlign="space-around center">

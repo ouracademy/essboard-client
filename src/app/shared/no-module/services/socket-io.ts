@@ -8,8 +8,9 @@ export class SocketService {
     public _app: FeathersApp;
     public _url: string;
     constructor() {
-        this._url = api.main;
+        this._url = api;
     }
+    
     init() {
         this.socket = io(this._url);
         return feathers()
