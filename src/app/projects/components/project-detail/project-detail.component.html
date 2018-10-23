@@ -42,7 +42,7 @@
                         <h2 class="title">Tus sesiones de trabajo</h2>
                         <div  >
                             <button class="main" (click)="addSession()"><mat-icon class="md-24" >add</mat-icon></button>
-                            <tiles-sessions  *ngIf="project.sessions" [sessions]="project.sessions"></tiles-sessions>   
+                            <sessions-list  *ngIf="project.sessions" [sessions]="project.sessions"></sessions-list>   
                         </div>
                     </div>
                     <div class="col-lg-9">

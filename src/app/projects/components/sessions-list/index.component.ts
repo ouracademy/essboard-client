@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { Session } from '@no-module/models/project';
 
 @Component({
-  selector: 'tiles-sessions',
+  selector: 'sessions-list',
   templateUrl: 'index.component.html'
 })
-export class TilesSessionsComponent implements OnInit, OnChanges {
+export class SessionsListComponent implements OnInit, OnChanges {
   @Input() sessions: Session[];
   fixedCols = 4;
   fixedRowHeight = 100;

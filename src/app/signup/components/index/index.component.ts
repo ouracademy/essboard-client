@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
     private auth: AuthService,
     private sharedService: SharedService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -69,9 +69,8 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    this.auth.signup( this.signupForm.value ).then(() => this.onSuccess())
-     .catch((error) => this.onError(error));
-        
+    this.auth.signup(this.signupForm.value).subscribe(() => this.onSuccess(), (error) => this.onError(error));
+
   }
 
   private onSuccess() {
@@ -79,7 +78,8 @@ export class SignupComponent implements OnInit {
   }
 
   private onError(error: any) {
-    this.sharedService.showError("Upps!",  `Ya existe un usuario para esa cuenta`);
-    
+    console.log(error)
+    this.sharedService.showError("Upps!", `Ya existe un usuario para esa cuenta`);
+
   }
 }

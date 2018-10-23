@@ -19,12 +19,7 @@
 .empty-proyects mat-card{
     border: dashed #7cb987;
 }
-.title {
-    color: #5cbccf;
-    border: solid #7cb987;
-    border-bottom: solid 3px #999995;
-    padding: 10px;
-}
+
 mat-sidenav.invitation {
     width:250px;
 }

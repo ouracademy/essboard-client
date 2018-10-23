@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router'
 @Component({
   selector: "app-auth-layout",
   template: `
-  <div  class="viewport" fxLayout="column" fxLayoutAlign="center center" >
+  <div  class="viewport column middle-xs center-xs" >
     <img src='assets/images/logo/logo-horizontal.png' alt='Essboard' class='pointer' routerLink='/'>
     <ng-content></ng-content>
   </div>

@@ -17,8 +17,8 @@ export class UserSocketService extends UserService {
 
     constructor(public socketService: SocketService, private router: Router) {
         super();
-        this._app = this.socketService.init();
-        this.service = this._app.service('users');
+
+        this.service = this.socketService.getService('users');
 
         this.users$ = new Subject<any>()
         this.currentUser$ = new Subject<any>()
@@ -28,7 +28,7 @@ export class UserSocketService extends UserService {
     }
 
     getUsers() {
-        this._app.authenticate().then(data => {
+        
             this.service.find({
                 query: {
                     $sort: { createdAt: -1 }
@@ -39,12 +39,12 @@ export class UserSocketService extends UserService {
                     this.toUser(x));
                 this.users$.next(this.users);
             });
-        });
+        
     }
 
     get(id: string) {
-        console.log(id);
-        this._app.authenticate().then(data => {
+  
+        
             this.service.get(id,
                 (err, x: any) => {
                     if (err) return console.error(err);
@@ -52,7 +52,7 @@ export class UserSocketService extends UserService {
                     this.currentUser$.next(this.user);
                     console.log('item of server ', x);
                 })
-        });
+       
     }
 
     getByUsername(username: string) {
@@ -72,31 +72,26 @@ export class UserSocketService extends UserService {
         this.users.splice(id, 1);
         this.users$.next(this.users);
         this.service.remove(id)
-            .then((result) => {
+            .subscribe( result => {
                 this.router.navigate(['admin/users']);
-            })
-            .catch(function (error) {
+            },  (error)  => {
                 alert('Error al eliminar  tu proyecto');
-            });
+            } )
+           
     }
 
-    patch(user: User): Promise<void> {
-        return this._app.authenticate().then(data =>
+    patch(user: User) {
+      
             this.service.patch(user.id, {
                 name: user.name,
                 email: user.email
-            }).catch(function (error) {
-                throw error;
-            }));
+            })
     }
-    setAppKeyTrello(user: User): Promise<void> {
-        console.log(user);
-        return this._app.authenticate().then(data =>
+    setAppKeyTrello(user: User) {
+      
             this.service.patch(user.id, {
                 appKeyTrello: user.appKeyTrello
-            }).catch(function (error) {
-                throw error;
-            }));
+            });
     }
 
     private toUser(source) {
@@ -104,7 +99,7 @@ export class UserSocketService extends UserService {
     }
 
     search(email: string) {
-        this._app.authenticate().then(data => {
+        
             this.service.find({
                 query: {
                     email: { $regex: email, $options: 'igm' }
@@ -114,6 +109,6 @@ export class UserSocketService extends UserService {
                 this.users = items.data.map((x) => this.toUser(x));
                 this.users$.next(this.users);
             });
-        });
+       
     }
 }

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { InsideLayoutComponent } from '@layouts/inside/layout.component'
 
 
+
 const routes: Routes = [
   {
     path: '',

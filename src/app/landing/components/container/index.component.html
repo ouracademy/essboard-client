@@ -9,13 +9,13 @@
   </ng-template>
   </right-content>
 </app-header>
-<div fxLayout="column" fxLayoutAlign="center center">
+<div class="row center-xs middle-xs">
   <h1 class="mat-display-1 primary center width-70">{{ labels.slogan }}</h1>
   <h4 class="mat-display-1 info middle-width center">{{ labels.description }}</h4>
   <a class="btn-big " mat-stroked-button  color="accent" routerLink="/login">{{ labels.start }} </a>
   <div class="all-width p-2">
-    <div fxLayout="row wrap" fxLayoutAlign="center center">
-      <div fxLayout="row wrap" fxFlex.xs="60" fxFlex.md="70" fxFlex.sm="70" fxLayoutAlign="space-around center">
+    <div class="row center-xs middle-xs">
+      <div  class="row around-xs middle-xs" >
         <div class="icon center" *ngFor="let item of kernelIcons">
           <div class="icon-image auto" [ngStyle]="{
                     'background': getBackground(item)}">

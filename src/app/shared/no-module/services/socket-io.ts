@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { api } from '@env/environment';
-import * as feathers from 'feathers-client'; 
-import * as io from 'socket.io-client'; 
+
 @Injectable()
 export class SocketService {
     public socket: any;
@@ -12,11 +11,11 @@ export class SocketService {
     }
     
     init() {
-        this.socket = io(this._url);
+     /*    this.socket = io(this._url);
         return feathers()
             .configure(feathers.socketio(this.socket,{timeout:10000}))
             .configure(feathers.hooks())
-            .configure(feathers.authentication({ storage: window.localStorage }));
+            .configure(feathers.authentication({ storage: window.localStorage })); */
     }
 }
 

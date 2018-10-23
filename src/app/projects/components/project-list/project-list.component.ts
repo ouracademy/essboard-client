@@ -5,7 +5,8 @@ import { Project } from '@no-module/models/project';
 import { ProjectsService } from '../../services/projects.service';
 import { AuthService } from '@core/auth.service';
 import { User } from '@no-module/models/user';
-
+import { MatDialogClose, MatDialog } from '@angular/material';
+import { ProjectCreateComponent } from '../project-create/project-form.component'
 @Component({
     selector: 'project-list',
     templateUrl: 'project-list.component.html',
@@ -21,6 +22,7 @@ export class ProjectListComponent implements OnInit {
     user: User;
 
     constructor(
+        private matDialog: MatDialog,
         private router: Router,
         private projectsService: ProjectsService,
         private auth: AuthService) { }
@@ -35,13 +37,11 @@ export class ProjectListComponent implements OnInit {
         this.projectsService.getProjects();
     }
 
-    showForm(): void {
-        this.hideForm = !this.hideForm;
+    createProject(): void {
+        this.matDialog.open(ProjectCreateComponent)
     }
 
-    closeCreateForm() {
-        this.hideForm = true;
-    }
+
 
 
 }

@@ -1,0 +1,16 @@
+<div class="">
+    <div class="title">Cree su proyecto</div>
+    <div>
+      <form  (ngSubmit)="onSubmit()" #projectForm="ngForm">
+        <mat-form-field appearance="outline" class='all-width'><input matInput  class="full-width" placeholder="Nombre" required [(ngModel)]="model.name" name="name" #name="ngModel">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class='all-width'><input matInput  class="full-width" placeholder="Descripcion" required [(ngModel)]="model.description" name="description" #description="ngModel">
+        </mat-form-field>
+        <br>
+        <div class="align-right">
+          <button type="submit" [disabled]="!projectForm.form.valid" mat-raised-button color="accent" class=" mar-0-1 btn-big">Guardar</button>
+          <button type="button" mat-raised-button  color="warn" class=" mar-0-1 btn-big"  mat-dialog-close>Cancelar</button>
+        </div>
+       </form>
+    </div>
+</div>

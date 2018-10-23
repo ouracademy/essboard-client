@@ -1,6 +1,6 @@
 
 import { User } from '../../model/user';
-import { UserService } from '../../services/user.service';
+import { UserSearchSocketService } from '../../services/user-search-socket.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -15,22 +15,20 @@ export class SearchComponent implements OnInit {
     keyToSearch: string = "";
     users: User[];
 
-    private subscription: Subscription;
-
-    constructor(private userService: UserService
+    constructor(private userService: UserSearchSocketService
     ) { }
 
     ngOnInit(): void {
-        this.subscription = this.userService.users$.subscribe((users: User[]) => {
-            this.users = users;
-        });
+   
     }
     onKey(event: any) {
         if (this.keyToSearch == "") {
             this.users = [];
         }
         else {
-            this.userService.search(this.keyToSearch);
+            this.userService.search(this.keyToSearch).subscribe( users =>{
+                this.users = users;
+            });
         }
     }
     select(user) {

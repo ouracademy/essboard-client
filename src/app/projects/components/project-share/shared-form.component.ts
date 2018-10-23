@@ -1,20 +1,26 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Project } from '@no-module/models/project';
-import { ProjectService } from '../../../services/project.service';
+import { ProjectService } from '../../services/project.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
     selector: 'project-share-form',
     templateUrl: 'shared-form.component.html'
 })
 export class SharedFormComponent implements OnInit {
-    @Output() onCloseForm = new EventEmitter<boolean>();
+
     @Input() project: Project;
     public invitedsEmail: any;
     public message: String;
     public inviteds: any;
-    constructor(private projectService: ProjectService) { }
+    constructor(
+        private projectService: ProjectService, 
+        private reference: MatDialogRef<SharedFormComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any) {
+            this.project = data
+         }
     ngOnInit() {
-        this.inviteds = this.project.members;
+        this.inviteds = [];
         this.invitedsEmail = null;
         this.message = "";
     }
@@ -30,13 +36,12 @@ export class SharedFormComponent implements OnInit {
     existsInUsers(email) {
         return true;
     }
-    close() {
-        this.onCloseForm.emit(false);
-    }
+ 
     getSelect(user) {
-        if (!this.project.haveThisMember(user)) {
-            this.inviteTo(user);
-        }
+        this.inviteTo(user);
+        // if (!this.project.haveThisMember(user)) {
+        //     this.inviteTo(user);
+        // }
     }
     inviteTo(user) {
         this.projectService.inviteTo(this.project,user);

@@ -6,12 +6,13 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { Project, Session } from '@no-module/models/project';
 import { ProjectService } from '../../services/project.service';
 import { SharedService } from '@core/shared.service';
+import { SharedFormComponent } from '../project-share/shared-form.component';
 
 
 @Component({
   selector: 'my-project-detail',
   templateUrl: 'project-detail.component.html',
-  styleUrls: ['detail.component.css'],
+  styleUrls: ['project-detail.component.css'],
 })
 export class ProjectDetailComponent implements OnInit, OnDestroy {
   project: Project;
@@ -52,7 +53,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     }
   }
   share() {
-    this.showShare = !this.showShare;
+    this.dialog.open(SharedFormComponent, { data: this.project })
   }
   closeSharedForm(hide) {
     this.showShare = hide;

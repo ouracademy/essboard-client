@@ -2,16 +2,14 @@
     <mat-toolbar>
         <span class="title">{{title}}</span>
         <span class="fill-remaining"></span>
-        <button mat-icon-button class="main" (click)="showForm()"><mat-icon  >add</mat-icon></button>
+        <button mat-icon-button class="main" (click)="createProject()"><mat-icon  >add</mat-icon></button>
     </mat-toolbar>
     <div class="main-content mar-1">
-        <project-form [hidden]="hideForm" (onCloseForm)="closeCreateForm($event)"></project-form>
+     
         <div *ngIf="loaded && projects.length == 0" class="empty-proyects">
             <mat-card>
                 <mat-card-content>
-                    <div class="col-lg-offset-7 col-lg-5">
-                        <p>No tienes ningun proyecto creado</p>
-                    </div>
+                        <p>No tienes proyectos</p>
                 </mat-card-content>
             </mat-card>
         </div>

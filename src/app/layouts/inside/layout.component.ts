@@ -19,6 +19,8 @@ import { HeaderModule } from '@shared/header/index.module';
       <button mat-icon-button  class="avatar" [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
+      <app-notifications></app-notifications>
+
     </right-content>
   </app-header>
   <router-outlet></router-outlet>
@@ -48,14 +50,15 @@ export class InsideLayoutComponent implements OnInit {
 import { NgModule,  NO_ERRORS_SCHEMA  } from '@angular/core';
 import { CommonAppModule } from "@shared/common";
 import { Router } from "@angular/router";
-
+import { NotificationsModule } from '@shared/notifications/index.module'
 import { RouterModule } from '@angular/router'
 @NgModule({
   imports: [
     CommonAppModule,
     MatMenuModule, MatButtonModule, MatIconModule,
     RouterModule,
-    HeaderModule
+    HeaderModule,
+    NotificationsModule
   ],
   declarations: [InsideLayoutComponent],
   exports: [InsideLayoutComponent],

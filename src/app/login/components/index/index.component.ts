@@ -12,7 +12,7 @@ import { Credentials } from '@no-module/models/user';
   <app-auth-layout>
     <p class=''>Ingresa con tus credenciales</p>
     <mat-card>
-        <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <mat-card-content class="column" >
             <form  class="center" [formGroup]='loginForm' (ngSubmit)='onSubmit()'>
               <mat-form-field floatLabel='never' appearance="outline" class='all-width'>
                   <input matInput formControlName='email'
@@ -26,7 +26,7 @@ import { Credentials } from '@no-module/models/user';
               </mat-form-field>
               <button class="width-100 mar-0-1 btn-big" type='submit' [disabled]='!loginForm.valid' mat-raised-button  color="accent" >Ingresa</button>
             </form>
-            <div fxLayout fxLayoutAlign="space-around center">
+            <div class="row aorund-xs middle-xs">
                 <span class="info"><a routerLink='/signup'>No tienes una cuenta</a></span>
             </div>
         </mat-card-content>
