@@ -17,7 +17,7 @@ import { BagGoal } from '@no-module/models/goal';
   templateUrl: 'index.component.html',
   styleUrls: ['index.component.css'],
 })
-export class SessionComponent implements OnInit{
+export class SessionComponent implements OnInit {
   idSession: string;
   session: Session;
   alphaSelect: AlphaMetadata;
@@ -40,6 +40,7 @@ export class SessionComponent implements OnInit{
     });
     this.subscription = this.route.params.subscribe(params => {
       this.idSession = this.route.snapshot.params['id'];
+      console.log(this.idSession)
       this.service.getSession(this.idSession);
     });
   }
@@ -58,7 +59,7 @@ export class SessionComponent implements OnInit{
 
   }
   showChat() {
-      this.isJoinedToChat = !this.isJoinedToChat;
+    this.isJoinedToChat = !this.isJoinedToChat;
   }
   goToProject() {
     this.router.navigate(['/me/projects', this.session.projectId]);

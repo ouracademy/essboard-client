@@ -9,7 +9,6 @@ import {
   MatInputModule,
   MatRadioModule,
   MatIconModule,
-  MatSidenavModule,
   MatDialogModule
 } from '@angular/material'
 
@@ -17,7 +16,7 @@ import {
 import { ReactiveFormsModule } from '@angular/forms'
 
 import { FormsModule } from '@angular/forms';
-import  { KernelModule } from '@shared/kernel/kernel.module'
+import { KernelModule } from '@shared/kernel/kernel.module'
 
 import { LoadingModule } from '../shared/loading/loading.module';
 
@@ -25,14 +24,14 @@ import { SearchUsersModule } from '../users/search.module';
 import { RoutingModule } from './routing.module';
 
 
-import { ProjectListComponent } from './components/project-list/project-list.component';
-import { ProjectDetailComponent,ConfirmationDialog} from './components/project-detail/project-detail.component';
-import { ProjectCardComponent } from './components/project-card/project-card.component';
+import { ListComponent } from './components/list/list.component';
+import { DetailComponent } from './components/detail/detail.component';
+import { CardComponent } from './components/card/card.component';
 import { SessionsListComponent } from './components/sessions-list/index.component';
 
 
-import { ProjectCreateComponent } from './components/project-create/project-form.component';
-import { SharedFormComponent } from './components/project-share/shared-form.component';
+import { CreateComponent } from './components/create/create.component';
+import { ShareComponent } from './components/share/share.component';
 
 
 import { ProjectService } from './services/project.service';
@@ -57,29 +56,24 @@ import { ProjectsSocketService } from './services/projects-socket.service';
     MatIconModule,
     MatToolbarModule,
     MatProgressBarModule,
-    MatSidenavModule,
     MatDialogModule,
     SearchUsersModule,
 
-
-
     LoadingModule,
     RoutingModule,
-
 
     FormsModule,
     KernelModule
   ],
   declarations: [
-    ProjectListComponent,
-    ProjectCardComponent,
-    ProjectDetailComponent,
+    ListComponent,
+    CardComponent,
+    DetailComponent,
     SessionsListComponent,
-    ProjectCreateComponent,
-    SharedFormComponent,
-    ConfirmationDialog
+    CreateComponent,
+    ShareComponent
   ],
-  entryComponents: [ ConfirmationDialog, ProjectCreateComponent, SharedFormComponent ],
+  entryComponents: [CreateComponent, ShareComponent],
   providers: [
     { provide: ProjectService, useClass: ProjectSocketService },
     { provide: ProjectsService, useClass: ProjectsSocketService }

@@ -10,9 +10,8 @@ import { Credentials } from '@no-module/models/user';
   template: `
 
   <app-auth-layout>
-    <p class=''>Ingresa con tus credenciales</p>
     <mat-card>
-        <mat-card-content class="column" >
+        <mat-card-content class="row" >
             <form  class="center" [formGroup]='loginForm' (ngSubmit)='onSubmit()'>
               <mat-form-field floatLabel='never' appearance="outline" class='all-width'>
                   <input matInput formControlName='email'
@@ -42,7 +41,7 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private sharedService: SharedService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -61,8 +60,8 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.auth.login(new Credentials(this.loginForm.value['email'], this.loginForm.value['password'])
     ).then(() => this.onSuccess())
-     .catch((error) => this.onError(error));
-        
+      .catch((error) => this.onError(error));
+
   }
 
   private onSuccess() {
@@ -70,8 +69,8 @@ export class LoginComponent implements OnInit {
   }
 
   private onError(error: any) {
-    this.sharedService.showError("Upps!",  `Lo sentimos, Essboard no renoce
+    this.sharedService.showError("Upps!", `Lo sentimos, Essboard no renoce
     a estas credenciales como un usuario.`);
-    
+
   }
 }

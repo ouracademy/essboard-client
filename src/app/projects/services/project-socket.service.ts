@@ -23,35 +23,33 @@ export class ProjectSocketService extends ProjectService {
         this.project = null;
     }
     getProject(id: string) {
-        console.log('idd', id )
-            this.service.watch().get(id,)
+        this.service.watch().get(id)
             .subscribe(item => {
-                console.log( item )
-                    this.project = ToProject.transformCompleteToProject(item);
-                    this.currentProject$.next(this.project);
-                }, err => console.log('err', err ));
+                console.log(item)
+                this.project = ToProject.transformCompleteToProject(item);
+                this.currentProject$.next(this.project);
+            }, err => console.log('err', err));
     }
     delete() {
-       
-            this.service.remove(this.project.id, {},
-                (err, result: any) => {
-                    if (err) return console.error(err);
-                    // this.projects.splice(this.getIndex(id), 1);
-                    // this.projectsObserver.next(this.projects);
-                    this.router.navigate(['me/projects']);
-                })
-       
+
+        this.service.remove(this.project.id, {},
+            (err, result: any) => {
+                if (err) return console.error(err);
+                // this.projects.splice(this.getIndex(id), 1);
+                // this.projectsObserver.next(this.projects);
+                this.router.navigate(['me/projects']);
+            })
+
     }
     patchData(data) {
-        console.log('pathh', data)
- 
-            this.service.patch(this.project.id, data)
-                .then((result) => {
-                    console.log('se edito ')
-                })
-                .catch(function (error) {
-                });
+        this.service.patch(this.project.id, data)
+            .then((result) => {
+                console.log('se edito ')
+            })
+            .catch(function (error) {
+            });
     }
+
     setName(name) {
         const data = { name: name };
         this.patchData(data);
@@ -60,37 +58,34 @@ export class ProjectSocketService extends ProjectService {
         const data = { description: description };
         this.patchData(data);
     }
-    public inviteTo(project, user) {
-        console.log( project.id )
+
+    inviteTo(project, user) {
+
         this.socketService.getService('members').watch().create(
-            { projectId: project.id , userId: user.id , role: 'invited' }
-        ).subscribe( result => {
-            console.log('Invitado al proyecto', result );
-        }, function (error) {
-                console.log(error, "Error al editar  tu proyecto");
-            });   
-      
-           
+            { projectId: project.id, userId: user.id, role: 'invited' }
+        ).subscribe(result => {
+        }, (error) => {
+            console.log(error, "Error al editar  tu proyecto");
+        });
+
     }
 
 
-    public desinviteTo(user) {
-        
-            this.service.watch().patch(
-                this.project.id,
-                { $pull: { members: user.id } },
-                { query: { data: user.id } }
-            ).subscribe( result => {
-                alert('Invitado al proyecto');
-            }, function (error) {
-                    console.log(error, "Error al editar  tu proyecto");
-                });  
-      
+    desinviteTo(user) {
+
+        this.service.watch().patch(
+            this.project.id,
+            { $pull: { members: user.id } },
+            { query: { data: user.id } }
+        ).subscribe(result => {
+            alert('Invitado al proyecto');
+        }, function (error) {
+            console.log(error, "Error al editar  tu proyecto");
+        });
+
     }
 
     private onPatched(patchedItem: any) {
-
-        console.log( 'cambio el proyecto', patchedItem)
         if (patchedItem._id === this.project.id) {
             this.project = ToProject.transformCompleteToProject(patchedItem);
             this.currentProject$.next(this.project);
@@ -102,24 +97,25 @@ export class ProjectSocketService extends ProjectService {
         //this.dataStore.checks.splice(index, 1);
         //this.itemsObserver.next(this.data);
     }
+
     private addSessionToProject(sessionId: string) {
-      
-            this.service.watch().patch(
-                this.project.id,
-                { $addToSet: { sessions: sessionId } }
-            ).subscribe( result => {
-                alert('Invitado al proyecto');
-            }, function (error) {
-                    console.log(error, "Error al editar  tu proyecto");
-                });  
+
+        this.service.watch().patch(
+            this.project.id,
+            { $addToSet: { sessions: sessionId } }
+        ).subscribe(result => {
+        }, (error) => {
+
+        });
     }
+
     private addBagGoal(sessionId: string) {
         let data = { sessionId: sessionId };
         let goalService = this.socketService.getService('goals');
-       
-            goalService.create(
-                data)
-      
+
+        goalService.create(
+            data)
+
     }
 
     addSession() {
@@ -127,14 +123,14 @@ export class ProjectSocketService extends ProjectService {
         let order = this.project.sessions.length + 1;
         const idLastSession = this.project.getLastSessionId();
         let alphas = BuildDataToServer.initDimensions();
-            sessionService.watch().create({
-                _project: this.project.id,
-                nroOrder: order,
-                alphas: alphas,
-                idLastSession: idLastSession
-            }).subscribe ( session => {
-                this.addSessionToProject(session._id);
-                this.addBagGoal(session._id);
-            })
+        sessionService.watch().create({
+            _project: this.project.id,
+            nroOrder: order,
+            alphas: alphas,
+            idLastSession: idLastSession
+        }).subscribe(session => {
+            this.addSessionToProject(session._id);
+            this.addBagGoal(session._id);
+        })
     }
 }

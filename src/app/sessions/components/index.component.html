@@ -1,17 +1,16 @@
 <div *ngIf="session">
     <mat-toolbar class="detail">
         <span> Session:</span><span>{{session.num}}</span>
-        <span> {{ session.date | date:'d/M/y' }}  </span>
+        <span> {{ session.date | date:'d/M/y' }} </span>
         <span class="fill-remaining"></span>
         <button mat-icon-button>
-            <mat-icon class="md-24" (click)="delete()" >delete_forever</mat-icon>
+            <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
         </button>
         <button mat-icon-button (click)="showChat()">
             <mat-icon class="md-24">chat</mat-icon>
         </button>
         <button mat-button (click)="goToProject()">Ir a mi proyecto</button>
     </mat-toolbar>
-
     <mat-tab-group class="steps-tab-group ">
         <mat-tab>
             <ng-template mat-tab-label>
@@ -30,22 +29,23 @@
                 <span>Determina tu estado</span>
             </ng-template>
             <div class="content-tab">
-            <div class="row middle-xs center-xs">
-              <h2 class="title">Determina el estado de cualquier dimension</h2> 
-              <h4 class="subtitle">( Selecciona una dimension y luego selecciona el estado que tú consideras se encuentra el proyecto )</h4>
-            </div>
-              
+                <div class="row middle-xs center-xs">
+                    <h2 class="title">Determina el estado de cualquier dimension</h2>
+                    <h4 class="subtitle">( Selecciona una dimension y luego selecciona el estado que tú consideras se
+                        encuentra el proyecto )</h4>
+                </div>
+
                 <div class="row">
                     <div class="alpha-buttons">
                         <mat-button-toggle-group name="dimensions-name">
-                            <mat-button-toggle value="" *ngFor="let alpha of kernel.alphasSummary"  (click)="chooseAlpha(alpha)">
+                            <mat-button-toggle value="" *ngFor="let alpha of kernel.alphasSummary" (click)="chooseAlpha(alpha)">
                                 {{alpha.name}}
                             </mat-button-toggle>
                         </mat-button-toggle-group>
                     </div>
                 </div>
                 <div class="pad-1">
-                      <set-current-state [dimension]="session.getDimension(alphaSelect)" [idSession]="session.id"></set-current-state>
+                    <set-current-state [dimension]="session.getDimension(alphaSelect)" [idSession]="session.id"></set-current-state>
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
                 <span>Establece las metas</span>
             </ng-template>
             <div class="content-tab">
-                <set-goal-state [kernel]="session.kernel" [sessionId]="session.id" ></set-goal-state>
+                <set-goal-state [kernel]="session.kernel" [sessionId]="session.id"></set-goal-state>
             </div>
         </mat-tab>
         <mat-tab>
@@ -67,10 +67,9 @@
             </ng-template>
 
             <div class="content-tab">
-                <how-reach-goals [sessionId]="session.id" [sessionNumber]="session.num"  ></how-reach-goals>
+                <how-reach-goals [sessionId]="session.id" [sessionNumber]="session.num"></how-reach-goals>
             </div>
         </mat-tab>
     </mat-tab-group>
-
     <comments *ngIf="isJoinedToChat" [sessionId]="session.id"> </comments>
 </div>

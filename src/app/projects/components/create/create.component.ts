@@ -4,16 +4,15 @@ import { ProjectsService } from '../../services/projects.service';
 import { MatDialogRef } from '@angular/material';
 @Component({
     selector: 'project-form',
-    templateUrl: 'project-form.component.html'
+    templateUrl: 'create.component.html'
 })
-export class ProjectCreateComponent {
+export class CreateComponent {
     model = new Project('', '', '', '');
 
-    constructor( private reference: MatDialogRef<ProjectCreateComponent>, private projectService: ProjectsService) { }
+    constructor(private reference: MatDialogRef<CreateComponent>, private projectService: ProjectsService) { }
 
     onSubmit() {
         this.projectService.add(this.model);
         this.reference.close()
     }
-
 }

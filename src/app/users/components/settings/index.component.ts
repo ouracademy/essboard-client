@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { User } from '../../model/user';
+import { User } from '@no-module/models/user';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '@core/auth.service';
 import { SharedService } from '@core/shared.service';
@@ -16,8 +16,8 @@ import { SharedService } from '@core/shared.service';
 })
 export class ProfileSettingsComponent implements OnInit {
   userForm: FormGroup;
- 
-  user: User;
+
+  user: any;
 
   constructor(
     private service: UserService,
@@ -34,6 +34,7 @@ export class ProfileSettingsComponent implements OnInit {
     // this.service.get(user.id);
     this.user = this.auth.user;
     this.buildForm();
+
   }
 
   buildForm(): void {

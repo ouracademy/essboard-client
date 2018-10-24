@@ -9,7 +9,7 @@ import { AlphaCard } from './components/alpha-card/index';
 import { RowAlphaStates } from './components/row-alpha-states/index';
 import {
   KernelViewHolistic,
-  AlphaConnections
+  AlphaConnections, RadarChartComponent
 } from './components/kernel-views/index';
 import { StateBoard } from './components/state-board/index';
 //services
@@ -21,7 +21,7 @@ import { PracticeMockService } from './services/mock-practices/index.service';
 @NgModule({
   imports: [
     CommonModule,
-    MatCardModule,MatIconModule,
+    MatCardModule, MatIconModule,
     ChartsModule
   ],
   declarations: [
@@ -31,6 +31,7 @@ import { PracticeMockService } from './services/mock-practices/index.service';
     RowAlphaStates,
     KernelViewHolistic,
     AlphaConnections,
+    RadarChartComponent,
     StateBoard
   ],
   exports: [
@@ -39,9 +40,10 @@ import { PracticeMockService } from './services/mock-practices/index.service';
     AlphaCard,
     RowAlphaStates,
     KernelViewHolistic,
+    RadarChartComponent,
     AlphaConnections,
     StateBoard
   ],
-  providers : [ PracticeMockService,ActivitySpaceMockService,PrimaryKernelMockService,AlphaMockService,StateMockService]
+  providers: [PracticeMockService, ActivitySpaceMockService, PrimaryKernelMockService, AlphaMockService, StateMockService]
 })
 export class KernelModule { }

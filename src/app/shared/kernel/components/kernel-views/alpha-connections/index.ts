@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Kernel } from '../../../model/kernel';
 
+
 class SVG {
   positionx: number;
   positiony: number;
@@ -75,42 +76,6 @@ export class AlphaConnections implements OnInit {
   isHightlight(nameAlpha: string) {
     let object = this.hightlights.find(alpha => alpha.name === nameAlpha);
     return object ? true : false;
-  }
-
-  public radarChartLabels: string[] = ['Oportunity', 'Stakeholder', 'Requeriments', 'System Software', 'Team', 'Way Working', 'Work'];
-
-  public radarChartData: any = [
-    { data: [0, 0, 0, 0, 0, 0, 0], label: 'Sesion 1' },
-    { data: [1, 1, 1, 1, 1, 1, 5], label: 'Sesion 2' },
-    { data: [2, 1, 2, 1, 1, 1, 6], label: 'Sesion 3' }
-  ];
-
-  public radarChartType: string = 'radar';
-
-  public options: any = {
-    legend: {
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'Proyecto'
-    },
-    scale: {
-      reverse: false,
-      ticks: {
-        beginAtZero: true,
-        stepSize: 1
-      }
-    }
-  };
-
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
-  }
-
-  public chartHovered(e: any): void {
-    console.log(e);
   }
 
 }

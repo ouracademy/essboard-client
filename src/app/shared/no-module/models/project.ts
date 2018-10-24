@@ -3,25 +3,21 @@ import { CheckpointMetadata } from './kernel/kernel';
 import { User } from '@no-module/models/user';
 
 export class Project {
-  public members: any[];
-  public createdAt: Date;
-  public sessions: Session[];
-  public id: string;
-  public name: string;
-  public description: string;
-  public percent: number;
+  public members: any[] = [];
+  public sessions: Session[] = [];
+
   public lastSession: Session;
 
-  constructor(id: string, name: string, description: string, private ownerId: string, createdAt: Date = new Date()) {
-    this.name = name;
-    this.description = description;
-    this.id = id;
-    this.members = [];
-    this.sessions = [];
-    this.createdAt = createdAt;
+  constructor(
+    public id: string,
+    public name: string,
+    public description: string,
+    private ownerId: string,
+    public createdAt: Date = new Date(),
+    public progressPercent = 0) {
   }
 
-  isInvited(user: User): boolean {
+  isOwner(user: User): boolean {
     return this.ownerId !== user.id;
   }
 

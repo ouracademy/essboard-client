@@ -14,29 +14,27 @@ export class SessionSocketService extends SessionService {
     sessionObserver: any;
     session: Session;
     sessions: Session[];
-    _app: any;
     service: any;
     constructor(public socketService: SocketService, private auth: AuthService, private router: Router) {
         super();
-        this._app = this.socketService.init();
-        this.service = this._app.service('sessions');
+        this.service = this.socketService.getService('sessions');
         this.service.on('patched', (patchedItem) => this.onPatched(patchedItem));
         this.currentSession$ = new Subject<any>();
         this.session = null;
     }
     getSession(id: string) {
-        this.service.get(id,
-            (err, item: any) => {
-                if (err) return console.error(err);
-                console.log('sobre una sesion', item)
-                this.session = ToSession.withCompleteTransformation(item);
-                GetKeys.setSource(item.alphas);
-                this.currentSession$.next(this.session);
-            });
+        console.log('tteyendoo ')
+        this.service.get(id).then((item: any) => {
+            console.log('sobre una sesion', item)
+            this.session = ToSession.withCompleteTransformation(item);
+            GetKeys.setSource(item.alphas);
+            this.currentSession$.next(this.session);
+        });
     }
+
     colaboreUsingUserIdInProject(idSession: string, idProject: string) {
-        let userId= this.auth.user.id;
-        let data = { participants : userId };
+        let userId = this.auth.user.id;
+        let data = { participants: userId };
         let action = { '$addToSet': data };
         this.patch(idSession, action, {});
     }
@@ -82,19 +80,18 @@ export class SessionSocketService extends SessionService {
         this.patch(id, action, params);
     }
     private patch(id, data, params) {
-        this._app.authenticate().then(() => {
-            this.service.patch(
-                id, data,
-                params)
-                .then((result) => {
-                    console.log('edited', result)
-                })
-                .catch(function (error) {
-                    console.log(error)
-                })
-        });
-
+        this.service.patch(
+            id, data,
+            params)
+            .then((result) => {
+                console.log('edited', result)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
     }
+
+
 
     setCheckpointTo(id, dimensionMetadataId, stateMetadataId, checkpointMetadataId, condition) {
         let indexs = GetKeys.getIndexs(dimensionMetadataId, stateMetadataId);
@@ -115,15 +112,16 @@ export class SessionSocketService extends SessionService {
         }
     }
     public colaboreUsingSessionsIdInUser(idSession) {
-        this._app.authenticate().then(() => {
-            this._app.service('users').patch(
-                this.auth.user.id,
-                { $addToSet: { sessionsId: idSession } }
-            ).then((result) => {
+
+        this.socketService.getService('users').patch(
+            this.auth.user.id,
+            { $addToSet: { sessionsId: idSession } }
+        ).then((result) => {
+        })
+            .catch(function (error) {
+                console.log(error)
             })
-                .catch(function (error) {
-                    console.log(error)
-                })
-        });
+
+
     }
 }

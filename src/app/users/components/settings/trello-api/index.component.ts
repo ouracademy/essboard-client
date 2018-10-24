@@ -15,7 +15,7 @@ import { SharedService } from '@core/shared.service';
 export class TrelloSettingsComponent implements OnInit {
   appKeyForm: FormGroup;
 
-  user: User;
+  user: any;
 
   constructor(
     private service: UserService,

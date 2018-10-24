@@ -5,20 +5,20 @@ import { User } from '@no-module/models/user';
 
 @Component({
     selector: 'project-card',
-    templateUrl: 'project-card.component.html'
+    templateUrl: 'card.component.html'
 })
-export class ProjectCardComponent {
+export class CardComponent {
     @Input() project: Project;
     @Input() user: User;
 
     constructor(private router: Router) { }
 
-    select() {
+    handleSelection() {
         this.router.navigate(['/me/projects', this.project.id]);
     }
 
-    get isInvited(): Boolean {
-        return this.project.isInvited(this.user);
+    get isOwner(): Boolean {
+        return this.project.isOwner(this.user)
     }
 
 }

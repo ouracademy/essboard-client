@@ -2,23 +2,18 @@ import { Injectable } from '@angular/core';
 import { SocketService } from '@core/socket.service';
 import { Credentials, User } from '@no-module/models/user';
 import { tap } from 'rxjs/operators';
-import { BehaviorSubject , Subject} from 'rxjs';
+import { BehaviorSubject, Subject, Observable } from 'rxjs';
+import { NotificationService } from './notification.service';
 
 @Injectable()
 export class AuthService {
     // store the URL so we can redirect after logging in
     private _redirectURL: string;
 
-    public notifications$ = new BehaviorSubject([])
-    public newNotification$ = new Subject()
-    
+
+    constructor(public socketService: SocketService, private notification: NotificationService) {
 
 
-    constructor(public socketService: SocketService) {
-        
-        const notificationService =  this.socketService.getService('notifications')
-        notificationService.on('created', (newItem) => this.newNotification$.next(newItem));
-        notificationService.find().then( result => console.log( 'nots', result ))
     }
 
     set redirectURL(URL: string) {
@@ -36,14 +31,15 @@ export class AuthService {
             'password': credentials.password
         }).then((result) => {
             window.localStorage.setItem('user', JSON.stringify(result));
+            this.notification.startSubscription()
             return this.user;
         }).catch(function (error) {
-            console.log( error )
+            console.log(error)
             throw error;
         });
     }
 
-    public loginWithToken(){
+    public loginWithToken() {
         // const token = window.localStorage.getItem('feathers-jwt')
         // if( token ){
         //     this.logoutToLogin().then( () =>{
@@ -72,7 +68,7 @@ export class AuthService {
 
     public get user(): User {
         const data = JSON.parse(window.localStorage.getItem('user'));
-        return data ?  new User(data['_id'], data['name'], data['email'], data['createdAt'], data['appKeyTrello']) :  new User('','');
+        return data ? new User(data['_id'], data['name'], data['email'], data['createdAt'], data['appKeyTrello']) : new User('', '');
     }
     public set user(user: User) {
         window.localStorage['user'] = JSON.stringify(user);
@@ -88,6 +84,6 @@ export class AuthService {
             email: user.email,
             password: user.password
         }).pipe(
-            tap(val => this.login(new Credentials(user.email, user.password)) )
+            tap(val => this.login(new Credentials(user.email, user.password))))
     }
 }

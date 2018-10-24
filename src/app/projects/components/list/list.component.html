@@ -1,0 +1,17 @@
+<div class="content-app">
+    <mat-toolbar>
+        <span class="title">{{title}}</span>
+        <span class="fill-remaining"></span>
+        <button mat-icon-button class="main" (click)="createProject()"><mat-icon>add</mat-icon></button>
+    </mat-toolbar>
+    <div class="main-content mar-1">
+        <div *ngIf="loaded && projects.length == 0" class="empty-proyects">
+            <div class="shadow">
+                <p>No tienes proyectos</p>
+            </div>
+        </div>        
+        <div class="container-elements">
+            <project-card *ngFor="let project of projects"  [project]="project" [user]="user"></project-card>
+        </div>
+    </div>
+</div>

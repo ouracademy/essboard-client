@@ -1,9 +1,0 @@
-<mat-card (click)="select()" class="box-md mar-1 selectable">
-    <mat-card-actions *ngIf="isInvited" align="end">
-        <mat-icon>folder_shared</mat-icon>
-   </mat-card-actions>
-    <mat-card-title>{{project.name}} </mat-card-title>
-    <mat-card-content>
-        <mat-progress-bar mode="determinate" value={{project.percent}}></mat-progress-bar>
-    </mat-card-content>
-</mat-card>

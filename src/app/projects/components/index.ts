@@ -1,2 +1,2 @@
-export * from './project-detail/project-detail.component'
-export * from './project-list/project-list.component'
+export * from './detail/detail.component'
+export * from './list/list.component'

@@ -5,20 +5,20 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
     selector: 'project-share-form',
-    templateUrl: 'shared-form.component.html'
+    templateUrl: 'share.component.html'
 })
-export class SharedFormComponent implements OnInit {
+export class ShareComponent implements OnInit {
 
     @Input() project: Project;
     public invitedsEmail: any;
     public message: String;
     public inviteds: any;
     constructor(
-        private projectService: ProjectService, 
-        private reference: MatDialogRef<SharedFormComponent>,
+        private projectService: ProjectService,
+        private reference: MatDialogRef<ShareComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
-            this.project = data
-         }
+        this.project = data
+    }
     ngOnInit() {
         this.inviteds = [];
         this.invitedsEmail = null;
@@ -36,7 +36,7 @@ export class SharedFormComponent implements OnInit {
     existsInUsers(email) {
         return true;
     }
- 
+
     getSelect(user) {
         this.inviteTo(user);
         // if (!this.project.haveThisMember(user)) {
@@ -44,7 +44,7 @@ export class SharedFormComponent implements OnInit {
         // }
     }
     inviteTo(user) {
-        this.projectService.inviteTo(this.project,user);
+        this.projectService.inviteTo(this.project, user);
         this.inviteds.push(user);
     }
     delete(invited) {

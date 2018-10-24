@@ -1,24 +1,23 @@
 <div class="row">
-<!--
-  <div id="radar-chart" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-    <canvas class="chart" [datasets]="radarChartData" [labels]="radarChartLabels" [options]="options" [chartType]="'radar'" (chartHover)="chartHovered($event)"
-      (chartClick)="chartClicked($event)" baseChart> </canvas>
-  </div>
-  -->
+
+
+
   <div id="alpha-relationships" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
     <div class="normal-svg-container">
-      <svg class="svg-content" height="100%" preserveAspectRatio="xMinYMin meet" version="1.1" viewBox="0 0 900 900" width="100%">
+      <svg class="svg-content" height="100%" preserveAspectRatio="xMinYMin meet" version="1.1" viewBox="0 0 900 900"
+        width="100%">
         <g groupmode="layer" id="layer1" label="alpha-conection" style="" transform="translate(0,-30)">
           <rect class="rect-all" height="100%" id="background" width="100%" x="0" y="0"></rect>
           <g class="area-e" transform="translate(0,0)">
-            <rect class="rect rect-customer" height="171" id="customer-area-of-concern" rx="20" ry="20" style="" width="100%" x="0" y="38"></rect>
+            <rect class="rect rect-customer" height="171" id="customer-area-of-concern" rx="20" ry="20" style="" width="100%"
+              x="0" y="38"></rect>
             <a (click)="test()">
               <g style="" transform="translate(50,80)">
                 <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
                   id="alpha-01"></path>
                 <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="72" y="50">Interesado </text>
-                <rect *ngFor="let state of kernel.dimensions[0].states" height="20" rx="0" ry="0" class="state-square" width="30" [attr.x]="state.getX()"
-                  [attr.y]="state.getY()" [class.hightlight]="state.isAcheived"></rect>
+                <rect *ngFor="let state of kernel.dimensions[0].states" height="20" rx="0" ry="0" class="state-square"
+                  width="30" [attr.x]="state.getX()" [attr.y]="state.getY()" [class.hightlight]="state.isAcheived"></rect>
 
                 <g transform="translate(100,90)">
                   <a>
@@ -41,8 +40,8 @@
                 <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
                   id="alpha-01"></path>
                 <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="72" y="50">Oportunidad</text>
-                <rect *ngFor="let state of kernel.dimensions[1].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
-                  width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+                <rect *ngFor="let state of kernel.dimensions[1].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived"
+                  class="state-square" width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
                 <g transform="translate(-6,30)">
                   <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(90)"></polyline>
                 </g>
@@ -61,13 +60,14 @@
             </a>
           </g>
           <g class="area-e" transform="translate(0,210)">
-            <rect class="rect rect-solution" height="171" id="customer-area-of-concern" rx="20" ry="20" width="100%" x="0" y="38"></rect>
+            <rect class="rect rect-solution" height="171" id="customer-area-of-concern" rx="20" ry="20" width="100%" x="0"
+              y="38"></rect>
             <g style="" transform="translate(50,80)">
               <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
                 id="alpha-01"></path>
               <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="52" y="50">Requerimientos</text>
-              <rect *ngFor="let state of kernel.dimensions[2].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
-                width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+              <rect *ngFor="let state of kernel.dimensions[2].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived"
+                class="state-square" width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
               <g transform="translate(100,90)">
                 <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(0)"></polyline>
               </g>
@@ -77,8 +77,8 @@
               <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
                 id="alpha-01"></path>
               <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="28" y="50">Sistema de Software</text>
-              <rect *ngFor="let state of kernel.dimensions[3].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
-                width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+              <rect *ngFor="let state of kernel.dimensions[3].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived"
+                class="state-square" width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
               <g transform="translate(-6,30)">
                 <polyline points="0,0  30,0  15,40" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(90)"></polyline>
               </g>
@@ -89,13 +89,14 @@
             </g>
           </g>
           <g class="area-e" transform="translate(0,420)">
-            <rect class="rect rect-endeavor" height="320" id="customer-area-of-concern" rx="20" ry="20" width="100%" x="0" y="38"></rect>
+            <rect class="rect rect-endeavor" height="320" id="customer-area-of-concern" rx="20" ry="20" width="100%" x="0"
+              y="38"></rect>
             <g style="" transform="translate(50,80)">
               <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
                 id="alpha-01"></path>
               <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="90" y="50">Equipo</text>
-              <rect *ngFor="let state of kernel.dimensions[4].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
-                width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+              <rect *ngFor="let state of kernel.dimensions[4].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived"
+                class="state-square" width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
               <g transform="translate(-6,60)">
                 <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(180)"></polyline>
               </g>
@@ -110,8 +111,8 @@
               <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
                 id="alpha-01"></path>
               <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="45" y="50">Forma de trabajo</text>
-              <rect *ngFor="let state of kernel.dimensions[5].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
-                width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+              <rect *ngFor="let state of kernel.dimensions[5].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived"
+                class="state-square" width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
               <g transform="translate(-6,30)">
                 <polyline points="0,0  30,0  15,40" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(90)"></polyline>
               </g>
@@ -127,8 +128,8 @@
               <path class="alpha-graph alpha droppable" d=" M 255,0 c 0,0 -15.08253,21.86648 -24.92188,36.0332 z m -24.92188,36.0332 -2.72265,3.93555 0,-4.17187 c 0,-19.78571 -15.92914,-35.71484 -35.71485,-35.71484 l -153.57226,0 c -19.78572,0 -35.71289,15.92913 -35.71289,35.71484 l 0,14.28515 c 0,19.78571 15.92717,35.71485 35.71289,35.71485 l 153.57226,0 c 1.41931,0 2.81625,-0.0905 4.19141,-0.25 l 3.89481,-0.71513 c 0,0 -3.3007,0.76333 -2.1702,0.47294 16.94929,-2.80429 29.79883,-17.45431 29.79883,-35.22266 l 0,-3.89648 2.7207,3.93359 c -1.21979,-2.46801 -2.16316,-4.76901 -2.7207,-6.79883 l 0,-0.48242 c 0.55794,-2.03125 1.50162,-4.3347 2.72265,-6.80469 z m -0.002,14.08594 c 9.45908,14.5459 24.92383,36.03711 24.92383,36.03711 z"
                 id="alpha-01"></path>
               <text style="fill:black;font-size: 20px;stroke:none;/* width: 10px; */" x="85" y="50">Trabajo</text>
-              <rect *ngFor="let state of kernel.dimensions[6].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived" class="state-square"
-                width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
+              <rect *ngFor="let state of kernel.dimensions[6].states" height="20" rx="0" ry="0" [class.hightlight]="state.isAcheived"
+                class="state-square" width="30" [attr.x]="state.getX()" [attr.y]="state.getY()"></rect>
               <g transform="translate(18,-5)">
                 <polyline points="0,0  30,0  15,30" style="/* stroke:#006600; */fill: #b8b1b1;" transform="rotate(130)"></polyline>
               </g>

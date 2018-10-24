@@ -15,7 +15,6 @@ import {
 import { AvatarLetterModule } from '@shared/avatar-letter/index.module';
 
 import { ListComponent } from './components/list/list.component';
-import { SearchComponent } from './components/search/search.component';
 import { UserDetailComponent } from './components/detail/detail.component';
 import { ProfileUserComponent } from './components/profile/index.component';
 import { ProfileSettingsComponent } from './components/settings/profile/index.component';
@@ -46,7 +45,6 @@ import { UserSocketService } from './services/user-socket.service';
   declarations: [
     ListComponent,
     UserDetailComponent,
-    SearchComponent,
     ProfileUserComponent,
     ProfileSettingsComponent,
     TrelloSettingsComponent
@@ -55,7 +53,7 @@ import { UserSocketService } from './services/user-socket.service';
     { provide: UserService, useClass: UserSocketService }
   ],
   exports: [
-    ListComponent, UserDetailComponent, SearchComponent, ProfileUserComponent,
+    ListComponent, UserDetailComponent, ProfileUserComponent,
     ProfileSettingsComponent, TrelloSettingsComponent
   ]
 })

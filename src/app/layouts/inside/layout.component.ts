@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from '@core/auth.service'
-import { MatMenuModule, MatButtonModule, MatIconModule} from '@angular/material';
+import { MatMenuModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { HeaderModule } from '@shared/header/index.module';
 
 @Component({
-  selector: "app-auth-layout",
+  selector: "app-inside-layout",
   template: `
   <app-header mode='toolbar'>
-    <right-content>
+    <right-content class="row">
       <mat-menu class="menu-options" x-position="after" y-position="below" #menu="matMenu">
         <button mat-menu-item routerLink="/me/projects"> Mis proyectos  </button>
         <button mat-menu-item routerLink="/me/projects"> Mis competencias </button>
@@ -20,7 +20,6 @@ import { HeaderModule } from '@shared/header/index.module';
         <mat-icon>more_vert</mat-icon>
       </button>
       <app-notifications></app-notifications>
-
     </right-content>
   </app-header>
   <router-outlet></router-outlet>
@@ -47,7 +46,7 @@ export class InsideLayoutComponent implements OnInit {
 
 }
 
-import { NgModule,  NO_ERRORS_SCHEMA  } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonAppModule } from "@shared/common";
 import { Router } from "@angular/router";
 import { NotificationsModule } from '@shared/notifications/index.module'
@@ -62,7 +61,7 @@ import { RouterModule } from '@angular/router'
   ],
   declarations: [InsideLayoutComponent],
   exports: [InsideLayoutComponent],
-  schemas:[ NO_ERRORS_SCHEMA ]
+  schemas: [NO_ERRORS_SCHEMA]
 
 })
 export class InsideLayoutModule { }

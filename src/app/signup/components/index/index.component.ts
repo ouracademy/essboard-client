@@ -10,7 +10,6 @@ import { Credentials } from '@no-module/models/user';
   template: `
 
   <app-auth-layout>
-    <p class=''>Crea una cuenta</p>
     <mat-card >
     <mat-card-content>
        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
@@ -78,7 +77,6 @@ export class SignupComponent implements OnInit {
   }
 
   private onError(error: any) {
-    console.log(error)
     this.sharedService.showError("Upps!", `Ya existe un usuario para esa cuenta`);
 
   }
