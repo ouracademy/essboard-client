@@ -4,6 +4,7 @@ import { Credentials, User } from '@no-module/models/user';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { NotificationService } from './notification.service';
+import { KernelService } from './kernel-knowledge.service';
 
 @Injectable()
 export class AuthService {
@@ -11,8 +12,9 @@ export class AuthService {
     private _redirectURL: string;
 
 
-    constructor(public socketService: SocketService, private notification: NotificationService) {
-
+    constructor(
+        public socketService: SocketService,
+        private notification: NotificationService) {
 
     }
 
@@ -37,6 +39,7 @@ export class AuthService {
             console.log(error)
             throw error;
         });
+
     }
 
     public loginWithToken() {

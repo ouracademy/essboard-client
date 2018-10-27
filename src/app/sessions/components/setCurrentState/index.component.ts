@@ -11,11 +11,13 @@ export class SetCurrentStateComponent implements OnInit {
     @ViewChild('player') public playerContainer: ElementRef;
 
     @Input()
-    dimension: Alpha;
+    knowledge: any;
+    @Input()
+    implementation: any;
+
     @Input()
     idSession: string;
-    private sub: Subscription;
-    private subscription: Subscription;
+
     selectedState: State;
     constructor(private service: SessionService) {
     }
@@ -26,7 +28,7 @@ export class SetCurrentStateComponent implements OnInit {
         this.selectedState = state;
         console.log(state);
         if (this.isPosiblePutStateAsWorking(state)) {
-            this.service.setStateAsWorking(this.idSession, this.dimension.metadataId, state.info.identifier);
+            this.service.setStateAsWorking(this.idSession, this.knowledge.id, state.info.identifier);
         } else {
             this.playerContainer.nativeElement.play();
 
@@ -36,19 +38,19 @@ export class SetCurrentStateComponent implements OnInit {
         return state.isWorking === false && (state.isFirst || state.stateBackIsAchaived);
     }
     private putDimensionAsTouching() {
-        if (this.dimension.isTouched == false) {
-            this.dimension.isTouched = true;
-        }
+        // if (this.alpha.isTouched == false) {
+        //     this.alpha.isTouched = true;
+        // }
     }
     onSelectedCheckpoint(checkpoint: Checkpoint) {
-            this.service.setVoteToCheckpoint(this.idSession,
-                this.dimension.metadataId,
-                this.selectedState.info.identifier,
-                checkpoint.info.identifier, !checkpoint.isAchieved);
+        this.service.setVoteToCheckpoint(this.idSession,
+            this.knowledge.id,
+            this.selectedState.info.identifier,
+            checkpoint.info.identifier, !checkpoint.isAchieved);
     }
     noCheck(checkpoint: Checkpoint) {
         this.service.setUnVoteToCheckpoint(this.idSession,
-            this.dimension.metadataId,
+            this.knowledge.metadatidaId,
             this.selectedState.info.identifier,
             checkpoint.info.identifier, !checkpoint.isAchieved);
     }

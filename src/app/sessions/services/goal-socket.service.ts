@@ -11,16 +11,14 @@ export class GoalSocketService extends GoalService {
     bagGoals$: any;
     bagGoalsComplete$: any;
     bagGoals: BagGoal;
-    _app: any;
     service: any;
 
     constructor(public socketService: SocketService, private router: Router) {
         super();
-        this._app = this.socketService.init();
-        this.service = this._app.service('goals');
+        this.service = this.socketService.getService('goals');
         this.service.on('patched', (newItem) => this.onPatched(newItem));
         this.bagGoals$ = new Subject<any>();
-        this.bagGoalsComplete$ =  new Subject<any>();
+        this.bagGoalsComplete$ = new Subject<any>();
     }
 
     private transform(obj: any) {
@@ -31,51 +29,48 @@ export class GoalSocketService extends GoalService {
     }
 
     getBagGoals(sessionId) {
-        this._app.authenticate().then(() => {
-            this.service.find({
-                query: { sessionId: sessionId },
-            }, (err, items: any) => {
-                if (err) return console.error(err);
-                if (!!items.data[0]) {
-                    this.bagGoals = this.transform(items.data[0]);
-                    this.bagGoals$.next(this.bagGoals);
-                }
-            })
-        });
+
+        this.service.find({
+            query: { sessionId: sessionId },
+        }, (err, items: any) => {
+            if (err) return console.error(err);
+            if (!!items.data[0]) {
+                this.bagGoals = this.transform(items.data[0]);
+                this.bagGoals$.next(this.bagGoals);
+            }
+        })
+
     }
     getBagGoalsComplete(sessionId) {
-        this._app.authenticate().then(() => {
-            this.service.find({
-                query: { sessionId: sessionId },
-            }, (err, items: any) => {
-                if (err) return console.error(err);
-                if (!!items.data[0]) {
-                    this.bagGoals = this.transformComplete(items.data[0]);
-                    this.bagGoalsComplete$.next(this.bagGoals);
-                }
-            })
-        });
+
+        this.service.find({
+            query: { sessionId: sessionId },
+        }, (err, items: any) => {
+            if (err) return console.error(err);
+            if (!!items.data[0]) {
+                this.bagGoals = this.transformComplete(items.data[0]);
+                this.bagGoalsComplete$.next(this.bagGoals);
+            }
+        })
     }
 
     createBagGoal(sessionId: string) {
         let data = { sessionId: sessionId };
-        this._app.authenticate().then(() => {
-            this.service.create(
-                data)
-                .then((result) => {
-                    this.bagGoals = this.transform(result);
-                    this.bagGoals$.next(this.bagGoals);
-                })
-                .catch(function (error) {
-                    console.error('Error', error);
-                })
-        });
+        this.service.create(
+            data)
+            .then((result) => {
+                this.bagGoals = this.transform(result);
+                this.bagGoals$.next(this.bagGoals);
+            })
+            .catch(function (error) {
+                console.error('Error', error);
+            })
 
     }
     addStateGoal(goalStateId: number) {
         let data = {
             '$addToSet':
-            { goals: { _id: goalStateId, actions: [] } }
+                { goals: { _id: goalStateId, actions: [] } }
         };
         this.patch(this.bagGoals.id, data, {});
 
@@ -83,7 +78,7 @@ export class GoalSocketService extends GoalService {
     quitStateGoal(goalStateId: number) {
         let data = {
             '$pull':
-            { goals: { _id: goalStateId } }
+                { goals: { _id: goalStateId } }
         };
         this.patch(this.bagGoals.id, data, {});
 
@@ -95,20 +90,18 @@ export class GoalSocketService extends GoalService {
         let params = { ["query"]: { [search]: stateId } };
         let data = {
             '$addToSet':
-            { [path]: { name: action } }
+                { [path]: { name: action } }
         };
         this.patch(this.bagGoals.id, data, params);
 
     }
     private patch(id, data, params) {
-        this._app.authenticate().then(() => {
-            this.service.patch(
-                id, data,
-                params)
-                .catch((error)=> {
-                    console.log(error)
-                })
-        });
+        this.service.patch(
+            id, data,
+            params)
+            .catch((error) => {
+                console.log(error)
+            })
 
     }
 

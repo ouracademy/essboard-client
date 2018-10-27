@@ -19,8 +19,12 @@
             </ng-template>
 
             <div class="content-tab">
-                <h2 class="title">Mira las conecciones </h2>
-                <alpha-connections *ngIf="session" [kernel]="session.kernel"></alpha-connections>
+                <div class="row middle-xs center-xs">
+                    <h2 class="title">Mira como va tu proyecto </h2>
+                </div>
+                <div class="row center-xs">
+                    <app-radar-chart class="col-xs-12 col-md-6" [idSession]="session.id" level="specific"></app-radar-chart>
+                </div>
             </div>
         </mat-tab>
         <mat-tab>
@@ -38,20 +42,20 @@
                 <div class="row">
                     <div class="alpha-buttons">
                         <mat-button-toggle-group name="dimensions-name">
-                            <mat-button-toggle value="" *ngFor="let alpha of kernel.alphasSummary" (click)="chooseAlpha(alpha)">
+                            <mat-button-toggle value="" *ngFor="let alpha of alphas" (click)="handleSelectionAlpha(alpha)">
                                 {{alpha.name}}
                             </mat-button-toggle>
                         </mat-button-toggle-group>
                     </div>
                 </div>
                 <div class="pad-1">
-                    <set-current-state [dimension]="session.getDimension(alphaSelect)" [idSession]="session.id"></set-current-state>
+                    <set-current-state [knowledge]="currentAlpha" [implementation]="statusByCurrentAlpha" [idSession]="session.id"></set-current-state>
                 </div>
             </div>
 
 
         </mat-tab>
-        <mat-tab>
+        <!-- <mat-tab>
             <ng-template mat-tab-label>
                 <i class="material-icons">looks_3</i>
                 <span>Establece las metas</span>
@@ -69,7 +73,7 @@
             <div class="content-tab">
                 <how-reach-goals [sessionId]="session.id" [sessionNumber]="session.num"></how-reach-goals>
             </div>
-        </mat-tab>
+        </mat-tab> -->
     </mat-tab-group>
     <comments *ngIf="isJoinedToChat" [sessionId]="session.id"> </comments>
 </div>

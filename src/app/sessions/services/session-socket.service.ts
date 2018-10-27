@@ -23,14 +23,14 @@ export class SessionSocketService extends SessionService {
         this.session = null;
     }
     getSession(id: string) {
-        console.log('tteyendoo ')
         this.service.get(id).then((item: any) => {
-            console.log('sobre una sesion', item)
-            this.session = ToSession.withCompleteTransformation(item);
+            console.log('session', item)
+            this.session = new Session(item['_id'], item['nroOrder'], new Date())
             GetKeys.setSource(item.alphas);
             this.currentSession$.next(this.session);
         });
     }
+
 
     colaboreUsingUserIdInProject(idSession: string, idProject: string) {
         let userId = this.auth.user.id;
@@ -79,6 +79,7 @@ export class SessionSocketService extends SessionService {
         let action = { '$pull': data };
         this.patch(id, action, params);
     }
+
     private patch(id, data, params) {
         this.service.patch(
             id, data,

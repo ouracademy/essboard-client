@@ -10,6 +10,8 @@ import { AuthService } from '@core/auth.service';
 import { PrimaryKernelMockService } from '@shared/kernel/services/index';
 import { AlphaMetadata, StateMetadata } from '@no-module/models/kernel/kernel';
 import { BagGoal } from '@no-module/models/goal';
+import { KernelService } from '@core/kernel-knowledge.service';
+
 
 
 @Component({
@@ -20,18 +22,23 @@ import { BagGoal } from '@no-module/models/goal';
 export class SessionComponent implements OnInit {
   idSession: string;
   session: Session;
-  alphaSelect: AlphaMetadata;
+
+  currentAlpha: any;
+  statusByCurrentAlpha = null
   isJoinedToChat: boolean = false;
   workItems: any[] = [];
   private subscription: Subscription;
+
+  alphas = []
   constructor(
+    private kernelService: KernelService,
     private service: SessionService,
     public kernel: PrimaryKernelMockService,
     private route: ActivatedRoute,
     private router: Router,
-    private auth: AuthService,
+    private auth: AuthService
   ) {
-    this.alphaSelect = null;
+    this.currentAlpha = null;
   }
   ngOnInit() {
     this.subscription = this.service.currentSession$.subscribe((session: Session) => {
@@ -39,18 +46,27 @@ export class SessionComponent implements OnInit {
       //put init work session in method colaborate
     });
     this.subscription = this.route.params.subscribe(params => {
-      this.idSession = this.route.snapshot.params['id'];
-      console.log(this.idSession)
+      this.idSession = params['id'];
       this.service.getSession(this.idSession);
     });
+
+    this.kernelService.getAlphas().subscribe((result: any[]) => {
+      this.alphas = result
+    })
   }
+
+
   private colaborate(sessionId, projectId) {
     this.service.colaboreUsingUserIdInProject(sessionId, projectId);
     this.service.colaboreUsingSessionsIdInUser(sessionId);
   }
 
-  chooseAlpha(alpha: AlphaMetadata) {
-    this.alphaSelect = alpha;
+  handleSelectionAlpha(alpha: any) {
+    this.currentAlpha = alpha;
+    this.kernelService.getStates(alpha['id']).subscribe((result: any[]) => {
+      this.currentAlpha['states'] = result
+    })
+
   }
   getWorkItems(workItem) {
     this.workItems.push(workItem);

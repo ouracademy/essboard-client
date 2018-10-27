@@ -9,13 +9,11 @@ import { SocketService } from '@core/socket.service';
 export class DialogSocketService extends DialogService {
 
     comments: Comment[] = [];
-    _app: any;
     service: any;
 
     constructor(public socketService: SocketService, private router: Router) {
         super();
-        this._app = this.socketService.init();
-        this.service = this._app.service('dialog-sessions');
+        this.service = this.socketService.getService('dialog-sessions');
         this.service.on('created', (newItem) => this.onCreated(newItem));
         this.comments$ = new Subject<any>()
     }
@@ -25,32 +23,29 @@ export class DialogSocketService extends DialogService {
     }
 
     getComments(sessionId) {
-        this._app.authenticate().then(() => {
-            this.service.find({
-                query: { sessionId: sessionId },
-            }, (err, items: any) => {
-                if (err) return console.error(err);
-                this.comments = items.data.map((obj) => this.transform(obj));
-                this.comments$.next(this.comments);
-            })
-        });
+        this.service.find({
+            query: { sessionId: sessionId },
+        }, (err, items: any) => {
+            if (err) return console.error(err);
+            this.comments = items.data.map((obj) => this.transform(obj));
+            this.comments$.next(this.comments);
+        })
     }
 
     add(comment: string, sessionId: string) {
-        this._app.authenticate().then(() => {
-            this.service.create(
-                {
-                    text: comment,
-                    userName: this._app.get('user').name,
-                    sessionId: sessionId
-                })
-                .then((result) => {
-                    console.log(result);
-                })
-                .catch(function (error) {
-                    console.error('Error saving!', error);
-                })
-        });
+
+        this.service.create(
+            {
+                text: comment,
+                sessionId: sessionId
+            })
+            .then((result) => {
+                console.log(result);
+            })
+            .catch(function (error) {
+                console.error('Error saving!', error);
+            })
+
     }
 
     private onCreated(newItem: any) {

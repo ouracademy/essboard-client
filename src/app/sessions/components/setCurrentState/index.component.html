@@ -1,8 +1,31 @@
 <div class="row around-xs">
     <alpha-card class="mar-1" *ngIf="dimension" [dimension]="dimension" (onChooseState)="onSelectedState($event)"></alpha-card>
-    <state-card-view  class="mar-1" *ngIf="selectedState" [state]="selectedState.info" [classCSS]="'normal'"></state-card-view>
-    <checklist class="mar-1" *ngIf="selectedState" [state]="dimension.getState(selectedState)" (onChooseCheckpoint)="onSelectedCheckpoint($event)" (onNoChooseCheckpoint)="noCheck($event)"></checklist>
+    <!-- 
+        kwoledgeToAlpha1                           
+            { name:"Interesado", 
+                                
+
+            }
+
+       statusAlpha1
+            ['estado1','estado2']
+  <alpha-card class="mar-1" [dimension]="dimension" (onChooseState)="onSelectedState($event)"></alpha-card>
+  -->
+
+
+
+
+    <state-card-view class="mar-1" *ngIf="selectedState" [state]="selectedState.info" [classCSS]="'normal'"></state-card-view>
+    <checklist class="mar-1" *ngIf="selectedState" [state]="dimension.getState(selectedState)" (onChooseCheckpoint)="onSelectedCheckpoint($event)"
+        (onNoChooseCheckpoint)="noCheck($event)"></checklist>
 </div>
+
+
+
+
+
+
 <audio #player preload="auto">
-    <source src="https://static1.grsites.com/archive/sounds/cartoon/cartoon008.mp3" type="audio/mpeg"> Your browser does not support the audio element.
+    <source src="https://static1.grsites.com/archive/sounds/cartoon/cartoon008.mp3" type="audio/mpeg"> Your browser
+    does not support the audio element.
 </audio>

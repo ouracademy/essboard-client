@@ -40,6 +40,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+
   addSession() {
     if (this.project.canCreateNewSession()) {
       this.service.addSession();
