@@ -109,20 +109,10 @@ export class ProjectSocketService extends ProjectService {
     //this.itemsObserver.next(this.data);
   }
 
-  /* 
-
-    kernel : { 
-        alphas : [
-            {
-                id, 
-                states : [{ id }]
-            }
-        ]
-    }
-    */
   addSession() {
-    const lastSessionId = this.project.getLastSessionId()
-
-    this.sessionService.addSession(this.project.id, lastSessionId)
+    this.sessionService.addSession(
+      this.project.id,
+      this.project.getLastSessionId()
+    )
   }
 }
