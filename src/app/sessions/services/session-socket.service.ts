@@ -7,6 +7,7 @@ import { SocketService } from '@core/socket.service'
 import { ToSession } from '@no-module/transforms/to-session'
 import { GetKeys } from '@no-module/util/get-keys-from-object'
 import { AuthService } from '@core/auth.service'
+import { KernelService } from '@core/kernel-knowledge.service'
 
 @Injectable()
 export class SessionSocketService extends SessionService {
@@ -17,6 +18,7 @@ export class SessionSocketService extends SessionService {
   service: any
   constructor(
     public socketService: SocketService,
+    public kernelKnowledgeService: KernelService,
     private auth: AuthService,
     private router: Router
   ) {
@@ -36,7 +38,26 @@ export class SessionSocketService extends SessionService {
     })
   }
 
-  addSession(data) {}
+  addSession(projectId, lastSessionId) {
+    this.kernelKnowledgeService.getSchemaKernel().subscribe(result => {
+      this.service
+        .addSession({
+          projectId: projectId,
+          kernel: { alphas: result },
+          lastSessionId
+        })
+        .then(session => {
+          //this.addGoalsContainerBySession(session._id)
+        })
+    })
+  }
+
+  private addGoalsContainerBySession(sessionId: string) {
+    // old way but now this will change
+    let data = { sessionId: sessionId }
+    let goalService = this.socketService.getService('goals')
+    goalService.create(data)
+  }
 
   colaboreUsingUserIdInProject(idSession: string, idProject: string) {
     let userId = this.auth.user.id
