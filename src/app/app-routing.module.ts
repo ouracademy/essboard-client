@@ -1,9 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { InsideLayoutComponent } from '@layouts/inside/layout.component'
-
-
+import { NgModule } from '@angular/core'
+import { Routes, RouterModule } from '@angular/router'
 
 const routes: Routes = [
   {
@@ -14,18 +10,14 @@ const routes: Routes = [
       { path: 'signup', loadChildren: 'app/signup/index.module#SignupModule' }
     ]
   },
+
   {
-    path: 'me', 
-    component: InsideLayoutComponent, 
-    children: [
-      { path: 'projects', loadChildren: 'app/projects/module#Module' },
-      { path: 'sessions', loadChildren: 'app/sessions/module#Module' },
-      { path: 'practices', loadChildren: 'app/practices/module#Module'}
-    ]
+    path: 'me',
+    loadChildren: 'app/inside.module#InsideRoutingModule'
   }
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

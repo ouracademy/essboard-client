@@ -109,13 +109,6 @@ export class ProjectSocketService extends ProjectService {
     //this.itemsObserver.next(this.data);
   }
 
-  private addSessionToProject(sessionId: string) {
-    this.service
-      .watch()
-      .patch(this.project.id, { $addToSet: { sessions: sessionId } })
-      .subscribe(result => {}, error => {})
-  }
-
   private addBagGoal(sessionId: string) {
     let data = { sessionId: sessionId }
     let goalService = this.socketService.getService('goals')
@@ -147,7 +140,6 @@ export class ProjectSocketService extends ProjectService {
         idLastSession
       })
       .then(session => {
-        this.addSessionToProject(session._id)
         this.addBagGoal(session._id)
       })
   }
