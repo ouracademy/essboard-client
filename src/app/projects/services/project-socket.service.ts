@@ -113,21 +113,35 @@ export class ProjectSocketService extends ProjectService {
         let data = { sessionId: sessionId };
         let goalService = this.socketService.getService('goals');
 
-        goalService.create(
-            data)
+        goalService.create(data)
 
     }
 
+    /* 
+
+    kernel : { 
+        alphas : [
+            {
+                id, 
+                states : [{ id }]
+            }
+        ]
+    }
+    */
     addSession() {
+
         let sessionService = this.socketService.getService('sessions');
         let order = this.project.sessions.length + 1;
         const idLastSession = this.project.getLastSessionId();
         let alphas = BuildDataToServer.initDimensions();
+
+        const kernel = {}
+
         sessionService.watch().create({
-            _project: this.project.id,
+            projectId: this.project.id,
             nroOrder: order,
-            alphas: alphas,
-            idLastSession: idLastSession
+            kernel,
+            idLastSession
         }).subscribe(session => {
             this.addSessionToProject(session._id);
             this.addBagGoal(session._id);

@@ -5,7 +5,6 @@ import { urlEssenceKernel } from '@env/environment'
 export class KernelService {
     constructor(private httpClient: HttpClient) {
     }
-
     getAlphas() {
         return this.httpClient.get(`${urlEssenceKernel}/kernel`)
     }

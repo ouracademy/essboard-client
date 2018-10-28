@@ -22,6 +22,7 @@ export class SessionSocketService extends SessionService {
         this.currentSession$ = new Subject<any>();
         this.session = null;
     }
+
     getSession(id: string) {
         this.service.get(id).then((item: any) => {
             console.log('session', item)

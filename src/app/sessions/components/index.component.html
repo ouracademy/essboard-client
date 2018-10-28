@@ -6,7 +6,7 @@
         <button mat-icon-button>
             <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
         </button>
-        <button mat-icon-button (click)="showChat()">
+        <button mat-icon-button (click)="isChatVisible = !isChatVisible">
             <mat-icon class="md-24">chat</mat-icon>
         </button>
         <button mat-button (click)="goToProject()">Ir a mi proyecto</button>
@@ -38,11 +38,10 @@
                     <h4 class="subtitle">( Selecciona una dimension y luego selecciona el estado que tú consideras se
                         encuentra el proyecto )</h4>
                 </div>
-
                 <div class="row">
                     <div class="alpha-buttons">
                         <mat-button-toggle-group name="dimensions-name">
-                            <mat-button-toggle value="" *ngFor="let alpha of alphas" (click)="handleSelectionAlpha(alpha)">
+                            <mat-button-toggle value="" *ngFor="let alpha of kernelService.getAlphas() | async" (click)="handleSelectionAlpha(alpha)">
                                 {{alpha.name}}
                             </mat-button-toggle>
                         </mat-button-toggle-group>
@@ -52,7 +51,6 @@
                     <set-current-state [knowledge]="currentAlpha" [implementation]="statusByCurrentAlpha" [idSession]="session.id"></set-current-state>
                 </div>
             </div>
-
 
         </mat-tab>
         <!-- <mat-tab>
@@ -75,5 +73,5 @@
             </div>
         </mat-tab> -->
     </mat-tab-group>
-    <comments *ngIf="isJoinedToChat" [sessionId]="session.id"> </comments>
+    <comments *ngIf="isChatVisible" [sessionId]="session.id"> </comments>
 </div>
