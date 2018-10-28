@@ -41,7 +41,7 @@ export class SessionSocketService extends SessionService {
   addSession(projectId, lastSessionId) {
     this.kernelKnowledgeService.getSchemaKernel().subscribe(result => {
       this.service
-        .addSession({
+        .create({
           projectId: projectId,
           kernel: { alphas: result },
           lastSessionId
