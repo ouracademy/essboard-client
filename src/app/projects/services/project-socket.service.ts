@@ -109,13 +109,6 @@ export class ProjectSocketService extends ProjectService {
     //this.itemsObserver.next(this.data);
   }
 
-  private addBagGoal(sessionId: string) {
-    let data = { sessionId: sessionId }
-    let goalService = this.socketService.getService('goals')
-
-    goalService.create(data)
-  }
-
   /* 
 
     kernel : { 
@@ -128,19 +121,8 @@ export class ProjectSocketService extends ProjectService {
     }
     */
   addSession() {
-    const idLastSession = this.project.getLastSessionId()
-    let alphas = BuildDataToServer.initDimensions()
+    const lastSessionId = this.project.getLastSessionId()
 
-    const kernel = {}
-
-    this.sessionService
-      .addSession({
-        projectId: this.project.id,
-        kernel,
-        idLastSession
-      })
-      .then(session => {
-        this.addBagGoal(session._id)
-      })
+    this.sessionService.addSession(this.project.id, lastSessionId)
   }
 }
