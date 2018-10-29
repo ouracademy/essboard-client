@@ -33,7 +33,13 @@ export class ProjectSocketService extends ProjectService {
       .get(id)
       .subscribe(
         item => {
-          this.project = ToProject.transformCompleteToProject(item)
+          this.project = new Project(
+            item._id,
+            item.name,
+            item.description,
+            item.createdBy,
+            item.createdAt
+          )
           this.currentProject$.next(this.project)
         },
         err => console.log('err', err)
