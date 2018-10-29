@@ -1,4 +1,4 @@
 <mat-card *ngFor="let session of  sessionsService.sessions$ | async " class="mar-1" (click)="goSession(session)"
     style.background="lightblue">
-    SESSION
+    <span> Sesión {{ session.createdAt | date:'d \'de\' MMMM' }}</span>
 </mat-card>
