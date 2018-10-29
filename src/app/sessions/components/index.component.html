@@ -1,7 +1,8 @@
 <div *ngIf="session">
     <mat-toolbar class="detail">
-        <span> Session:</span><span>{{session.num}}</span>
-        <span> {{ session.date | date:'d/M/y' }} </span>
+        <span> Sesión</span><span>{{session.num}}</span>
+        <span> {{ session.date | date:'d \'de\' MMMM' }}</span>
+        <!-- <span *ngIf="session.isFinished"> {{ session.endDate | date:'d \'de\' MMMM' }}</span> -->
         <span class="fill-remaining"></span>
         <button mat-icon-button>
             <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
