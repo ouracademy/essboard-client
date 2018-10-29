@@ -11,12 +11,8 @@ import { KernelService } from '@core/kernel-knowledge.service'
 
 @Injectable()
 export class SessionSocketService extends SessionService {
-  items: Observable<any>
-  sessionObserver: any
   session: Session
-  sessions: Session[]
-
-  sessions$ = new Subject()
+  sessions$: Subject<any>
   service: any
   constructor(
     public socketService: SocketService,
@@ -26,25 +22,28 @@ export class SessionSocketService extends SessionService {
   ) {
     super()
     this.service = this.socketService.getService('sessions')
-    this.service.on('patched', patchedItem => this.onPatched(patchedItem))
+    this.service.on('patched', session => this.onPatched(session))
     this.currentSession$ = new Subject<any>()
-    this.session = null
+    this.sessions$ = new Subject()
   }
 
   getSession(id: string) {
     this.service.get(id).then((item: any) => {
-      console.log('session', item)
-      this.session = new Session(item['_id'], item['nroOrder'], new Date())
+      this.session = this.toSession(item)
       GetKeys.setSource(item.alphas)
       this.currentSession$.next(this.session)
     })
   }
+
+  toSession(item) {
+    return new Session(item['_id'], item['createdAt'], item['endDate'])
+  }
+
   getSessions(projectId: string) {
     this.service
       .watch()
       .find({ query: { projectId } })
       .subscribe((result: any) => {
-        console.log('sessions changes', result['data'])
         this.sessions$.next(result['data'])
       })
   }
@@ -63,6 +62,16 @@ export class SessionSocketService extends SessionService {
         })
     })
   }
+
+  finish(session) {
+    this.service.patch(session.id, { finish: true })
+  }
+
+  private onPatched(session: any) {
+    this.currentSession$.next(this.toSession(session))
+  }
+
+  // mthods q aun no vemos al final
 
   private addGoalsContainerBySession(sessionId: string) {
     // old way but now this will change
@@ -163,13 +172,6 @@ export class SessionSocketService extends SessionService {
     this.patch(id, action, params)
   }
 
-  private onPatched(patchedItem: any) {
-    if (patchedItem._id === this.session.id) {
-      this.session = ToSession.withCompleteTransformation(patchedItem)
-      GetKeys.setSource(patchedItem.alphas)
-      this.currentSession$.next(this.session)
-    }
-  }
   public colaboreUsingSessionsIdInUser(idSession) {
     this.socketService
       .getService('users')

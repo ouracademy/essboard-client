@@ -25,4 +25,5 @@ export abstract class SessionService {
   )
   abstract colaboreUsingSessionsIdInUser(idSession)
   abstract colaboreUsingUserIdInProject(idSession, idProject)
+  abstract finish(session)
 }
