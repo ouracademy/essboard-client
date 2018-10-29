@@ -9,13 +9,6 @@ export class ToProject {
       obj.createdBy,
       obj.createdAt
     )
-    for (let session of obj.sessions) {
-      p.addSession(this.transformSourceToSession(session))
-    }
-    for (let member of obj.members) {
-      p.addMember(member._id, member.email, member.avatar)
-    }
-    return p
   }
 
   public static transformSourceToSession(obj: any) {
