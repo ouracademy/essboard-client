@@ -2,7 +2,7 @@ import { Project, Session } from '../models/project'
 
 export class ToProject {
   public static transformCompleteToProject(obj: any) {
-    let p = new Project(
+    return new Project(
       obj._id,
       obj.name,
       obj.description,
