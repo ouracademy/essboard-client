@@ -1,42 +1,18 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { Session } from '@no-module/models/project';
+import { Component, OnInit, OnChanges, Input } from '@angular/core'
+import { Router } from '@angular/router'
+import { Session } from '@no-module/models/project'
 
 @Component({
   selector: 'sessions-list',
   templateUrl: 'index.component.html'
 })
-export class SessionsListComponent implements OnInit, OnChanges {
-  @Input() sessions: Session[];
-  fixedCols = 4;
-  fixedRowHeight = 100;
-  sessionsTiles: any[] = [];
+export class SessionsListComponent {
+  @Input()
+  sessions: Session[]
 
-  constructor(private router: Router) { }
-
-  ngOnInit() {
-    this.convertToTiles(this.sessions);
-  }
-  ngOnChanges() {
-    this.convertToTiles(this.sessions);
-  }
-
-  private convertToTiles(sessions: Session[]) {
-    this.sessionsTiles = [];
-    if (sessions.length !== 0) {
-      this.addSessionToView(sessions[0], 'lightblue', 3);
-      for (let i = 1; i < sessions.length; i++) {
-        this.addSessionToView(sessions[i], 'lightgreen', 1);
-      }
-    }
-  }
-
-  private addSessionToView(data, color, cols) {
-    this.sessionsTiles.push({ data: data, cols: cols, rows: 1, color: color });
-  }
+  constructor(private router: Router) {}
 
   goSession(session) {
-    this.router.navigate(['/me/sessions', session.data.id]);
+    this.router.navigate(['/me/sessions', session.id])
   }
-
 }
