@@ -1,3 +1,3 @@
-<mat-card *ngFor="let session of sessionsTiles" class="mar-1" (click)="goSession(session)" [style.background]="session.color">
-    <mat-icon class="md-24">{{session.data.getIcon()}}</mat-icon>
+<mat-card *ngFor="let session of sessions" class="mar-1" (click)="goSession(session)" style.background="lightblue">
+    <mat-icon class="md-24">{{session.getIcon()}}</mat-icon>
 </mat-card>
