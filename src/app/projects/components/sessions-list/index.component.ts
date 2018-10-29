@@ -20,6 +20,6 @@ export class SessionsListComponent {
   }
 
   goSession(session) {
-    this.router.navigate(['/me/sessions', session.id])
+    this.router.navigate(['/me/sessions', session._id])
   }
 }
