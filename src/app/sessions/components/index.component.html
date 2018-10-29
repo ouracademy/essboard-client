@@ -7,17 +7,10 @@
             <span *ngIf="session.hasFinished; else notFinished">
                 a {{ session.endDate | date:'d \'de\' MMMM' }}
             </span>
-            <!-- si es asi no -->
             <ng-template #notFinished>
                 <button mat-stroked-button color="accent" (click)="finishSession()">Dar por concluído</button>
             </ng-template>
         </div>
-
-
-
-        <!-- <span *ngIf="
-                    session.isFinished"> {{ session.endDate | date:'d \'de\' MMMM' }}</span> -->
-
 
         <span class="fill-remaining"></span>
         <button mat-icon-button>
