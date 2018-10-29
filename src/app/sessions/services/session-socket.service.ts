@@ -37,6 +37,14 @@ export class SessionSocketService extends SessionService {
       this.currentSession$.next(this.session)
     })
   }
+  getSessions(projectId: string) {
+    this.service
+      .watch()
+      .find({ query: { projectId } })
+      .subscribe((result: any) => {
+        console.log('sessions changes', result['data'])
+      })
+  }
 
   addSession(projectId, lastSessionId) {
     this.kernelKnowledgeService.getSchemaKernel().subscribe(result => {
@@ -47,6 +55,7 @@ export class SessionSocketService extends SessionService {
           lastSessionId
         })
         .then(session => {
+          console.log(session)
           //this.addGoalsContainerBySession(session._id)
         })
     })
