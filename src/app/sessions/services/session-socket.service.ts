@@ -15,6 +15,8 @@ export class SessionSocketService extends SessionService {
   sessionObserver: any
   session: Session
   sessions: Session[]
+
+  sessions$ = new Subject()
   service: any
   constructor(
     public socketService: SocketService,
@@ -43,6 +45,7 @@ export class SessionSocketService extends SessionService {
       .find({ query: { projectId } })
       .subscribe((result: any) => {
         console.log('sessions changes', result['data'])
+        this.sessions$.next(result['data'])
       })
   }
 
