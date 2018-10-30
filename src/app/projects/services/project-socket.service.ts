@@ -4,7 +4,6 @@ import { Subject } from 'rxjs/Subject'
 import { ProjectService } from './project.service'
 import { SocketService } from '@core/socket.service'
 import { Project, Session } from '@no-module/models/project'
-import { ToProject } from '@no-module/transforms/to-project'
 import { BuildDataToServer } from '@no-module/util/build-data-to-server'
 import { SessionService } from '../../sessions/services/session.service'
 

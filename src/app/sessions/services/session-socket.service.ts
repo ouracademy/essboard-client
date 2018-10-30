@@ -4,7 +4,6 @@ import { Session } from '@no-module/models/project'
 import { Observable, Subject } from 'rxjs'
 import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
-import { ToSession } from '@no-module/transforms/to-session'
 import { GetKeys } from '@no-module/util/get-keys-from-object'
 import { AuthService } from '@core/auth.service'
 import { KernelService } from '@core/kernel-knowledge.service'
@@ -36,7 +35,12 @@ export class SessionSocketService extends SessionService {
   }
 
   toSession(item) {
-    return new Session(item['_id'], item['createdAt'], item['endDate'])
+    return new Session(
+      item['_id'],
+      item['createdAt'],
+      item['endDate'],
+      item['projectId']
+    )
   }
 
   getSessions(projectId: string) {

@@ -70,10 +70,14 @@ export class Project {
 }
 
 export class Session {
-  public projectId: string
   public kernel
 
-  constructor(public id: string, public createdAt: Date, public endDate: Date) {
+  constructor(
+    public id: string,
+    public createdAt: Date,
+    public endDate: Date,
+    public projectId: string
+  ) {
     this.createdAt = createdAt
     this.id = id
     this.endDate = endDate
