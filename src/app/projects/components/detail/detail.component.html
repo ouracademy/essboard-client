@@ -24,7 +24,7 @@
                     <button class="main" (click)="addSession()">
                         <mat-icon class="md-24">add</mat-icon>
                     </button>
-                    <sessions-list *ngIf="project.sessions" [projectId]="project.id"></sessions-list>
+                    <sessions-list [projectId]="project.id"></sessions-list>
                 </div>
             </div>
             <div class="col-lg-9">

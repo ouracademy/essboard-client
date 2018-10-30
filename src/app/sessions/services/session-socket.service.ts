@@ -11,6 +11,7 @@ import { KernelService } from '@core/kernel-knowledge.service'
 @Injectable()
 export class SessionSocketService extends SessionService {
   session: Session
+  sessions = []
   sessions$: Subject<any>
   service: any
   constructor(
@@ -22,6 +23,7 @@ export class SessionSocketService extends SessionService {
     super()
     this.service = this.socketService.getService('sessions')
     this.service.on('patched', session => this.onPatched(session))
+    this.service.on('created', session => this.onCreated(session))
     this.currentSession$ = new Subject<any>()
     this.sessions$ = new Subject()
   }
@@ -44,12 +46,10 @@ export class SessionSocketService extends SessionService {
   }
 
   getSessions(projectId: string) {
-    this.service
-      .watch()
-      .find({ query: { projectId } })
-      .subscribe((result: any) => {
-        this.sessions$.next(result['data'])
-      })
+    this.service.find({ query: { projectId } }).then((result: any) => {
+      this.sessions = result['data']
+      this.sessions$.next(this.sessions)
+    })
   }
 
   addSession(projectId) {
@@ -71,7 +71,9 @@ export class SessionSocketService extends SessionService {
   private onPatched(session: any) {
     this.currentSession$.next(this.toSession(session))
   }
-
+  private onCreated(session: any) {
+    this.sessions$.next([this.toSession(session), ...this.sessions])
+  }
   // mthods q aun no vemos al final
 
   private addGoalsContainerBySession(sessionId: string) {

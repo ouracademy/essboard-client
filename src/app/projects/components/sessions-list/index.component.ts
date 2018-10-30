@@ -8,19 +8,20 @@ import { SessionService } from 'app/sessions/services/session.service'
   templateUrl: 'index.component.html'
 })
 export class SessionsListComponent {
-  @Input()
-  projectId: any
+
+  @Input('projectId')
+  set projectId(projectId) {
+    this.sessionsService.getSessions(projectId)
+  } 
 
   constructor(private router: Router, public sessionsService: SessionService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
 
-  ngOnChanges() {
-    console.log('change id', this.projectId)
-    this.sessionsService.getSessions(this.projectId)
   }
 
   goSession(session) {
     this.router.navigate(['/me/sessions', session._id])
   }
+}
 }
