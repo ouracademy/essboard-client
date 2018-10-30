@@ -9,14 +9,15 @@ import { SessionService } from 'app/sessions/services/session.service'
 })
 export class SessionsListComponent {
   @Input()
-  sessionId: any
+  projectId: any
 
   constructor(private router: Router, public sessionsService: SessionService) {}
 
   ngOnInit() {}
 
   ngOnChanges() {
-    this.sessionsService.getSessions(this.sessionId)
+    console.log('change id', this.projectId)
+    this.sessionsService.getSessions(this.projectId)
   }
 
   goSession(session) {
