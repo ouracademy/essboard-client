@@ -28,23 +28,22 @@ export class ProjectSocketService extends ProjectService {
     this.project = null
   }
   getProject(id: string) {
-    this.service
-      .watch()
-      .get(id)
-      .subscribe(
-        item => {
-          this.project = new Project(
-            item._id,
-            item.name,
-            item.description,
-            item.createdBy,
-            item.createdAt
-          )
-          this.currentProject$.next(this.project)
-        },
-        err => console.log('err', err)
-      )
+    this.service.get(id).then(item => {
+      this.project = this.toProject(item)
+      this.currentProject$.next(this.project)
+    })
   }
+
+  private toProject(item: any) {
+    return new Project(
+      item._id,
+      item.name,
+      item.description,
+      item.createdBy,
+      item.createdAt
+    )
+  }
+
   delete() {
     this.service.remove(this.project.id, {}, (err, result: any) => {
       if (err) return console.error(err)
@@ -74,12 +73,12 @@ export class ProjectSocketService extends ProjectService {
   inviteTo(project, user) {
     this.socketService
       .getService('members')
-      .watch()
       .create({ projectId: project.id, userId: user.id, role: 'invited' })
       .subscribe(
         result => {},
         error => {
           console.log(error, 'Error al editar  tu proyecto')
+          //TODO: show alert
         }
       )
   }
@@ -102,11 +101,8 @@ export class ProjectSocketService extends ProjectService {
       )
   }
 
-  private onPatched(patchedItem: any) {
-    if (patchedItem._id === this.project.id) {
-      this.project = ToProject.transformCompleteToProject(patchedItem)
-      this.currentProject$.next(this.project)
-    }
+  private onPatched(project: any) {
+    this.project = this.toProject(project)
   }
 
   private onRemoved(removedItem) {
