@@ -112,9 +112,6 @@ export class ProjectSocketService extends ProjectService {
   }
 
   addSession() {
-    this.sessionService.addSession(
-      this.project.id,
-      this.project.getLastSessionId()
-    )
+    return this.sessionService.addSession(this.project.id)
   }
 }

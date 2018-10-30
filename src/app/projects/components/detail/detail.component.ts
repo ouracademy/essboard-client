@@ -45,14 +45,12 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   addSession() {
-    if (this.project.canCreateNewSession()) {
-      this.service.addSession()
-    } else {
+    this.service.addSession().catch(error => {
       this.sharedService.showError(
         'Upps!',
         'Aun no haz concluido tu actual sesión'
       )
-    }
+    })
   }
 
   share() {

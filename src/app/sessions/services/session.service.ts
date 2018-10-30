@@ -5,7 +5,7 @@ export abstract class SessionService {
   sessions$: Subject<any>
   abstract getSession(id: string)
   abstract getSessions(projectId: string)
-  abstract addSession(projectId: string, lastSessionId: string)
+  abstract addSession(projectId: string): Promise<any>
   abstract delete(id)
   abstract setCheckpointTo(id, dimensionId, stateId, checkpointId, condition)
   abstract setStateAsWorking(id, dimensionConcept, stateName)

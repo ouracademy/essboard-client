@@ -48,19 +48,16 @@ export class SessionSocketService extends SessionService {
       })
   }
 
-  addSession(projectId, lastSessionId) {
-    this.kernelKnowledgeService.getSchemaKernel().subscribe(result => {
-      this.service
-        .create({
-          projectId: projectId,
-          kernel: { alphas: result },
-          lastSessionId
+  addSession(projectId) {
+    return this.kernelKnowledgeService
+      .getSchemaKernel()
+      .toPromise()
+      .then(alphas =>
+        this.service.create({
+          projectId,
+          kernel: { alphas }
         })
-        .then(session => {
-          console.log(session)
-          //this.addGoalsContainerBySession(session._id)
-        })
-    })
+      )
   }
 
   finish(session) {
