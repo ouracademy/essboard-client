@@ -4,7 +4,7 @@ import { MatCardModule, MatIconModule } from '@angular/material'
 
 import { EssenceCard } from './components/essence-card/index'
 import { StateCardView } from './components/state-card-view/index'
-import { AlphaCard } from './components/alpha-card/index'
+import { AlphaCardComponent } from './components/alpha-card/index'
 import { RowAlphaStates } from './components/row-alpha-states/index'
 import {
   AlphaConnections,
@@ -23,7 +23,7 @@ import { PracticeMockService } from './services/mock-practices/index.service'
   declarations: [
     EssenceCard,
     StateCardView,
-    AlphaCard,
+    AlphaCardComponent,
     RowAlphaStates,
     AlphaConnections,
     RadarChartComponent,
@@ -32,7 +32,7 @@ import { PracticeMockService } from './services/mock-practices/index.service'
   exports: [
     EssenceCard,
     StateCardView,
-    AlphaCard,
+    AlphaCardComponent,
     RowAlphaStates,
     RadarChartComponent,
     AlphaConnections,

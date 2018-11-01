@@ -1,5 +1,6 @@
 <div class="row around-xs">
-    <alpha-card class="mar-1" *ngIf="dimension" [dimension]="dimension" (onChooseState)="onSelectedState($event)"></alpha-card>
+    <alpha-card class="mar-1" *ngIf="alpha" [alpha]="alpha" [projectStates]="projectStates" (onChooseState)="onSelectedState($event)">
+    </alpha-card>
     <!-- 
         kwoledgeToAlpha1                           
             { name:"Interesado", 
@@ -11,13 +12,10 @@
             ['estado1','estado2']
   <alpha-card class="mar-1" [dimension]="dimension" (onChooseState)="onSelectedState($event)"></alpha-card>
   -->
-
-
-
-
+    <!-- 
     <state-card-view class="mar-1" *ngIf="selectedState" [state]="selectedState.info" [classCSS]="'normal'"></state-card-view>
     <checklist class="mar-1" *ngIf="selectedState" [state]="dimension.getState(selectedState)" (onChooseCheckpoint)="onSelectedCheckpoint($event)"
-        (onNoChooseCheckpoint)="noCheck($event)"></checklist>
+        (onNoChooseCheckpoint)="noCheck($event)"></checklist> -->
 </div>
 
 

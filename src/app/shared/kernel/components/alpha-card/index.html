@@ -1,20 +1,9 @@
-<essence-card [name]="dimension.info.name" [area]="dimension.getType()">
+<essence-card [name]="alpha.name" [area]="alpha.area">
     <content>
-        <div [ngStyle]="{'height': 'calc( 29vh/'+dimension.states.length+')' }"   class="state-wrapper" *ngFor="let state of dimension.states" >
-                    <div class="state row middle-xs center-xs"
-                    [ngClass]="{'achieved':state.isAchaived,
-                                 'working': state.isWorking,
-                                'noAchieved': !state.isAchaived,
-                                
-                                'selected': isSelected(state)}"
-                    (click)="select(state)">
-                        <div >{{state.info.name}}</div>
-                    </div>
-
+        <div [ngStyle]="{'height': 'calc( 29vh/'+alpha.states.length+')' }" class="state-wrapper" *ngFor="let state of alpha.states">
+            <div class="state row middle-xs center-xs" [ngClass]="getClass(state)" (click)="select(state)">
+                <div>{{state.name}}</div>
+            </div>
         </div>
     </content>
 </essence-card>
-
-
-
-        

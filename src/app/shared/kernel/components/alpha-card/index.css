@@ -1,39 +1,37 @@
 /* alpha-card*/
 
-
-.state-wrapper{
-	padding: 3px 4px;
+.state-wrapper {
+  padding: 3px 4px;
 }
-.state{
-	border: 2px solid currentColor;
-	margin: 2px 1px;
-	cursor: pointer;
-	height: 100%;
-
+.state {
+  border: 2px solid currentColor;
+  margin: 2px 1px;
+  cursor: pointer;
+  height: 100%;
 }
-.state div{
+.state div {
   color: #878686;
   line-height: 1;
 }
 
-
-
-.state:hover{
-	border-style : solid;
-	background-color: currentColor;
+.state:hover {
+  border-style: solid;
+  background-color: currentColor;
 }
 
-.achieved{
-   	border-style : solid;
-	background-color: currentColor;
+.todo {
+  background-color: transparent;
 }
 
-
-
-.noAchieved{
-    background-color: transparent;
-}
-.selected{
-	box-shadow: 1px 2px 30px 13px rgba(202,188,188,0.79);
+.doing {
+  background-color: red;
 }
 
+.done {
+  border-style: solid;
+  background-color: currentColor;
+}
+
+.selected {
+  box-shadow: 1px 2px 30px 13px rgba(202, 188, 188, 0.79);
+}
