@@ -1,25 +1,19 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
-
+import { Component, Input } from '@angular/core'
 
 @Component({
   selector: 'essence-card',
   templateUrl: 'index.html',
   styleUrls: ['index.css']
 })
-export class EssenceCard {
-
-
+export class EssenceCardComponent {
   @Input()
-  name: String;
+  name: String
   @Input()
-  area: String;
-
+  area: String
 
   mmappingAreaWithColor = {
-    'customer': '#c1ecc1',
-    'solution': '#ffff99',
-    'endeavor':'#d4e6f0'
+    customer: '#c1ecc1',
+    solution: '#ffff99',
+    endeavor: '#d4e6f0'
   }
- 
- 
 }

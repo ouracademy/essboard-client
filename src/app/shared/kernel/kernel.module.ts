@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { MatCardModule, MatIconModule } from '@angular/material'
 
-import { EssenceCard } from './components/essence-card/index'
+import { EssenceCardComponent } from './components/essence-card/index'
 import { StateCardView } from './components/state-card-view/index'
 import { AlphaCardComponent } from './components/alpha-card/index'
 import { RowAlphaStates } from './components/row-alpha-states/index'
@@ -21,7 +21,7 @@ import { PracticeMockService } from './services/mock-practices/index.service'
 @NgModule({
   imports: [CommonModule, MatCardModule, MatIconModule],
   declarations: [
-    EssenceCard,
+    EssenceCardComponent,
     StateCardView,
     AlphaCardComponent,
     RowAlphaStates,
@@ -30,7 +30,7 @@ import { PracticeMockService } from './services/mock-practices/index.service'
     StateBoard
   ],
   exports: [
-    EssenceCard,
+    EssenceCardComponent,
     StateCardView,
     AlphaCardComponent,
     RowAlphaStates,
