@@ -1,21 +1,9 @@
-import {
-  Component,
-  OnInit,
-  AfterContentChecked,
-  OnChanges,
-  OnDestroy,
-  Input,
-  Output,
-  EventEmitter
-} from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Subscription } from 'rxjs/Subscription'
 import { Session } from '@no-module/models/project'
 import { SessionService } from '../services/session.service'
-import { AuthService } from '@core/auth.service'
 import { PrimaryKernelMockService } from '@shared/kernel/services/index'
 import { KernelService } from '@core/kernel-knowledge.service'
-import { Observable } from 'rxjs'
 
 @Component({
   selector: 'session',
@@ -26,10 +14,11 @@ export class SessionComponent implements OnInit {
   idSession: string
   session: Session
 
+  alphas: any[]
   currentAlpha: any
   statusByCurrentAlpha = null
 
-  isChatVisible: boolean = false
+  isChatVisible = false
 
   workItems: any[] = []
 
@@ -50,6 +39,10 @@ export class SessionComponent implements OnInit {
 
     this.service.currentSession$.subscribe((session: Session) => {
       this.session = session
+    })
+
+    this.kernelService.getAlphas().subscribe(alphas => {
+      this.alphas = alphas
     })
   }
 

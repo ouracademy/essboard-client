@@ -51,7 +51,7 @@
                 <div class="row">
                     <div class="alpha-buttons">
                         <mat-button-toggle-group name="dimensions-name">
-                            <mat-button-toggle value="" *ngFor="let alpha of kernelService.getAlphas() | async" (click)="handleSelectionAlpha(alpha)">
+                            <mat-button-toggle *ngFor="let alpha of alphas" (click)="handleSelectionAlpha(alpha)">
                                 {{alpha.name}}
                             </mat-button-toggle>
                         </mat-button-toggle-group>
