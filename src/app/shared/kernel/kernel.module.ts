@@ -7,7 +7,6 @@ import { StateCardView } from './components/state-card-view/index'
 import { AlphaCard } from './components/alpha-card/index'
 import { RowAlphaStates } from './components/row-alpha-states/index'
 import {
-  KernelViewHolistic,
   AlphaConnections,
   RadarChartComponent
 } from './components/kernel-views/index'
@@ -26,7 +25,6 @@ import { PracticeMockService } from './services/mock-practices/index.service'
     StateCardView,
     AlphaCard,
     RowAlphaStates,
-    KernelViewHolistic,
     AlphaConnections,
     RadarChartComponent,
     StateBoard
@@ -36,7 +34,6 @@ import { PracticeMockService } from './services/mock-practices/index.service'
     StateCardView,
     AlphaCard,
     RowAlphaStates,
-    KernelViewHolistic,
     RadarChartComponent,
     AlphaConnections,
     StateBoard
