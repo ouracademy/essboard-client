@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
-import { Observable, Subject } from 'rxjs'
+import { Observable, Subject, from } from 'rxjs'
 import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
 import { GetKeys } from '@no-module/util/get-keys-from-object'
@@ -66,6 +66,14 @@ export class SessionSocketService extends SessionService {
 
   finish(session) {
     this.service.patch(session.id, { finish: true })
+  }
+
+  leave(session: Session): boolean | Observable<boolean> {
+    return from(
+      this.socketService
+        .getService('channel-subscriptions')
+        .remove(session.id, { type: 'sessions' })
+    )
   }
 
   private onPatched(session: any) {

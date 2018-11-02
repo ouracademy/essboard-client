@@ -1,4 +1,5 @@
-import { Subject } from 'rxjs'
+import { Subject, Observable } from 'rxjs'
+import { Session } from '@shared/no-module/models/project'
 
 export abstract class SessionService {
   currentSession$: Subject<any>
@@ -26,4 +27,5 @@ export abstract class SessionService {
   abstract colaboreUsingSessionsIdInUser(idSession)
   abstract colaboreUsingUserIdInProject(idSession, idProject)
   abstract finish(session)
+  abstract leave(session: Session): boolean | Observable<boolean>
 }
