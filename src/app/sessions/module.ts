@@ -32,7 +32,7 @@ import { ActOnWorkItems } from './components/act-on-work-items/index.component'
 import { SetCurrentStateComponent } from './components/setCurrentState/index.component'
 import { SetGoalStateComponent } from './components/setGoalState/index.component'
 import { Checklist } from './components/setCurrentState/checklist/index.component'
-import { DialogComponent } from './components/chatInSession/index.component'
+import { ChatComponent } from './components/chatInSession/index.component'
 import { TrelloComponent } from './components/act-on-work-items/migrateToTrello/index.component'
 
 @NgModule({
@@ -66,7 +66,7 @@ import { TrelloComponent } from './components/act-on-work-items/migrateToTrello/
     HowReachGoals,
     HowReachGoal,
     ActOnWorkItems,
-    DialogComponent,
+    ChatComponent,
     TrelloComponent
   ],
 
@@ -77,7 +77,7 @@ import { TrelloComponent } from './components/act-on-work-items/migrateToTrello/
     SessionComponent,
     HowReachGoals,
     ActOnWorkItems,
-    DialogComponent,
+    ChatComponent,
     TrelloComponent
   ]
 })

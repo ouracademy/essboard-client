@@ -1,48 +1,55 @@
-import { Component, Input, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
-import { DialogService } from '../../services/dialog.service';
-import { Subscription } from 'rxjs/Subscription';
-import { Comment } from '../../model/comment';
+import {
+  Component,
+  Input,
+  OnInit,
+  AfterViewChecked,
+  ElementRef,
+  ViewChild
+} from '@angular/core'
+import { ChatService } from '../../services/chat.service'
+import { Message } from '../../model/messages'
 @Component({
-    selector: 'comments',
-    templateUrl: 'index.component.html',
-    styleUrls: ['index.component.css'],
+  selector: 'chat',
+  templateUrl: 'index.component.html',
+  styleUrls: ['index.component.css']
 })
-export class DialogComponent implements OnInit {
-    @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+export class ChatComponent implements OnInit, AfterViewChecked {
+  @Input()
+  sessionId
 
-    @Input() sessionId;
-    show = false;
-    comments: Comment[] = [];
-    message: string = '';
-    private subscription: Subscription;
-    constructor(private dialogService: DialogService) {
-    }
+  show = false
+  messages: Message[] = []
+  message = ''
 
-    ngAfterViewChecked() {
-        this.scrollToBottom();
-    }
+  @ViewChild('scrollMe')
+  private myScrollContainer: ElementRef
 
-    scrollToBottom(): void {
-        try {
-            this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-        } catch (err) { }
-    }
-    ngOnInit() {
-        this.subscription = this.dialogService.comments$.subscribe((comments) => {
-            this.comments = comments;
-        });
-        this.dialogService.getComments(this.sessionId);
-        this.scrollToBottom();
-    }
+  constructor(private chatService: ChatService) {}
 
-    showWindow() {
-        this.show = !this.show;
-    }
-    save() {
-        this.dialogService.add(this.message, this.sessionId);
-        this.message = '';
-    }
+  ngOnInit() {
+    this.chatService.messages$.subscribe(messages => {
+      this.messages = messages
+    })
+    this.chatService.getMessages(this.sessionId)
+    this.scrollToBottom()
+  }
 
+  ngAfterViewChecked() {
+    this.scrollToBottom()
+  }
 
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight
+    } catch (err) {}
+  }
 
+  showWindow() {
+    this.show = !this.show
+  }
+
+  save() {
+    this.chatService.addMessage(this.message, this.sessionId)
+    this.message = ''
+  }
 }

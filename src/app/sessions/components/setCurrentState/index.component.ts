@@ -9,7 +9,6 @@ export interface Alpha {
   states: State[]
 }
 
-
 export interface State {
   id: string
   name: string
@@ -23,6 +22,7 @@ export interface ProjectAlpha {
   states: ProjectState[]
 }
 
+
 export interface ProjectState {
   knowledgeId: string
   status: 'todo' | 'doing' | 'done'
@@ -35,9 +35,6 @@ export interface ProjectState {
   styleUrls: ['index.component.css']
 })
 export class SetCurrentStateComponent {
-  @ViewChild('player')
-  public playerContainer: ElementRef
-
   @Input()
   alpha: Alpha // kernel
   @Input()
@@ -45,7 +42,10 @@ export class SetCurrentStateComponent {
   @Input()
   idSession: string
 
+  @ViewChild('player')
+  public playerContainer: ElementRef
   selectedState: State
+
   constructor(private service: SessionService) {}
 
   get projectStates() {
@@ -53,9 +53,9 @@ export class SetCurrentStateComponent {
   }
 
   onSelectedState(state: State) {
-    this.putDimensionAsTouching()
     this.selectedState = state
-    console.log(state)
+
+    this.putDimensionAsTouching()
     if (this.isPosiblePutStateAsWorking(state)) {
       this.service.setStateAsWorking(
         this.idSession,
@@ -66,11 +66,13 @@ export class SetCurrentStateComponent {
       this.playerContainer.nativeElement.play()
     }
   }
+
   private isPosiblePutStateAsWorking(state: State): Boolean {
     return (
       state.isWorking === false && (state.isFirst || state.stateBackIsAchaived)
     )
   }
+
   private putDimensionAsTouching() {
     // if (this.alpha.isTouched == false) {
     //     this.alpha.isTouched = true;
