@@ -14,6 +14,8 @@ export class SessionSocketService extends SessionService {
   sessions = []
   sessions$: Subject<any>
   service: any
+  channelSubscriptions: any
+
   constructor(
     public socketService: SocketService,
     public kernelKnowledgeService: KernelService,
@@ -22,6 +24,10 @@ export class SessionSocketService extends SessionService {
   ) {
     super()
     this.service = this.socketService.getService('sessions')
+    this.channelSubscriptions = this.socketService.getService(
+      'channel-subscriptions'
+    )
+
     this.service.on('patched', session => this.onPatched(session))
     this.service.on('created', session => this.onCreated(session))
     this.currentSession$ = new Subject<any>()
@@ -33,6 +39,11 @@ export class SessionSocketService extends SessionService {
       this.session = this.toSession(item)
       GetKeys.setSource(item.alphas)
       this.currentSession$.next(this.session)
+
+      this.channelSubscriptions.create({
+        id: this.session.id,
+        type: 'sessions'
+      })
     })
   }
 
@@ -70,9 +81,7 @@ export class SessionSocketService extends SessionService {
 
   leave(session: Session): boolean | Observable<boolean> {
     return from(
-      this.socketService
-        .getService('channel-subscriptions')
-        .remove(session.id, { type: 'sessions' })
+      this.channelSubscriptions.remove(session.id, { type: 'sessions' })
     )
   }
 

@@ -27,7 +27,7 @@ export class ChatSocketService extends ChatService {
     this.service.create({ text, sessionId })
   }
 
-  private onCreated(newItem: any) {
+  onCreated = (newItem: any) => {
     this.comments.push(this.transform(newItem))
     this.messages$.next(this.comments)
   }
