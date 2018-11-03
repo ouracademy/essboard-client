@@ -2,19 +2,13 @@ import { Injectable } from '@angular/core'
 import { SocketService } from '@core/socket.service'
 import { Credentials, User } from '@no-module/models/user'
 import { tap } from 'rxjs/operators'
-import { BehaviorSubject, Subject, Observable } from 'rxjs'
-import { NotificationService } from './notification.service'
-import { KernelService } from './kernel-knowledge.service'
 
 @Injectable()
 export class AuthService {
   // store the URL so we can redirect after logging in
   private _redirectURL: string
 
-  constructor(
-    public socketService: SocketService,
-    private notification: NotificationService
-  ) {}
+  constructor(public socketService: SocketService) {}
 
   set redirectURL(URL: string) {
     this._redirectURL = URL
@@ -33,7 +27,6 @@ export class AuthService {
       })
       .then(result => {
         window.localStorage.setItem('user', JSON.stringify(result))
-        this.notification.startSubscription()
         return this.user
       })
   }

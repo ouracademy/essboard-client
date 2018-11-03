@@ -73,31 +73,14 @@ export class ProjectSocketService extends ProjectService {
     this.socketService
       .getService('members')
       .create({ projectId: project.id, userId: user.id, role: 'invited' })
-      .subscribe(
-        result => {},
-        error => {
-          console.log(error, 'Error al editar  tu proyecto')
-          //TODO: show alert
-        }
-      )
   }
 
   desinviteTo(user) {
-    this.service
-      .watch()
-      .patch(
-        this.project.id,
-        { $pull: { members: user.id } },
-        { query: { data: user.id } }
-      )
-      .subscribe(
-        result => {
-          alert('Invitado al proyecto')
-        },
-        function(error) {
-          console.log(error, 'Error al editar  tu proyecto')
-        }
-      )
+    this.service.patch(
+      this.project.id,
+      { $pull: { members: user.id } },
+      { query: { data: user.id } }
+    )
   }
 
   private onPatched(project: any) {

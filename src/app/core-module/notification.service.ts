@@ -1,38 +1,40 @@
-import { Injectable } from '@angular/core';
-import { SocketService } from '@core/socket.service';
+import { Injectable } from '@angular/core'
+import { SocketService } from '@core/socket.service'
 
-import { tap } from 'rxjs/operators';
-import { BehaviorSubject, Subject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
+import { Subject } from 'rxjs'
 
 @Injectable()
 export class NotificationService {
+  public newNotification$ = new Subject()
+  notificationService
 
-    public notifications$ = new BehaviorSubject([])
-    public newNotification$ = new Subject()
-    notificationService
+  constructor(public socketService: SocketService) {
+    this.notificationService = this.socketService.getService('notifications')
+    this.notificationService.on('created', newItem =>
+      this.newNotification$.next(newItem)
+    )
+  }
 
+  get notifications$() {
+    return this.notificationService
+      .watch()
+      .find({
+        query: {
+          $limit: 15,
+          $sort: {
+            createdAt: -1
+          }
+        }
+      })
+      .pipe(map(x => x['data']))
+  }
 
-    constructor(public socketService: SocketService) {
-
-        this.notificationService = this.socketService.getService('notifications')
-        this.notificationService.on('created', (newItem) => this.newNotification$.next(newItem));
-
-    }
-    startSubscription() {
-        this.notificationService.watch().find({
-            query: {
-                $limit: 15,
-                $sort: {
-                    createdAt: -1
-                }
-            }
-        }).subscribe(r => { this.notifications$.next(r['data']) })
-    }
-    markAsRead(idNotification) {
-        this.notificationService.patch(idNotification, { readed: true }).then(result => { console.log(result) })
-
-    }
-
-
-
+  markAsRead(idNotification) {
+    this.notificationService
+      .patch(idNotification, { readed: true })
+      .then(result => {
+        console.log(result)
+      })
+  }
 }
