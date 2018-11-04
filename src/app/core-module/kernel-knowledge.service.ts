@@ -14,5 +14,10 @@ export class KernelService {
   getSchemaKernel() {
     return this.httpClient.get(`${urlEssenceKernel}/kernel/schema`)
   }
+  getCheckpoints(stateId) {
+    return this.httpClient.get(
+      `${urlEssenceKernel}/kernel/states/${stateId}/checkpoints`
+    )
+  }
   getSchemaByTemplateId(templateId) {}
 }
