@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'
 import { MatCardModule, MatIconModule } from '@angular/material'
 
 import { EssenceCardComponent } from './components/essence-card/index'
-import { StateCardView } from './components/state-card-view/index'
+import { StateCardViewComponent } from './components/state-card-view/index'
 import { AlphaCardComponent } from './components/alpha-card/index'
 import { RowAlphaStates } from './components/row-alpha-states/index'
 import {
@@ -22,7 +22,7 @@ import { PracticeMockService } from './services/mock-practices/index.service'
   imports: [CommonModule, MatCardModule, MatIconModule],
   declarations: [
     EssenceCardComponent,
-    StateCardView,
+    StateCardViewComponent,
     AlphaCardComponent,
     RowAlphaStates,
     AlphaConnections,
@@ -31,7 +31,7 @@ import { PracticeMockService } from './services/mock-practices/index.service'
   ],
   exports: [
     EssenceCardComponent,
-    StateCardView,
+    StateCardViewComponent,
     AlphaCardComponent,
     RowAlphaStates,
     RadarChartComponent,

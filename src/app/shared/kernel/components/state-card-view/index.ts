@@ -1,14 +1,18 @@
-import { Component, Input } from '@angular/core';
-import { StateMetadata, CheckpointMetadata } from '@no-module/models/kernel/kernel';
+import { Component, Input } from '@angular/core'
+import { State } from 'app/sessions/components/setCurrentState/index.component'
 
 @Component({
   selector: 'state-card-view',
   templateUrl: 'index.html',
   styleUrls: ['index.css']
 })
-export class StateCardView {
+export class StateCardViewComponent {
   @Input()
-  state: StateMetadata;
+  state: State
   @Input()
-  classCSS: string;
+  area: string
+
+  get visibleChecklist() {
+    return this.state.checkpoints.filter(check => check.isVisibleInCard)
+  }
 }

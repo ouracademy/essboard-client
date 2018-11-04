@@ -1,17 +1,16 @@
-
-<essence-card *ngIf="state" class="state-card selectable" [name]="state.dimension.name" [area]="state.dimension.getType()">
-    <content>
-      <div class="state-card-wrapper">
-        <div class="state-name   row middle-xs center-xs">
-            <div>{{state.name}}</div>
-          </div>
-            <ul class="checkpoints">
-              <li *ngFor="let checkpoint of state.getMainChecklist()">
-                {{checkpoint.name}}
-              </li>
-            </ul>
+<essence-card *ngIf="state" class="state-card selectable" [name]="state.name" [area]="area">
+  <content>
+    <div class="state-card-wrapper">
+      <div class="state-name   row middle-xs center-xs">
+        <div>{{state.name}}</div>
       </div>
-    </content>
-    <footer>
-    </footer>
+      <ul class="checkpoints">
+        <li *ngFor="let checkpoint of visibleChecklist">
+          {{checkpoint.name}}
+        </li>
+      </ul>
+    </div>
+  </content>
+  <footer>
+  </footer>
 </essence-card>

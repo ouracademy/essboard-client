@@ -1,6 +1,6 @@
 import { Component, Input, ElementRef, ViewChild } from '@angular/core'
-import { State, Checkpoint } from '@no-module/models/project-kernel'
 import { SessionService } from '../../services/session.service'
+import { KernelService } from '@core/kernel-knowledge.service'
 
 export interface Alpha {
   id: string
@@ -13,6 +13,13 @@ export interface State {
   id: string
   name: string
   previousId: string
+  checkpoints: Checkpoint[]
+}
+export interface Checkpoint {
+  id: string
+  name: string
+  description: string
+  isVisibleInCard: string
 }
 
 export interface ProjectAlpha {
@@ -21,7 +28,6 @@ export interface ProjectAlpha {
   isTouched: boolean
   states: ProjectState[]
 }
-
 
 export interface ProjectState {
   knowledgeId: string
@@ -46,31 +52,36 @@ export class SetCurrentStateComponent {
   public playerContainer: ElementRef
   selectedState: State
 
-  constructor(private service: SessionService) {}
+  constructor(
+    private service: SessionService,
+    public kernelService: KernelService
+  ) {}
 
   get projectStates() {
     return []
   }
 
   onSelectedState(state: State) {
-    this.selectedState = state
-
-    this.putDimensionAsTouching()
-    if (this.isPosiblePutStateAsWorking(state)) {
-      this.service.setStateAsWorking(
-        this.idSession,
-        this.alpha.id,
-        state.info.identifier
+    this.kernelService
+      .getCheckpoints(state.id)
+      .subscribe(
+        (checkpoints: any[]) => (this.selectedState = { ...state, checkpoints })
       )
-    } else {
-      this.playerContainer.nativeElement.play()
-    }
+
+    // this.putDimensionAsTouching()
+    // if (this.isPosiblePutStateAsWorking(state)) {
+    //   this.service.setStateAsWorking(
+    //     this.idSession,
+    //     this.alpha.id,
+    //     state.info.identifier
+    //   )
+    // } else {
+    //   this.playerContainer.nativeElement.play()
+    // }
   }
 
   private isPosiblePutStateAsWorking(state: State): Boolean {
-    return (
-      state.isWorking === false && (state.isFirst || state.stateBackIsAchaived)
-    )
+    return true //state.isWorking === false && (state.isFirst || state.stateBackIsAchaived)
   }
 
   private putDimensionAsTouching() {
@@ -78,22 +89,24 @@ export class SetCurrentStateComponent {
     //     this.alpha.isTouched = true;
     // }
   }
+
   onSelectedCheckpoint(checkpoint: Checkpoint) {
     this.service.setVoteToCheckpoint(
       this.idSession,
       this.alpha.id,
-      this.selectedState.info.identifier,
-      checkpoint.info.identifier,
-      !checkpoint.isAchieved
+      this.selectedState.id,
+      checkpoint.id,
+      true
     )
   }
+
   noCheck(checkpoint: Checkpoint) {
     this.service.setUnVoteToCheckpoint(
       this.idSession,
       this.alpha.id,
-      this.selectedState.info.identifier,
-      checkpoint.info.identifier,
-      !checkpoint.isAchieved
+      this.selectedState.id,
+      checkpoint.id,
+      false
     )
   }
 }
