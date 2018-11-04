@@ -48,6 +48,8 @@ export class SetCurrentStateComponent {
   @Input()
   idSession: string
 
+  registerCheckpointIsVisible = false
+
   @ViewChild('player')
   public playerContainer: ElementRef
   selectedState: State
@@ -78,6 +80,10 @@ export class SetCurrentStateComponent {
     // } else {
     //   this.playerContainer.nativeElement.play()
     // }
+  }
+
+  registerCheckpoint() {
+    this.registerCheckpointIsVisible = !this.registerCheckpointIsVisible
   }
 
   private isPosiblePutStateAsWorking(state: State): Boolean {

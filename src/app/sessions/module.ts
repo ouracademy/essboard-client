@@ -31,7 +31,7 @@ import { HowReachGoal } from './components/how-reach-goal/index.component'
 import { ActOnWorkItems } from './components/act-on-work-items/index.component'
 import { SetCurrentStateComponent } from './components/setCurrentState/index.component'
 import { SetGoalStateComponent } from './components/setGoalState/index.component'
-import { Checklist } from './components/setCurrentState/checklist/index.component'
+import { ChecklistComponent } from './components/setCurrentState/checklist/index.component'
 import { ChatComponent } from './components/chatInSession/index.component'
 import { TrelloComponent } from './components/act-on-work-items/migrateToTrello/index.component'
 
@@ -61,7 +61,7 @@ import { TrelloComponent } from './components/act-on-work-items/migrateToTrello/
   declarations: [
     SetCurrentStateComponent,
     SetGoalStateComponent,
-    Checklist,
+    ChecklistComponent,
     SessionComponent,
     HowReachGoals,
     HowReachGoal,

@@ -1,11 +1,13 @@
 <div class="row around-xs">
     <alpha-card class="mar-1" *ngIf="alpha" [alpha]="alpha" [projectStates]="projectStates" (onChooseState)="onSelectedState($event)">
     </alpha-card>
-
     <state-card-view class="mar-1" *ngIf="selectedState" [state]="selectedState" [area]="alpha.area"></state-card-view>
-    <!--
-    <checklist class="mar-1" *ngIf="selectedState" [state]="dimension.getState(selectedState)" (onChooseCheckpoint)="onSelectedCheckpoint($event)"
-        (onNoChooseCheckpoint)="noCheck($event)"></checklist> -->
+</div>
+<button *ngIf="selectedState" (click)="registerCheckpoint()">registrar apreciacion</button>
+
+<div>
+    <checklist class="mar-1" *ngIf="registerCheckpointIsVisible" [state]="selectedState" [projectState]="projectState"
+        (onChooseCheckpoint)="onSelectedCheckpoint($event)" (onNoChooseCheckpoint)="noCheck($event)"></checklist>
 </div>
 
 
