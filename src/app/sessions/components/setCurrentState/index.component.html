@@ -4,7 +4,7 @@
         (onChooseState)="onSelectedState($event)">
     </alpha-card>
     <div class="row around-xs top-xs" *ngIf="selectedState">
-        <state-card-view class="mar-1" [state]="selectedState" [area]="alphaTemplate.area"></state-card-view>
+        <state-card-view class="mar-1" [state]="selectedState" [alpha]="alphaTemplate"></state-card-view>
         <button (click)="markStatusAsDone()">Marcar como estado logrado</button>
     </div>
 
