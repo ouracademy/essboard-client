@@ -9,14 +9,14 @@
     </div>
 
 </div>
-<div class="row" *ngIf="alpha">
+<div class="row" *ngIf="alphaTemplate">
     <button (click)="startMonitor()">Iniciar revision</button>
     <button (click)="showMonitor()">Mostrar resultados</button>
     <button *ngIf="selectedState" (click)="registerCheckpoint()">registrar apreciacion</button>
 </div>
 <div>
-    <!-- <checklist class="mar-1" *ngIf="registerCheckpointIsVisible" [state]="selectedState" [projectState]="projectState"
-        (onChooseCheckpoint)="onSelectedCheckpoint($event)" (onNoChooseCheckpoint)="noCheck($event)"></checklist> -->
+    <checklist class="mar-1" *ngIf="registerCheckpointIsVisible" [state]="selectedState" [projectState]="projectState"
+        (onChooseCheckpoint)="onSelectedCheckpoint($event)" (onNoChooseCheckpoint)="noCheck($event)"></checklist>
 </div>
 
 

@@ -7,7 +7,7 @@
         <th>Nombre</th>
         <th>Descripcion</th>
       </tr>
-      <tr *ngFor="let checkpoint of _state.checkpoints">
+      <tr *ngFor="let checkpoint of _state.checkpoints | async">
         <td class="check">
           <!--<div [className]="checkpoint.isAchieved ? 'box-check achieved':'box-check no-achieved'" >
           </div>-->
