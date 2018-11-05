@@ -2,14 +2,25 @@ import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { SessionService } from '../../services/session.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { Session } from '@no-module/models/project'
+import { Observable } from 'rxjs'
 
-import { AlphaProjectService } from '../services/alpha.service'
+export class Alpha {
+  private stateCache: Observable<State[]>
 
-export interface Alpha {
-  id: string
-  name: string
-  area: string
-  states: State[]
+  constructor(
+    public id: string,
+    public name: string,
+    public area: string,
+    private service: KernelService
+  ) {}
+
+  get states() {
+    if (!this.stateCache) {
+      this.stateCache = this.service.getStates(this.id)
+    }
+
+    return this.stateCache
+  }
 }
 
 export interface State {
@@ -18,6 +29,7 @@ export interface State {
   previousId: string
   checkpoints: Checkpoint[]
 }
+
 export interface Checkpoint {
   id: string
   name: string
@@ -47,20 +59,17 @@ export interface ProjectState {
 export class SetCurrentStateComponent implements OnInit {
   @Input('alpha')
   set _alpha(arg: Alpha) {
-
-    this.sessionService.getAlpha(arg).subscribe(alpha => {
-      this.alpha = alpha
-    })
-    
-    this.kernelService.getStates(arg.id).subscribe((result: any[]) => {
-      this.
-    })
+    // this.sessionService.getAlpha(arg).subscribe(alpha => {
+    //   this.alpha = alpha
+    // })
+    this.alphaTemplate = arg
   }
+
+  alpha: ProjectAlpha
+  alphaTemplate: Alpha
 
   @Input()
   session: Session
-
-  alpha: ProjectAlpha
 
   projectAlpha: ProjectAlpha = null
 
@@ -73,7 +82,6 @@ export class SetCurrentStateComponent implements OnInit {
 
   constructor(
     private service: SessionService,
-    public kernelService: KernelService,
     private sessionService: SessionService
   ) {}
 
@@ -84,12 +92,7 @@ export class SetCurrentStateComponent implements OnInit {
   }
 
   onSelectedState(state: State) {
-    this.kernelService
-      .getCheckpoints(state.id)
-      .subscribe(
-        (checkpoints: any[]) => (this.selectedState = { ...state, checkpoints })
-      )
-
+    // this.selectedState = state
     // this.putDimensionAsTouching()
     // if (this.isPosiblePutStateAsWorking(state)) {
     //   this.service.setStateAsWorking(
@@ -127,7 +130,7 @@ export class SetCurrentStateComponent implements OnInit {
   onSelectedCheckpoint(checkpoint: Checkpoint) {
     this.service.setVoteToCheckpoint(
       this.session.id,
-      this.alpha.id,
+      this.alphaTemplate.id,
       this.selectedState.id,
       checkpoint.id,
       true
@@ -137,7 +140,7 @@ export class SetCurrentStateComponent implements OnInit {
   noCheck(checkpoint: Checkpoint) {
     this.service.setUnVoteToCheckpoint(
       this.session.id,
-      this.alpha.id,
+      this.alphaTemplate.id,
       this.selectedState.id,
       checkpoint.id,
       false

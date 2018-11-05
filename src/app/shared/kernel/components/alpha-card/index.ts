@@ -15,19 +15,18 @@ export class AlphaCardComponent {
   alpha: Alpha
   @Input()
   projectStates: ProjectState[] = []
-
   @Output()
   onChooseState = new EventEmitter<State>()
 
-  stateSelect: State = null
+  selectedState: State = null
 
   select(state: State) {
-    this.stateSelect = state
+    this.selectedState = state
     this.onChooseState.emit(state)
   }
 
   isSelected(state: State) {
-    return state === this.stateSelect
+    return state === this.selectedState
   }
 
   getClass(state: State) {

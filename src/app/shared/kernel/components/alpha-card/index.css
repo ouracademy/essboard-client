@@ -1,8 +1,12 @@
 /* alpha-card*/
 
-.state-wrapper {
-  padding: 3px 4px;
+.states {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
 }
+
 .state {
   border: 2px solid currentColor;
   margin: 2px 1px;

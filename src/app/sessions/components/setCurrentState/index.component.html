@@ -1,8 +1,9 @@
 <div class="row around-xs">
-    <alpha-card class="mar-1" *ngIf="alpha" [alpha]="alpha" [projectStates]="projectStates" (onChooseState)="onSelectedState($event)">
+    <!-- TODO: add *ngIf="alpha" -->
+    <alpha-card class="mar-1" [alpha]="alphaTemplate" [projectStates]="projectStates" (onChooseState)="onSelectedState($event)">
     </alpha-card>
     <div class="row around-xs top-xs" *ngIf="selectedState">
-        <state-card-view class="mar-1" [state]="selectedState" [area]="alpha.area"></state-card-view>
+        <state-card-view class="mar-1" [state]="selectedState" [area]="alphaTemplate.area"></state-card-view>
         <button (click)="markStatusAsDone()">Marcar como estado logrado</button>
     </div>
 
@@ -13,8 +14,8 @@
     <button *ngIf="selectedState" (click)="registerCheckpoint()">registrar apreciacion</button>
 </div>
 <div>
-    <checklist class="mar-1" *ngIf="registerCheckpointIsVisible" [state]="selectedState" [projectState]="projectState"
-        (onChooseCheckpoint)="onSelectedCheckpoint($event)" (onNoChooseCheckpoint)="noCheck($event)"></checklist>
+    <!-- <checklist class="mar-1" *ngIf="registerCheckpointIsVisible" [state]="selectedState" [projectState]="projectState"
+        (onChooseCheckpoint)="onSelectedCheckpoint($event)" (onNoChooseCheckpoint)="noCheck($event)"></checklist> -->
 </div>
 
 

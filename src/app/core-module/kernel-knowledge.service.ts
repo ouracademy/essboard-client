@@ -7,21 +7,24 @@ import {
   Checkpoint
 } from 'app/sessions/components/setCurrentState/index.component'
 import { Observable } from 'rxjs/Observable'
-import { pipe } from 'rxjs/internal/util/pipe';
-import { map } from 'rxjs/operators/map'
+import { map } from 'rxjs/operators'
+
 @Injectable()
 export class KernelService {
   constructor(private httpClient: HttpClient) {}
 
   getAlphas(): Observable<Alpha[]> {
-    return pipe(
-      this.httpClient.get<any[]>(`${urlEssenceKernel}/kernel`),
-      map(alphas => alphas.map(x => new Alpha(...x, null))                                    
-    )
+    return this.httpClient
+      .get<any[]>(`${urlEssenceKernel}/kernel`)
+      .pipe(
+        map(alphas => alphas.map(x => new Alpha(x.id, x.name, x.area, this)))
+      )
   }
 
   getStates(alphaId): Observable<State[]> {
-    return this.httpClient.get<any[]>(`${urlEssenceKernel}/kernel/alphas/${alphaId}`)
+    return this.httpClient.get<any[]>(
+      `${urlEssenceKernel}/kernel/alphas/${alphaId}`
+    )
   }
 
   getSchemaKernel() {
@@ -29,10 +32,8 @@ export class KernelService {
   }
 
   getCheckpoints(stateId): Observable<Checkpoint[]> {
-    return this.httpClient.get(
+    return this.httpClient.get<Checkpoint[]>(
       `${urlEssenceKernel}/kernel/states/${stateId}/checkpoints`
     )
   }
-
-  getSchemaByTemplateId(templateId) {}
 }
