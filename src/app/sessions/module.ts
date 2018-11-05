@@ -34,6 +34,7 @@ import { SetGoalStateComponent } from './components/setGoalState/index.component
 import { ChecklistComponent } from './components/setCurrentState/checklist/index.component'
 import { ChatComponent } from './components/chatInSession/index.component'
 import { TrelloComponent } from './components/act-on-work-items/migrateToTrello/index.component'
+import { AlphaProjectService } from './services/alpha.service'
 
 @NgModule({
   imports: [
@@ -71,7 +72,7 @@ import { TrelloComponent } from './components/act-on-work-items/migrateToTrello/
   ],
 
   entryComponents: [],
-  providers: [],
+  providers: [AlphaProjectService],
   exports: [
     SetCurrentStateComponent,
     SessionComponent,

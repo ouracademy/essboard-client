@@ -4,6 +4,7 @@ import { Session } from '@no-module/models/project'
 import { SessionService } from '../services/session.service'
 import { PrimaryKernelMockService } from '@shared/kernel/services/index'
 import { KernelService } from '@core/kernel-knowledge.service'
+import { AlphaProjectService } from '../services/alpha.service'
 
 @Component({
   selector: 'session',
@@ -28,7 +29,8 @@ export class SessionComponent implements OnInit {
     private service: SessionService,
     public kernel: PrimaryKernelMockService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alphaService: AlphaProjectService
   ) {
     this.currentAlpha = null
   }
@@ -45,6 +47,10 @@ export class SessionComponent implements OnInit {
     this.kernelService.getAlphas().subscribe(alphas => {
       this.alphas = alphas
     })
+
+    this.alphaService.alphaProject$.subscribe(
+      projectAlpha => (this.projectAlpha = projectAlpha)
+    )
   }
 
   handleSelectionAlpha(alpha: any) {
@@ -52,6 +58,8 @@ export class SessionComponent implements OnInit {
     this.kernelService.getStates(alpha['id']).subscribe((result: any[]) => {
       this.currentAlpha['states'] = result
     })
+
+    this.alphaService.getProjectAlpha(this.session.id, alpha['id'])
   }
 
   finishSession() {
