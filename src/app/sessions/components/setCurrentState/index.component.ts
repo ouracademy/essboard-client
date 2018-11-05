@@ -2,11 +2,28 @@ import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { SessionService } from '../../services/session.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { Session } from '@no-module/models/project'
-import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
+import memoize from 'lodash/fp/memoize'
+
+import {
+  DecoratorConfig,
+  DecoratorFactory,
+  ResolvableFunction,
+  BiTypedMethodDecorator1
+} from 'lodash-decorators/factory'
+import { MemoizeApplicator } from 'lodash-decorators/applicators'
+import { MemoizeConfig } from 'lodash-decorators/shared'
+
+export const Memoize = DecoratorFactory.createInstanceDecorator(
+  new DecoratorConfig(memoize, new MemoizeApplicator(), {
+    getter: true,
+    optionalParams: true
+  })
+) as BiTypedMethodDecorator1<ResolvableFunction | MemoizeConfig<any, any>>
+export { Memoize as memoize }
+export default Memoize
 
 export class Alpha {
-  private stateCache: Observable<State[]>
-
   constructor(
     public id: string,
     public name: string,
@@ -14,20 +31,31 @@ export class Alpha {
     private service: KernelService
   ) {}
 
+  @Memoize()
   get states() {
-    if (!this.stateCache) {
-      this.stateCache = this.service.getStates(this.id)
-    }
-
-    return this.stateCache
+    return this.service.getStates(this.id)
   }
 }
 
-export interface State {
-  id: string
-  name: string
-  previousId: string
-  checkpoints: Checkpoint[]
+export class State {
+  constructor(
+    public id: string,
+    public name: string,
+    public previousId: string,
+    public service: KernelService
+  ) {}
+
+  @Memoize()
+  get cardCheckpoints() {
+    return this.checkpoints.pipe(
+      map(checkpoints => checkpoints.filter(x => x.isVisibleInCard))
+    )
+  }
+
+  @Memoize()
+  get checkpoints() {
+    return this.service.getCheckpoints(this.id)
+  }
 }
 
 export interface Checkpoint {
@@ -92,7 +120,7 @@ export class SetCurrentStateComponent implements OnInit {
   }
 
   onSelectedState(state: State) {
-    // this.selectedState = state
+    this.selectedState = state
     // this.putDimensionAsTouching()
     // if (this.isPosiblePutStateAsWorking(state)) {
     //   this.service.setStateAsWorking(

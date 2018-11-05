@@ -5,7 +5,7 @@
         <div>{{state.name}}</div>
       </div>
       <ul class="checkpoints">
-        <li *ngFor="let checkpoint of visibleChecklist">
+        <li *ngFor="let checkpoint of state.cardCheckpoints | async">
           {{checkpoint.name}}
         </li>
       </ul>

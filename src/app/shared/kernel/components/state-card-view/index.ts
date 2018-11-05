@@ -11,8 +11,4 @@ export class StateCardViewComponent {
   state: State
   @Input()
   area: string
-
-  get visibleChecklist() {
-    return this.state.checkpoints.filter(check => check.isVisibleInCard)
-  }
 }

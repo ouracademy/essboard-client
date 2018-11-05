@@ -22,9 +22,13 @@ export class KernelService {
   }
 
   getStates(alphaId): Observable<State[]> {
-    return this.httpClient.get<any[]>(
-      `${urlEssenceKernel}/kernel/alphas/${alphaId}`
-    )
+    return this.httpClient
+      .get<any[]>(`${urlEssenceKernel}/kernel/alphas/${alphaId}`)
+      .pipe(
+        map(alphas =>
+          alphas.map(x => new State(x.id, x.name, x.previousId, this))
+        )
+      )
   }
 
   getSchemaKernel() {
