@@ -87,11 +87,10 @@ export interface State {
 export class SetCurrentStateComponent implements OnInit {
   @Input('alpha')
   set _alpha(arg: AlphaTemplate) {
-    // this.sessionService.getAlpha(arg).subscribe(alpha => {
-    //   this.alpha = alpha
-    // })
+    this.sessionService.getAlpha(arg).subscribe(alpha => {
+      this.alpha = alpha
+    })
     this.alphaTemplate = arg
-
     this.reset()
   }
 
@@ -100,8 +99,6 @@ export class SetCurrentStateComponent implements OnInit {
 
   @Input()
   session: Session
-
-  projectAlpha: Alpha = null
 
   isChecklistVisible = false
   @ViewChild('player')
