@@ -5,6 +5,9 @@
     </alpha-card>
     <div class="row around-xs top-xs" *ngIf="selectedState">
         <state-card-view class="mar-1" [state]="selectedState" [alpha]="alphaTemplate"></state-card-view>
+
+        <checklist class="mar-1" *ngIf="isChecklistVisible" [state]="selectedState" [projectState]="projectState"
+            (onChooseCheckpoint)="onSelectedCheckpoint($event)" (onNoChooseCheckpoint)="noCheck($event)"></checklist>
         <button (click)="markStatusAsDone()">Marcar como estado logrado</button>
     </div>
 
@@ -14,10 +17,7 @@
     <button (click)="showMonitor()">Mostrar resultados</button>
     <button *ngIf="selectedState" (click)="registerCheckpoint()">registrar apreciacion</button>
 </div>
-<div>
-    <checklist class="mar-1" *ngIf="registerCheckpointIsVisible" [state]="selectedState" [projectState]="projectState"
-        (onChooseCheckpoint)="onSelectedCheckpoint($event)" (onNoChooseCheckpoint)="noCheck($event)"></checklist>
-</div>
+
 
 
 

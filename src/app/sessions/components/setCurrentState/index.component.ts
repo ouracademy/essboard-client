@@ -91,6 +91,8 @@ export class SetCurrentStateComponent implements OnInit {
     //   this.alpha = alpha
     // })
     this.alphaTemplate = arg
+
+    this.reset()
   }
 
   alpha: ProjectAlpha
@@ -101,8 +103,7 @@ export class SetCurrentStateComponent implements OnInit {
 
   projectAlpha: ProjectAlpha = null
 
-  registerCheckpointIsVisible = false
-
+  isChecklistVisible = false
   @ViewChild('player')
   public playerContainer: ElementRef
   selectedState: State
@@ -117,6 +118,9 @@ export class SetCurrentStateComponent implements OnInit {
 
   get projectStates() {
     return []
+  }
+  reset() {
+    this.selectedState = null
   }
 
   onSelectedState(state: State) {
@@ -134,7 +138,7 @@ export class SetCurrentStateComponent implements OnInit {
   }
 
   registerCheckpoint() {
-    this.registerCheckpointIsVisible = !this.registerCheckpointIsVisible
+    this.isChecklistVisible = !this.isChecklistVisible
   }
 
   startMonitor() {}
