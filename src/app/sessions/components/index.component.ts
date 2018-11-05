@@ -4,7 +4,7 @@ import { Session } from '@no-module/models/project'
 import { SessionService } from '../services/session.service'
 import { PrimaryKernelMockService } from '@shared/kernel/services/index'
 import { KernelService } from '@core/kernel-knowledge.service'
-import { Alpha } from './setCurrentState/index.component'
+import { AlphaTemplate } from './setCurrentState/index.component'
 
 @Component({
   selector: 'session',
@@ -15,8 +15,8 @@ export class SessionComponent implements OnInit {
   idSession: string
   session: Session
 
-  alphas: Alpha[]
-  selectedAlpha: Alpha = null
+  alphas: AlphaTemplate[]
+  selectedAlpha: AlphaTemplate = null
 
   isChatVisible = false
 

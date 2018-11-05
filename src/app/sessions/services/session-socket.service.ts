@@ -8,8 +8,8 @@ import { GetKeys } from '@no-module/util/get-keys-from-object'
 import { AuthService } from '@core/auth.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 import {
-  Alpha,
-  ProjectAlpha
+  AlphaTemplate,
+  Alpha
 } from '../components/setCurrentState/index.component'
 
 @Injectable()
@@ -90,7 +90,7 @@ export class SessionSocketService extends SessionService {
     )
   }
 
-  getAlpha(alpha: Alpha): Observable<ProjectAlpha> {
+  getAlpha(alpha: AlphaTemplate): Observable<Alpha> {
     return from(
       this.socketService
         .getService('alphas')

@@ -1,8 +1,8 @@
 import { Subject, Observable } from 'rxjs'
 import { Session } from '@shared/no-module/models/project'
 import {
-  Alpha,
-  ProjectAlpha
+  AlphaTemplate,
+  Alpha
 } from '../components/setCurrentState/index.component'
 
 export abstract class SessionService {
@@ -32,5 +32,5 @@ export abstract class SessionService {
   abstract colaboreUsingUserIdInProject(idSession, idProject)
   abstract finish(session)
   abstract leave(session: Session): boolean | Observable<boolean>
-  abstract getAlpha(alpha: Alpha): Observable<ProjectAlpha>
+  abstract getAlpha(alpha: AlphaTemplate): Observable<Alpha>
 }

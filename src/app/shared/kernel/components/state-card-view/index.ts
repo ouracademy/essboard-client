@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core'
 import {
-  State,
-  Alpha
+  StateTemplate,
+  AlphaTemplate
 } from 'app/sessions/components/setCurrentState/index.component'
 
 @Component({
@@ -11,7 +11,7 @@ import {
 })
 export class StateCardViewComponent {
   @Input()
-  state: State
+  state: StateTemplate
   @Input()
-  alpha: Alpha
+  alpha: AlphaTemplate
 }

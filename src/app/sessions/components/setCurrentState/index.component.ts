@@ -23,7 +23,7 @@ export const Memoize = DecoratorFactory.createInstanceDecorator(
 export { Memoize as memoize }
 export default Memoize
 
-export class Alpha {
+export class AlphaTemplate {
   constructor(
     public id: string,
     public name: string,
@@ -37,7 +37,7 @@ export class Alpha {
   }
 }
 
-export class State {
+export class StateTemplate {
   constructor(
     public id: string,
     public name: string,
@@ -58,22 +58,22 @@ export class State {
   }
 }
 
-export interface Checkpoint {
+export interface CheckpointTemplate {
   id: string
   name: string
   description: string
   isVisibleInCard: string
 }
 
-export interface ProjectAlpha {
+export interface Alpha {
   knowledgeId: number
   // currentState: { knowledgeId: String }, // calculated
   isTouched: boolean
-  states: ProjectState[]
-  template: Alpha
+  states: State[]
+  template: AlphaTemplate
 }
 
-export interface ProjectState {
+export interface State {
   knowledgeId: string
   status: 'todo' | 'doing' | 'done'
   alphaId: string
@@ -86,7 +86,7 @@ export interface ProjectState {
 })
 export class SetCurrentStateComponent implements OnInit {
   @Input('alpha')
-  set _alpha(arg: Alpha) {
+  set _alpha(arg: AlphaTemplate) {
     // this.sessionService.getAlpha(arg).subscribe(alpha => {
     //   this.alpha = alpha
     // })
@@ -95,18 +95,18 @@ export class SetCurrentStateComponent implements OnInit {
     this.reset()
   }
 
-  alpha: ProjectAlpha
-  alphaTemplate: Alpha
+  alpha: Alpha
+  alphaTemplate: AlphaTemplate
 
   @Input()
   session: Session
 
-  projectAlpha: ProjectAlpha = null
+  projectAlpha: Alpha = null
 
   isChecklistVisible = false
   @ViewChild('player')
   public playerContainer: ElementRef
-  selectedState: State
+  selectedState: StateTemplate
   projectState = null
 
   constructor(
@@ -123,7 +123,7 @@ export class SetCurrentStateComponent implements OnInit {
     this.selectedState = null
   }
 
-  onSelectedState(state: State) {
+  onSelectedState(state: StateTemplate) {
     this.selectedState = state
     // this.putDimensionAsTouching()
     // if (this.isPosiblePutStateAsWorking(state)) {
@@ -149,7 +149,7 @@ export class SetCurrentStateComponent implements OnInit {
     // verificar si se puede marcar como hecho
   }
 
-  private isPosiblePutStateAsWorking(state: State): Boolean {
+  private isPosiblePutStateAsWorking(state: StateTemplate): Boolean {
     return true // state.isWorking === false && (state.isFirst || state.stateBackIsAchaived)
   }
 
@@ -159,7 +159,7 @@ export class SetCurrentStateComponent implements OnInit {
     // }
   }
 
-  onSelectedCheckpoint(checkpoint: Checkpoint) {
+  onSelectedCheckpoint(checkpoint: CheckpointTemplate) {
     this.service.setVoteToCheckpoint(
       this.session.id,
       this.alphaTemplate.id,
@@ -169,7 +169,7 @@ export class SetCurrentStateComponent implements OnInit {
     )
   }
 
-  noCheck(checkpoint: Checkpoint) {
+  noCheck(checkpoint: CheckpointTemplate) {
     this.service.setUnVoteToCheckpoint(
       this.session.id,
       this.alphaTemplate.id,

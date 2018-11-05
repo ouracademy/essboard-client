@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { urlEssenceKernel } from '@env/environment'
 import {
-  Alpha,
-  State,
-  Checkpoint
+  AlphaTemplate,
+  StateTemplate,
+  CheckpointTemplate
 } from 'app/sessions/components/setCurrentState/index.component'
 import { Observable } from 'rxjs/Observable'
 import { map } from 'rxjs/operators'
@@ -13,20 +13,22 @@ import { map } from 'rxjs/operators'
 export class KernelService {
   constructor(private httpClient: HttpClient) {}
 
-  getAlphas(): Observable<Alpha[]> {
+  getAlphas(): Observable<AlphaTemplate[]> {
     return this.httpClient
       .get<any[]>(`${urlEssenceKernel}/kernel`)
       .pipe(
-        map(alphas => alphas.map(x => new Alpha(x.id, x.name, x.area, this)))
+        map(alphas =>
+          alphas.map(x => new AlphaTemplate(x.id, x.name, x.area, this))
+        )
       )
   }
 
-  getStates(alphaId): Observable<State[]> {
+  getStates(alphaId): Observable<StateTemplate[]> {
     return this.httpClient
       .get<any[]>(`${urlEssenceKernel}/kernel/alphas/${alphaId}`)
       .pipe(
         map(alphas =>
-          alphas.map(x => new State(x.id, x.name, x.previousId, this))
+          alphas.map(x => new StateTemplate(x.id, x.name, x.previousId, this))
         )
       )
   }
@@ -35,8 +37,8 @@ export class KernelService {
     return this.httpClient.get(`${urlEssenceKernel}/kernel/schema`)
   }
 
-  getCheckpoints(stateId): Observable<Checkpoint[]> {
-    return this.httpClient.get<Checkpoint[]>(
+  getCheckpoints(stateId): Observable<CheckpointTemplate[]> {
+    return this.httpClient.get<CheckpointTemplate[]>(
       `${urlEssenceKernel}/kernel/states/${stateId}/checkpoints`
     )
   }

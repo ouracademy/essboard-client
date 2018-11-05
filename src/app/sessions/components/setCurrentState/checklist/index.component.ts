@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core'
-import { State } from '../index.component'
+import { StateTemplate } from '../index.component'
 
 @Component({
   selector: 'checklist',
@@ -13,7 +13,7 @@ export class ChecklistComponent {
     border: '1px solid #d3d3d3',
     isSquare: true
   }
-  _state: State
+  _state: StateTemplate
   @Output()
   onChooseCheckpoint = new EventEmitter<any>()
   @Output()
@@ -24,7 +24,7 @@ export class ChecklistComponent {
   @Input()
   projectState
   @Input()
-  set state(state: State) {
+  set state(state: StateTemplate) {
     this._state = state
   }
   get state() {

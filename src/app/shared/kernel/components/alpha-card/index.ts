@@ -1,8 +1,8 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core'
 import {
-  Alpha,
-  State,
-  ProjectState
+  AlphaTemplate,
+  StateTemplate,
+  State
 } from 'app/sessions/components/setCurrentState/index.component'
 
 @Component({
@@ -12,24 +12,24 @@ import {
 })
 export class AlphaCardComponent {
   @Input()
-  alpha: Alpha
+  alpha: AlphaTemplate
   @Input()
-  projectStates: ProjectState[] = []
+  projectStates: State[] = []
   @Output()
-  onChooseState = new EventEmitter<State>()
+  onChooseState = new EventEmitter<StateTemplate>()
 
-  selectedState: State = null
+  selectedState: StateTemplate = null
 
-  select(state: State) {
+  select(state: StateTemplate) {
     this.selectedState = state
     this.onChooseState.emit(state)
   }
 
-  isSelected(state: State) {
+  isSelected(state: StateTemplate) {
     return state === this.selectedState
   }
 
-  getClass(state: State) {
+  getClass(state: StateTemplate) {
     const projectState = this.projectStates.find(
       x => x.knowledgeId === state.id
     )
