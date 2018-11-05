@@ -1,6 +1,7 @@
 <div class="row around-xs">
     <!-- TODO: add *ngIf="alpha" -->
-    <alpha-card class="mar-1" [alpha]="alphaTemplate" [projectStates]="projectStates" (onChooseState)="onSelectedState($event)">
+    <alpha-card *ngIf="alphaTemplate" class="mar-1" [alpha]="alphaTemplate" [projectStates]="projectStates"
+        (onChooseState)="onSelectedState($event)">
     </alpha-card>
     <div class="row around-xs top-xs" *ngIf="selectedState">
         <state-card-view class="mar-1" [state]="selectedState" [area]="alphaTemplate.area"></state-card-view>
