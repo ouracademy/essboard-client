@@ -7,6 +7,10 @@ import { SocketService } from '@core/socket.service'
 import { GetKeys } from '@no-module/util/get-keys-from-object'
 import { AuthService } from '@core/auth.service'
 import { KernelService } from '@core/kernel-knowledge.service'
+import {
+  Alpha,
+  ProjectAlpha
+} from '../components/setCurrentState/index.component'
 
 @Injectable()
 export class SessionSocketService extends SessionService {
@@ -36,6 +40,7 @@ export class SessionSocketService extends SessionService {
 
   getSession(id: string) {
     this.service.get(id).then((item: any) => {
+      console.log(item)
       this.session = this.toSession(item)
       GetKeys.setSource(item.alphas)
       this.currentSession$.next(this.session)
@@ -82,6 +87,14 @@ export class SessionSocketService extends SessionService {
   leave(session: Session): boolean | Observable<boolean> {
     return from(
       this.channelSubscriptions.remove(session.id, { type: 'sessions' })
+    )
+  }
+
+  getAlpha(alpha: Alpha): Observable<ProjectAlpha> {
+    return from(
+      this.socketService
+        .getService('alphas')
+        .find({ query: { knowledgeId: alpha.id, sessionId: this.session.id } })
     )
   }
 

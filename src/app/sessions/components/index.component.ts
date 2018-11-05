@@ -4,7 +4,7 @@ import { Session } from '@no-module/models/project'
 import { SessionService } from '../services/session.service'
 import { PrimaryKernelMockService } from '@shared/kernel/services/index'
 import { KernelService } from '@core/kernel-knowledge.service'
-import { AlphaProjectService } from '../services/alpha.service'
+import { Alpha } from './setCurrentState/index.component'
 
 @Component({
   selector: 'session',
@@ -15,10 +15,8 @@ export class SessionComponent implements OnInit {
   idSession: string
   session: Session
 
-  alphas: any[]
-  currentAlpha: any
-
-  projectAlpha = null
+  alphas: Alpha[]
+  selectedAlpha: Alpha = null
 
   isChatVisible = false
 
@@ -29,11 +27,9 @@ export class SessionComponent implements OnInit {
     private service: SessionService,
     public kernel: PrimaryKernelMockService,
     private route: ActivatedRoute,
-    private router: Router,
-    private alphaService: AlphaProjectService
-  ) {
-    this.currentAlpha = null
-  }
+    private router: Router
+  ) {}
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.idSession = params['id']
@@ -47,19 +43,10 @@ export class SessionComponent implements OnInit {
     this.kernelService.getAlphas().subscribe(alphas => {
       this.alphas = alphas
     })
-
-    this.alphaService.alphaProject$.subscribe(
-      projectAlpha => (this.projectAlpha = projectAlpha)
-    )
   }
 
   handleSelectionAlpha(alpha: any) {
-    this.currentAlpha = alpha
-    this.kernelService.getStates(alpha['id']).subscribe((result: any[]) => {
-      this.currentAlpha['states'] = result
-    })
-
-    this.alphaService.getProjectAlpha(this.session.id, alpha['id'])
+    this.selectedAlpha = alpha
   }
 
   finishSession() {
