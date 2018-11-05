@@ -44,7 +44,7 @@ export class SetCurrentStateComponent {
   @Input()
   alpha: Alpha // kernel
   @Input()
-  status: ProjectAlpha // feathers
+  projectAlpha: ProjectAlpha // feathers
   @Input()
   idSession: string
 
@@ -53,6 +53,7 @@ export class SetCurrentStateComponent {
   @ViewChild('player')
   public playerContainer: ElementRef
   selectedState: State
+  projectState = null
 
   constructor(
     private service: SessionService,
@@ -84,6 +85,14 @@ export class SetCurrentStateComponent {
 
   registerCheckpoint() {
     this.registerCheckpointIsVisible = !this.registerCheckpointIsVisible
+  }
+
+  startMonitor() {}
+
+  showMonitor() {}
+  markStatusAsDone() {
+    //selectedState
+    //verificar si se puede marcar como hecho
   }
 
   private isPosiblePutStateAsWorking(state: State): Boolean {

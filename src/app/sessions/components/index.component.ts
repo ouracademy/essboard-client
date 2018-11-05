@@ -16,7 +16,8 @@ export class SessionComponent implements OnInit {
 
   alphas: any[]
   currentAlpha: any
-  statusByCurrentAlpha = null
+
+  projectAlpha = null
 
   isChatVisible = false
 
