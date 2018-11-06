@@ -13,6 +13,7 @@ import {
 } from 'lodash-decorators/factory'
 import { MemoizeApplicator } from 'lodash-decorators/applicators'
 import { MemoizeConfig } from 'lodash-decorators/shared'
+import { SelectedState } from '@shared/kernel/components/alpha-card'
 
 export const Memoize = DecoratorFactory.createInstanceDecorator(
   new DecoratorConfig(memoize, new MemoizeApplicator(), {
@@ -88,7 +89,7 @@ export class SetCurrentStateComponent implements OnInit {
   @Input('alpha')
   set _alpha(arg: AlphaTemplate) {
     this.sessionService.getAlpha(arg).subscribe(alpha => {
-      this.alpha = alpha
+      this.alpha = alpha // {   states : [ { id, status }]}   { states : [ ]}
     })
     this.alphaTemplate = arg
     this.reset()
@@ -103,7 +104,7 @@ export class SetCurrentStateComponent implements OnInit {
   isChecklistVisible = false
   @ViewChild('player')
   public playerContainer: ElementRef
-  selectedState: StateTemplate
+  selectedState: SelectedState
   projectState = null
 
   constructor(

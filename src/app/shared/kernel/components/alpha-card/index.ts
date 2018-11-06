@@ -5,6 +5,11 @@ import {
   State
 } from 'app/sessions/components/setCurrentState/index.component'
 
+export interface SelectedState {
+  state: State
+  template: StateTemplate
+}
+
 @Component({
   selector: 'alpha-card',
   templateUrl: 'index.html',
@@ -14,31 +19,30 @@ export class AlphaCardComponent {
   @Input()
   alpha: AlphaTemplate
   @Input()
-  projectStates: State[] = []
+  states: State[] = []
   @Output()
-  onChooseState = new EventEmitter<StateTemplate>()
+  onChooseState = new EventEmitter<SelectedState>()
 
   selectedState: StateTemplate = null
 
-  select(state: StateTemplate) {
-    this.selectedState = state
-    this.onChooseState.emit(state)
+  select(template: StateTemplate) {
+    this.onChooseState.emit({ state: this.getState(template), template })
   }
 
   isSelected(state: StateTemplate) {
     return state === this.selectedState
   }
 
-  getClass(state: StateTemplate) {
-    const projectState = this.projectStates.find(
-      x => x.knowledgeId === state.id
-    )
-
-    const label = projectState ? projectState.status : 'todo'
+  getClass(stateTemplate: StateTemplate) {
+    const { status = 'todo' } = this.getState(stateTemplate)
 
     return {
-      [label]: true,
-      selected: this.isSelected(state)
+      [status]: true,
+      selected: this.isSelected(stateTemplate)
     }
+  }
+
+  getState(stateTemplate: StateTemplate) {
+    return this.states.find(x => x.knowledgeId === stateTemplate.id)
   }
 }
