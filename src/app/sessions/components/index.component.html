@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="pad-1">
-                    <set-current-state [alpha]="selectedAlpha" [session]="session"></set-current-state>
+                    <set-current-state *ngIf="selectedAlpha" [alpha]="selectedAlpha" [session]="session"></set-current-state>
                 </div>
             </div>
 
