@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
-import { Observable, Subject, from } from 'rxjs'
+import { Observable, Subject, from, of } from 'rxjs'
+
 import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
 import { GetKeys } from '@no-module/util/get-keys-from-object'
@@ -9,7 +10,9 @@ import { AuthService } from '@core/auth.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 import {
   AlphaTemplate,
-  Alpha
+  Alpha,
+  StateTemplate,
+  State
 } from '../components/setCurrentState/index.component'
 
 @Injectable()
@@ -40,9 +43,9 @@ export class SessionSocketService extends SessionService {
 
   getSession(id: string) {
     this.service.get(id).then((item: any) => {
-      console.log(item)
       this.session = this.toSession(item)
-      GetKeys.setSource(item.alphas)
+      console.log(this.session)
+      // GetKeys.setSource(item.alphas)
       this.currentSession$.next(this.session)
 
       this.channelSubscriptions.create({
@@ -91,11 +94,39 @@ export class SessionSocketService extends SessionService {
   }
 
   getAlpha(alpha: AlphaTemplate): Observable<Alpha> {
+    const sessionId = this.session.id
     return from(
       this.socketService
         .getService('alphas')
-        .find({ query: { knowledgeId: alpha.id, sessionId: this.session.id } })
+        .find({ query: { knowledgeId: alpha.id, sessionId: sessionId } })
     )
+    // return of({
+    //   _id: 1222,
+    //   knowledgeId: 1,
+    //   states: [
+    //     { _id: 11111, knowledgeId: '11', status: 'doing', alphaId: '1' }
+    //   ],
+    //   template: alpha
+    // })
+  }
+
+  setStateToAlpha(
+    alpha: Alpha,
+    stateTemplate: StateTemplate,
+    state: State,
+    checked: any
+  ) {
+    if (state) {
+      return this.socketService
+        .getService('states')
+        .patch(state._id, { vote: checked })
+    } else {
+      return this.socketService.getService('states').create({
+        knowledgeId: stateTemplate.id,
+        alphaId: alpha._id,
+        status: 'done'
+      })
+    }
   }
 
   private onPatched(session: any) {

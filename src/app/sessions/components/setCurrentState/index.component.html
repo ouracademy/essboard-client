@@ -1,21 +1,34 @@
 <div class="row around-xs">
     <!-- TODO: add *ngIf="alpha" -->
-    <alpha-card *ngIf="alphaTemplate" class="mar-1" [alpha]="alphaTemplate" [projectStates]="projectStates"
+    <alpha-card *ngIf="alphaTemplate && alpha" class="mar-1" [alpha]="alphaTemplate" [states]="alpha.states"
         (onChooseState)="onSelectedState($event)">
     </alpha-card>
-    <div class="row around-xs top-xs" *ngIf="selectedState">
-        <state-card-view class="mar-1" [state]="selectedState" [alpha]="alphaTemplate"></state-card-view>
+    <div class="row around-xs top-xs" *ngIf="stateTemplate">
 
-        <checklist class="mar-1" *ngIf="isChecklistVisible" [state]="selectedState" [projectState]="projectState"
+
+        <state-card-view class="mar-1" [state]="stateTemplate" [alpha]="alphaTemplate"></state-card-view>
+
+
+        <mat-checkbox [checked]="state && state.status == 'done'" (change)="handleChange($event.checked)">Marcar
+            como
+            estado logrado</mat-checkbox>
+
+        <checklist class="mar-1" *ngIf="isChecklistVisible" [state]="stateTemplate" [projectState]="projectState"
             (onChooseCheckpoint)="onSelectedCheckpoint($event)" (onNoChooseCheckpoint)="noCheck($event)"></checklist>
-        <button (click)="markStatusAsDone()">Marcar como estado logrado</button>
+
+
+        <!-- 
+            idState  
+            [  { idCheckTemplate : 1, votes:  ['arthur','diana' ]}, idCheckTemplate: 2, votes:  ['eli', 'arthur' ]]
+            
+        -->
     </div>
 
 </div>
 <div class="row" *ngIf="alphaTemplate">
     <button (click)="startMonitor()">Iniciar revision</button>
     <button (click)="showMonitor()">Mostrar resultados</button>
-    <button *ngIf="selectedState" (click)="registerCheckpoint()">registrar apreciacion</button>
+    <button *ngIf="stateTemplate" (click)="registerCheckpoint()">registrar apreciacion</button>
 </div>
 
 

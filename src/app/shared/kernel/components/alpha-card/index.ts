@@ -5,7 +5,7 @@ import {
   State
 } from 'app/sessions/components/setCurrentState/index.component'
 
-export interface SelectedState {
+export class SelectedState {
   state: State
   template: StateTemplate
 }
@@ -34,8 +34,8 @@ export class AlphaCardComponent {
   }
 
   getClass(stateTemplate: StateTemplate) {
-    const { status = 'todo' } = this.getState(stateTemplate)
-
+    const state = this.getState(stateTemplate)
+    const status = state ? state.status : 'todo'
     return {
       [status]: true,
       selected: this.isSelected(stateTemplate)

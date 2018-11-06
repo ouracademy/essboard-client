@@ -2,7 +2,9 @@ import { Subject, Observable } from 'rxjs'
 import { Session } from '@shared/no-module/models/project'
 import {
   AlphaTemplate,
-  Alpha
+  Alpha,
+  StateTemplate,
+  State
 } from '../components/setCurrentState/index.component'
 
 export abstract class SessionService {
@@ -33,4 +35,10 @@ export abstract class SessionService {
   abstract finish(session)
   abstract leave(session: Session): boolean | Observable<boolean>
   abstract getAlpha(alpha: AlphaTemplate): Observable<Alpha>
+  abstract setStateToAlpha(
+    alpha: Alpha,
+    stateTemplate: StateTemplate,
+    state: State,
+    checked: any
+  )
 }

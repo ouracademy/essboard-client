@@ -67,17 +67,21 @@ export interface CheckpointTemplate {
 }
 
 export interface Alpha {
+  _id: any
   knowledgeId: number
   // currentState: { knowledgeId: String }, // calculated
-  isTouched: boolean
+  // isTouched?: boolean
   states: State[]
   template: AlphaTemplate
 }
+type Status = 'todo' | 'doing' | 'done'
 
 export interface State {
+  _id: any
   knowledgeId: string
-  status: 'todo' | 'doing' | 'done'
+  status: string
   alphaId: string
+  votes?: any[]
 }
 
 @Component({
@@ -89,7 +93,8 @@ export class SetCurrentStateComponent implements OnInit {
   @Input('alpha')
   set _alpha(arg: AlphaTemplate) {
     this.sessionService.getAlpha(arg).subscribe(alpha => {
-      this.alpha = alpha // {   states : [ { id, status }]}   { states : [ ]}
+      console.log(alpha)
+      this.alpha = alpha
     })
     this.alphaTemplate = arg
     this.reset()
@@ -105,6 +110,8 @@ export class SetCurrentStateComponent implements OnInit {
   @ViewChild('player')
   public playerContainer: ElementRef
   selectedState: SelectedState
+  state: State
+  stateTemplate: StateTemplate
   projectState = null
 
   constructor(
@@ -114,15 +121,14 @@ export class SetCurrentStateComponent implements OnInit {
 
   ngOnInit() {}
 
-  get projectStates() {
-    return []
-  }
   reset() {
     this.selectedState = null
   }
 
-  onSelectedState(state: StateTemplate) {
-    this.selectedState = state
+  onSelectedState({ state, template }: SelectedState) {
+    this.stateTemplate = template
+    this.state = state
+    //
     // this.putDimensionAsTouching()
     // if (this.isPosiblePutStateAsWorking(state)) {
     //   this.service.setStateAsWorking(
@@ -134,7 +140,14 @@ export class SetCurrentStateComponent implements OnInit {
     //   this.playerContainer.nativeElement.play()
     // }
   }
-
+  handleChange(checked) {
+    // true selectedState.state.vote( checked)
+    this.sessionService
+      .setStateToAlpha(this.alpha, this.stateTemplate, this.state, checked)
+      .then(result => {
+        console.log(result)
+      })
+  }
   registerCheckpoint() {
     this.isChecklistVisible = !this.isChecklistVisible
   }
@@ -161,7 +174,7 @@ export class SetCurrentStateComponent implements OnInit {
     this.service.setVoteToCheckpoint(
       this.session.id,
       this.alphaTemplate.id,
-      this.selectedState.id,
+      this.stateTemplate.id,
       checkpoint.id,
       true
     )
@@ -171,7 +184,7 @@ export class SetCurrentStateComponent implements OnInit {
     this.service.setUnVoteToCheckpoint(
       this.session.id,
       this.alphaTemplate.id,
-      this.selectedState.id,
+      this.stateTemplate.id,
       checkpoint.id,
       false
     )
