@@ -10,4 +10,5 @@ export abstract class ProjectService {
   abstract inviteTo(project, user)
   abstract desinviteTo(user)
   abstract getMembers(id)
+  abstract getInfoMembers(userIds: any[])
 }

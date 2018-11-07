@@ -2,7 +2,7 @@ import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { SessionService } from '../../services/session.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { Session } from '@no-module/models/project'
-import { map } from 'rxjs/operators'
+import { map, skip } from 'rxjs/operators'
 import memoize from 'lodash/fp/memoize'
 
 import {
@@ -118,7 +118,9 @@ export class SetCurrentStateComponent implements OnInit {
     private sessionService: SessionService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.service.currentState$.subscribe(state => (this.state = state))
+  }
 
   reset() {
     this.stateTemplate = null
@@ -127,18 +129,9 @@ export class SetCurrentStateComponent implements OnInit {
 
   onSelectedState({ state, template }: SelectedState) {
     this.stateTemplate = template
-    this.state = state
-    //
-    // this.putDimensionAsTouching()
-    // if (this.isPosiblePutStateAsWorking(state)) {
-    //   this.service.setStateAsWorking(
-    //     this.idSession,
-    //     this.alpha.id,
-    //     state.info.identifier
-    //   )
-    // } else {
+    this.service.getState(state, this.state)
+
     //   this.playerContainer.nativeElement.play()
-    // }
   }
   handleChange(checked) {
     // true selectedState.state.vote( checked)

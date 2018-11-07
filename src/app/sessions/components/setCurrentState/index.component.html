@@ -1,35 +1,43 @@
-<div class="row around-xs">
-    <!-- TODO: add *ngIf="alpha" -->
-    <alpha-card *ngIf="alphaTemplate && alpha" class="mar-1" [alpha]="alphaTemplate" [states]="alpha.states"
-        (onChooseState)="onSelectedState($event)">
-    </alpha-card>
-    <div class="row around-xs top-xs" *ngIf="stateTemplate">
+<div>
+    <div class="row  center-xs middle-xs ">
+        <alpha-card *ngIf="alphaTemplate && alpha" class="col-xs-4" [alpha]="alphaTemplate" [states]="alpha.states"
+            (onChooseState)="onSelectedState($event)">
+        </alpha-card>
+        <div class="row col-xs-8" *ngIf="stateTemplate">
+            <div class="row  around-xs top-xs">
+                <state-card-view class="mar-1" [state]="stateTemplate" [alpha]="alphaTemplate"></state-card-view>
+                <div>
+
+                    <mat-checkbox [checked]="state && state.status == 'done'" (change)="handleChange($event.checked)">Marcar
+                        como
+                        estado logrado</mat-checkbox>
+                    <div class="row center-xs middle-xs" *ngIf="state">
+                        <ngx-avatar *ngFor="let vote of state.votes" size="30" [name]="vote.name"></ngx-avatar>
+                    </div>
+                    <button (click)="registerCheckpoint()">Ver checklist</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="isChecklistVisible">
+        <checklist class="mar-1" [state]="stateTemplate" [projectState]="projectState" (onChooseCheckpoint)="onSelectedCheckpoint($event)"
+            (onNoChooseCheckpoint)="noCheck($event)"></checklist>
+    </div>
 
 
-        <state-card-view class="mar-1" [state]="stateTemplate" [alpha]="alphaTemplate"></state-card-view>
 
-
-        <mat-checkbox [checked]="state && state.status == 'done'" (change)="handleChange($event.checked)">Marcar
-            como
-            estado logrado</mat-checkbox>
-
-        <checklist class="mar-1" *ngIf="isChecklistVisible" [state]="stateTemplate" [projectState]="projectState"
-            (onChooseCheckpoint)="onSelectedCheckpoint($event)" (onNoChooseCheckpoint)="noCheck($event)"></checklist>
-
-
-        <!-- 
+    <!-- 
             idState  
             [  { idCheckTemplate : 1, votes:  ['arthur','diana' ]}, idCheckTemplate: 2, votes:  ['eli', 'arthur' ]]
             
         -->
-    </div>
-
 </div>
+<!-- 
 <div class="row" *ngIf="alphaTemplate">
     <button (click)="startMonitor()">Iniciar revision</button>
     <button (click)="showMonitor()">Mostrar resultados</button>
-    <button *ngIf="stateTemplate" (click)="registerCheckpoint()">registrar apreciacion</button>
-</div>
+
+</div> -->
 
 
 

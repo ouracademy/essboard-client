@@ -9,6 +9,7 @@ import {
 
 export abstract class SessionService {
   currentSession$: Subject<any>
+  currentState$: Subject<any>
   sessions$: Subject<any>
   channelSubscriptions$: Subject<any>
   abstract getSession(id: string)
@@ -43,4 +44,5 @@ export abstract class SessionService {
     checked: any
   )
   abstract getSessionChannelSubscriptions(sessionId)
+  abstract getState(stateId, previousState)
 }

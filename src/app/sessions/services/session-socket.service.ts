@@ -20,11 +20,12 @@ import { ProjectService } from 'app/projects/services/project.service'
 export class SessionSocketService extends SessionService {
   service: any
   channelSubscriptionsService
+  statesService
 
   session: Session
   sessions = []
-  channelSubscriptions: any[] = []
-  currentSubscription
+
+  channelSubscriptions = {}
 
   constructor(
     public socketService: SocketService,
@@ -38,72 +39,73 @@ export class SessionSocketService extends SessionService {
     this.channelSubscriptionsService = this.socketService.getService(
       'channel-subscriptions'
     )
+    this.statesService = this.socketService.getService('states')
 
     this.service.on('patched', session => this.onPatched(session))
     this.service.on('created', session => this.onCreated(session))
 
-    this.channelSubscriptionsService.on('created', subscription =>
-      this.handleChangeSubscriptions('add', subscription)
-    )
-    this.channelSubscriptionsService.on('removed', subscription =>
-      this.handleChangeSubscriptions('remove', subscription)
-    )
+    this.statesService.on('patched', state => {
+      console.log('patch', state)
+      this.currentState$.next(state)
+    })
 
     this.currentSession$ = new Subject<any>()
+    this.currentState$ = new Subject<any>()
     this.sessions$ = new Subject()
-    this.channelSubscriptions$ = new Subject<any>()
   }
 
   getSession(id: string) {
     this.service.get(id).then((item: any) => {
+      this.projectService.getMembers(item['projectId'])
       this.session = this.toSession(item)
       this.currentSession$.next(this.session)
-      this.joinToSessionChannel()
+      this.joinToChannel('sessions', this.session.id)
       this.getSessionChannelSubscriptions(id)
-      this.projectService.getMembers(item['projectId'])
     })
   }
 
-  private joinToSessionChannel() {
-    this.channelSubscriptionsService
+  private joinToChannel(type, typeId) {
+    return this.channelSubscriptionsService
       .create({
-        idType: this.session.id,
-        type: 'sessions'
+        idType: typeId,
+        type
       })
       .then(subscription => {
-        this.currentSubscription = subscription
+        this.channelSubscriptions[type] = subscription
       })
       .catch(error => {
-        this.currentSubscription = error['data']
+        this.channelSubscriptions[type] = error['data']
       })
+  }
+  private leaveChannel(type, typeId) {
+    const { _id } = this.channelSubscriptions[type]
+    return this.channelSubscriptionsService
+      .remove(_id, {
+        type: type,
+        idType: typeId
+      })
+      .then(() => delete this.channelSubscriptions[type])
   }
 
   leaveSessionChannel(session: Session): Observable<any> {
-    const { _id } = this.currentSubscription
     return from(
-      this.channelSubscriptionsService
-        .remove(_id, {
-          type: 'sessions',
-          idType: session.id
-        })
-        .then(data => {
-          this.handleChangeSubscriptions('remove', data)
-
-          return true
-        })
+      this.leaveChannel('sessions', session.id).then(data => {
+        return true
+      })
     )
   }
 
   getSessionChannelSubscriptions(sessionId) {
-    this.channelSubscriptionsService
-      .find({
+    return this.channelSubscriptionsService.watch().find({
+      query: {
         idType: sessionId,
         type: 'sessions'
-      })
-      .then(result => {
-        this.channelSubscriptions = result['data']
-        this.channelSubscriptions$.next(this.channelSubscriptions)
-      })
+      }
+    })
+  }
+
+  get channelSubscriptions$() {
+    return this.getSessionChannelSubscriptions(this.session.id)
   }
 
   toSession(item) {
@@ -173,16 +175,20 @@ export class SessionSocketService extends SessionService {
     this.sessions$.next([this.toSession(session), ...this.sessions])
   }
 
-  private handleChangeSubscriptions(action, data) {
-    if (action === 'add') {
-      this.channelSubscriptions = [...this.channelSubscriptions, data]
+  getState(state, previousState) {
+    if (previousState) {
+      this.leaveChannel('states', previousState._id)
     }
-    if (action === 'remove') {
-      this.channelSubscriptions = this.channelSubscriptions.filter(
-        subscription => data['_id'] !== subscription._id
-      )
+    const stateId = state && state._id
+    if (stateId) {
+      this.statesService.get(stateId).then(result => {
+        const votes = this.projectService.getInfoMembers(result['votes'])
+        this.currentState$.next({ ...result, votes })
+        this.joinToChannel('states', stateId)
+      })
+    } else {
+      this.currentState$.next(null)
     }
-    this.channelSubscriptions$.next(this.channelSubscriptions)
   }
 
   // mthods q aun no vemos al final

@@ -41,6 +41,17 @@ export class ProjectSocketService extends ProjectService {
       })
   }
 
+  getInfoMembers(userIds) {
+    return this.projectMembers.length > 0
+      ? userIds.map(userId => {
+          const memberTemp = this.projectMembers.find(
+            member => member['userId']['_id'] === userId
+          )
+          return memberTemp['userId']
+        })
+      : []
+  }
+
   private toProject(item: any) {
     return new Project(
       item._id,

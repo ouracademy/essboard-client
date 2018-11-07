@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { SessionService } from 'app/sessions/services/session.service'
 import { ProjectService } from 'app/projects/services/project.service'
-import { combineLatest } from 'rxjs'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-online-users',
@@ -11,24 +11,26 @@ import { combineLatest } from 'rxjs'
   </div>
   `
 })
-export class OnlineUsersComponent implements OnInit {
+export class OnlineUsersComponent implements OnInit, OnDestroy {
   onlineMembers = []
+  subscription: Subscription
+
   constructor(
     private service: SessionService,
     private projectService: ProjectService
   ) {}
 
   ngOnInit() {
-    combineLatest(
-      this.projectService.projectMembers$,
-      this.service.channelSubscriptions$
-    ).subscribe(([allMembers, onlineMembers]) => {
-      this.onlineMembers = onlineMembers.map(member => {
-        const memberTemp = allMembers.find(
-          allMember => allMember['userId']['_id'] === member['userId']
+    this.subscription = this.service.channelSubscriptions$.subscribe(
+      ({ data: onlineMembers }) => {
+        this.onlineMembers = this.projectService.getInfoMembers(
+          onlineMembers.map(member => member['userId'])
         )
-        return memberTemp['userId']
-      })
-    })
+      }
+    )
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
   }
 }
