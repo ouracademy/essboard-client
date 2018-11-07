@@ -93,7 +93,6 @@ export class SetCurrentStateComponent implements OnInit {
   @Input('alpha')
   set _alpha(arg: AlphaTemplate) {
     this.sessionService.getAlpha(arg).subscribe(alpha => {
-      console.log(alpha)
       this.alpha = alpha
     })
     this.alphaTemplate = arg
