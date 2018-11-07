@@ -44,9 +44,11 @@ export class SessionSocketService extends SessionService {
     this.service.on('patched', session => this.onPatched(session))
     this.service.on('created', session => this.onCreated(session))
 
-    this.statesService.on('patched', state => {
-      console.log('patch', state)
-      this.currentState$.next(state)
+    this.statesService.on('patched', result => {
+      this.currentState$.next({
+        ...result,
+        votes: this.projectService.getInfoMembers(result['votes'])
+      })
     })
 
     this.currentSession$ = new Subject<any>()
@@ -182,8 +184,10 @@ export class SessionSocketService extends SessionService {
     const stateId = state && state._id
     if (stateId) {
       this.statesService.get(stateId).then(result => {
-        const votes = this.projectService.getInfoMembers(result['votes'])
-        this.currentState$.next({ ...result, votes })
+        this.currentState$.next({
+          ...result,
+          votes: this.projectService.getInfoMembers(result['votes'])
+        })
         this.joinToChannel('states', stateId)
       })
     } else {
