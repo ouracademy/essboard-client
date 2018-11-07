@@ -167,7 +167,7 @@ export class SessionSocketService extends SessionService {
     }
   }
 
-  createState(stateTemplate: StateTemplate, alpha: Alpha) {
+  createState(stateTemplate: StateTemplate, alpha: Alpha): Promise<State> {
     return this.statesService.create({
       knowledgeId: stateTemplate.id,
       alphaId: alpha._id

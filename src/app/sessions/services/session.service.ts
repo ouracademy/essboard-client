@@ -42,6 +42,9 @@ export abstract class SessionService {
     checked: any
   )
   abstract getSessionChannelSubscriptions(sessionId)
-  abstract createState(knowledgeId, alphaId)
+  abstract createState(
+    stateTemplate: StateTemplate,
+    alpha: Alpha
+  ): Promise<State>
   abstract getState(stateId, previousState)
 }
