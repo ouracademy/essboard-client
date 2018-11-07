@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, HostListener } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
 import { SessionService } from '../services/session.service'
@@ -43,6 +43,18 @@ export class SessionComponent implements OnInit {
     this.kernelService.getAlphas().subscribe(alphas => {
       this.alphas = alphas
     })
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHander($event) {
+    const confirmationMessage = 'o/'
+    $event.returnValue = confirmationMessage
+    return confirmationMessage
+  }
+
+  @HostListener('window:unload', ['$event'])
+  unloadHandler(event) {
+    this.service.leaveSessionChannel(this.session)
   }
 
   handleSelectionAlpha(alpha: any) {
