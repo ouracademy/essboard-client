@@ -23,8 +23,6 @@ export class SessionSocketService extends SessionService {
   statesService
 
   session: Session
-  sessions = []
-
   channelSubscriptions = {}
 
   constructor(
@@ -40,9 +38,6 @@ export class SessionSocketService extends SessionService {
       'channel-subscriptions'
     )
     this.statesService = this.socketService.getService('states')
-
-    this.service.on('created', session => this.onCreated(session))
-
     this.statesService.on('patched', result => {
       this.currentState$.next({
         ...result,
@@ -51,7 +46,17 @@ export class SessionSocketService extends SessionService {
     })
 
     this.currentState$ = new Subject<any>()
-    this.sessions$ = new Subject()
+  }
+
+  getSessions(projectId: string) {
+    return this.service
+      .watch()
+      .find({ query: { projectId } })
+      .pipe(
+        map(result => {
+          return result['data'].map(item => this.toSession(item))
+        })
+      )
   }
 
   getSession(id: string): Observable<Session> {
@@ -122,13 +127,6 @@ export class SessionSocketService extends SessionService {
     )
   }
 
-  getSessions(projectId: string) {
-    this.service.find({ query: { projectId } }).then((result: any) => {
-      this.sessions = result['data']
-      this.sessions$.next(this.sessions)
-    })
-  }
-
   addSession(projectId) {
     return this.kernelKnowledgeService
       .getSchemaKernel()
@@ -172,11 +170,6 @@ export class SessionSocketService extends SessionService {
       })
     }
   }
-
-  private onCreated(session: any) {
-    this.sessions$.next([this.toSession(session), ...this.sessions])
-  }
-
   getState(state, previousState) {
     if (previousState) {
       this.leaveChannel('states', previousState._id)

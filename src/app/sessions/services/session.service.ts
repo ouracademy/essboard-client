@@ -9,10 +9,9 @@ import {
 
 export abstract class SessionService {
   currentState$: Subject<any>
-  sessions$: Subject<any>
   channelSubscriptions$: Subject<any>
   abstract getSession(id: string): Observable<Session>
-  abstract getSessions(projectId: string)
+  abstract getSessions(projectId: string): Observable<Session[]>
   abstract addSession(projectId: string): Promise<any>
   abstract delete(id)
   abstract setCheckpointTo(id, dimensionId, stateId, checkpointId, condition)
