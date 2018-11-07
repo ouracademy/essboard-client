@@ -14,45 +14,96 @@ import {
   StateTemplate,
   State
 } from '../components/setCurrentState/index.component'
+import { ProjectService } from 'app/projects/services/project.service'
 
 @Injectable()
 export class SessionSocketService extends SessionService {
+  service: any
+  channelSubscriptionsService
+
   session: Session
   sessions = []
-  sessions$: Subject<any>
-  service: any
-  channelSubscriptions: any
+  channelSubscriptions: any[] = []
+  currentSubscription
 
   constructor(
     public socketService: SocketService,
+    public projectService: ProjectService,
     public kernelKnowledgeService: KernelService,
     private auth: AuthService,
     private router: Router
   ) {
     super()
     this.service = this.socketService.getService('sessions')
-    this.channelSubscriptions = this.socketService.getService(
+    this.channelSubscriptionsService = this.socketService.getService(
       'channel-subscriptions'
     )
 
     this.service.on('patched', session => this.onPatched(session))
     this.service.on('created', session => this.onCreated(session))
+
+    this.channelSubscriptionsService.on('created', subscription =>
+      this.handleChangeSubscriptions('add', subscription)
+    )
+    this.channelSubscriptionsService.on('removed', subscription =>
+      this.handleChangeSubscriptions('remove', subscription)
+    )
+
     this.currentSession$ = new Subject<any>()
     this.sessions$ = new Subject()
+    this.channelSubscriptions$ = new Subject<any>()
   }
 
   getSession(id: string) {
     this.service.get(id).then((item: any) => {
       this.session = this.toSession(item)
-      console.log(this.session)
-      // GetKeys.setSource(item.alphas)
       this.currentSession$.next(this.session)
+      this.joinToSessionChannel()
+      this.getSessionChannelSubscriptions(id)
+      this.projectService.getMembers(item['projectId'])
+    })
+  }
 
-      this.channelSubscriptions.create({
-        id: this.session.id,
+  private joinToSessionChannel() {
+    this.channelSubscriptionsService
+      .create({
+        idType: this.session.id,
         type: 'sessions'
       })
-    })
+      .then(subscription => {
+        this.currentSubscription = subscription
+      })
+      .catch(error => {
+        this.currentSubscription = error['data']
+      })
+  }
+
+  leaveSessionChannel(session: Session): Observable<any> {
+    const { _id } = this.currentSubscription
+    return from(
+      this.channelSubscriptionsService
+        .remove(_id, {
+          type: 'sessions',
+          idType: session.id
+        })
+        .then(data => {
+          this.handleChangeSubscriptions('remove', data)
+
+          return true
+        })
+    )
+  }
+
+  getSessionChannelSubscriptions(sessionId) {
+    this.channelSubscriptionsService
+      .find({
+        idType: sessionId,
+        type: 'sessions'
+      })
+      .then(result => {
+        this.channelSubscriptions = result['data']
+        this.channelSubscriptions$.next(this.channelSubscriptions)
+      })
   }
 
   toSession(item) {
@@ -87,12 +138,6 @@ export class SessionSocketService extends SessionService {
     this.service.patch(session.id, { finish: true })
   }
 
-  leave(session: Session): boolean | Observable<boolean> {
-    return from(
-      this.channelSubscriptions.remove(session.id, { type: 'sessions' })
-    )
-  }
-
   getAlpha(alpha: AlphaTemplate): Observable<Alpha> {
     const sessionId = this.session.id
     return from(
@@ -100,14 +145,6 @@ export class SessionSocketService extends SessionService {
         .getService('alphas')
         .find({ query: { knowledgeId: alpha.id, sessionId: sessionId } })
     )
-    // return of({
-    //   _id: 1222,
-    //   knowledgeId: 1,
-    //   states: [
-    //     { _id: 11111, knowledgeId: '11', status: 'doing', alphaId: '1' }
-    //   ],
-    //   template: alpha
-    // })
   }
 
   setStateToAlpha(
@@ -135,6 +172,19 @@ export class SessionSocketService extends SessionService {
   private onCreated(session: any) {
     this.sessions$.next([this.toSession(session), ...this.sessions])
   }
+
+  private handleChangeSubscriptions(action, data) {
+    if (action === 'add') {
+      this.channelSubscriptions = [...this.channelSubscriptions, data]
+    }
+    if (action === 'remove') {
+      this.channelSubscriptions = this.channelSubscriptions.filter(
+        subscription => data['_id'] !== subscription._id
+      )
+    }
+    this.channelSubscriptions$.next(this.channelSubscriptions)
+  }
+
   // mthods q aun no vemos al final
 
   private addGoalsContainerBySession(sessionId: string) {
@@ -210,12 +260,8 @@ export class SessionSocketService extends SessionService {
   private patch(id, data, params) {
     this.service
       .patch(id, data, params)
-      .then(result => {
-        console.log('edited', result)
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
+      .then(result => {})
+      .catch(function(error) {})
   }
 
   setCheckpointTo(

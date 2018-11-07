@@ -10,6 +10,7 @@ import {
 export abstract class SessionService {
   currentSession$: Subject<any>
   sessions$: Subject<any>
+  channelSubscriptions$: Subject<any>
   abstract getSession(id: string)
   abstract getSessions(projectId: string)
   abstract addSession(projectId: string): Promise<any>
@@ -33,7 +34,7 @@ export abstract class SessionService {
   abstract colaboreUsingSessionsIdInUser(idSession)
   abstract colaboreUsingUserIdInProject(idSession, idProject)
   abstract finish(session)
-  abstract leave(session: Session): boolean | Observable<boolean>
+  abstract leaveSessionChannel(session: Session): Observable<any>
   abstract getAlpha(alpha: AlphaTemplate): Observable<Alpha>
   abstract setStateToAlpha(
     alpha: Alpha,
@@ -41,4 +42,5 @@ export abstract class SessionService {
     state: State,
     checked: any
   )
+  abstract getSessionChannelSubscriptions(sessionId)
 }

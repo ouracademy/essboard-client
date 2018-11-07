@@ -25,6 +25,7 @@ import { AvatarLetterModule } from '@shared/avatar-letter/index.module'
 import { UsersModule } from '../users/index.module'
 
 import { SessionComponent } from './components/index.component'
+
 /* steps for use essence in each session*/
 import { HowReachGoals } from './components/how-reach-goals/index.component'
 import { HowReachGoal } from './components/how-reach-goal/index.component'
@@ -34,6 +35,7 @@ import { SetGoalStateComponent } from './components/setGoalState/index.component
 import { ChecklistComponent } from './components/setCurrentState/checklist/index.component'
 import { ChatComponent } from './components/chatInSession/index.component'
 import { TrelloComponent } from './components/act-on-work-items/migrateToTrello/index.component'
+import { OnlineUsersComponent } from './components/online-users/index.components'
 
 @NgModule({
   imports: [
@@ -67,7 +69,8 @@ import { TrelloComponent } from './components/act-on-work-items/migrateToTrello/
     HowReachGoal,
     ActOnWorkItems,
     ChatComponent,
-    TrelloComponent
+    TrelloComponent,
+    OnlineUsersComponent
   ],
 
   entryComponents: [],
