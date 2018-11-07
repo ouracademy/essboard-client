@@ -121,7 +121,8 @@ export class SetCurrentStateComponent implements OnInit {
   ngOnInit() {}
 
   reset() {
-    this.selectedState = null
+    this.stateTemplate = null
+    this.isChecklistVisible = false
   }
 
   onSelectedState({ state, template }: SelectedState) {
