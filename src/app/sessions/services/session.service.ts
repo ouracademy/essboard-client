@@ -42,5 +42,6 @@ export abstract class SessionService {
     checked: any
   )
   abstract getSessionChannelSubscriptions(sessionId)
+  abstract createState(knowledgeId, alphaId)
   abstract getState(stateId, previousState)
 }

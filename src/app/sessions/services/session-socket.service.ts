@@ -163,12 +163,15 @@ export class SessionSocketService extends SessionService {
         .getService('states')
         .patch(state._id, { vote: checked })
     } else {
-      return this.socketService.getService('states').create({
-        knowledgeId: stateTemplate.id,
-        alphaId: alpha._id,
-        status: 'done'
-      })
+      return this.createState(stateTemplate, alpha)
     }
+  }
+
+  createState(stateTemplate: StateTemplate, alpha: Alpha) {
+    return this.statesService.create({
+      knowledgeId: stateTemplate.id,
+      alphaId: alpha._id
+    })
   }
   getState(state, previousState) {
     if (previousState) {

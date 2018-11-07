@@ -143,7 +143,9 @@ export class SetCurrentStateComponent implements OnInit {
     this.isChecklistVisible = !this.isChecklistVisible
   }
   createState() {
-    this.state = { status: 'doing', _id: '11', knowledgeId: '1', alphaId: '1' }
+    this.service.createState(this.stateTemplate, this.alpha).then(state => {
+      this.service.getState(state, this.state)
+    })
   }
 
   startMonitor() {}
