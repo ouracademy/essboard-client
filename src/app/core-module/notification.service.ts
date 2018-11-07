@@ -31,10 +31,6 @@ export class NotificationService {
   }
 
   markAsRead(idNotification) {
-    this.notificationService
-      .patch(idNotification, { readed: true })
-      .then(result => {
-        console.log(result)
-      })
+    this.notificationService.patch(idNotification, { readed: true })
   }
 }

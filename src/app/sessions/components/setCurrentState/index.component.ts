@@ -144,9 +144,7 @@ export class SetCurrentStateComponent implements OnInit {
     // true selectedState.state.vote( checked)
     this.sessionService
       .setStateToAlpha(this.alpha, this.stateTemplate, this.state, checked)
-      .then(result => {
-        console.log(result)
-      })
+      .then(result => {})
   }
   registerCheckpoint() {
     this.isChecklistVisible = !this.isChecklistVisible

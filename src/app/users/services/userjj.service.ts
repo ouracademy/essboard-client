@@ -1,101 +1,101 @@
-
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { SocketService } from '@core/socket.service';
-import { User } from '@no-module/models/user';
-import { Credentials } from '@no-module/models/user';
+import { Injectable } from '@angular/core'
+import { Observable, Subject } from 'rxjs'
+import { SocketService } from '@core/socket.service'
+import { User } from '@no-module/models/user'
+import { Credentials } from '@no-module/models/user'
 
 @Injectable()
-export class UserService  {
+export class UserService {
+  public items$: Observable<any>
+  private userService: any
+  private itemsObserver: any
+  private user: User
+  public _app: any
+  private dataStore: {
+    items: User[]
+  }
+  constructor(public socketService: SocketService) {
+    this._app = this.socketService.init()
+    this.userService = this._app.service('users')
+    this.userService.on('created', newItem => this.onCreated(newItem))
+    this.userService.on('updated', updatedItem => this.onUpdated(updatedItem))
+    this.userService.on('removed', removedItem => this.onRemoved(removedItem))
+    this.items$ = new Subject<any>()
+    this.dataStore = { items: [] }
+  }
 
-    public items$: Observable<any>;
-    private userService: any;
-    private itemsObserver: any;
-    private user: User;
-    public _app :  any;
-    private dataStore: {
-        items: User[]
-    };
-      constructor(public socketService: SocketService) {
-        this._app =  this.socketService.init();
-        this.userService = this._app.service('users');
-        this.userService.on('created', (newItem) => this.onCreated(newItem));
-        this.userService.on('updated', (updatedItem) => this.onUpdated(updatedItem));
-        this.userService.on('removed', (removedItem) => this.onRemoved(removedItem));
-        this.items$ = new Subject<any>()
-        this.dataStore = { items: [] };
-    }
-    
-    public find() {
-        this.userService.find((err, items: User[]) => {
-            if (err) return console.error(err);
+  public find() {
+    this.userService.find((err, items: User[]) => {
+      if (err) return console.error(err)
 
-            this.dataStore.items = items;
-            this.itemsObserver.next(this.dataStore.items);
-        });
-    }
-    public create(email: string, password: string): void {
-        this.userService.create({
-            email: email,
-            password: password
-        });
-    }
-    public login(credentials: Credentials) {
-        this._app.authenticate({
-            type: 'local',
-            'email': credentials.email,
-            'password': credentials.password
-        }).then( (result) => {
-            this.user = new User(result.data.id,result.data.email,result.data.avatar);
-        }).catch(function (error) {
-            console.error('Error authenticating!', error);
-        });
-    }
-    public get isLoggedIn():boolean{
-        return !!this.user;
-    }
-    public logout() {
-        console.log(window.localStorage);
-        this._app.logout().then(() => window.location.href = '/');
+      this.dataStore.items = items
+      this.itemsObserver.next(this.dataStore.items)
+    })
+  }
+  public create(email: string, password: string): void {
+    this.userService.create({
+      email: email,
+      password: password
+    })
+  }
+  public login(credentials: Credentials) {
+    this._app
+      .authenticate({
+        type: 'local',
+        email: credentials.email,
+        password: credentials.password
+      })
+      .then(result => {
+        this.user = new User(
+          result.data.id,
+          result.data.email,
+          result.data.avatar
+        )
+      })
+      .catch(function(error) {
+        console.error('Error authenticating!', error)
+      })
+  }
+  public get isLoggedIn(): boolean {
+    return !!this.user
+  }
+  public logout() {
+    this._app.logout().then(() => (window.location.href = '/'))
+  }
 
-    }
+  private getIndex(id: string): number {
+    let foundIndex = -1
 
-    private getIndex(id: string): number {
-        let foundIndex = -1;
-
-        for (let i = 0; i < this.dataStore.items.length; i++) {
-            if (this.dataStore.items[i].id === id) {
-                foundIndex = i;
-            }
-        }
-
-        return foundIndex;
-    }
-
-
-
-    // Listen for when a new message has been created
-    private onCreated(newItem: Object) {
-        //this.dataStore.items.push(new MyModel(newItem.id,newItem.text));
-        console.log('Someone created a message', newItem);
-        //PROJECTS.push(new Auth(newItem.id,newItem.text));
-        // this.itemsObserver.next(PROJECTS);
+    for (let i = 0; i < this.dataStore.items.length; i++) {
+      if (this.dataStore.items[i].id === id) {
+        foundIndex = i
+      }
     }
 
-    private onUpdated(updatedItem: User) {
-        const index = this.getIndex(updatedItem.id);
+    return foundIndex
+  }
 
-        this.dataStore.items[index] = updatedItem;
+  // Listen for when a new message has been created
+  private onCreated(newItem: Object) {
+    //this.dataStore.items.push(new MyModel(newItem.id,newItem.text));
+    console.log('Someone created a message', newItem)
+    //PROJECTS.push(new Auth(newItem.id,newItem.text));
+    // this.itemsObserver.next(PROJECTS);
+  }
 
-        this.itemsObserver.next(this.dataStore.items);
-    }
+  private onUpdated(updatedItem: User) {
+    const index = this.getIndex(updatedItem.id)
 
-    private onRemoved(removedItem) {
-        const index = this.getIndex(removedItem.id);
+    this.dataStore.items[index] = updatedItem
 
-        //this.dataStore.checks.splice(index, 1);
+    this.itemsObserver.next(this.dataStore.items)
+  }
 
-        this.itemsObserver.next(this.dataStore.items);
-    }
+  private onRemoved(removedItem) {
+    const index = this.getIndex(removedItem.id)
 
+    //this.dataStore.checks.splice(index, 1);
+
+    this.itemsObserver.next(this.dataStore.items)
+  }
 }
