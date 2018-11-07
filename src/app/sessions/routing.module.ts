@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router'
 import { CanDeactivateGuard } from './services/leave-session.guard'
 import { SessionComponent } from './components/index.component'
 
-const enableChannelsSubscription = false
+const enableChannelsSubscription = true
 
 const routes: Routes = [
   {
