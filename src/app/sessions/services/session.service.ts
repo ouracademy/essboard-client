@@ -8,11 +8,10 @@ import {
 } from '../components/setCurrentState/index.component'
 
 export abstract class SessionService {
-  currentSession$: Subject<any>
   currentState$: Subject<any>
   sessions$: Subject<any>
   channelSubscriptions$: Subject<any>
-  abstract getSession(id: string)
+  abstract getSession(id: string): Observable<Session>
   abstract getSessions(projectId: string)
   abstract addSession(projectId: string): Promise<any>
   abstract delete(id)

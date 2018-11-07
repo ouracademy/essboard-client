@@ -5,6 +5,7 @@ import { SessionService } from '../services/session.service'
 import { PrimaryKernelMockService } from '@shared/kernel/services/index'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { AlphaTemplate } from './setCurrentState/index.component'
+import { flatMap } from 'rxjs/operators'
 
 @Component({
   selector: 'session',
@@ -31,14 +32,11 @@ export class SessionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.idSession = params['id']
-      this.service.getSession(this.idSession)
-    })
-
-    this.service.currentSession$.subscribe((session: Session) => {
-      this.session = session
-    })
+    this.route.params
+      .pipe(flatMap(params => this.service.getSession(params['id'])))
+      .subscribe((session: Session) => {
+        this.session = session
+      })
 
     this.kernelService.getAlphas().subscribe(alphas => {
       this.alphas = alphas

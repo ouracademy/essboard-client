@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
 import { Observable, Subject, from, of } from 'rxjs'
-
+import { map } from 'rxjs/operators'
 import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
 import { GetKeys } from '@no-module/util/get-keys-from-object'
@@ -41,7 +41,6 @@ export class SessionSocketService extends SessionService {
     )
     this.statesService = this.socketService.getService('states')
 
-    this.service.on('patched', session => this.onPatched(session))
     this.service.on('created', session => this.onCreated(session))
 
     this.statesService.on('patched', result => {
@@ -51,19 +50,23 @@ export class SessionSocketService extends SessionService {
       })
     })
 
-    this.currentSession$ = new Subject<any>()
     this.currentState$ = new Subject<any>()
     this.sessions$ = new Subject()
   }
 
-  getSession(id: string) {
-    this.service.get(id).then((item: any) => {
-      this.projectService.getMembers(item['projectId'])
-      this.session = this.toSession(item)
-      this.currentSession$.next(this.session)
-      this.joinToChannel('sessions', this.session.id)
-      this.getSessionChannelSubscriptions(id)
-    })
+  getSession(id: string): Observable<Session> {
+    return this.service
+      .watch()
+      .get(id)
+      .pipe(
+        map(item => {
+          this.projectService.getMembers(item['projectId'])
+          this.joinToChannel('sessions', item['_id'])
+          this.getSessionChannelSubscriptions(id)
+          this.session = this.toSession(item)
+          return this.session
+        })
+      )
   }
 
   private joinToChannel(type, typeId) {
@@ -170,9 +173,6 @@ export class SessionSocketService extends SessionService {
     }
   }
 
-  private onPatched(session: any) {
-    this.currentSession$.next(this.toSession(session))
-  }
   private onCreated(session: any) {
     this.sessions$.next([this.toSession(session), ...this.sessions])
   }
