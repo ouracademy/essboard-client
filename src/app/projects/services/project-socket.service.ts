@@ -13,17 +13,15 @@ export class ProjectSocketService extends ProjectService {
   project: Project
   service: any
   otherService: any
+  projectMembers = []
 
-  constructor(
-    public socketService: SocketService,
-    private router: Router,
-    private sessionService: SessionService
-  ) {
+  constructor(public socketService: SocketService, private router: Router) {
     super()
     this.service = this.socketService.getService('projects')
     this.service.on('removed', removedItem => this.onRemoved(removedItem))
     this.service.on('patched', patchedItem => this.onPatched(patchedItem))
     this.currentProject$ = new Subject<any>()
+    this.projectMembers$ = new Subject<any>()
     this.project = null
   }
   getProject(id: string) {
@@ -31,6 +29,16 @@ export class ProjectSocketService extends ProjectService {
       this.project = this.toProject(item)
       this.currentProject$.next(this.project)
     })
+  }
+
+  getMembers(id) {
+    this.socketService
+      .getService('members')
+      .find({ query: { projectId: id } })
+      .then(result => {
+        this.projectMembers = result['data']
+        this.projectMembers$.next(this.projectMembers)
+      })
   }
 
   private toProject(item: any) {
@@ -52,12 +60,7 @@ export class ProjectSocketService extends ProjectService {
     })
   }
   patchData(data) {
-    this.service
-      .patch(this.project.id, data)
-      .then(result => {
-        console.log('se edito ')
-      })
-      .catch(function(error) {})
+    this.service.patch(this.project.id, data)
   }
 
   setName(name) {
@@ -91,9 +94,5 @@ export class ProjectSocketService extends ProjectService {
     //  const index = this.getIndex(removedItem.id);
     //this.dataStore.checks.splice(index, 1);
     //this.itemsObserver.next(this.data);
-  }
-
-  addSession() {
-    return this.sessionService.addSession(this.project.id)
   }
 }

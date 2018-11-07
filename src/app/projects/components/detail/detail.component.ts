@@ -7,6 +7,7 @@ import { Project, Session } from '@no-module/models/project'
 import { ProjectService } from '../../services/project.service'
 import { SharedService } from '@core/shared.service'
 import { ShareComponent } from '../share/share.component'
+import { SessionService } from 'app/sessions/services/session.service'
 
 @Component({
   selector: 'project-detail',
@@ -24,7 +25,8 @@ export class DetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private service: ProjectService,
     private sharedService: SharedService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private sessionService: SessionService
   ) {}
 
   ngOnInit() {
@@ -45,7 +47,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   addSession() {
-    this.service.addSession().catch(error => {
+    this.sessionService.addSession(this.project.id).catch(error => {
       this.sharedService.showError(
         'Upps!',
         'Aun no haz concluido tu actual sesión'
