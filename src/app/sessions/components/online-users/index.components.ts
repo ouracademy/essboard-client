@@ -6,8 +6,8 @@ import { combineLatest } from 'rxjs'
 @Component({
   selector: 'app-online-users',
   template: `
-  <div *ngFor = "let onlineMember of onlineMembers">
-   {{ onlineMember.name }}
+  <div class="row center-xs middle-xs" >
+   <ngx-avatar *ngFor="let onlineMember of onlineMembers" size="30" [name]="onlineMember.name"></ngx-avatar>
   </div>
   `
 })

@@ -15,8 +15,7 @@
           </mat-checkbox>
           <button mat-button (click)="quitVote(checkpoint)">X</button>
         <td class="check">
-          <avatar-letter *ngFor="let vote of checkpointProject.votes" [text]="vote.member" [options]="options">
-          </avatar-letter>
+          <ngx-avatar *ngFor="let vote of checkpointProject.votes" [name]="vote.member"></ngx-avatar>
         </td>
         <td class="name">{{checkpoint.name}}</td>
         <td clas="description">{{checkpoint.description}}</td>

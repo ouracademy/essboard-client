@@ -20,8 +20,7 @@ import { DragulaModule, DragulaService } from 'ng2-dragula/ng2-dragula'
 import { RoutingModule } from './routing.module'
 
 import { KernelModule } from '@shared/kernel/kernel.module'
-import { AvatarLetterModule } from '@shared/avatar-letter/index.module'
-
+import { AvatarModule } from 'ngx-avatar'
 import { UsersModule } from '../users/index.module'
 
 import { SessionComponent } from './components/index.component'
@@ -57,7 +56,7 @@ import { OnlineUsersComponent } from './components/online-users/index.components
     MatListModule,
 
     DragulaModule,
-    AvatarLetterModule,
+    AvatarModule,
     RoutingModule
   ],
   declarations: [
