@@ -1,28 +1,29 @@
 <div *ngIf="session">
-    <mat-toolbar class="detail">
-        <span>Sesión</span>
-        <div>
-            <span> {{ session.createdAt | date:'d \'de\' MMMM' }}</span>
+    <div class="row between-xs middle-xs">
+        <div class="row middle-xs pad-1">
+            <span>Sesión </span>
+            <div class="pad-1">
+                <span> {{ session.createdAt | date:'d \'de\' MMMM' }}</span>
 
-            <span *ngIf="session.hasFinished; else notFinished">
-                a {{ session.endDate | date:'d \'de\' MMMM' }}
-            </span>
-            <ng-template #notFinished>
-                <button mat-stroked-button color="accent" (click)="finishSession()">Dar por concluído</button>
-            </ng-template>
+                <span *ngIf="
+            session.hasFinished; else notFinished">
+                    a {{ session.endDate | date:'d \'de\' MMMM' }}
+                </span>
+                <ng-template #notFinished>
+                    <button mat-stroked-button color="accent" (click)="finishSession()">Dar por concluído</button>
+                </ng-template>
+            </div>
         </div>
-
-        <span class="fill-remaining"></span>
-        <button mat-icon-button>
-            <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
-        </button>
-        <button mat-icon-button (click)="isChatVisible = !isChatVisible">
-            <mat-icon class="md-24">chat</mat-icon>
-        </button>
-        <button mat-button (click)="goToProject()">Ir a mi proyecto</button>
-    </mat-toolbar>
-    <div>
         <app-online-users></app-online-users>
+        <div class="row middle-xs pad-1">
+            <button mat-icon-button>
+                <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
+            </button>
+            <button mat-icon-button (click)="isChatVisible = !isChatVisible">
+                <mat-icon class="md-24">chat</mat-icon>
+            </button>
+            <button mat-button (click)="goToProject()">Ir a mi proyecto</button>
+        </div>
     </div>
     <mat-tab-group class="steps-tab-group ">
         <mat-tab>
@@ -48,7 +49,8 @@
             <div class="content-tab">
                 <div class="row middle-xs center-xs">
                     <h2 class="title">Determina el estado de cualquier dimension</h2>
-                    <h4 class="subtitle">( Selecciona una dimension y luego selecciona el estado que tú consideras se
+                    <h4 class="subtitle">( Selecciona una dimension y luego selecciona el estado que tú consideras
+                        se
                         encuentra el proyecto )</h4>
                 </div>
                 <div class="row">
