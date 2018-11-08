@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core'
 import { map } from 'rxjs/operators/map'
 import { User } from '../model/user'
-import {
-  SocketService,
-  FeathersApp,
-  FeathersService
-} from '@core/socket.service'
+import { SocketService } from '@core/socket.service'
 
 @Injectable()
 export class UserSearchSocketService {

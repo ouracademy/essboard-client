@@ -3,19 +3,13 @@ import { Router } from '@angular/router'
 import { Observable, Subject } from 'rxjs'
 import { UserService } from './user.service'
 import { User } from '../model/user'
-import {
-  SocketService,
-  FeathersApp,
-  FeathersService
-} from '@core/socket.service'
+import { SocketService } from '@core/socket.service'
 
 @Injectable()
 export class UserSocketService extends UserService {
   user: User
   users: User[]
-
-  _app: FeathersApp
-  service: FeathersService
+  service: any
 
   constructor(public socketService: SocketService, private router: Router) {
     super()

@@ -146,10 +146,12 @@ export class SessionSocketService extends SessionService {
 
   getAlpha(alpha: AlphaTemplate): Observable<Alpha> {
     const sessionId = this.session.id
-    return from(
-      this.socketService
-        .getService('alphas')
-        .find({ query: { knowledgeId: alpha.id, sessionId: sessionId } })
+    return <any>(
+      from(
+        this.socketService
+          .getService<Alpha>('alphas')
+          .find({ query: { knowledgeId: alpha.id, sessionId: sessionId } })
+      )
     )
   }
 
