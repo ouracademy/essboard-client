@@ -18,7 +18,7 @@ export class Project {
   ) {}
 
   isOwner(user: User): boolean {
-    return this.ownerId !== user.id
+    return this.ownerId === user.id
   }
 
   public get currentKernel(): Kernel {
