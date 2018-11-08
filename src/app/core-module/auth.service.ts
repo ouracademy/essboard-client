@@ -59,7 +59,7 @@ export class AuthService {
           data['createdAt'],
           data['appKeyTrello']
         )
-      : new User('', '')
+      : null
   }
   public set user(user: User) {
     window.localStorage['user'] = JSON.stringify(user)
