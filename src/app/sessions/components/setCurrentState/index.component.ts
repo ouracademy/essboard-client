@@ -105,7 +105,6 @@ export class SetCurrentStateComponent implements OnInit {
   @Input()
   session: Session
 
-  isChecklistVisible = false
   @ViewChild('player')
   public playerContainer: ElementRef
   selectedState: SelectedState
@@ -124,7 +123,7 @@ export class SetCurrentStateComponent implements OnInit {
 
   reset() {
     this.stateTemplate = null
-    this.isChecklistVisible = false
+    this.state = null
   }
 
   onSelectedState({ state, template }: SelectedState) {
@@ -134,14 +133,11 @@ export class SetCurrentStateComponent implements OnInit {
     //   this.playerContainer.nativeElement.play()
   }
   handleChange(checked) {
-    // true selectedState.state.vote( checked)
     this.sessionService
       .setStateToAlpha(this.alpha, this.stateTemplate, this.state, checked)
       .then(result => {})
   }
-  registerCheckpoint() {
-    this.isChecklistVisible = !this.isChecklistVisible
-  }
+
   createState() {
     this.service.createState(this.stateTemplate, this.alpha).then(state => {
       this.service.getState(state, this.state)
