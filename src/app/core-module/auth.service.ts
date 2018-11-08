@@ -19,16 +19,11 @@ export class AuthService {
   }
 
   public login(credentials: Credentials): Promise<User> {
-    return this.socketService
-      .authenticate({
-        strategy: 'local',
-        email: credentials.email,
-        password: credentials.password
-      })
-      .then(result => {
-        window.localStorage.setItem('user', JSON.stringify(result))
-        return this.user
-      })
+    return this.socketService.authenticate({
+      strategy: 'local',
+      email: credentials.email,
+      password: credentials.password
+    })
   }
 
   public reconnect() {
@@ -55,7 +50,7 @@ export class AuthService {
   }
 
   public get user(): User {
-    const data = JSON.parse(window.localStorage.getItem('user'))
+    const data = this.socketService.getValue('user')
     return data
       ? new User(
           data['_id'],
@@ -69,20 +64,19 @@ export class AuthService {
   public set user(user: User) {
     window.localStorage['user'] = JSON.stringify(user)
   }
-  public haveThisSession(sessionId: string): boolean {
+  haveThisSession(sessionId: string): boolean {
     const data = JSON.parse(window.localStorage.getItem('user'))
     return data.sessionsId.indexOf(sessionId) !== -1
   }
 
-  public signup(user: User) {
+  signup(user: User) {
     return this.socketService
       .getService('users')
-      .watch()
       .create({
         name: user.name,
         email: user.email,
         password: user.password
       })
-      .pipe(tap(val => this.login(new Credentials(user.email, user.password))))
+      .then(val => this.login(new Credentials(user.email, user.password)))
   }
 }

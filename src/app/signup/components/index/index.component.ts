@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 
-import { AuthService } from "@core/auth.service";
-import { SharedService } from "@core/shared.service";
-import { Credentials } from '@no-module/models/user';
+import { AuthService } from '@core/auth.service'
+import { SharedService } from '@core/shared.service'
+import { Credentials } from '@no-module/models/user'
 @Component({
-  selector: "app-login",
+  selector: 'app-login',
   template: `
 
   <app-auth-layout>
@@ -32,52 +32,56 @@ import { Credentials } from '@no-module/models/user';
   </mat-card>
   </app-auth-layout>
   `
-
 })
 export class SignupComponent implements OnInit {
-  signupForm: FormGroup;
+  signupForm: FormGroup
   constructor(
     private router: Router,
     private auth: AuthService,
     private sharedService: SharedService,
     private fb: FormBuilder
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.buildForm();
+    this.buildForm()
   }
 
   buildForm(): void {
     this.signupForm = this.fb.group({
-      'name': ['', [
-        Validators.required,
-        Validators.minLength(1), // like github
-        Validators.maxLength(25),
-      ]],
-      'email': ['', [
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(50),
-      ]],
-      'password': ['', [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(50),
-      ]]
-    });
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(1), // like github
+          Validators.maxLength(25)
+        ]
+      ],
+      email: [
+        '',
+        [Validators.required, Validators.minLength(4), Validators.maxLength(50)]
+      ],
+      password: [
+        '',
+        [Validators.required, Validators.minLength(6), Validators.maxLength(50)]
+      ]
+    })
   }
 
   onSubmit() {
-    this.auth.signup(this.signupForm.value).subscribe(() => this.onSuccess(), (error) => this.onError(error));
-
+    this.auth
+      .signup(this.signupForm.value)
+      .then(() => this.onSuccess())
+      .catch(error => this.onError(error))
   }
 
   private onSuccess() {
-    this.router.navigate([this.auth.redirectURL]);
+    this.router.navigate([this.auth.redirectURL])
   }
 
   private onError(error: any) {
-    this.sharedService.showError("Upps!", `Ya existe un usuario para esa cuenta`);
-
+    this.sharedService.showError(
+      'Upps!',
+      `Ya existe un usuario para esa cuenta`
+    )
   }
 }
