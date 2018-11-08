@@ -42,11 +42,8 @@ export class AuthService {
     return !!this.user
   }
 
-  public logout(): Promise<boolean> {
-    return this.socketService.logout().then(() => {
-      localStorage.removeItem('user')
-      return true
-    })
+  public logout(): Promise<void> {
+    return this.socketService.logout()
   }
 
   public get user(): User {

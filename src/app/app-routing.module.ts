@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
+import { AuthGuardService } from '@core/auth-guard.service'
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
 
   {
     path: 'me',
-    loadChildren: 'app/inside.module#InsideRoutingModule'
+    loadChildren: 'app/inside.module#InsideRoutingModule',
+    canActivate: [AuthGuardService]
   }
 ]
 @NgModule({
