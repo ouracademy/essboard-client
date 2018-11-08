@@ -36,17 +36,19 @@
       (change)="handleChange($event.checked)"
       >Marcar todos</mat-checkbox
     >
+
     <checklist
       class="mar-1"
-      [state]="stateTemplate"
-      [projectState]="projectState"
-      (onChooseCheckpoint)="onSelectedCheckpoint($event)"
-      (onNoChooseCheckpoint)="noCheck($event)"
+      [stateTemplate]="stateTemplate"
+      [state]="state"
     ></checklist>
   </div>
 
   <!--
     idState  
+
+
+
 
 
 
@@ -126,7 +128,13 @@
 
 
 
+
+
+
       <button (click)="startMonitor()">Iniciar revision</button>
+
+
+
 
 
 
@@ -202,7 +210,13 @@
 
 
 
+
+
+
   
+
+
+
 
 
 

@@ -4,6 +4,7 @@ import {
   AlphaTemplate,
   Alpha,
   StateTemplate,
+  CheckpointTemplate,
   State
 } from '../components/setCurrentState/index.component'
 
@@ -47,4 +48,9 @@ export abstract class SessionService {
     alpha: Alpha
   ): Promise<State>
   abstract getState(stateId, previousState)
+  abstract voteCheckpoint(
+    state: State,
+    checkpointTemplate: CheckpointTemplate,
+    vote: boolean
+  )
 }

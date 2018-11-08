@@ -12,7 +12,8 @@ import {
   AlphaTemplate,
   Alpha,
   StateTemplate,
-  State
+  State,
+  CheckpointTemplate
 } from '../components/setCurrentState/index.component'
 import { ProjectService } from 'app/projects/services/project.service'
 
@@ -168,10 +169,18 @@ export class SessionSocketService extends SessionService {
   }
 
   createState(stateTemplate: StateTemplate, alpha: Alpha): Promise<State> {
-    return this.statesService.create({
-      knowledgeId: stateTemplate.id,
-      alphaId: alpha._id
-    })
+    return stateTemplate.checkpoints
+      .toPromise()
+      .then((checkpoints: CheckpointTemplate[]) =>
+        this.statesService.create({
+          knowledgeId: stateTemplate.id,
+          alphaId: alpha._id,
+          checklist: checkpoints.map(x => ({
+            knowledgeId: x.id,
+            favorablesVotes: []
+          }))
+        })
+      )
   }
   getState(state, previousState) {
     if (previousState) {
@@ -217,6 +226,7 @@ export class SessionSocketService extends SessionService {
         alert('Error al eliminar  tu proyecto')
       })
   }
+
   setStateAsWorking(id, dimensionMetadataId, stateMetadataId) {
     let indexs = GetKeys.getIndexs(dimensionMetadataId, stateMetadataId)
     let base = 'alphas.' + indexs.dimension + '.states.' + indexs.state
@@ -225,6 +235,16 @@ export class SessionSocketService extends SessionService {
     let data = { [path]: true }
     let action = { $set: data }
     this.patch(id, action, params)
+  }
+
+  voteCheckpoint(state: State, checkpointTemplate: CheckpointTemplate, vote) {
+    this.statesService
+      .patch(state._id, {
+        voteCheckpoint: { knowledgeId: checkpointTemplate.id, vote }
+      })
+      .then(result => {
+        console.log(result)
+      })
   }
   setVoteToCheckpoint(
     id,
@@ -242,6 +262,7 @@ export class SessionSocketService extends SessionService {
     let params = { ['query']: { [search]: checkpointMetadataId } }
     let data = { [path]: username }
     let action = { $addToSet: data }
+    //  { $addToSet: { [path]: username } }
     this.patch(id, action, params)
   }
   setUnVoteToCheckpoint(
@@ -260,6 +281,7 @@ export class SessionSocketService extends SessionService {
     let params = { ['query']: { [search]: checkpointMetadataId } }
     let data = { [path]: username }
     let action = { $pull: data }
+    //
     this.patch(id, action, params)
   }
 

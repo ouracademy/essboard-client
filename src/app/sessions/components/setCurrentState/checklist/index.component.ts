@@ -1,5 +1,7 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core'
-import { StateTemplate } from '../index.component'
+import { Component, Input } from '@angular/core'
+import { StateTemplate, State, CheckpointTemplate } from '../index.component'
+import { SessionService } from 'app/sessions/services/session.service'
+import { MatCheckboxChange } from '@angular/material/checkbox'
 
 @Component({
   selector: 'checklist',
@@ -7,34 +9,17 @@ import { StateTemplate } from '../index.component'
   styleUrls: ['index.component.css']
 })
 export class ChecklistComponent {
-  public options: any = {
-    size: 20,
-    fontColor: '#FFFFFF',
-    border: '1px solid #d3d3d3',
-    isSquare: true
-  }
-  _state: StateTemplate
-  @Output()
-  onChooseCheckpoint = new EventEmitter<any>()
-  @Output()
-  onNoChooseCheckpoint = new EventEmitter<any>()
-
-  checkpointProject: { votes: any[] } = { votes: [] }
-
   @Input()
-  projectState
+  state: State
   @Input()
-  set state(state: StateTemplate) {
-    this._state = state
-  }
-  get state() {
-    return this._state
-  }
-  vote(checkpoint) {
-    checkpoint.isAchaived = !checkpoint.isAchaived
-    this.onChooseCheckpoint.emit(checkpoint)
-  }
-  quitVote(checkpoint) {
-    this.onNoChooseCheckpoint.emit(checkpoint)
+  stateTemplate: StateTemplate
+  constructor(private sessionService: SessionService) {}
+
+  vote(checkpointTemplate: CheckpointTemplate, $event: MatCheckboxChange) {
+    this.sessionService.voteCheckpoint(
+      this.state,
+      checkpointTemplate,
+      $event.checked
+    )
   }
 }

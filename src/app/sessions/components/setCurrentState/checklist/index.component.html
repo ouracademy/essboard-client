@@ -1,24 +1,20 @@
-<div *ngIf="_state" class="state-card ">
+<div *ngIf="stateTemplate" class="state-card ">
   <div class="checkpoints ">
     <table class="table table-bordered">
       <tr>
         <th>¿Lo realizaste?</th>
-        <th>¿Lo realizamos?</th>
         <th>Nombre</th>
         <th>Descripcion</th>
       </tr>
-      <tr *ngFor="let checkpoint of _state.checkpoints | async">
+      <tr
+        *ngFor="let checkpointTemplate of (stateTemplate.checkpoints | async)"
+      >
         <td class="check">
-          <!--<div [className]="checkpoint.isAchieved ? 'box-check achieved':'box-check no-achieved'" >
-          </div>-->
-          <mat-checkbox (click)="vote(checkpoint)">
+          <mat-checkbox (change)="vote(checkpointTemplate, $event)">
           </mat-checkbox>
-          <button mat-button (click)="quitVote(checkpoint)">X</button>
-        <td class="check">
-          <ngx-avatar *ngFor="let vote of checkpointProject.votes" [name]="vote.member"></ngx-avatar>
         </td>
-        <td class="name">{{checkpoint.name}}</td>
-        <td clas="description">{{checkpoint.description}}</td>
+        <td class="name">{{ checkpointTemplate.name }}</td>
+        <td clas="description">{{ checkpointTemplate.description }}</td>
       </tr>
     </table>
   </div>
