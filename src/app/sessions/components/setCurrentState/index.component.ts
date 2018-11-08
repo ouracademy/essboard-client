@@ -82,6 +82,11 @@ export interface State {
   status: string
   alphaId: string
   votes?: any[]
+  checklist?: Checkpoint[]
+}
+export interface Checkpoint {
+  favorablesVotes: any[]
+  knowledgeId: string
 }
 
 @Component({
