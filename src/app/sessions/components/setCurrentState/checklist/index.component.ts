@@ -3,6 +3,7 @@ import { StateTemplate, State, CheckpointTemplate } from '../index.component'
 import { SessionService } from 'app/sessions/services/session.service'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 import { AuthService } from '@core/auth.service'
+import { ProjectService } from 'app/projects/services/project.service'
 
 @Component({
   selector: 'checklist',
@@ -16,6 +17,7 @@ export class ChecklistComponent {
   stateTemplate: StateTemplate
   constructor(
     private sessionService: SessionService,
+    private projectService: ProjectService,
     private authService: AuthService
   ) {}
 
@@ -26,9 +28,22 @@ export class ChecklistComponent {
       $event.checked
     )
   }
+
   isChecked(checkpointTemplate: CheckpointTemplate) {
-    return this.state.checklist
-      .find(checkpoint => checkpointTemplate.id === checkpoint.knowledgeId)
-      .favorablesVotes.find(userId => userId === this.authService.user.id)
+    return this.getCheckpoint(checkpointTemplate).favorablesVotes.find(
+      userId => userId === this.authService.user.id
+    )
+  }
+
+  voters(checkpointTemplate: CheckpointTemplate) {
+    return this.projectService.getInfoMembers(
+      this.getCheckpoint(checkpointTemplate).favorablesVotes
+    )
+  }
+
+  private getCheckpoint(template: CheckpointTemplate) {
+    return this.state.checklist.find(
+      checkpoint => template.id === checkpoint.knowledgeId
+    )
   }
 }

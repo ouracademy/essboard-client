@@ -1,23 +1,33 @@
-<div *ngIf="stateTemplate" class="state-card ">
-  <div class="checkpoints ">
+<div *ngIf="stateTemplate">
+  <div>
     <table class="table table-bordered">
       <tr>
         <th>¿Lo realizaste?</th>
+        <th>¿Lo realizamos?</th>
         <th>Nombre</th>
         <th>Descripcion</th>
       </tr>
       <tr
         *ngFor="let checkpointTemplate of (stateTemplate.checkpoints | async)"
       >
-        <td class="check">
+        <td>
           <mat-checkbox
             (change)="vote(checkpointTemplate, $event)"
             [checked]="isChecked(checkpointTemplate)"
           >
           </mat-checkbox>
         </td>
-        <td class="name">{{ checkpointTemplate.name }}</td>
-        <td clas="description">{{ checkpointTemplate.description }}</td>
+        <td class="voters row center-xs middle-xs">
+          <ngx-avatar
+            *ngFor="let voter of voters(checkpointTemplate)"
+            [name]="voter.name"
+            size="20"
+            class="pad-0-3"
+          >
+          </ngx-avatar>
+        </td>
+        <td class="text">{{ checkpointTemplate.name }}</td>
+        <td class="text">{{ checkpointTemplate.description }}</td>
       </tr>
     </table>
   </div>
