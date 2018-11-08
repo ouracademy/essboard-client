@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   public get isLoggedIn(): boolean {
-    return !!window.localStorage.getItem('user')
+    return !!this.user
   }
 
   public logout(): Promise<boolean> {
