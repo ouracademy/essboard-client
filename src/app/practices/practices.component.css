@@ -1,31 +1,28 @@
-
-
-.area-select{
-    text-align: center;
-    margin: auto;
-    padding: 5px;
-    border: solid 1px #58ce85;
-    color: #59bbce;
-    font-size: 15px;
-    font-weight: 500;
-    border-radius: 10%;
+.area-select {
+  text-align: center;
+  margin: auto;
+  padding: 5px;
+  border: solid 1px #58ce85;
+  color: #59bbce;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10%;
 }
-select:focus{
+select:focus {
   border: 1px solid #58ce85;
-  outline:none;
+  outline: none;
 }
-span{
+span {
   color: #58ce85;
   font-weight: 600;
 }
 select option {
-    background: transparent;
-    color: #969693;
-} 
-rel-space-alpha-for-area{
-  margin:auto;
+  background: transparent;
+  color: #969693;
 }
-img{
-    width: 90%;
+rel-space-alpha-for-area {
+  margin: auto;
 }
-
+img {
+  width: 90%;
+}

@@ -1,12 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'
 
-  
-  
-  @NgModule({
-    imports: [
-     
-    ],
-    exports: [  ]
-  })
-  export class CommonAppModule {
-  }
+@NgModule({
+  imports: [],
+  exports: []
+})
+export class CommonAppModule {}

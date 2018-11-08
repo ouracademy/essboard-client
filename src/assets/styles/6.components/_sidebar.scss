@@ -1,13 +1,13 @@
 .menu {
-  background-color: #00324C;
+  background-color: #00324c;
   &__item {
     color: $white;
-    transition: .5s; 
+    transition: 0.5s;
     cursor: pointer;
     font-weight: 600;
-    font-weight: .9rem;
+    font-weight: 0.9rem;
     &:hover {
-      background-color: #f29f43; 
+      background-color: #f29f43;
       color: white;
     }
   }

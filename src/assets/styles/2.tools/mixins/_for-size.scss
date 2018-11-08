@@ -3,23 +3,19 @@
     @media (max-width: #{$phone-upper-boundary - 1}) {
       @content;
     }
-  }
-  @else if $range==tablet-portrait-up {
+  } @else if $range==tablet-portrait-up {
     @media (min-width: $phone-upper-boundary) {
       @content;
     }
-  }
-  @else if $range==tablet-landscape-up {
+  } @else if $range==tablet-landscape-up {
     @media (min-width: $tablet-portrait-upper-boundary) {
       @content;
     }
-  }
-  @else if $range==desktop-up {
+  } @else if $range==desktop-up {
     @media (min-width: $tablet-landscape-upper-boundary) {
       @content;
     }
-  }
-  @else if $range==big-desktop-up {
+  } @else if $range==big-desktop-up {
     @media (min-width: $desktop-upper-boundary) {
       @content;
     }
@@ -44,58 +40,56 @@ $widescreen: 1192px !default;
 // 960 and 1152 have been chosen because
 // they are divisible by both 12 and 16
 
-@mixin from($device){
-  @media screen and (min-width: $device){
+@mixin from($device) {
+  @media screen and (min-width: $device) {
     @content;
   }
 }
 
-@mixin until($device){
-  @media screen and (max-width: $device - 1px){
+@mixin until($device) {
+  @media screen and (max-width: $device - 1px) {
     @content;
   }
 }
 
-@mixin mobile{
-  @media screen and (max-width: $tablet - 1px){
+@mixin mobile {
+  @media screen and (max-width: $tablet - 1px) {
     @content;
   }
 }
 
-@mixin tablet{
-  @media screen and (min-width: $tablet){
+@mixin tablet {
+  @media screen and (min-width: $tablet) {
     @content;
   }
 }
 
-@mixin tablet-only{
-  @media screen and (min-width: $tablet) and (max-width: $desktop - 1px){
-    @content;
-    }
-}
-
-@mixin touch{
-  @media screen and (max-width: $desktop - 1px){
-    @content;
-}
-}
-
-@mixin desktop{
-  @media screen and (min-width: $desktop){
+@mixin tablet-only {
+  @media screen and (min-width: $tablet) and (max-width: $desktop - 1px) {
     @content;
   }
 }
 
-@mixin desktop-only{
-  @media screen and (min-width: $desktop) and (max-width: $widescreen - 1px){
-    @content;
-}
-}
-
-@mixin widescreen{
-  @media screen and (min-width: $widescreen){
+@mixin touch {
+  @media screen and (max-width: $desktop - 1px) {
     @content;
   }
 }
 
+@mixin desktop {
+  @media screen and (min-width: $desktop) {
+    @content;
+  }
+}
 
+@mixin desktop-only {
+  @media screen and (min-width: $desktop) and (max-width: $widescreen - 1px) {
+    @content;
+  }
+}
+
+@mixin widescreen {
+  @media screen and (min-width: $widescreen) {
+    @content;
+  }
+}

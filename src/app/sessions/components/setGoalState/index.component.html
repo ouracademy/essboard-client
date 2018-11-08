@@ -1,5 +1,14 @@
-<div *ngIf="!bagGoals"><button mat-button (click)="createBagGoalsForSession()">Crear Contenedor de metas</button> </div>
+<div *ngIf="!bagGoals">
+  <button mat-button (click)="createBagGoalsForSession()">
+    Crear Contenedor de metas
+  </button>
+</div>
 <div *ngIf="bagGoals">
-    <state-board [kernel]="kernel" [isForSelected]=true [statesGoal]="getStatesGoal()" (onChooseStateGoal)="addStateGoal($event)"
-        (onNoChooseStateGoal)="quitStateGoal($event)"></state-board>
+  <state-board
+    [kernel]="kernel"
+    [isForSelected]="true"
+    [statesGoal]="getStatesGoal()"
+    (onChooseStateGoal)="addStateGoal($event)"
+    (onNoChooseStateGoal)="quitStateGoal($event)"
+  ></state-board>
 </div>

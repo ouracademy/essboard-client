@@ -1,1 +1,1 @@
-export { notificationOptions } from './messages/notifications';
+export { notificationOptions } from './messages/notifications'

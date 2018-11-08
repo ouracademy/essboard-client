@@ -1,29 +1,24 @@
 @import 'theming';
 @import 'assets/styles/main';
 
-
-
 $config: mat-typography-config();
 
 .form-control {
   display: flex;
   flex-direction: column;
 
-  >label{
-      font-weight:500;
-      display:block;
+  > label {
+    font-weight: 500;
+    display: block;
   }
 
   textarea {
-      margin: 1rem 0;
-      outline-color: #c7daf0;
-      font-family: mat-font-family($config);
+    margin: 1rem 0;
+    outline-color: #c7daf0;
+    font-family: mat-font-family($config);
   }
 }
 
-
-.circle{
-  border-radius:50%;
+.circle {
+  border-radius: 50%;
 }
-
-

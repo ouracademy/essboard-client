@@ -1,19 +1,16 @@
-import { ALPHAS } from '../models/kernel/mock-kernel';
+import { ALPHAS } from '../models/kernel/mock-kernel'
 export class BuildDataToServer {
-
   public static initDimensions(): any[] {
-    let dimensions = [];
+    let dimensions = []
     for (let alpha of ALPHAS) {
-      let states = [];
+      let states = []
       for (let state of alpha.states) {
-        let checklist = [];
+        let checklist = []
         for (let check of state.checkList) {
-          checklist.push(
-            {
-              metadataId: check.identifier,
-              isAchieved: false
-            }
-          );
+          checklist.push({
+            metadataId: check.identifier,
+            isAchieved: false
+          })
         }
         states.push({
           metadataId: state.identifier,
@@ -21,7 +18,7 @@ export class BuildDataToServer {
           isAchieved: false,
           isWorking: false,
           checklist: checklist
-        });
+        })
       }
       dimensions.push({
         metadataId: alpha.identifier,
@@ -32,7 +29,6 @@ export class BuildDataToServer {
       })
     }
 
-    return dimensions;
+    return dimensions
   }
-
 }

@@ -1,27 +1,24 @@
-.state-card-wrapper{
-    padding: 5px;
+.state-card-wrapper {
+  padding: 5px;
 }
 .state-card .state-name {
-    border: solid currentColor 2px;
-    border-radius: 5px;
-    margin: 2px 4px;
+  border: solid currentColor 2px;
+  border-radius: 5px;
+  margin: 2px 4px;
 }
-.state-card .state-name div{
-    color: black;
+.state-card .state-name div {
+  color: black;
 }
-.state-card ul{
-    list-style-position: inside;
-    list-style-type: disc;
+.state-card ul {
+  list-style-position: inside;
+  list-style-type: disc;
 }
-.state-card li{
-    color: #8f8b8b;
-    line-height: 1;
-    text-align: justify;
-    margin: 3px 1px;
+.state-card li {
+  color: #8f8b8b;
+  line-height: 1;
+  text-align: justify;
+  margin: 3px 1px;
 }
-.checkpoints{
-    margin: 8px;
+.checkpoints {
+  margin: 8px;
 }
-
-
-

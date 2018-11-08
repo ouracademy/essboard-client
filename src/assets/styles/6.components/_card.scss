@@ -1,9 +1,9 @@
 .cmp-card {
-  background-color: #D8E4FD;
-  border-radius: 5px; 
+  background-color: #d8e4fd;
+  border-radius: 5px;
   cursor: pointer;
-  transition: .5s;
-  color: #4486F9;
+  transition: 0.5s;
+  color: #4486f9;
   .cmp-card__icon {
     background-image: url('/assets/images/icons/footprint.svg');
     background-repeat: no-repeat;
@@ -14,21 +14,21 @@
     text-transform: uppercase;
   }
   &:hover {
-    box-shadow: 0 3px 6px rgba(black, .2);
+    box-shadow: 0 3px 6px rgba(black, 0.2);
   }
 }
 
 .cmp-card--red {
-  background-color: #FFDEE4;
-  color: #FF5F7D;
+  background-color: #ffdee4;
+  color: #ff5f7d;
   .cmp-card__icon {
     background-image: url('/assets/images/icons/oath.svg');
   }
 }
 
 .cmp-card--yellow {
-  background-color: #FFEFDC;
-  color: #FFB25A;
+  background-color: #ffefdc;
+  color: #ffb25a;
   .cmp-card__icon {
     background-image: url('/assets/images/icons/handshake.svg');
   }

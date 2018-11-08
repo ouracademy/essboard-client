@@ -1,5 +1,5 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import { ActivitySpaceMetadata } from '@no-module/models/kernel/kernel';
+import { Component, OnInit, OnChanges, Input } from '@angular/core'
+import { ActivitySpaceMetadata } from '@no-module/models/kernel/kernel'
 @Component({
   selector: 'rel-space-alpha-for-area',
   templateUrl: 'index.html',
@@ -7,43 +7,43 @@ import { ActivitySpaceMetadata } from '@no-module/models/kernel/kernel';
 })
 export class RelationshipSpaceAlpha implements OnInit, OnChanges {
   @Input()
-  area: any;
-  activitySpaces: any[] = [];
-  alphas: any = [];
-  statesForAlpha: any[] = [];
-  constructor() { }
+  area: any
+  activitySpaces: any[] = []
+  alphas: any = []
+  statesForAlpha: any[] = []
+  constructor() {}
 
   ngOnInit() {
-    this.activitySpaces = this.area.activitypaces;
-    this.statesForAlpha = this.stateForEachAlpha();
+    this.activitySpaces = this.area.activitypaces
+    this.statesForAlpha = this.stateForEachAlpha()
   }
   ngOnChanges() {
-    this.activitySpaces = this.area.activitypaces;
-    this.statesForAlpha = this.stateForEachAlpha();
+    this.activitySpaces = this.area.activitypaces
+    this.statesForAlpha = this.stateForEachAlpha()
   }
   stateForEachAlpha() {
-    let states: any[] = [];
+    let states: any[] = []
 
     for (let alpha of this.area.dimensions) {
       for (let state of alpha.states) {
-        states.push(state);
+        states.push(state)
       }
     }
-    return states;
+    return states
   }
   getActivyAlphasRelationshipFor(activitySpace: ActivitySpaceMetadata) {
-    let states = this.stateForEachAlpha();
-    let options: any[] = [];
+    let states = this.stateForEachAlpha()
+    let options: any[] = []
     for (let state of states) {
       options.push({
-        "condition": activitySpace.implicaThisState(state),
-        "state": state,
-        "spcaeActivity": activitySpace
-      });
+        condition: activitySpace.implicaThisState(state),
+        state: state,
+        spcaeActivity: activitySpace
+      })
     }
-    return options;
+    return options
   }
   showPractices(item) {
-    console.log("item", item);
+    console.log('item', item)
   }
 }

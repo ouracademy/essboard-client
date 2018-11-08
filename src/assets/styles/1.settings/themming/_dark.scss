@@ -1,79 +1,73 @@
-
 /* For use in src/lib/core/theming/_palette.scss */
 
 /* For use in src/lib/core/theming/_palette.scss */
 $mat-accent: (
-    50 : #edfaf2,
-    100 : #d1f2dd,
-    200 : #b2e9c7,
-    300 : #93e0b1,
-    400 : #7cd9a0,
-    500 : #65d28f,
-    600 : #5dcd87,
-    700 : #53c77c,
-    800 : #49c172,
-    900 : #37b660,
-    A100 : #ffffff,
-    A200 : #ceffdd,
-    A400 : #9bffb9,
-    A700 : #81ffa7,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #000000,
-        800 : #000000,
-        900 : #000000,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
+  50: #edfaf2,
+  100: #d1f2dd,
+  200: #b2e9c7,
+  300: #93e0b1,
+  400: #7cd9a0,
+  500: #65d28f,
+  600: #5dcd87,
+  700: #53c77c,
+  800: #49c172,
+  900: #37b660,
+  A100: #ffffff,
+  A200: #ceffdd,
+  A400: #9bffb9,
+  A700: #81ffa7,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
 );
-
 $mat-primary: (
-    50 : #ecf7f9,
-    100 : #cfecf1,
-    200 : #afdfe8,
-    300 : #8fd2de,
-    400 : #77c8d7,
-    500 : #5fbed0,
-    600 : #57b8cb,
-    700 : #4dafc4,
-    800 : #43a7be,
-    900 : #3299b3,
-    A100 : #fafeff,
-    A200 : #c7f3ff,
-    A400 : #94e9ff,
-    A700 : #7ae3ff,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #000000,
-        800 : #000000,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
+  50: #ecf7f9,
+  100: #cfecf1,
+  200: #afdfe8,
+  300: #8fd2de,
+  400: #77c8d7,
+  500: #5fbed0,
+  600: #57b8cb,
+  700: #4dafc4,
+  800: #43a7be,
+  900: #3299b3,
+  A100: #fafeff,
+  A200: #c7f3ff,
+  A400: #94e9ff,
+  A700: #7ae3ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
 );
-
-
 // mandatory stuff for theming
 $theme-primary: mat-palette($mat-primary);
-$theme-accent:  mat-palette($mat-accent);
-$theme-warn:    mat-palette($mat-red,400);
-
+$theme-accent: mat-palette($mat-accent);
+$theme-warn: mat-palette($mat-red, 400);
 // include the custom theme components into a theme object
-$dark-theme: mat-dark-theme($theme-primary, $theme-accent,$theme-warn);
-
+$dark-theme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);

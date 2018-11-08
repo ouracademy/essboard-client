@@ -1,4 +1,4 @@
-<mat-progress-spinner *ngIf="isLoading;else childrenTemplate"></mat-progress-spinner>
-<ng-template #childrenTemplate>
-  <ng-content></ng-content>
-</ng-template>
+<mat-progress-spinner
+  *ngIf="isLoading; else: childrenTemplate"
+></mat-progress-spinner>
+<ng-template #childrenTemplate> <ng-content></ng-content> </ng-template>

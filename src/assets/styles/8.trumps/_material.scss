@@ -159,7 +159,6 @@ textarea.mat-input-element {
   }
 }
 
-
 // @mixin itemReadonly() {
 //   .mat-form-field-underline {
 //     display: none !important; // color: #cec7c7
@@ -215,7 +214,7 @@ mat-form-field {
 }
 
 .mat-list-text p {
-  color: rgba(0, 0, 0, .38);
+  color: rgba(0, 0, 0, 0.38);
 }
 
 .mat-form-field {
@@ -231,29 +230,23 @@ mat-form-field {
   }
 }
 
-.mat-raised-button{
+.mat-raised-button {
   color: white !important;
 }
 
-
-.alpha-buttons{
-  .mat-button-toggle-button{
+.alpha-buttons {
+  .mat-button-toggle-button {
     border: solid 2px #7cb987 !important;
     width: 11rem;
   }
-  .mat-button-toggle{
+  .mat-button-toggle {
     margin-right: 9px !important;
   }
-  .mat-button-toggle-group{
+  .mat-button-toggle-group {
     box-shadow: none !important;
   }
-  .mat-button-toggle-checked{
+  .mat-button-toggle-checked {
     background-color: #d7f5d7;
     color: #4a6950;
   }
 }
-
-
-
-
-   

@@ -1,64 +1,57 @@
 /* alpha-card*/
 
-
 .essence-card {
-	width: 16vw;
-	height: 38vh;
-	border: solid 1px currentColor;
-	background-color: currentColor;
+  width: 16vw;
+  height: 38vh;
+  border: solid 1px currentColor;
+  background-color: currentColor;
 }
 
-.essence-card-header{
-	height: 6vh;
-	width: 100%;
-	color: black !important;
+.essence-card-header {
+  height: 6vh;
+  width: 100%;
+  color: black !important;
 }
-.essence-card-content{
-	background: white;
-	height: 29vh;
+.essence-card-content {
+  background: white;
+  height: 29vh;
 }
-.essence-card-footer{
-	height: 3vh;
+.essence-card-footer {
+  height: 3vh;
 }
 
-.state-wrapper{
-	padding: 3px 4px;
+.state-wrapper {
+  padding: 3px 4px;
 }
-.state{
-	border: 2px solid currentColor;
-	margin: 2px 1px;
-	cursor: pointer;
-	height: 100%;
-
+.state {
+  border: 2px solid currentColor;
+  margin: 2px 1px;
+  cursor: pointer;
+  height: 100%;
 }
-.state div{
+.state div {
   color: #878686;
   line-height: 1;
 }
 
-
-
-.essence-card  .state:hover{
-	border-style : solid;
-	background-color: currentColor;
+.essence-card .state:hover {
+  border-style: solid;
+  background-color: currentColor;
 }
-.noAchieved{
-    background-color: transparent;
+.noAchieved {
+  background-color: transparent;
 }
 
-.achieved{
-   	border-style : solid;
-	background-color: currentColor;
+.achieved {
+  border-style: solid;
+  background-color: currentColor;
 }
 
-.working{	
-	border-style : solid;
-	background-color: currentColor !important;
+.working {
+  border-style: solid;
+  background-color: currentColor !important;
 }
 
-
-
-.selected{
-	box-shadow: 1px 2px 30px 13px rgba(202,188,188,0.79);
+.selected {
+  box-shadow: 1px 2px 30px 13px rgba(202, 188, 188, 0.79);
 }
-

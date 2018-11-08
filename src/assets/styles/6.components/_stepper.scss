@@ -6,7 +6,7 @@
     color: $skyblue;
     position: relative;
     cursor: pointer;
-    transition: .5s;
+    transition: 0.5s;
     min-width: 150px;
     opacity: 0.3;
     text-align: center;
@@ -23,12 +23,12 @@
       border-radius: 20px;
       border: 2px solid $skyblue;
     }
-    
+
     &:after {
       visibility: hidden;
       width: 100%;
       font-weight: 500;
-      content: "estas en la etapa:";
+      content: 'estas en la etapa:';
       left: 50%;
       top: -20px;
       transform: translate(-50%, 0);

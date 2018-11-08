@@ -1,10 +1,10 @@
-.completion{
-    background: green;
+.completion {
+  background: green;
 }
-.no-completion{
-    background: transparent;
+.no-completion {
+  background: transparent;
 }
-.headForRow{
+.headForRow {
   width: 240px;
 }
 
@@ -18,16 +18,14 @@
   td {
     text-align: center;
     border: 1px solid #ccc;
-    width:5px;
+    width: 5px;
   }
   .csstransforms & th.rotate {
     height: 180px;
     white-space: nowrap;
-    // Firefox needs the extra DIV for some reason, otherwise the text disappears if you rotate 
+    // Firefox needs the extra DIV for some reason, otherwise the text disappears if you rotate
     > div {
-      transform: 
-        translate(3px, 81px)
-        rotate(-90deg);
+      transform: translate(3px, 81px) rotate(-90deg);
       width: 30px;
     }
     > div > span {
@@ -38,7 +36,7 @@
     padding: 0 10px;
   }
 }
-th{
-  font-size:12px;
+th {
+  font-size: 12px;
   border: 1px solid #ccc;
 }

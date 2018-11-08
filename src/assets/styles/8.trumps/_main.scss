@@ -7,8 +7,6 @@
 @import 'input-date';
 @import 'tab-material';
 
-
-
 /*
 .datatable-header-cell{
     color: #999999;
@@ -31,56 +29,56 @@
 }*/
 
 .td-paging-bar {
-    box-sizing: border-box;
-    max-height: 100%;
-    display: flex;
-    flex-direction: row;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    place-content: center flex-end;
-    align-items: center;
-    -webkit-box-pack: end;
-    -webkit-box-align: center;
+  box-sizing: border-box;
+  max-height: 100%;
+  display: flex;
+  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  place-content: center flex-end;
+  align-items: center;
+  -webkit-box-pack: end;
+  -webkit-box-align: center;
 }
 
 .page-count {
-    display: none;
+  display: none;
 }
 
 /*popover-ngx*/
-popover-content{
-    z-index: 100;
-    &>div{
-      top:0 !important
-    }
+popover-content {
+  z-index: 100;
+  & > div {
+    top: 0 !important;
+  }
 }
 .popover {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .popover--common {
-    width: 220px;
-    display: block;
-    background: white;
-    min-height: 200px;
+  width: 220px;
+  display: block;
+  background: white;
+  min-height: 200px;
 }
 
-.mat-step-body{
-    border: #b3c2c5 1px solid;
+.mat-step-body {
+  border: #b3c2c5 1px solid;
 }
-.mat-steppers-header, .mat-steppers-mobile-header, .mat-step-actions {
-    background: white;
+.mat-steppers-header,
+.mat-steppers-mobile-header,
+.mat-step-actions {
+  background: white;
 }
 
-.backdrop{
-    z-index: 10000 !important;
+.backdrop {
+  z-index: 10000 !important;
 }
 .spinner-three-bounce {
-    z-index: 10000000000 !important;
+  z-index: 10000000000 !important;
 }
-.row{
-    margin-right: 0 !important;
-    margin-left: 0 !important;
+.row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
 }
-
-

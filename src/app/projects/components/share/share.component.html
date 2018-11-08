@@ -1,23 +1,26 @@
 <div class="">
-    <div class="title">Comparte el proyecto a tus amigos</div>
-    <div>
-      <search-user (onSelect)="getSelect($event)"></search-user> 
-      <p>{{message}}</p>
-      <table class="table table-bordered">
-        <tr>
-          <th>Comparto mi proyecto con:</th>
-          <th></th>
-        </tr>
-        <tr *ngFor="let invited of inviteds">
-          <td>{{invited.email}}
-          </td>
-          <td> <button mat-icon-button (click)="delete(invited)"><mat-icon class="md-24" >delete_forever</mat-icon>
-               </button>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="align-right">
-      <button class="main" mat-dialog-close><mat-icon class="md-24" >done</mat-icon></button>
-    </div>
+  <div class="title">Comparte el proyecto a tus amigos</div>
+  <div>
+    <search-user (onSelect)="getSelect($event)"></search-user>
+    <p>{{ message }}</p>
+    <table class="table table-bordered">
+      <tr>
+        <th>Comparto mi proyecto con:</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let invited of inviteds">
+        <td>{{ invited.email }}</td>
+        <td>
+          <button mat-icon-button (click)="delete(invited)">
+            <mat-icon class="md-24">delete_forever</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="align-right">
+    <button class="main" mat-dialog-close>
+      <mat-icon class="md-24">done</mat-icon>
+    </button>
+  </div>
 </div>

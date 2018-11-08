@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { OptionGoTo } from '@no-module/models/option-go-to';
+import { Component, OnInit } from '@angular/core'
+import { OptionGoTo } from '@no-module/models/option-go-to'
 
 @Component({
   selector: 'app-developer',
   templateUrl: './layout-settings.component.html'
 })
 export class LayoutSettingsComponent implements OnInit {
-
-  settingOptions: OptionGoTo[];
+  settingOptions: OptionGoTo[]
   ngOnInit() {
     this.settingOptions = [
       {
@@ -27,7 +26,7 @@ export class LayoutSettingsComponent implements OnInit {
         description: '',
         icon: 'equalizer',
         route: '/me/settings/competencies'
-      },
-    ];
+      }
+    ]
   }
 }

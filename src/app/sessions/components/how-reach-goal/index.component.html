@@ -1,17 +1,28 @@
 <div class="row">
   <div class="col-lg-3 col-md-3 col-sm-3">
-    <state-card-view *ngIf="goal.goalState" [state]="goal.goalState"></state-card-view>
+    <state-card-view
+      *ngIf="goal.goalState"
+      [state]="goal.goalState"
+    ></state-card-view>
   </div>
   <div class="col-lg-9 col-md-9 col-sm-9">
     <mat-form-field appearance="outline">
-      <textarea matInput maxlength="200" class="full-width" placeholder="¿Que debo hacer?" [(ngModel)]="action"
-        (keyup.enter)="add()"></textarea>
+      <textarea
+        matInput
+        maxlength="200"
+        class="full-width"
+        placeholder="¿Que debo hacer?"
+        [(ngModel)]="action"
+        (keyup.enter)="add()"
+      ></textarea>
     </mat-form-field>
     <mat-card *ngFor="let action of goal.actions" class="action">
       <mat-card-content>
-        <input [(ngModel)]="action.name" (blur)="save(action)">
+        <input [(ngModel)]="action.name" (blur)="save(action)" />
         <button class="transparent">
-          <mat-icon class="md-24" (click)="delete(action)">delete_forever</mat-icon>
+          <mat-icon class="md-24" (click)="delete(action)"
+            >delete_forever</mat-icon
+          >
         </button>
       </mat-card-content>
     </mat-card>

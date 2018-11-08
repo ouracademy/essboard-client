@@ -1,28 +1,26 @@
-
-.sidenav-content{
-    overflow: initial;
+.sidenav-content {
+  overflow: initial;
 }
-.box{
-    text-align:center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: solid 1px #dcdcda;
+.box {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: solid 1px #dcdcda;
 }
 .option {
-    border: 1px solid #73d699;
-    text-align: center;
-    padding: 8px;
-    width: 200px;
-    margin: auto;
-    margin-bottom: 10px;
+  border: 1px solid #73d699;
+  text-align: center;
+  padding: 8px;
+  width: 200px;
+  margin: auto;
+  margin-bottom: 10px;
 }
-.option a{
-    color: #8cd0dd;
-    font-size: 18px;
-    text-decoration: none;
+.option a {
+  color: #8cd0dd;
+  font-size: 18px;
+  text-decoration: none;
 }
-.content-title{
-    width: 200px;
-    margin: auto;
+.content-title {
+  width: 200px;
+  margin: auto;
 }
-

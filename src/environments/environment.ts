@@ -5,9 +5,8 @@
 
 export const environment = {
   production: false
-};
+}
 
-
-export const api = 'http://localhost:3030';
+export const api = 'http://localhost:3030'
 
 export const urlEssenceKernel = 'http://localhost:3000'

@@ -1,4 +1,4 @@
-$golden-ratio:1.61803398875;
+$golden-ratio: 1.61803398875;
 h1,
 h2,
 h3,
@@ -27,9 +27,9 @@ h4 {
 }
 
 h5 {
-  font-size: .83rem; // line-height: .83rem*$golden-ratio;
+  font-size: 0.83rem; // line-height: .83rem*$golden-ratio;
 }
 
 h6 {
-  font-size: .67rem; // line-height: .67rem*$golden-ratio;
+  font-size: 0.67rem; // line-height: .67rem*$golden-ratio;
 }

@@ -8,29 +8,56 @@ import { Credentials } from '@no-module/models/user'
 @Component({
   selector: 'app-login',
   template: `
-
-  <app-auth-layout>
-    <mat-card >
-    <mat-card-content>
-       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline" class="full-width"  >
-          <input matInput formControlName="name" required
-          placeholder="Nombre de usuario">  
-        </mat-form-field>
-        <mat-form-field  appearance="outline"  class="full-width" placeholder="Correo electrónico" required >
-          <input matInput formControlName="email" placeholder="Correo electrónico" required>  
-        </mat-form-field>
-        <mat-form-field appearance="outline"  class="full-width"   >
-          <input matInput type="password" formControlName="password" placeholder="Contraseña" required>
-        </mat-form-field>
-        <button class="width-100 mar-0-1 btn-big"  color="accent"  type="submit" [disabled]="!signupForm.valid" mat-raised-button >Registrate</button>   
-        <div class="more-options">
-          <span><a routerLink="/login">Ya tengo una cuenta</a></span>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-  </app-auth-layout>
+    <app-auth-layout>
+      <mat-card>
+        <mat-card-content>
+          <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline" class="full-width">
+              <input
+                matInput
+                formControlName="name"
+                required
+                placeholder="Nombre de usuario"
+              />
+            </mat-form-field>
+            <mat-form-field
+              appearance="outline"
+              class="full-width"
+              placeholder="Correo electrónico"
+              required
+            >
+              <input
+                matInput
+                formControlName="email"
+                placeholder="Correo electrónico"
+                required
+              />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <input
+                matInput
+                type="password"
+                formControlName="password"
+                placeholder="Contraseña"
+                required
+              />
+            </mat-form-field>
+            <button
+              class="width-100 mar-0-1 btn-big"
+              color="accent"
+              type="submit"
+              [disabled]="!signupForm.valid"
+              mat-raised-button
+            >
+              Registrate
+            </button>
+            <div class="more-options">
+              <span><a routerLink="/login">Ya tengo una cuenta</a></span>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </app-auth-layout>
   `
 })
 export class SignupComponent implements OnInit {

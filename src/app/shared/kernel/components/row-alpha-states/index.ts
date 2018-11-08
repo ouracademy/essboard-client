@@ -1,7 +1,7 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core'
 
-import { Alpha } from '@no-module/models/project-kernel';
-import { StateMetadata } from '@no-module/models/kernel/kernel';
+import { Alpha } from '@no-module/models/project-kernel'
+import { StateMetadata } from '@no-module/models/kernel/kernel'
 
 @Component({
   selector: 'row-alpha-states',
@@ -10,28 +10,30 @@ import { StateMetadata } from '@no-module/models/kernel/kernel';
 })
 export class RowAlphaStates {
   @Input()
-  isForSelected: boolean;
+  isForSelected: boolean
   @Input()
-  stateGoal: StateMetadata = null;
+  stateGoal: StateMetadata = null
   @Input()
-  alpha: Alpha;
+  alpha: Alpha
 
   @Output()
-  onChooseStateGoal = new EventEmitter<StateMetadata>();
+  onChooseStateGoal = new EventEmitter<StateMetadata>()
   @Output()
-  onNoChooseStateGoal = new EventEmitter<StateMetadata>();
+  onNoChooseStateGoal = new EventEmitter<StateMetadata>()
 
   select(state) {
-    this.onChooseStateGoal.emit(state);
+    this.onChooseStateGoal.emit(state)
   }
   noSelect() {
-    this.onNoChooseStateGoal.emit(this.stateGoal);
+    this.onNoChooseStateGoal.emit(this.stateGoal)
   }
   isPosibleToSelect(select: StateMetadata) {
     if (this.isForSelected) {
-      return (select === this.alpha.lastFilled || select === this.alpha.firstByFilled);
+      return (
+        select === this.alpha.lastFilled || select === this.alpha.firstByFilled
+      )
     } else {
-      return false;
+      return false
     }
   }
 }

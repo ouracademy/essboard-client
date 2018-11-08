@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { BagGoal } from '@no-module/models/goal';
-import { GoalService } from '../../services/goal.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, Input } from '@angular/core'
+import { BagGoal } from '@no-module/models/goal'
+import { GoalService } from '../../services/goal.service'
+import { Subscription } from 'rxjs/Subscription'
 @Component({
   selector: 'how-reach-goals',
   templateUrl: 'index.component.html',
@@ -9,23 +9,21 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class HowReachGoals {
   @Input()
-  sessionId: string;
+  sessionId: string
   @Input()
-  sessionNumber : number;
-  bagGoals: BagGoal;
-  private subscription: Subscription;
-  constructor(private service: GoalService) {
-  }
+  sessionNumber: number
+  bagGoals: BagGoal
+  private subscription: Subscription
+  constructor(private service: GoalService) {}
   ngOnInit() {
-    this.subscription = this.service.bagGoalsComplete$.subscribe((bagGoals: BagGoal) => {
-      this.bagGoals = bagGoals;
-    });
-    this.service.getBagGoalsComplete(this.sessionId);
+    this.subscription = this.service.bagGoalsComplete$.subscribe(
+      (bagGoals: BagGoal) => {
+        this.bagGoals = bagGoals
+      }
+    )
+    this.service.getBagGoalsComplete(this.sessionId)
   }
   addAction(action) {
-    this.service.addAction(action.name, action.stateId);
+    this.service.addAction(action.name, action.stateId)
   }
-
 }
-
-

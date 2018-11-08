@@ -1,20 +1,13 @@
-import { Injectable } from '@angular/core';
-import { AlphaMetadata } from '../../model/metadata/kernel';
+import { Injectable } from '@angular/core'
+import { AlphaMetadata } from '../../model/metadata/kernel'
 @Injectable()
 export class AlphaMockService {
-    alphas :AlphaMetadata[] = [];
-    constructor() {
-    }
+  alphas: AlphaMetadata[] = []
+  constructor() {}
 
-    getAlphaSummary(identifier: number) {
-
-    }
-    getAlphaComplete(identifier: number) {
-
-
-    }
-    addToAlphas(alphas){
-        this.alphas = alphas;
-    }
-
+  getAlphaSummary(identifier: number) {}
+  getAlphaComplete(identifier: number) {}
+  addToAlphas(alphas) {
+    this.alphas = alphas
+  }
 }

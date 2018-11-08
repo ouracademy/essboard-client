@@ -13,7 +13,7 @@
 @import 'height';
 
 $spacer: 3rem;
-*{
+* {
   box-sizing: border-box;
 }
 .p-0 {
@@ -32,35 +32,34 @@ $spacer: 3rem;
   padding: $spacer;
 }
 
-.m-1{
+.m-1 {
   margin: $spacer * 0.25;
 }
-.m-2{
+.m-2 {
   margin: $spacer * 0.5;
 }
-.m-3{
-  margin: $spacer ;
+.m-3 {
+  margin: $spacer;
 }
 
-
-.all-width{
-  width:100%;
+.all-width {
+  width: 100%;
 }
-.middle-width{
-   width:50%;
+.middle-width {
+  width: 50%;
 }
-.center{
-      text-align:center;
+.center {
+  text-align: center;
 }
-.auto{
+.auto {
   margin: auto;
 }
 
-.viewport{
+.viewport {
   width: 100vw;
   height: 100vh;
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
 }

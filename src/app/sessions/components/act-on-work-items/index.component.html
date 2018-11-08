@@ -3,12 +3,20 @@
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let action of actions">
-        <p mat-line>{{action.name}}</p>
+        <p mat-line>{{ action.name }}</p>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
-  <mat-card-actions >
-    <button class="main" (click)="initConectTrello()">Trabajar con Trello</button>
+  <mat-card-actions>
+    <button class="main" (click)="initConectTrello()">
+      Trabajar con Trello
+    </button>
   </mat-card-actions>
 </mat-card>
-<trello *ngIf="isConectionInit" [apiKey]="apiKey" [actions]="actions" [sessionNumber]="sessionNumber"> </trello>
+<trello
+  *ngIf="isConectionInit"
+  [apiKey]="apiKey"
+  [actions]="actions"
+  [sessionNumber]="sessionNumber"
+>
+</trello>

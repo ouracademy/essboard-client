@@ -1,9 +1,13 @@
 <essence-card [name]="alpha.name" [area]="alpha.area">
-    <content class="states">
-        <div *ngFor="let state of alpha.states | async">
-            <div class="state row middle-xs center-xs" [ngClass]="getClass(state)" (click)="select(state)">
-                <div>{{state.name}}</div>
-            </div>
-        </div>
-    </content>
+  <content class="states">
+    <div *ngFor="let state of alpha.states | async">
+      <div
+        class="state row middle-xs center-xs"
+        [ngClass]="getClass(state)"
+        (click)="select(state)"
+      >
+        <div>{{state.name}}</div>
+      </div>
+    </div>
+  </content>
 </essence-card>

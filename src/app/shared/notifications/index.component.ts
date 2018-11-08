@@ -17,18 +17,25 @@ interface Notification {
 @Component({
   selector: 'app-notifications',
   template: `
-    <div >
-  
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon [matBadge]="notifications.length" matBadgeColor="warn">home</mat-icon>
-    </button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let not of notifications"  class="not" [ngClass]="{ 'focus-not': !not.readed }"  (click)="handleClick(not)">
-                <span>{{not.message}}</span>
-            </button>
-        </mat-menu>
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon [matBadge]="notifications.length" matBadgeColor="warn"
+          >home</mat-icon
+        >
+      </button>
+      <mat-menu #menu="matMenu">
+        <button
+          mat-menu-item
+          *ngFor="let not of notifications"
+          class="not"
+          [ngClass]="{ 'focus-not': !not.readed }"
+          (click)="handleClick(not)"
+        >
+          <span>{{ not.message }}</span>
+        </button>
+      </mat-menu>
     </div>
-    `,
+  `,
   styles: [
     `
       .not {

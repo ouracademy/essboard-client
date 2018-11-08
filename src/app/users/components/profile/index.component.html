@@ -1,31 +1,29 @@
 <div *ngIf="user">
-    <div class="row">
-        <div class="col-md-4">
-            <img src="{{user.avatar(200)}}" alt="{{user.name}}">
-            <h3>{{user.name}}</h3>
-            <p>Unido : {{user.createdAt | date }}</p>
-        </div>
-        <div class="col-md-8">
-            <h1>Tabs with simplified api</h1>
-            <!--FIX: not displaying the words-->
-            <mat-tab-group class="demo-tab-group">
-                <mat-tab label="Earth">
-                    This tab is about the Earth!
-                </mat-tab>
-                <mat-tab label="Fire">
-                    This tab is about combustion!
-                </mat-tab>
-            </mat-tab-group>
-
-            <!--<mat-progress-bar mode="determinate" value=40></mat-progress-bar>
-            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-            <mat-progress-bar mode="buffer" value=40 bufferValue="myBufferValue"></mat-progress-bar>
-            <mat-progress-bar mode="query"></mat-progress-bar>
-            <mat-slider></mat-slider>
-            <mat-slider min="1" max="5"></mat-slider>
-            <mat-slider min="1" max="5"></mat-slider>
-            <mat-slider step="5" value="25"></mat-slider>
-            <mat-slider step="5"></mat-slider>-->
-        </div>
+  <div class="row">
+    <div class="col-md-4">
+      <img src="{{user.avatar(200)}}" alt="{{user.name}}" />
+      <h3>{{ user.name }}</h3>
+      <p>Unido : {{ user.createdAt | date }}</p>
     </div>
+    <div class="col-md-8">
+      <h1>Tabs with simplified api</h1>
+      <!-- FIX: not displaying the words -->
+      <mat-tab-group class="demo-tab-group">
+        <mat-tab label="Earth"> This tab is about the Earth! </mat-tab>
+        <mat-tab label="Fire"> This tab is about combustion! </mat-tab>
+      </mat-tab-group>
+
+      <!--
+        <mat-progress-bar mode="determinate" value=40></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar mode="buffer" value=40 bufferValue="myBufferValue"></mat-progress-bar>
+        <mat-progress-bar mode="query"></mat-progress-bar>
+        <mat-slider></mat-slider>
+        <mat-slider min="1" max="5"></mat-slider>
+        <mat-slider min="1" max="5"></mat-slider>
+        <mat-slider step="5" value="25"></mat-slider>
+        <mat-slider step="5"></mat-slider>
+      -->
+    </div>
+  </div>
 </div>

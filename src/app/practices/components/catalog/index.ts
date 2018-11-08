@@ -1,6 +1,13 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { PRACTICES } from '@no-module/models/kernel/mock-practices/mock';
-import { PracticeMockService } from '@shared/kernel/services/index';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core'
+import { PRACTICES } from '@no-module/models/kernel/mock-practices/mock'
+import { PracticeMockService } from '@shared/kernel/services/index'
 @Component({
   selector: 'practice-catalog',
   templateUrl: 'index.html',
@@ -8,17 +15,17 @@ import { PracticeMockService } from '@shared/kernel/services/index';
 })
 export class PracticesCatalog implements OnInit, OnChanges {
   @Input()
-  spaceActivity: any;
+  spaceActivity: any
   @Input()
-  state: any;
-  practices: any[];
-  activities: any[] = [];
-  constructor(public practiceService:PracticeMockService) { }
+  state: any
+  practices: any[]
+  activities: any[] = []
+  constructor(public practiceService: PracticeMockService) {}
   getPractices(spaceActivity) {
-   // this.practices = this.practicesBySpaceActivity(spaceActivity);
+    // this.practices = this.practicesBySpaceActivity(spaceActivity);
   }
-  practicesBySpaceActivity(spaceActivity){
-   /* return PRACTICES.map(
+  practicesBySpaceActivity(spaceActivity) {
+    /* return PRACTICES.map(
       practice => practice.activities.map(
         (activity,practice) => activity.achaiveds.map(
           (achaived,practice) =>{ if(achaived.spaceActivity === spaceActivity) {return practice};}
@@ -26,11 +33,10 @@ export class PracticesCatalog implements OnInit, OnChanges {
   }
   ngOnInit() {
     //this.getPractices(this.spaceActivity);
-    this.practices = this.practiceService.all();
-    console.log(this.practices);
+    this.practices = this.practiceService.all()
+    console.log(this.practices)
   }
   ngOnChanges() {
-   // this.getPractices(this.spaceActivity);
+    // this.getPractices(this.spaceActivity);
   }
-
 }

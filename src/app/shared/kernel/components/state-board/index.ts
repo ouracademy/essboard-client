@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Kernel,Alpha } from '@no-module/models/project-kernel';
-import { StateMetadata } from '@no-module/models/kernel/kernel';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core'
+import { Kernel, Alpha } from '@no-module/models/project-kernel'
+import { StateMetadata } from '@no-module/models/kernel/kernel'
 
 @Component({
   selector: 'state-board',
@@ -9,21 +9,21 @@ import { StateMetadata } from '@no-module/models/kernel/kernel';
 })
 export class StateBoard {
   @Input()
-  kernel: Kernel;
+  kernel: Kernel
   @Input()
-  isForSelected: boolean;
+  isForSelected: boolean
   @Input()
-  statesGoal:StateMetadata[] = [];
-  @Output() onChooseStateGoal = new EventEmitter<StateMetadata>();
-  @Output() onNoChooseStateGoal = new EventEmitter<StateMetadata>();
+  statesGoal: StateMetadata[] = []
+  @Output() onChooseStateGoal = new EventEmitter<StateMetadata>()
+  @Output() onNoChooseStateGoal = new EventEmitter<StateMetadata>()
 
   getStateGoal(state: StateMetadata) {
-      this.onChooseStateGoal.emit(state);
+    this.onChooseStateGoal.emit(state)
   }
   quitOfStateGoal(state: StateMetadata) {
-     this.onNoChooseStateGoal.emit(state);
+    this.onNoChooseStateGoal.emit(state)
   }
-  getStateGoalFor(alpha:Alpha){
-    return this.statesGoal.find( state =>  state.dimension === alpha.info);
+  getStateGoalFor(alpha: Alpha) {
+    return this.statesGoal.find(state => state.dimension === alpha.info)
   }
 }

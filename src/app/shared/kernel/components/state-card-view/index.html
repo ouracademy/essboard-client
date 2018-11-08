@@ -1,4 +1,9 @@
-<essence-card *ngIf="state" class="state-card selectable" [name]="alpha.name" [area]="alpha.area">
+<essence-card
+  *ngIf="state"
+  class="state-card selectable"
+  [name]="alpha.name"
+  [area]="alpha.area"
+>
   <content>
     <div class="state-card-wrapper">
       <div class="state-name   row middle-xs center-xs">
@@ -11,6 +16,5 @@
       </ul>
     </div>
   </content>
-  <footer>
-  </footer>
+  <footer></footer>
 </essence-card>

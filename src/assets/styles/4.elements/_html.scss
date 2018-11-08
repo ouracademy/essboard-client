@@ -1,5 +1,5 @@
 html {
-  $font-size:14px;
+  $font-size: 14px;
   // font-size: $font-size;
   @include for-size(phone-only) {
     font-size: $font-size !important;
@@ -8,10 +8,10 @@ html {
     font-size: $font-size !important;
   }
   @include for-size(tablet-landscape-up) {
-    font-size: $font-size + .5px !important;
+    font-size: $font-size + 0.5px !important;
   }
   @include for-size(desktop-up) {
-    font-size: $font-size + .5px !important;
+    font-size: $font-size + 0.5px !important;
   }
   @include for-size(big-desktop-up) {
     font-size: $font-size + 1px !important;

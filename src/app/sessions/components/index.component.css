@@ -1,13 +1,10 @@
-
-
-
 /*arrow*/
 
 button {
   -webkit-appearance: none;
   background: transparent;
   border: 0;
-  outline:0;
+  outline: 0;
 }
 
 svg {
@@ -55,17 +52,17 @@ svg {
 polyline {
   transition: all 250ms ease-in-out;
 }
-/* size ofr section : in a wrapper */ 
-alpha-card{
-    width: 180px;
-    background-color: transparent;
+/* size ofr section : in a wrapper */
+alpha-card {
+  width: 180px;
+  background-color: transparent;
 }
-state-card{
-    width: 850px;
-    margin: 10px 5px 5px 5px;
+state-card {
+  width: 850px;
+  margin: 10px 5px 5px 5px;
 }
 
-.content-tab{
+.content-tab {
   margin: 2rem;
   min-height: 400px;
 }

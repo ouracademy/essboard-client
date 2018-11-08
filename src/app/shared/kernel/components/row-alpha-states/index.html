@@ -1,23 +1,33 @@
 <div class="wrapper">
-    <div class="achieved">
-        <div class="wrapper">
-            <state-card-view *ngFor="let state of alpha.statesFulfilled" [state]="state" (click)="select(state)"
-                [className]="isPosibleToSelect(state)? 'active' : 'disabled' "></state-card-view>
-        </div>
+  <div class="achieved">
+    <div class="wrapper">
+      <state-card-view
+        *ngFor="let state of alpha.statesFulfilled"
+        [state]="state"
+        (click)="select(state)"
+        [className]="isPosibleToSelect(state)? 'active' : 'disabled' "
+      ></state-card-view>
     </div>
-    <div [ngClass]="{'separator':true,'container-selected':isForSelected}">
-        <p *ngIf="!stateGoal && isForSelected">Hacer click en un estado y se visualizara aqui</p>
-        <div *ngIf="stateGoal">
-            <state-card-view [state]="stateGoal"></state-card-view>
-            <button class="quit" (click)="noSelect()">
-                <mat-icon class="md-24">close</mat-icon>
-            </button>
-        </div>
+  </div>
+  <div [ngClass]="{'separator':true,'container-selected':isForSelected}">
+    <p *ngIf="!stateGoal && isForSelected">
+      Hacer click en un estado y se visualizara aqui
+    </p>
+    <div *ngIf="stateGoal">
+      <state-card-view [state]="stateGoal"></state-card-view>
+      <button class="quit" (click)="noSelect()">
+        <mat-icon class="md-24">close</mat-icon>
+      </button>
     </div>
-    <div class="no-achieved">
-        <div class="wrapper">
-            <state-card-view *ngFor="let state of alpha.statesUnfulfilled" [state]="state" (click)="select(state)"
-                [className]="isPosibleToSelect(state) ? 'active' : 'disabled' "></state-card-view>
-        </div>
+  </div>
+  <div class="no-achieved">
+    <div class="wrapper">
+      <state-card-view
+        *ngFor="let state of alpha.statesUnfulfilled"
+        [state]="state"
+        (click)="select(state)"
+        [className]="isPosibleToSelect(state) ? 'active' : 'disabled' "
+      ></state-card-view>
     </div>
+  </div>
 </div>

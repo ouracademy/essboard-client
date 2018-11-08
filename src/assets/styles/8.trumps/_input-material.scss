@@ -1,12 +1,9 @@
-
-
 .readonly {
   // color: inherit !important;
   .mat-form-field-infix {
     background-color: #efefef;
   }
 }
-
 
 @mixin itemReadonly() {
   .mat-form-field-underline {
@@ -17,19 +14,19 @@
     font-weight: bold;
   }
   .mat-form-field-infix {
-    padding: .8rem 1rem !important;
+    padding: 0.8rem 1rem !important;
     border-radius: 3px !important; // border: none !important;
   }
   color: #7b7878;
   font-weight: bold !important;
 }
 
-.readonly-select{
+.readonly-select {
   pointer-events: none;
 }
 
 .readonly {
-  @include itemReadonly() // >>>>>>> master
+  @include itemReadonly()// >>>>>>> master;
 }
 
 .no-readonly {
