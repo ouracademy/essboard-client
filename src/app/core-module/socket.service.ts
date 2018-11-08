@@ -48,8 +48,9 @@ export class SocketService {
       .then(user => this._app.set('user', user))
   }
 
-  // expose logout
   public logout() {
-    return this._app.logout()
+    return this._app.logout().then(() => {
+      this._app.set('user', null)
+    })
   }
 }
