@@ -19,7 +19,9 @@ interface Notification {
   template: `
     <div>
       <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon [matBadge]="notifications.length" matBadgeColor="warn"
+        <mat-icon
+          [matBadgeHidden]="notReadedNotifications.length === 0"
+          [matBadge]="notReadedNotifications.length" matBadgeColor="warn"
           >home</mat-icon
         >
       </button>
@@ -100,5 +102,9 @@ export class NotificationsComponent implements OnInit {
   }
   private isToRoute(subject) {
     return !!path([subject, 'route'], this.subjectNotification)
+  }
+
+  get notReadedNotifications(): Notification[] {
+    return this.notifications.filter(x => !x.readed)
   }
 }
