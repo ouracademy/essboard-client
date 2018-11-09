@@ -16,7 +16,7 @@ import {
 } from '@angular/material'
 
 import 'hammerjs'
-import { DragulaModule, DragulaService } from 'ng2-dragula/ng2-dragula'
+
 import { RoutingModule } from './routing.module'
 
 import { KernelModule } from '@shared/kernel/kernel.module'
@@ -55,7 +55,6 @@ import { OnlineUsersComponent } from './components/online-users/index.components
     MatButtonToggleModule,
     MatListModule,
 
-    DragulaModule,
     AvatarModule,
     RoutingModule
   ],
