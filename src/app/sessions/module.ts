@@ -73,13 +73,6 @@ import { OnlineUsersComponent } from './components/online-users/index.components
 
   entryComponents: [],
   providers: [],
-  exports: [
-    SetCurrentStateComponent,
-    SessionComponent,
-    HowReachGoals,
-    ActOnWorkItems,
-    ChatComponent,
-    TrelloComponent
-  ]
+  exports: []
 })
 export class Module {}
