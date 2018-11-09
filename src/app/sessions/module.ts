@@ -28,12 +28,12 @@ import { SessionComponent } from './components/index.component'
 /* steps for use essence in each session*/
 import { HowReachGoals } from './components/how-reach-goals/index.component'
 import { HowReachGoal } from './components/how-reach-goal/index.component'
-import { ActOnWorkItems } from './components/act-on-work-items/index.component'
+import { ActOnWorkItemsComponent } from './components/act-on-work-items/index.component'
 import { SetCurrentStateComponent } from './components/setCurrentState/index.component'
 import { SetGoalStateComponent } from './components/setGoalState/index.component'
 import { ChecklistComponent } from './components/setCurrentState/checklist/index.component'
 import { ChatComponent } from './components/chatInSession/index.component'
-import { TrelloComponent } from './components/act-on-work-items/migrateToTrello/index.component'
+
 import { OnlineUsersComponent } from './components/online-users/index.components'
 
 @NgModule({
@@ -65,9 +65,8 @@ import { OnlineUsersComponent } from './components/online-users/index.components
     SessionComponent,
     HowReachGoals,
     HowReachGoal,
-    ActOnWorkItems,
+    ActOnWorkItemsComponent,
     ChatComponent,
-    TrelloComponent,
     OnlineUsersComponent
   ],
 
@@ -75,4 +74,4 @@ import { OnlineUsersComponent } from './components/online-users/index.components
   providers: [],
   exports: []
 })
-export class Module {}
+export class SessionModule {}

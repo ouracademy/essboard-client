@@ -62,4 +62,4 @@ import {
   ],
   entryComponents: [CreateComponent, ShareComponent]
 })
-export class Module {}
+export class ProjectModule {}

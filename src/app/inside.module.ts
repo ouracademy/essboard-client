@@ -10,9 +10,8 @@ const routes: Routes = [
     path: '',
     component: InsideLayoutComponent,
     children: [
-      { path: 'projects', loadChildren: 'app/projects/module#Module' },
-      { path: 'sessions', loadChildren: 'app/sessions/module#Module' },
-      { path: 'practices', loadChildren: 'app/practices/module#Module' }
+      { path: 'projects', loadChildren: 'app/projects/module#ProjectModule' },
+      { path: 'sessions', loadChildren: 'app/sessions/module#SessionModule' }
     ]
   }
 ]

@@ -1,4 +1,4 @@
-import { OnInit, Component, Input, EventEmitter, Output } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { AuthService } from '@core/auth.service'
 import { Goal } from '@no-module/models/goal'
 @Component({
@@ -6,11 +6,11 @@ import { Goal } from '@no-module/models/goal'
   templateUrl: 'index.component.html',
   styleUrls: ['index.component.css']
 })
-export class ActOnWorkItems {
+export class ActOnWorkItemsComponent {
   @Input() goals: Goal[]
   @Input() sessionNumber: number
   apiKey: string
-  isConectionInit: boolean = false
+  isConectionInit = false
   constructor(private auth: AuthService) {}
   initConectTrello() {
     this.apiKey = this.auth.user.appKeyTrello

@@ -4,14 +4,11 @@ import {
   MatListModule,
   MatIconModule
 } from '@angular/material'
-import {
-  LayoutComponent,
-  LayoutSettingsComponent,
-  DeveloperComponent
-} from './index'
+import { LayoutSettingsComponent } from './index'
+import { CommonModule } from '@angular/common'
 
 @NgModule({
-  imports: [MatToolbarModule, MatListModule, MatIconModule],
-  declarations: [LayoutComponent, LayoutSettingsComponent, DeveloperComponent]
+  imports: [MatToolbarModule, MatListModule, MatIconModule, CommonModule],
+  declarations: [LayoutSettingsComponent]
 })
 export class DeveloperModule {}
