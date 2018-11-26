@@ -1,13 +1,14 @@
 <div>
   <div class="row  center-xs middle-xs ">
     <alpha-card
-      *ngIf="alphaTemplate && alpha"
+      *ngIf="alphaTemplate && states"
       class="col-xs-4"
       [alpha]="alphaTemplate"
-      [states]="alpha.states"
+      [states]="states"
       (onChooseState)="onSelectedState($event)"
     >
     </alpha-card>
+
     <div class="row col-xs-8" *ngIf="stateTemplate">
       <div class="row  around-xs top-xs">
         <state-card-view
@@ -15,24 +16,13 @@
           [state]="stateTemplate"
           [alpha]="alphaTemplate"
         ></state-card-view>
-        <div>
-          <div class="row center-xs middle-xs" *ngIf="state">
-            <ngx-avatar
-              *ngFor="let vote of state.votes"
-              size="30"
-              [name]="vote.name"
-            ></ngx-avatar>
-          </div>
-          <button *ngIf="!state" (click)="createState()">
-            Empezar a evaluar
-          </button>
-        </div>
       </div>
     </div>
   </div>
+  <!---->
   <div class="row" *ngIf="state">
     <mat-checkbox
-      [checked]="state && state.status == 'done'"
+      [checked]="state && state.status == 'achieved'"
       (change)="handleChange($event.checked)"
       >Marcar todos</mat-checkbox
     >
@@ -43,229 +33,7 @@
       [state]="state"
     ></checklist>
   </div>
-
-  <!--
-    idState  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    [  { idCheckTemplate : 1, votes:  ['arthur','diana' ]}, idCheckTemplate: 2, votes:  ['eli', 'arthur' ]]
-  -->
 </div>
-<!--
-  <div class="row" *ngIf="alphaTemplate">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <button (click)="startMonitor()">Iniciar revision</button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <button (click)="showMonitor()">Mostrar resultados</button>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  </div>
--->
 
 <audio #player preload="auto">
   <source

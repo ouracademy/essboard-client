@@ -97,13 +97,15 @@ export interface Checkpoint {
 export class SetCurrentStateComponent implements OnInit {
   @Input('alpha')
   set _alpha(arg: AlphaTemplate) {
-    this.sessionService.getAlpha(arg).subscribe(alpha => {
-      this.alpha = alpha
+    this.sessionService.getAlpha(arg).subscribe(states => {
+      this.states = states
     })
+
     this.alphaTemplate = arg
     this.reset()
   }
 
+  states: any
   alpha: Alpha
   alphaTemplate: AlphaTemplate
 
@@ -133,20 +135,16 @@ export class SetCurrentStateComponent implements OnInit {
 
   onSelectedState({ state, template }: SelectedState) {
     this.stateTemplate = template
-    this.service.getState(state, this.state)
-
+    // hay q editar alpha-card ...??uhm
+    // asi como hicimos la otra vez
+    // comentar todo alpha card no a aver creo q si
+    this.service.state = state
     //   this.playerContainer.nativeElement.play()
   }
   handleChange(checked) {
     this.sessionService
       .setStateToAlpha(this.alpha, this.stateTemplate, this.state, checked)
       .then(result => {})
-  }
-
-  createState() {
-    this.service.createState(this.stateTemplate, this.alpha).then(state => {
-      this.service.getState(state, this.state)
-    })
   }
 
   startMonitor() {}
@@ -187,3 +185,7 @@ export class SetCurrentStateComponent implements OnInit {
     )
   }
 }
+// ta funcionando??perateok te compartire mi pantall
+//sin audio xq toy cerca a al tele y suena fuerte
+// yap diana yaap :) diaaaaana ahm diana :P entra a hangouts
+//

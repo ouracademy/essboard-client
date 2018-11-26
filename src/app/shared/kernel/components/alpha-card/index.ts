@@ -19,7 +19,7 @@ export class AlphaCardComponent {
   @Input()
   alpha: AlphaTemplate
   @Input()
-  states: State[] = []
+  states: any[] = []
   @Output()
   onChooseState = new EventEmitter<SelectedState>()
 
@@ -43,6 +43,6 @@ export class AlphaCardComponent {
   }
 
   getState(stateTemplate: StateTemplate) {
-    return this.states.find(x => x.knowledgeId === stateTemplate.id)
+    return this.states.find(x => x.id === stateTemplate.id)
   }
 }

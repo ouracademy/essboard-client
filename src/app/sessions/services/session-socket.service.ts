@@ -74,7 +74,7 @@ export class SessionSocketService extends SessionService {
         })
       )
   }
-
+  //
   private joinToChannel(type, typeId) {
     return this.channelSubscriptionsService
       .create({
@@ -144,15 +144,34 @@ export class SessionSocketService extends SessionService {
     this.service.patch(session.id, { finish: true })
   }
 
-  getAlpha(alpha: AlphaTemplate): Observable<Alpha> {
-    const sessionId = this.session.id
-    return <any>(
-      from(
-        this.socketService
-          .getService<Alpha>('alphas')
-          .find({ query: { knowledgeId: alpha.id, sessionId: sessionId } })
-      )
-    )
+  getAlpha(alpha: AlphaTemplate): Observable<any> {
+    const response = [
+      {
+        status: 'achieved',
+        id: '11'
+      },
+      {
+        status: 'achieved',
+        id: '12'
+      },
+      {
+        status: 'todo',
+        id: '13'
+      }
+    ]
+    // achieved , todo , in-progress ara cambiar poco el
+    // angular okis
+    /*
+    <any>from(
+      this.socketService.getService('states').find({
+        query: { date, project: this.session.projectId, alpha: alpha.id }
+      })
+    ) 
+    */
+
+    // TODO: fix this
+    const date = this.session.endDate ? this.session.endDate : new Date()
+    return of(response)
   }
 
   setStateToAlpha(
@@ -184,22 +203,43 @@ export class SessionSocketService extends SessionService {
         })
       )
   }
-  getState(state, previousState) {
-    if (previousState) {
-      this.leaveChannel('states', previousState._id)
-    }
-    const stateId = state && state._id
-    if (stateId) {
-      this.statesService.get(stateId).then(result => {
-        this.currentState$.next({
-          ...result,
-          votes: this.projectService.getInfoMembers(result['votes'])
-        })
-        this.joinToChannel('states', stateId)
-      })
-    } else {
-      this.currentState$.next(null)
-    }
+  // can vote
+  set state(state) {
+    // esto es llamar a states muchas veces, cada vez q votes avisar q ststes ha cambiado
+    this.currentState$.next(state)
+
+    // if (previousState) {
+    //   this.leaveChannel('states', previousState._id)
+    // }
+    // const stateId = state && state._id
+    // if (stateId) {
+    //   this.statesService.get(stateId).then(result => {
+    //     this.currentState$.next({
+    //       ...result,
+    //       votes: this.projectService.getInfoMembers(result['votes'])
+    //     })
+    //     this.joinToChannel('states', stateId)
+    //   })
+    // } else {
+    //   this.currentState$.next(null)
+    // }
+  }
+
+  get checklist() {
+    const response = [
+      {
+        id: '111',
+        votes: [
+          {
+            from: '5bcbacd3c47faf2c39019741',
+            checkpoint: '111',
+            createdAt: '2018-11-01T05:00:00.000Z'
+          }
+        ],
+        isDone: true
+      }
+    ]
+    return of(response)
   }
 
   // mthods q aun no vemos al final
@@ -239,14 +279,13 @@ export class SessionSocketService extends SessionService {
     this.patch(id, action, params)
   }
 
-  voteCheckpoint(state: State, checkpointTemplate: CheckpointTemplate, vote) {
-    this.statesService
-      .patch(state._id, {
-        voteCheckpoint: { knowledgeId: checkpointTemplate.id, vote }
-      })
-      .then(result => {
-        console.log(result)
-      })
+  voteCheckpoint(checkpointTemplate: CheckpointTemplate, vote: boolean) {
+    this.socketService.getService('votes').create({
+      type: vote ? 'VOTE_EMITED' : 'VOTE_REMOVED',
+      checkpoint: checkpointTemplate.id,
+      sessionId: this.session.id,
+      projectId: this.session.projectId
+    })
   }
   setVoteToCheckpoint(
     id,

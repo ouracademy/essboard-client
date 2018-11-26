@@ -35,7 +35,7 @@ export abstract class SessionService {
   abstract colaboreUsingUserIdInProject(idSession, idProject)
   abstract finish(session)
   abstract leaveSessionChannel(session: Session): Observable<any>
-  abstract getAlpha(alpha: AlphaTemplate): Observable<Alpha>
+  abstract getAlpha(alpha: AlphaTemplate): Observable<any>
   abstract setStateToAlpha(
     alpha: Alpha,
     stateTemplate: StateTemplate,
@@ -47,10 +47,7 @@ export abstract class SessionService {
     stateTemplate: StateTemplate,
     alpha: Alpha
   ): Promise<State>
-  abstract getState(stateId, previousState)
-  abstract voteCheckpoint(
-    state: State,
-    checkpointTemplate: CheckpointTemplate,
-    vote: boolean
-  )
+  abstract set state(state)
+  abstract get checklist()
+  abstract voteCheckpoint(checkpointTemplate: CheckpointTemplate, vote: boolean)
 }

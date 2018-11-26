@@ -27,12 +27,12 @@
   background-color: transparent;
 }
 
-.doing {
+.in-progress {
   background-color: currentColor;
   opacity: 0.6;
 }
 
-.done {
+.achieved {
   border-style: solid;
   background-color: currentColor;
 }
