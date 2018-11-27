@@ -3,7 +3,7 @@ import {
   AlphaTemplate,
   StateTemplate,
   State
-} from 'app/sessions/components/setCurrentState/index.component'
+} from 'app/sessions/components/detail-alpha/index.component'
 
 @Component({
   selector: 'alpha-card',

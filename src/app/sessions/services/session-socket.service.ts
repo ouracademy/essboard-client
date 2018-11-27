@@ -14,7 +14,7 @@ import {
   StateTemplate,
   State,
   CheckpointTemplate
-} from '../components/setCurrentState/index.component'
+} from '../components/detail-alpha/index.component'
 import { ProjectService } from 'app/projects/services/project.service'
 
 @Injectable()
@@ -74,6 +74,11 @@ export class SessionSocketService extends SessionService {
         })
       )
   }
+
+  get selectedSession() {
+    return this.session
+  }
+
   //
   private joinToChannel(type, typeId) {
     return this.channelSubscriptionsService
@@ -178,33 +183,10 @@ export class SessionSocketService extends SessionService {
   }
 
   get checklist() {
-    // const response = [
-    //   {
-    //     id: '111',
-    //     votes: [
-    //       {
-    //         from: '5bcbacd3c47faf2c39019741',
-    //         checkpoint: '111',
-    //         createdAt: '2018-11-01T05:00:00.000Z'
-    //       }
-    //     ],
-    //     isDone: true
-    //   }
-    // ]
-    // return of(response)
-    console.log('get checklist', this.currentState$.getValue())
     const date = this.session.endDate
       ? this.session.endDate
-      : new Date(2018, 10, 30)
+      : new Date(2018, 10, 30) // TODO: check this
     const state = this.currentState$.getValue()
-    console.log({
-      query: {
-        date,
-        project: this.session.projectId,
-        state: state.id
-      },
-      asCheckpoints: true
-    })
 
     return from(
       this.socketService.getService('states').find({
@@ -276,8 +258,6 @@ export class SessionSocketService extends SessionService {
       .getService('users')
       .patch(this.auth.user.id, { $addToSet: { sessionsId: idSession } })
       .then(result => {})
-      .catch(function(error) {
-        console.log(error)
-      })
+      .catch(function(error) {})
   }
 }

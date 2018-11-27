@@ -6,11 +6,12 @@ import {
   StateTemplate,
   CheckpointTemplate,
   State
-} from '../components/setCurrentState/index.component'
+} from '../components/detail-alpha/index.component'
 
 export abstract class SessionService {
   currentState$: BehaviorSubject<StateTemplate>
   channelSubscriptions$: Subject<any>
+  abstract get selectedSession()
   abstract getSession(id: string): Observable<Session>
   abstract getSessions(projectId: string): Observable<Session[]>
   abstract addSession(projectId: string): Promise<any>

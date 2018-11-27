@@ -5,7 +5,7 @@ import {
   AlphaTemplate,
   StateTemplate,
   CheckpointTemplate
-} from 'app/sessions/components/setCurrentState/index.component'
+} from 'app/sessions/components/detail-alpha/index.component'
 import { Observable } from 'rxjs/Observable'
 import { map } from 'rxjs/operators'
 

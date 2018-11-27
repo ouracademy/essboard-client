@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { StateTemplate, State, CheckpointTemplate } from '../index.component'
-import { SessionService } from 'app/sessions/services/session.service'
+import {
+  StateTemplate,
+  State,
+  CheckpointTemplate
+} from '../detail-alpha/index.component'
+import { SessionService } from '../../services/session.service'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 import { AuthService } from '@core/auth.service'
 import { ProjectService } from 'app/projects/services/project.service'
@@ -32,18 +36,12 @@ export class ChecklistComponent implements OnInit {
   checklist: any[] = []
 
   getCheckpoints(stateId) {
-    console.log('get checklist')
     this.sessionService.checklist.subscribe(checklist => {
-      console.log('hjkj')
       this.checklist = checklist
-      console.log({ checklist })
     })
   }
 
-  ngOnInit() {
-    //listen changes about state
-    // this.getCheckpoints()
-  }
+  ngOnInit() {}
 
   vote(checkpointTemplate: CheckpointTemplate, $event: MatCheckboxChange) {
     this.sessionService.voteCheckpoint(checkpointTemplate, $event.checked)

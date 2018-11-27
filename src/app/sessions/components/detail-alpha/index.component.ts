@@ -89,11 +89,11 @@ export interface Checkpoint {
 }
 
 @Component({
-  selector: 'set-current-state',
+  selector: 'detail-alpha',
   templateUrl: 'index.component.html',
   styleUrls: ['index.component.css']
 })
-export class SetCurrentStateComponent implements OnInit {
+export class DetailAlphaComponent implements OnInit {
   @Input('alpha')
   set _alpha(arg: AlphaTemplate) {
     this.service.getAlpha(arg).subscribe(states => {
@@ -107,9 +107,6 @@ export class SetCurrentStateComponent implements OnInit {
   states: any
   alpha: Alpha
   alphaTemplate: AlphaTemplate
-
-  @Input()
-  session: Session
 
   @ViewChild('player')
   public playerContainer: ElementRef

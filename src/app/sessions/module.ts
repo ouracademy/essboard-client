@@ -26,13 +26,19 @@ import { UsersModule } from '../users/index.module'
 import { SessionComponent } from './components/index.component'
 
 /* steps for use essence in each session*/
+import { StepsComponent } from './components/steps/index.component'
+import { RadiatorInformationComponent } from './components/radiator-information/index.component'
+import { SetCurrentStateComponent } from './components/set-current-state/index.component'
+
 import { HowReachGoals } from './components/how-reach-goals/index.component'
-import { HowReachGoal } from './components/how-reach-goal/index.component'
+import { HowReachGoalComponent } from './components/how-reach-goal/index.component'
 import { ActOnWorkItemsComponent } from './components/act-on-work-items/index.component'
-import { SetCurrentStateComponent } from './components/setCurrentState/index.component'
-import { SetGoalStateComponent } from './components/setGoalState/index.component'
-import { ChecklistComponent } from './components/setCurrentState/checklist/index.component'
-import { ChatComponent } from './components/chatInSession/index.component'
+
+import { DetailAlphaComponent } from './components/detail-alpha/index.component'
+import { SetGoalStateComponent } from './components/set-goal-state/index.component'
+
+import { ChecklistComponent } from './components/checklist/index.component'
+import { ChatComponent } from './components/chat/index.component'
 
 import { OnlineUsersComponent } from './components/online-users/index.components'
 
@@ -59,12 +65,16 @@ import { OnlineUsersComponent } from './components/online-users/index.components
     RoutingModule
   ],
   declarations: [
+    StepsComponent,
+    RadiatorInformationComponent,
+
     SetCurrentStateComponent,
+    DetailAlphaComponent,
     SetGoalStateComponent,
     ChecklistComponent,
     SessionComponent,
     HowReachGoals,
-    HowReachGoal,
+    HowReachGoalComponent,
     ActOnWorkItemsComponent,
     ChatComponent,
     OnlineUsersComponent

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core'
 import {
   StateTemplate,
   AlphaTemplate
-} from 'app/sessions/components/setCurrentState/index.component'
+} from 'app/sessions/components/detail-alpha/index.component'
 
 @Component({
   selector: 'state-card-view',

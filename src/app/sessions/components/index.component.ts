@@ -4,7 +4,7 @@ import { Session } from '@no-module/models/project'
 import { SessionService } from '../services/session.service'
 import { PrimaryKernelMockService } from '@shared/kernel/services/index'
 import { KernelService } from '@core/kernel-knowledge.service'
-import { AlphaTemplate } from './setCurrentState/index.component'
+import { AlphaTemplate } from './detail-alpha/index.component'
 import { flatMap } from 'rxjs/operators'
 
 @Component({

@@ -5,15 +5,16 @@ import {
 } from '@no-module/models/kernel/kernel'
 import { Alpha, State, Checkpoint } from '@shared/kernel/model/kernel'
 import { Goal } from '@no-module/models/goal'
+
 @Component({
   selector: 'how-reach-goal',
   templateUrl: 'index.component.html',
   styleUrls: ['index.component.css']
 })
-export class HowReachGoal {
+export class HowReachGoalComponent {
   @Input() goal: Goal
   @Output() onAddAction = new EventEmitter<any>()
-  action: string = ''
+  action = ''
   save(description) {
     /*let index = this.actions.indexOf(description);
     this.actions[index] = description;
@@ -21,7 +22,7 @@ export class HowReachGoal {
   }
   add() {
     if (this.action !== '') {
-      let action = {
+      const action = {
         name: this.action,
         stateId: this.goal.goalState.identifier
       }

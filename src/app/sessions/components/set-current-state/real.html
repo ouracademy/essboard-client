@@ -1,0 +1,28 @@
+<div class="content-tab">
+  <div class="row middle-xs center-xs">
+    <h2 class="title">Determina el estado de cualquier dimension</h2>
+    <h4 class="subtitle">
+      ( Selecciona una dimension y luego selecciona el estado que tú consideras
+      se encuentra el proyecto )
+    </h4>
+  </div>
+  <div class="row">
+    <div class="alpha-buttons">
+      <mat-button-toggle-group name="dimensions-name">
+        <mat-button-toggle
+          *ngFor="let alpha of alphas"
+          (click)="handleSelectionAlpha(alpha)"
+        >
+          {{ alpha.name }}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+  <div class="pad-1">
+    <set-current-state
+      *ngIf="selectedAlpha"
+      [alpha]="selectedAlpha"
+      [session]="session"
+    ></set-current-state>
+  </div>
+</div>
