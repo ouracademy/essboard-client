@@ -19,19 +19,8 @@
       </div>
     </div>
   </div>
-  <!---->
-  <div class="row" *ngIf="state">
-    <mat-checkbox
-      [checked]="state && state.status == 'achieved'"
-      (change)="handleChange($event.checked)"
-      >Marcar todos</mat-checkbox
-    >
-
-    <checklist
-      class="mar-1"
-      [stateTemplate]="stateTemplate"
-      [state]="state"
-    ></checklist>
+  <div class="row" *ngIf="stateTemplate">
+    <checklist class="mar-1" [stateTemplate]="stateTemplate"></checklist>
   </div>
 </div>
 

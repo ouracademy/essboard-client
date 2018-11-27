@@ -1,4 +1,4 @@
-import { Subject, Observable } from 'rxjs'
+import { Subject, Observable, BehaviorSubject } from 'rxjs'
 import { Session } from '@shared/no-module/models/project'
 import {
   AlphaTemplate,
@@ -9,45 +9,20 @@ import {
 } from '../components/setCurrentState/index.component'
 
 export abstract class SessionService {
-  currentState$: Subject<any>
+  currentState$: BehaviorSubject<StateTemplate>
   channelSubscriptions$: Subject<any>
   abstract getSession(id: string): Observable<Session>
   abstract getSessions(projectId: string): Observable<Session[]>
   abstract addSession(projectId: string): Promise<any>
   abstract delete(id)
-  abstract setCheckpointTo(id, dimensionId, stateId, checkpointId, condition)
   abstract setStateAsWorking(id, dimensionConcept, stateName)
-  abstract setVoteToCheckpoint(
-    id,
-    dimensionId,
-    stateId,
-    checkpointId,
-    condition
-  )
-  abstract setUnVoteToCheckpoint(
-    id,
-    dimensionId,
-    stateId,
-    checkpointId,
-    condition
-  )
   abstract colaboreUsingSessionsIdInUser(idSession)
   abstract colaboreUsingUserIdInProject(idSession, idProject)
   abstract finish(session)
   abstract leaveSessionChannel(session: Session): Observable<any>
   abstract getAlpha(alpha: AlphaTemplate): Observable<any>
-  abstract setStateToAlpha(
-    alpha: Alpha,
-    stateTemplate: StateTemplate,
-    state: State,
-    checked: any
-  )
   abstract getSessionChannelSubscriptions(sessionId)
-  abstract createState(
-    stateTemplate: StateTemplate,
-    alpha: Alpha
-  ): Promise<State>
-  abstract set state(state)
+  abstract set state(state: StateTemplate)
   abstract get checklist()
   abstract voteCheckpoint(checkpointTemplate: CheckpointTemplate, vote: boolean)
 }

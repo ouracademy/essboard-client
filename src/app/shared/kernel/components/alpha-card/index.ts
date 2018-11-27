@@ -5,11 +5,6 @@ import {
   State
 } from 'app/sessions/components/setCurrentState/index.component'
 
-export class SelectedState {
-  state: State
-  template: StateTemplate
-}
-
 @Component({
   selector: 'alpha-card',
   templateUrl: 'index.html',
@@ -21,12 +16,12 @@ export class AlphaCardComponent {
   @Input()
   states: any[] = []
   @Output()
-  onChooseState = new EventEmitter<SelectedState>()
+  onChooseState = new EventEmitter<StateTemplate>()
 
   selectedState: StateTemplate = null
 
   select(template: StateTemplate) {
-    this.onChooseState.emit({ state: this.getState(template), template })
+    this.onChooseState.emit(template)
   }
 
   isSelected(state: StateTemplate) {

@@ -13,7 +13,6 @@ import {
 } from 'lodash-decorators/factory'
 import { MemoizeApplicator } from 'lodash-decorators/applicators'
 import { MemoizeConfig } from 'lodash-decorators/shared'
-import { SelectedState } from '@shared/kernel/components/alpha-card'
 
 export const Memoize = DecoratorFactory.createInstanceDecorator(
   new DecoratorConfig(memoize, new MemoizeApplicator(), {
@@ -97,7 +96,7 @@ export interface Checkpoint {
 export class SetCurrentStateComponent implements OnInit {
   @Input('alpha')
   set _alpha(arg: AlphaTemplate) {
-    this.sessionService.getAlpha(arg).subscribe(states => {
+    this.service.getAlpha(arg).subscribe(states => {
       this.states = states
     })
 
@@ -114,78 +113,23 @@ export class SetCurrentStateComponent implements OnInit {
 
   @ViewChild('player')
   public playerContainer: ElementRef
-  selectedState: SelectedState
-  state: State
   stateTemplate: StateTemplate
   projectState = null
 
-  constructor(
-    private service: SessionService,
-    private sessionService: SessionService
-  ) {}
+  constructor(private service: SessionService) {}
 
   ngOnInit() {
-    this.service.currentState$.subscribe(state => (this.state = state))
+    this.service.currentState$.subscribe(
+      stateTemplate => (this.stateTemplate = stateTemplate)
+    )
   }
 
   reset() {
     this.stateTemplate = null
-    this.state = null
   }
 
-  onSelectedState({ state, template }: SelectedState) {
-    this.stateTemplate = template
-    // hay q editar alpha-card ...??uhm
-    // asi como hicimos la otra vez
-    // comentar todo alpha card no a aver creo q si
-    this.service.state = state
+  onSelectedState(template: StateTemplate) {
+    this.service.state = template
     //   this.playerContainer.nativeElement.play()
   }
-  handleChange(checked) {
-    this.sessionService
-      .setStateToAlpha(this.alpha, this.stateTemplate, this.state, checked)
-      .then(result => {})
-  }
-
-  startMonitor() {}
-
-  showMonitor() {}
-  markStatusAsDone() {
-    // selectedState
-    // verificar si se puede marcar como hecho
-  }
-
-  private isPosiblePutStateAsWorking(state: StateTemplate): Boolean {
-    return true // state.isWorking === false && (state.isFirst || state.stateBackIsAchaived)
-  }
-
-  private putDimensionAsTouching() {
-    // if (this.alpha.isTouched == false) {
-    //     this.alpha.isTouched = true;
-    // }
-  }
-
-  onSelectedCheckpoint(checkpoint: CheckpointTemplate) {
-    this.service.setVoteToCheckpoint(
-      this.session.id,
-      this.alphaTemplate.id,
-      this.stateTemplate.id,
-      checkpoint.id,
-      true
-    )
-  }
-
-  noCheck(checkpoint: CheckpointTemplate) {
-    this.service.setUnVoteToCheckpoint(
-      this.session.id,
-      this.alphaTemplate.id,
-      this.stateTemplate.id,
-      checkpoint.id,
-      false
-    )
-  }
 }
-// ta funcionando??perateok te compartire mi pantall
-//sin audio xq toy cerca a al tele y suena fuerte
-// yap diana yaap :) diaaaaana ahm diana :P entra a hangouts
-//

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
-import { Observable, Subject, from, of } from 'rxjs'
+import { Observable, from, BehaviorSubject } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
@@ -46,7 +46,7 @@ export class SessionSocketService extends SessionService {
       })
     })
 
-    this.currentState$ = new Subject<any>()
+    this.currentState$ = new BehaviorSubject<StateTemplate>(null)
   }
 
   getSessions(projectId: string) {
@@ -145,66 +145,18 @@ export class SessionSocketService extends SessionService {
   }
 
   getAlpha(alpha: AlphaTemplate): Observable<any> {
-    const response = [
-      {
-        status: 'achieved',
-        id: '11'
-      },
-      {
-        status: 'achieved',
-        id: '12'
-      },
-      {
-        status: 'todo',
-        id: '13'
-      }
-    ]
-    // achieved , todo , in-progress ara cambiar poco el
-    // angular okis
-    /*
-    <any>from(
+    // TODO: fix this (problem with client sending other date that the server doesn't know)
+    const date = this.session.endDate ? this.session.endDate : new Date()
+
+    return from(
       this.socketService.getService('states').find({
         query: { date, project: this.session.projectId, alpha: alpha.id }
       })
-    ) 
-    */
-
-    // TODO: fix this
-    const date = this.session.endDate ? this.session.endDate : new Date()
-    return of(response)
+    )
   }
 
-  setStateToAlpha(
-    alpha: Alpha,
-    stateTemplate: StateTemplate,
-    state: State,
-    checked: any
-  ) {
-    if (state) {
-      return this.socketService
-        .getService('states')
-        .patch(state._id, { vote: checked })
-    } else {
-      return this.createState(stateTemplate, alpha)
-    }
-  }
-
-  createState(stateTemplate: StateTemplate, alpha: Alpha): Promise<State> {
-    return stateTemplate.checkpoints
-      .toPromise()
-      .then((checkpoints: CheckpointTemplate[]) =>
-        this.statesService.create({
-          knowledgeId: stateTemplate.id,
-          alphaId: alpha._id,
-          checklist: checkpoints.map(x => ({
-            knowledgeId: x.id,
-            favorablesVotes: []
-          }))
-        })
-      )
-  }
   // can vote
-  set state(state) {
+  set state(state: StateTemplate) {
     // esto es llamar a states muchas veces, cada vez q votes avisar q ststes ha cambiado
     this.currentState$.next(state)
 
@@ -226,20 +178,44 @@ export class SessionSocketService extends SessionService {
   }
 
   get checklist() {
-    const response = [
-      {
-        id: '111',
-        votes: [
-          {
-            from: '5bcbacd3c47faf2c39019741',
-            checkpoint: '111',
-            createdAt: '2018-11-01T05:00:00.000Z'
-          }
-        ],
-        isDone: true
-      }
-    ]
-    return of(response)
+    // const response = [
+    //   {
+    //     id: '111',
+    //     votes: [
+    //       {
+    //         from: '5bcbacd3c47faf2c39019741',
+    //         checkpoint: '111',
+    //         createdAt: '2018-11-01T05:00:00.000Z'
+    //       }
+    //     ],
+    //     isDone: true
+    //   }
+    // ]
+    // return of(response)
+    console.log('get checklist', this.currentState$.getValue())
+    const date = this.session.endDate
+      ? this.session.endDate
+      : new Date(2018, 10, 30)
+    const state = this.currentState$.getValue()
+    console.log({
+      query: {
+        date,
+        project: this.session.projectId,
+        state: state.id
+      },
+      asCheckpoints: true
+    })
+
+    return from(
+      this.socketService.getService('states').find({
+        query: {
+          date,
+          project: this.session.projectId,
+          state: state.id,
+          asCheckpoints: true
+        }
+      })
+    )
   }
 
   // mthods q aun no vemos al final
@@ -283,47 +259,9 @@ export class SessionSocketService extends SessionService {
     this.socketService.getService('votes').create({
       type: vote ? 'VOTE_EMITED' : 'VOTE_REMOVED',
       checkpoint: checkpointTemplate.id,
-      sessionId: this.session.id,
-      projectId: this.session.projectId
+      session: this.session.id,
+      project: this.session.projectId
     })
-  }
-  setVoteToCheckpoint(
-    id,
-    dimensionMetadataId,
-    stateMetadataId,
-    checkpointMetadataId,
-    condition
-  ) {
-    let indexs = GetKeys.getIndexs(dimensionMetadataId, stateMetadataId)
-    let username = this.auth.user.name
-    let base =
-      'alphas.' + indexs.dimension + '.states.' + indexs.state + '.checklist'
-    let path = base + '.$.favorablesVotes'
-    let search = base + '.metadataId'
-    let params = { ['query']: { [search]: checkpointMetadataId } }
-    let data = { [path]: username }
-    let action = { $addToSet: data }
-    //  { $addToSet: { [path]: username } }
-    this.patch(id, action, params)
-  }
-  setUnVoteToCheckpoint(
-    id,
-    dimensionMetadataId,
-    stateMetadataId,
-    checkpointMetadataId,
-    condition
-  ) {
-    let indexs = GetKeys.getIndexs(dimensionMetadataId, stateMetadataId)
-    let username = this.auth.user.name
-    let base =
-      'alphas.' + indexs.dimension + '.states.' + indexs.state + '.checklist'
-    let path = base + '.$.favorablesVotes'
-    let search = base + '.metadataId'
-    let params = { ['query']: { [search]: checkpointMetadataId } }
-    let data = { [path]: username }
-    let action = { $pull: data }
-    //
-    this.patch(id, action, params)
   }
 
   private patch(id, data, params) {
@@ -331,24 +269,6 @@ export class SessionSocketService extends SessionService {
       .patch(id, data, params)
       .then(result => {})
       .catch(function(error) {})
-  }
-
-  setCheckpointTo(
-    id,
-    dimensionMetadataId,
-    stateMetadataId,
-    checkpointMetadataId,
-    condition
-  ) {
-    let indexs = GetKeys.getIndexs(dimensionMetadataId, stateMetadataId)
-    let base =
-      'alphas.' + indexs.dimension + '.states.' + indexs.state + '.checklist'
-    let path = base + '.$.isAchieved'
-    let search = base + '.metadataId'
-    let params = { ['query']: { [search]: checkpointMetadataId } }
-    let data = { [path]: condition }
-    let action = { $set: data }
-    this.patch(id, action, params)
   }
 
   public colaboreUsingSessionsIdInUser(idSession) {

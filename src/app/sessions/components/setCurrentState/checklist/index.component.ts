@@ -11,13 +11,17 @@ import { ProjectService } from 'app/projects/services/project.service'
   styleUrls: ['index.component.css']
 })
 export class ChecklistComponent implements OnInit {
-  @Input('state')
-  set state(arg: any) {
+  _stateTemplate: StateTemplate
+
+  @Input()
+  set stateTemplate(arg: any) {
+    this._stateTemplate = arg
     this.getCheckpoints(arg.id)
   }
 
-  @Input()
-  stateTemplate: StateTemplate
+  get stateTemplate() {
+    return this._stateTemplate
+  }
 
   constructor(
     private sessionService: SessionService,
@@ -28,9 +32,11 @@ export class ChecklistComponent implements OnInit {
   checklist: any[] = []
 
   getCheckpoints(stateId) {
+    console.log('get checklist')
     this.sessionService.checklist.subscribe(checklist => {
+      console.log('hjkj')
       this.checklist = checklist
-      console.log(this.checklist)
+      console.log({ checklist })
     })
   }
 
