@@ -137,3 +137,16 @@ app-root {
 .detail span {
   margin-right: 10px;
 }
+.button--alpha {
+  border: 2px solid currentColor;
+  margin: 0.3rem;
+  padding: 0.5rem;
+  width: 11rem;
+  .text {
+    color: #646363;
+    text-align: center;
+  }
+}
+.active--alpha {
+  background: currentColor;
+}
