@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { urlEssenceKernel } from '@env/environment'
 import {
-  AlphaTemplate,
   StateTemplate,
   CheckpointTemplate
-} from 'app/sessions/components/detail-alpha/index.component'
+} from 'app/sessions/components/detail-alpha/kernel'
+import { AlphaTemplate } from 'app/sessions/components/detail-alpha/kernel'
 import { Observable } from 'rxjs/Observable'
 import { map } from 'rxjs/operators'
 
@@ -14,23 +14,22 @@ export class KernelService {
   constructor(private httpClient: HttpClient) {}
 
   getAlphas(): Observable<AlphaTemplate[]> {
-    return this.httpClient
-      .get<any[]>(`${urlEssenceKernel}/kernel`)
-      .pipe(
-        map(alphas =>
-          alphas.map(x => new AlphaTemplate(x.id, x.name, x.area, this))
-        )
-      )
+    return this.httpClient.get<any[]>(`${urlEssenceKernel}/kernel`)
+  }
+
+  getAlpha(alphaId): Observable<AlphaTemplate> {
+    return this.httpClient.get<AlphaTemplate>(
+      `${urlEssenceKernel}/kernel/alphas/${alphaId}`
+    )
+    // return this.getAlphas().pipe(
+    //   map(alphas => alphas.find(alpha => alpha.id === alphaId))
+    // )
   }
 
   getStates(alphaId): Observable<StateTemplate[]> {
-    return this.httpClient
-      .get<any[]>(`${urlEssenceKernel}/kernel/alphas/${alphaId}`)
-      .pipe(
-        map(alphas =>
-          alphas.map(x => new StateTemplate(x.id, x.name, x.previousId, this))
-        )
-      )
+    return this.httpClient.get<any[]>(
+      `${urlEssenceKernel}/kernel/alphas/${alphaId}`
+    )
   }
 
   getSchemaKernel() {

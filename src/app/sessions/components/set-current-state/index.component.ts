@@ -1,10 +1,6 @@
-import { Component, OnInit, HostListener } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
-import { Session } from '@no-module/models/project'
-import { SessionService } from '../../services/session.service'
-import { PrimaryKernelMockService } from '@shared/kernel/services/index'
+import { Component, OnInit } from '@angular/core'
 import { KernelService } from '@core/kernel-knowledge.service'
-import { AlphaTemplate } from '../detail-alpha/index.component'
+import { AlphaTemplate } from '../detail-alpha/kernel'
 
 @Component({
   selector: 'set-current-state',

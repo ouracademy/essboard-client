@@ -1,9 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import {
-  StateTemplate,
-  State,
-  CheckpointTemplate
-} from '../detail-alpha/index.component'
+import { StateTemplate, CheckpointTemplate } from '../detail-alpha/kernel'
 import { SessionService } from '../../services/session.service'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 import { AuthService } from '@core/auth.service'

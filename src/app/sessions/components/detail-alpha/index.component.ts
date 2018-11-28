@@ -1,68 +1,15 @@
 import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { SessionService } from '../../services/session.service'
 import { KernelService } from '@core/kernel-knowledge.service'
-import { Session } from '@no-module/models/project'
-import { map, skip } from 'rxjs/operators'
-import memoize from 'lodash/fp/memoize'
 
-import {
-  DecoratorConfig,
-  DecoratorFactory,
-  ResolvableFunction,
-  BiTypedMethodDecorator1
-} from 'lodash-decorators/factory'
-import { MemoizeApplicator } from 'lodash-decorators/applicators'
-import { MemoizeConfig } from 'lodash-decorators/shared'
+import { ActivatedRoute } from '@angular/router'
+import { AlphaTemplate, StateTemplate } from './kernel'
 
-export const Memoize = DecoratorFactory.createInstanceDecorator(
-  new DecoratorConfig(memoize, new MemoizeApplicator(), {
-    getter: true,
-    optionalParams: true
-  })
-) as BiTypedMethodDecorator1<ResolvableFunction | MemoizeConfig<any, any>>
-export { Memoize as memoize }
-export default Memoize
-
-export class AlphaTemplate {
-  constructor(
-    public id: string,
-    public name: string,
-    public area: string,
-    private service: KernelService
-  ) {}
-
-  @Memoize()
-  get states() {
-    return this.service.getStates(this.id)
-  }
-}
-
-export class StateTemplate {
-  constructor(
-    public id: string,
-    public name: string,
-    public previousId: string,
-    public service: KernelService
-  ) {}
-
-  @Memoize()
-  get cardCheckpoints() {
-    return this.checkpoints.pipe(
-      map(checkpoints => checkpoints.filter(x => x.isVisibleInCard))
-    )
-  }
-
-  @Memoize()
-  get checkpoints() {
-    return this.service.getCheckpoints(this.id)
-  }
-}
-
-export interface CheckpointTemplate {
+export interface FullAlphaTemplate {
   id: string
   name: string
-  description: string
-  isVisibleInCard: string
+  area: string
+  states: any[]
 }
 
 export interface Alpha {
@@ -94,39 +41,41 @@ export interface Checkpoint {
   styleUrls: ['index.component.css']
 })
 export class DetailAlphaComponent implements OnInit {
-  @Input('alpha')
-  set _alpha(arg: AlphaTemplate) {
-    this.service.getAlpha(arg).subscribe(states => {
-      this.states = states
-    })
-
-    this.alphaTemplate = arg
-    this.reset()
-  }
-
-  states: any
-  alpha: Alpha
   alphaTemplate: AlphaTemplate
+  states: any
+  stateTemplate: StateTemplate
 
   @ViewChild('player')
   public playerContainer: ElementRef
-  stateTemplate: StateTemplate
-  projectState = null
 
-  constructor(private service: SessionService) {}
+  constructor(
+    private sessions: SessionService,
+    private activeRoute: ActivatedRoute,
+    private kernel: KernelService
+  ) {}
 
   ngOnInit() {
-    this.service.currentState$.subscribe(
+    this.sessions.currentState$.subscribe(
       stateTemplate => (this.stateTemplate = stateTemplate)
     )
-  }
 
-  reset() {
-    this.stateTemplate = null
+    this.activeRoute.params.subscribe(params => {
+      this.kernel.getAlpha(params['id']).subscribe(alphaTemplate => {
+        this.alphaTemplate = alphaTemplate
+        this.sessions.getAlpha(this.alphaTemplate).subscribe(states => {
+          this.states = states
+          console.log({
+            alphaTemplate: this.alphaTemplate,
+            states: this.states
+          })
+        })
+      })
+    })
   }
 
   onSelectedState(template: StateTemplate) {
-    this.service.state = template
+    // get
+    this.sessions.state = template
     //   this.playerContainer.nativeElement.play()
   }
 }

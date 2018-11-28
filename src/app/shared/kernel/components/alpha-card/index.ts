@@ -1,9 +1,8 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core'
 import {
   AlphaTemplate,
-  StateTemplate,
-  State
-} from 'app/sessions/components/detail-alpha/index.component'
+  StateTemplate
+} from 'app/sessions/components/detail-alpha/kernel'
 
 @Component({
   selector: 'alpha-card',

@@ -1,12 +1,11 @@
 import { Subject, Observable, BehaviorSubject } from 'rxjs'
 import { Session } from '@shared/no-module/models/project'
+import { Alpha, State } from '../components/detail-alpha/index.component'
 import {
   AlphaTemplate,
-  Alpha,
   StateTemplate,
-  CheckpointTemplate,
-  State
-} from '../components/detail-alpha/index.component'
+  CheckpointTemplate
+} from '../components/detail-alpha/kernel'
 
 export abstract class SessionService {
   currentState$: BehaviorSubject<StateTemplate>

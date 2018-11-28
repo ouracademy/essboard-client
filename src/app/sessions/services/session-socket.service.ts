@@ -8,13 +8,12 @@ import { SocketService } from '@core/socket.service'
 import { GetKeys } from '@no-module/util/get-keys-from-object'
 import { AuthService } from '@core/auth.service'
 import { KernelService } from '@core/kernel-knowledge.service'
+import { Alpha, State } from '../components/detail-alpha/index.component'
 import {
-  AlphaTemplate,
-  Alpha,
   StateTemplate,
-  State,
   CheckpointTemplate
-} from '../components/detail-alpha/index.component'
+} from '../components/detail-alpha/kernel'
+import { AlphaTemplate } from '../components/detail-alpha/kernel'
 import { ProjectService } from 'app/projects/services/project.service'
 
 @Injectable()
