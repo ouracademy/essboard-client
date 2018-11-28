@@ -6,13 +6,13 @@ import { PrimaryKernelMockService } from '@shared/kernel/services/index'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { AlphaTemplate } from './detail-alpha/kernel'
 import { flatMap } from 'rxjs/operators'
-
+import { CanLeaveChannel } from '../services/leave-session.guard'
 @Component({
   selector: 'session',
   templateUrl: 'index.component.html',
   styleUrls: ['index.component.css']
 })
-export class SessionComponent implements OnInit {
+export class SessionComponent implements OnInit, CanLeaveChannel {
   idSession: string
   session: Session
 
@@ -52,7 +52,11 @@ export class SessionComponent implements OnInit {
 
   @HostListener('window:unload', ['$event'])
   unloadHandler(event) {
-    this.service.leaveSessionChannel(this.session)
+    this.leaveChannel()
+  }
+
+  leaveChannel() {
+    return this.service.leaveChannel()
   }
 
   handleSelectionAlpha(alpha: any) {

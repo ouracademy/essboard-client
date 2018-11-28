@@ -5,10 +5,11 @@ import {
   StateTemplate,
   CheckpointTemplate
 } from '../components/detail-alpha/kernel'
-
-export abstract class SessionService {
+import { CanLeaveChannel } from '../services/leave-session.guard'
+export abstract class SessionService implements CanLeaveChannel {
   currentState$: BehaviorSubject<StateTemplate>
   channelSubscriptions$: Subject<any>
+  abstract leaveChannel()
   abstract get selectedSession()
   abstract getSession(id: string): Observable<Session>
   abstract getSessions(projectId: string): Observable<Session[]>
@@ -18,7 +19,6 @@ export abstract class SessionService {
   abstract colaboreUsingSessionsIdInUser(idSession)
   abstract colaboreUsingUserIdInProject(idSession, idProject)
   abstract finish(session)
-  abstract leaveSessionChannel(session: Session): Observable<any>
   abstract getAlpha(alpha: AlphaTemplate): Observable<any>
   abstract getSessionChannelSubscriptions(sessionId)
   abstract set state(state: StateTemplate)

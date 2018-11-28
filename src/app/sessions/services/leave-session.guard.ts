@@ -4,11 +4,14 @@ import { CanDeactivate } from '@angular/router'
 
 import { SessionComponent } from '../components/index.component'
 import { SessionService } from './session.service'
-@Injectable()
-export class CanDeactivateGuard implements CanDeactivate<SessionComponent> {
-  constructor(private sessionService: SessionService) {}
 
-  canDeactivate(component: SessionComponent): Observable<any> {
-    return this.sessionService.leaveSessionChannel(component.session)
+export interface CanLeaveChannel {
+  leaveChannel(): Observable<any>
+}
+
+@Injectable()
+export class CanDeactivateGuard implements CanDeactivate<CanLeaveChannel> {
+  canDeactivate(component: CanLeaveChannel): Observable<any> {
+    return component.leaveChannel()
   }
 }

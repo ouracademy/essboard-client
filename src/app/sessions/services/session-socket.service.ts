@@ -69,9 +69,9 @@ export class SessionSocketService extends SessionService {
       )
   }
 
-  leaveSessionChannel(session: Session): Observable<any> {
+  leaveChannel(): Observable<any> {
     return from(
-      this.channels.leave('sessions', session.id).then(data => {
+      this.channels.leave('sessions', this.session.id).then(data => {
         return true
       })
     )
