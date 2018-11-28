@@ -8,7 +8,6 @@ import { SocketService } from '@core/socket.service'
 import { GetKeys } from '@no-module/util/get-keys-from-object'
 import { AuthService } from '@core/auth.service'
 import { KernelService } from '@core/kernel-knowledge.service'
-import { Alpha, State } from '../components/detail-alpha/index.component'
 import {
   StateTemplate,
   CheckpointTemplate

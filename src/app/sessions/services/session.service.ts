@@ -1,6 +1,5 @@
 import { Subject, Observable, BehaviorSubject } from 'rxjs'
 import { Session } from '@shared/no-module/models/project'
-import { Alpha, State } from '../components/detail-alpha/index.component'
 import {
   AlphaTemplate,
   StateTemplate,

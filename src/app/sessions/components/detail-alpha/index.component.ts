@@ -1,39 +1,9 @@
-import { Component, Input, ElementRef, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { SessionService } from '../../services/session.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 
 import { ActivatedRoute } from '@angular/router'
 import { AlphaTemplate, StateTemplate } from './kernel'
-
-export interface FullAlphaTemplate {
-  id: string
-  name: string
-  area: string
-  states: any[]
-}
-
-export interface Alpha {
-  _id: any
-  knowledgeId: number
-  // currentState: { knowledgeId: String }, // calculated
-  // isTouched?: boolean
-  states: State[]
-  template: AlphaTemplate
-}
-type Status = 'todo' | 'doing' | 'done'
-
-export interface State {
-  _id: any
-  knowledgeId: string
-  status: string
-  alphaId: string
-  votes?: any[]
-  checklist?: Checkpoint[]
-}
-export interface Checkpoint {
-  favorablesVotes: any[]
-  knowledgeId: string
-}
 
 @Component({
   selector: 'detail-alpha',
@@ -64,10 +34,6 @@ export class DetailAlphaComponent implements OnInit {
         this.alphaTemplate = alphaTemplate
         this.sessions.getAlpha(this.alphaTemplate).subscribe(states => {
           this.states = states
-          console.log({
-            alphaTemplate: this.alphaTemplate,
-            states: this.states
-          })
         })
       })
     })
