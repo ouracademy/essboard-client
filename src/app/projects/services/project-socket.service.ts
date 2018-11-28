@@ -13,7 +13,7 @@ export class ProjectSocketService extends ProjectService {
   project: Project
   service: any
   otherService: any
-  projectMembers = []
+  projectMembers: any[] = []
 
   constructor(public socketService: SocketService, private router: Router) {
     super()
@@ -34,9 +34,9 @@ export class ProjectSocketService extends ProjectService {
   getMembers(id) {
     this.socketService
       .getService('members')
-      .find({ query: { projectId: id } })
-      .then(result => {
-        this.projectMembers = result['data']
+      .find({ query: { projectId: id, withUserPopulate: true } })
+      .then((result: any[]) => {
+        this.projectMembers = result
         this.projectMembers$.next(this.projectMembers)
       })
   }
