@@ -1,7 +1,7 @@
-<mat-card class="chat">
+<div class="chat corner-rb">
   <div class="header" (click)="showWindow()"><div>Conversacion</div></div>
-  <mat-card-content *ngIf="show">
-    <div class="messages" #scrollMe>
+  <div *ngIf="show" class="chat-content">
+    <div class="list" #scrollMe>
       <mat-list>
         <mat-list-item *ngFor="let message of messages">
           <img mat-list-avatar src="{{message.userAvatar}}" />
@@ -11,15 +11,12 @@
         </mat-list-item>
       </mat-list>
     </div>
-    <mat-form-field appearance="outline">
-      <input
-        matInput
-        class="full-width"
-        placeholder="Escriba aqui su mensaje"
-        maxlength="100"
-        [(ngModel)]="message"
-        (keyup.enter)="save()"
-      />
-    </mat-form-field>
-  </mat-card-content>
-</mat-card>
+    <input
+      class="input full-width"
+      placeholder="Escriba aqui su mensaje"
+      maxlength="100"
+      [(ngModel)]="message"
+      (keyup.enter)="save()"
+    />
+  </div>
+</div>

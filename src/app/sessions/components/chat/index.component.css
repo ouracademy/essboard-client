@@ -1,14 +1,17 @@
 .chat {
-  position: fixed;
-  bottom: 18px;
-  right: 18px;
   width: 300px;
-  padding: 0px;
-  z-index: 1000;
+  background: white;
+  border: 1px solid #97a79e;
 }
-.messages {
+.chat-content {
   height: 300px;
   overflow-x: hidden;
+}
+.list {
+  height: 85%;
+}
+.input {
+  height: 15%;
 }
 .header {
   background: #8ea998;
