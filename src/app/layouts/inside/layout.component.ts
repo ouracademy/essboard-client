@@ -37,7 +37,7 @@ import { HeaderModule } from '@shared/header/index.module'
         <app-notifications></app-notifications>
       </right-content>
     </app-header>
-    <router-outlet></router-outlet>
+    <div class="pad-0-5"><router-outlet></router-outlet></div>
   `
 })
 export class InsideLayoutComponent implements OnInit {

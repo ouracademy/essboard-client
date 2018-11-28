@@ -1,8 +1,8 @@
 <div *ngIf="session">
-  <div class="row between-xs middle-xs">
-    <div class="row middle-xs pad-1">
+  <div class="row row-detail between-xs middle-xs">
+    <div class="row middle-xs ">
       <span>Sesión </span>
-      <div class="pad-1">
+      <div class="pad-0-5">
         <span> {{ session.createdAt | date: "d 'de' MMMM" }}</span>
 
         <span *ngIf="session.hasFinished; else: notFinished">
@@ -16,7 +16,7 @@
       </div>
     </div>
     <app-online-users></app-online-users>
-    <div class="row middle-xs pad-1">
+    <div class="row middle-xs pad-0-5">
       <button mat-icon-button>
         <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
       </button>
