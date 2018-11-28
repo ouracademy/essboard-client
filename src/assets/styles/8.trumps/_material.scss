@@ -195,24 +195,6 @@ mat-form-field {
   height: 4vh !important;
 }
 
-.button-group {
-  background: transparent;
-  .mat-button-toggle-group {
-    background: transparent;
-    box-shadow: none;
-  }
-  .mat-button-toggle-checked {
-    border-bottom: #002e4c 2px solid !important;
-  }
-  .mat-button-toggle {
-    background: transparent;
-  }
-  .mat-button-toggle-label {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-}
-
 .mat-list-text p {
   color: rgba(0, 0, 0, 0.38);
 }
@@ -234,19 +216,13 @@ mat-form-field {
   color: white !important;
 }
 
-.alpha-buttons {
-  .mat-button-toggle-button {
-    border: solid 2px #7cb987 !important;
-    width: 11rem;
-  }
-  .mat-button-toggle {
-    margin-right: 9px !important;
-  }
-  .mat-button-toggle-group {
-    box-shadow: none !important;
-  }
-  .mat-button-toggle-checked {
-    background-color: #d7f5d7;
-    color: #4a6950;
+.button--alpha {
+  background-color: currentColor;
+  margin: 0.3rem;
+  padding: 0.5rem;
+  width: 11rem;
+  .text {
+    color: #aca8a8;
+    text-align: center;
   }
 }
