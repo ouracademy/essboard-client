@@ -9,6 +9,30 @@ import { SharedService } from '@core/shared.service'
 import { ShareComponent } from '../share/share.component'
 import { SessionService } from 'app/sessions/services/session.service'
 
+/*
+   <mat-form-field appearance="outline">
+      <input
+        matInput
+        placeholder="Nombre del proyecto"
+        maxlength="200"
+        [(ngModel)]="project.name"
+        #name
+        (keyup.enter)="setName(name.value)"
+        (blur)="setName(name.value)"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline"
+      ><input
+        matInput
+        placeholder="Descripcion del proyecto"
+        maxlength="350"
+        [(ngModel)]="project.description"
+        #description
+        (keyup.enter)="setDescription(description.value)"
+        (blur)="setDescription(description.value)"
+      />
+    </mat-form-field>
+*/
 @Component({
   selector: 'project-detail',
   templateUrl: 'detail.component.html',
