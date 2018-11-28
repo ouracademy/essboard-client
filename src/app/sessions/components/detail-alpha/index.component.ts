@@ -4,13 +4,16 @@ import { KernelService } from '@core/kernel-knowledge.service'
 
 import { ActivatedRoute } from '@angular/router'
 import { AlphaTemplate, StateTemplate } from './kernel'
+import { CanLeaveChannel } from 'app/sessions/services/leave-session.guard'
+import { Observable } from 'rxjs/Observable'
+import { ChannelService } from 'app/sessions/services/channel.service'
 
 @Component({
   selector: 'detail-alpha',
   templateUrl: 'index.component.html',
   styleUrls: ['index.component.css']
 })
-export class DetailAlphaComponent implements OnInit {
+export class DetailAlphaComponent implements OnInit, CanLeaveChannel {
   alphaTemplate: AlphaTemplate
   states: any
   stateTemplate: StateTemplate
@@ -21,7 +24,8 @@ export class DetailAlphaComponent implements OnInit {
   constructor(
     private sessions: SessionService,
     private activeRoute: ActivatedRoute,
-    private kernel: KernelService
+    private kernel: KernelService,
+    private channels: ChannelService
   ) {}
 
   ngOnInit() {
@@ -58,5 +62,8 @@ leave  when  exit from current route
       template.checklist = checklist
       this.sessions.state = template
     })
+  }
+  leaveChannel(): Observable<any> {
+    return this.channels.leave('alphas')
   }
 }

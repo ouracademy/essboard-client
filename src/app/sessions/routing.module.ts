@@ -20,7 +20,15 @@ const routes: Routes = [
       {
         path: 'set-current-state',
         component: SetCurrentStateComponent,
-        children: [{ path: ':id', component: DetailAlphaComponent }]
+        children: [
+          {
+            path: ':id',
+            component: DetailAlphaComponent,
+            canDeactivate: enableChannelsSubscription
+              ? [CanDeactivateGuard]
+              : []
+          }
+        ]
       }
     ]
   }

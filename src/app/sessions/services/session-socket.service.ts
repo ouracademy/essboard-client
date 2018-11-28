@@ -70,11 +70,7 @@ export class SessionSocketService extends SessionService {
   }
 
   leaveChannel(): Observable<any> {
-    return from(
-      this.channels.leave('sessions', this.session.id).then(data => {
-        return true
-      })
-    )
+    return this.channels.leave('sessions')
   }
 
   getSessionChannelSubscriptions(sessionId) {
@@ -113,9 +109,15 @@ export class SessionSocketService extends SessionService {
     const date = this.session.endDate ? this.session.endDate : new Date()
 
     return from(
-      this.socketService.getService('states').find({
-        query: { date, project: this.session.projectId, alpha: alpha.id }
-      })
+      this.socketService
+        .getService('states')
+        .find({
+          query: { date, project: this.session.projectId, alpha: alpha.id }
+        })
+        .then(result => {
+          this.channels.join('alphas', `${this.session.id}-${alpha.id}`)
+          return result
+        })
     )
   }
 

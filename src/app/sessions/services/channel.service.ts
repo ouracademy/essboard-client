@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import { SocketService } from '@core/socket.service'
-import { Observable } from 'rxjs/Observable'
-import { Service } from '@feathersjs/feathers'
+import { from, Observable } from 'rxjs'
 
 @Injectable()
 export class ChannelService {
@@ -26,14 +25,17 @@ export class ChannelService {
       })
   }
 
-  public leave(aChannelName, aIdentifier) {
+  public leave(aChannelName): Observable<any> {
     const { _id } = this.subscriptions[aChannelName]
-    return this.service
-      .remove(_id, {
-        name: aChannelName,
-        identifier: aIdentifier
-      })
-      .then(() => delete this.subscriptions[aChannelName])
+    return from(
+      this.service
+        .remove(_id)
+        .then(() => {
+          delete this.subscriptions[aChannelName]
+          return true
+        })
+        .catch(() => false)
+    )
   }
 
   find(aChannelName, aIdentifier) {
