@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
-import { Observable, from, BehaviorSubject } from 'rxjs'
+import { Observable, from, BehaviorSubject, Subject } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
@@ -20,7 +20,10 @@ import { ChannelService } from './channel.service'
 export class SessionSocketService extends SessionService {
   service: any
   statesService
+  votesService
   session: Session
+
+  currentAlphaTemplate
 
   constructor(
     public socketService: SocketService,
@@ -33,14 +36,20 @@ export class SessionSocketService extends SessionService {
     super()
     this.service = this.socketService.getService('sessions')
     this.statesService = this.socketService.getService('states')
-    this.statesService.on('patched', result => {
-      this.currentState$.next({
-        ...result,
-        votes: this.projectService.getInfoMembers(result['votes'])
-      })
+    this.votesService = this.socketService.getService('votes')
+    // this.statesService.on('patched', result => {
+    //   this.currentState$.next({
+    //     ...result,
+    //     votes: this.projectService.getInfoMembers(result['votes'])
+    //   })
+    // })
+    this.votesService.on('created', result => {
+      console.log('nuevo voto')
+      this.getCurrentAlpha()
     })
 
     this.currentState$ = new BehaviorSubject<StateTemplate>(null)
+    this.currentAlpha$ = new BehaviorSubject(null)
   }
 
   getSessions(projectId: string) {
@@ -104,43 +113,33 @@ export class SessionSocketService extends SessionService {
     this.service.patch(session.id, { finish: true })
   }
 
-  getAlpha(alpha: AlphaTemplate): Observable<any> {
+  getAlpha(alpha: AlphaTemplate) {
+    this.currentAlphaTemplate = alpha
+    this.getCurrentAlpha().then(result => {
+      this.channels.join('alphas', `${this.session.id}-${alpha.id}`)
+    })
+  }
+
+  getCurrentAlpha() {
     // TODO: fix this (problem with client sending other date that the server doesn't know)
     const date = this.session.endDate ? this.session.endDate : new Date()
-
-    return from(
-      this.socketService
-        .getService('states')
-        .find({
-          query: { date, project: this.session.projectId, alpha: alpha.id }
-        })
-        .then(result => {
-          this.channels.join('alphas', `${this.session.id}-${alpha.id}`)
-          return result
-        })
-    )
+    return this.socketService
+      .getService('states')
+      .find({
+        query: {
+          date,
+          project: this.session.projectId,
+          alpha: this.currentAlphaTemplate.id
+        }
+      })
+      .then(result => {
+        this.currentAlpha$.next(result)
+      })
   }
 
   // can vote
   set state(state: StateTemplate) {
-    // esto es llamar a states muchas veces, cada vez q votes avisar q ststes ha cambiado
     this.currentState$.next(state)
-
-    // if (previousState) {
-    //   this.leaveChannel('states', previousState._id)
-    // }
-    // const stateId = state && state._id
-    // if (stateId) {
-    //   this.statesService.get(stateId).then(result => {
-    //     this.currentState$.next({
-    //       ...result,
-    //       votes: this.projectService.getInfoMembers(result['votes'])
-    //     })
-    //     this.joinToChannel('states', stateId)
-    //   })
-    // } else {
-    //   this.currentState$.next(null)
-    // }
   }
 
   get checklist() {

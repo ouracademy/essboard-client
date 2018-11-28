@@ -4,7 +4,7 @@ import { from, Observable } from 'rxjs'
 
 @Injectable()
 export class ChannelService {
-  subscriptions = {}
+  subscriptions = new Map()
   service: any
 
   constructor(socketService: SocketService) {
@@ -18,20 +18,21 @@ export class ChannelService {
         name: aChannelName
       })
       .then(subscription => {
-        this.subscriptions[aChannelName] = subscription
+        this.subscriptions.set(aChannelName, subscription)
       })
       .catch(error => {
-        this.subscriptions[aChannelName] = error['data']
+        // if error is already connected
+        this.subscriptions.set(aChannelName, error['data'])
       })
   }
 
   public leave(aChannelName): Observable<any> {
-    const { _id } = this.subscriptions[aChannelName]
+    const { _id } = this.subscriptions.get(aChannelName)
     return from(
       this.service
         .remove(_id)
         .then(() => {
-          delete this.subscriptions[aChannelName]
+          this.subscriptions.delete(aChannelName)
           return true
         })
         .catch(() => false)
