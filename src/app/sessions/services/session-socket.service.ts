@@ -14,28 +14,24 @@ import {
 } from '../components/detail-alpha/kernel'
 import { AlphaTemplate } from '../components/detail-alpha/kernel'
 import { ProjectService } from 'app/projects/services/project.service'
+import { ChannelService } from './channel.service'
 
 @Injectable()
 export class SessionSocketService extends SessionService {
   service: any
-  channelSubscriptionsService
   statesService
-
   session: Session
-  channelSubscriptions = {}
 
   constructor(
     public socketService: SocketService,
     public projectService: ProjectService,
     public kernelKnowledgeService: KernelService,
+    private channels: ChannelService,
     private auth: AuthService,
     private router: Router
   ) {
     super()
     this.service = this.socketService.getService('sessions')
-    this.channelSubscriptionsService = this.socketService.getService(
-      'channel-subscriptions'
-    )
     this.statesService = this.socketService.getService('states')
     this.statesService.on('patched', result => {
       this.currentState$.next({
@@ -65,7 +61,7 @@ export class SessionSocketService extends SessionService {
       .pipe(
         map(item => {
           this.projectService.getMembers(item['projectId'])
-          this.joinToChannel('sessions', item['_id'])
+          this.channels.join('sessions', item['_id'])
           this.getSessionChannelSubscriptions(id)
           this.session = this.toSession(item)
           return this.session
@@ -73,53 +69,24 @@ export class SessionSocketService extends SessionService {
       )
   }
 
-  get selectedSession() {
-    return this.session
-  }
-
-  //
-  private joinToChannel(type, typeId) {
-    return this.channelSubscriptionsService
-      .create({
-        idType: typeId,
-        type
-      })
-      .then(subscription => {
-        this.channelSubscriptions[type] = subscription
-      })
-      .catch(error => {
-        this.channelSubscriptions[type] = error['data']
-      })
-  }
-  private leaveChannel(type, typeId) {
-    const { _id } = this.channelSubscriptions[type]
-    return this.channelSubscriptionsService
-      .remove(_id, {
-        type: type,
-        idType: typeId
-      })
-      .then(() => delete this.channelSubscriptions[type])
-  }
-
   leaveSessionChannel(session: Session): Observable<any> {
     return from(
-      this.leaveChannel('sessions', session.id).then(data => {
+      this.channels.leave('sessions', session.id).then(data => {
         return true
       })
     )
   }
 
   getSessionChannelSubscriptions(sessionId) {
-    return this.channelSubscriptionsService.watch().find({
-      query: {
-        idType: sessionId,
-        type: 'sessions'
-      }
-    })
+    return this.channels.find('sessions', sessionId)
   }
 
   get channelSubscriptions$() {
     return this.getSessionChannelSubscriptions(this.session.id)
+  }
+
+  get selectedSession() {
+    return this.session
   }
 
   toSession(item) {

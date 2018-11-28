@@ -7,5 +7,5 @@ export const environment = {
   production: false
 }
 
-export const api = 'http://27ac0085.ngrok.io' //'http://localhost:3030' //
+export const api = 'http://localhost:3030' //'http://localhost:3030' //
 export const urlEssenceKernel = 'http://localhost:3000'

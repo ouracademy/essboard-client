@@ -28,6 +28,20 @@ export class DetailAlphaComponent implements OnInit {
     this.sessions.currentState$.subscribe(
       stateTemplate => (this.stateTemplate = stateTemplate)
     )
+    // yap diaaaana vas a tener q compartirme tu pantalla
+    // diaaanaap :) ya te esty llmanaod
+    // intentemoa a nivel de alpha escuchar cambios
+
+    /*
+this.sessions.currentAlpha$.subscribe(states => {
+  this.states = states  // [ { statys achaives id 11}]
+})
+
+votes created sent to channel   sessionId/alphaId  emit  voto  
+join a  sessionId/alphaId when entry this component
+listen votes created -->  get state x alpha --> currentAlpha$
+leave  when  exit from current route
+*/
 
     this.activeRoute.params.subscribe(params => {
       this.kernel.getAlpha(params['id']).subscribe(alphaTemplate => {
