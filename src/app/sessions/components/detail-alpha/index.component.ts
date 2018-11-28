@@ -5,10 +5,6 @@ import { KernelService } from '@core/kernel-knowledge.service'
 import { ActivatedRoute } from '@angular/router'
 import { AlphaTemplate, StateTemplate } from './kernel'
 
-// <div class="row" *ngIf="stateTemplate">
-//     <checklist class="mar-1" [stateTemplate]="stateTemplate"></checklist>
-//   </div>
-
 @Component({
   selector: 'detail-alpha',
   templateUrl: 'index.component.html',

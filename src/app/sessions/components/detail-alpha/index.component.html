@@ -19,7 +19,10 @@
       </div>
     </div>
   </div>
-  <!-- Here put the checklist -->
+
+  <div class="row" *ngIf="stateTemplate">
+    <checklist class="mar-1" [stateTemplate]="stateTemplate"></checklist>
+  </div>
 </div>
 
 <audio #player preload="auto">
