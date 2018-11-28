@@ -1,8 +1,8 @@
 <mat-card
   *ngFor="let session of sessions"
-  class="mar-1"
+  class="mar-1 selectable"
+  [ngClass]="{ active: session.endDate }"
   (click)="goSession(session)"
-  style.background="lightblue"
 >
   <span> Sesión {{ session.createdAt | date: "d 'de' MMMM" }}</span>
 </mat-card>
