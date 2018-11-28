@@ -10,10 +10,4 @@ export class EssenceCardComponent {
   name: String
   @Input()
   area: String
-
-  mmappingAreaWithColor = {
-    customer: '#c1ecc1',
-    solution: '#ffff99',
-    endeavor: '#d4e6f0'
-  }
 }

@@ -6,15 +6,14 @@
       se encuentra el proyecto )
     </h4>
   </div>
-  <div class="row">
-    <div class="alpha-buttons">
-      <div
-        *ngFor="let alpha of alphas"
-        [routerLink]="alpha.id"
-        routerLinkActive="active"
-      >
-        {{ alpha.name }}
-      </div>
+  <div class="row middle-xs center-xs">
+    <div
+      *ngFor="let alpha of alphas"
+      class=" {{alpha.area}} button--alpha selectable"
+      [routerLink]="alpha.id"
+      routerLinkActive="active"
+    >
+      <div class="text">{{ alpha.name }}</div>
     </div>
   </div>
   <div class="pad-1"><router-outlet></router-outlet></div>
