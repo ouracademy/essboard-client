@@ -19,10 +19,8 @@ const routes: Routes = [
       { path: 'holistic-view', component: RadiatorInformationComponent },
       {
         path: 'set-current-state',
-        children: [
-          { path: '', pathMatch: 'full', component: SetCurrentStateComponent },
-          { path: ':id', component: DetailAlphaComponent }
-        ]
+        component: SetCurrentStateComponent,
+        children: [{ path: ':id', component: DetailAlphaComponent }]
       }
     ]
   }
