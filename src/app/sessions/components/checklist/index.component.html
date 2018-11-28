@@ -7,9 +7,7 @@
         <th>Nombre</th>
         <th>Descripcion</th>
       </tr>
-      <tr
-        *ngFor="let checkpointTemplate of (stateTemplate.checkpoints | async)"
-      >
+      <tr *ngFor="let checkpointTemplate of stateTemplate.checkpoints">
         <td>
           <mat-checkbox
             (change)="vote(checkpointTemplate, $event)"

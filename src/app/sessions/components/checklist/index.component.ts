@@ -16,7 +16,7 @@ export class ChecklistComponent implements OnInit {
   @Input()
   set stateTemplate(arg: any) {
     this._stateTemplate = arg
-    this.getCheckpoints(arg.id)
+    this.getCheckpoints()
   }
 
   get stateTemplate() {
@@ -31,7 +31,7 @@ export class ChecklistComponent implements OnInit {
 
   checklist: any[] = []
 
-  getCheckpoints(stateId) {
+  getCheckpoints() {
     this.sessionService.checklist.subscribe(checklist => {
       this.checklist = checklist
     })

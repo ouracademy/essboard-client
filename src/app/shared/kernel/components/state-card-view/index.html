@@ -7,11 +7,11 @@
   <content>
     <div class="state-card-wrapper">
       <div class="state-name   row middle-xs center-xs">
-        <div>{{state.name}}</div>
+        <div>{{ state.name }}</div>
       </div>
       <ul class="checkpoints">
-        <li *ngFor="let checkpoint of state.cardCheckpoints | async">
-          {{checkpoint.name}}
+        <li *ngFor="let checkpoint of cardCheckpoints">
+          {{ checkpoint.name }}
         </li>
       </ul>
     </div>

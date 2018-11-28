@@ -5,6 +5,10 @@ import { KernelService } from '@core/kernel-knowledge.service'
 import { ActivatedRoute } from '@angular/router'
 import { AlphaTemplate, StateTemplate } from './kernel'
 
+// <div class="row" *ngIf="stateTemplate">
+//     <checklist class="mar-1" [stateTemplate]="stateTemplate"></checklist>
+//   </div>
+
 @Component({
   selector: 'detail-alpha',
   templateUrl: 'index.component.html',
@@ -40,8 +44,9 @@ export class DetailAlphaComponent implements OnInit {
   }
 
   onSelectedState(template: StateTemplate) {
-    // get
-    this.sessions.state = template
-    //   this.playerContainer.nativeElement.play()
+    this.kernel.getCheckpoints(template.id).subscribe(checklist => {
+      template.checklist = checklist
+      this.sessions.state = template
+    })
   }
 }
