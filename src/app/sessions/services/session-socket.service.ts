@@ -23,8 +23,6 @@ export class SessionSocketService extends SessionService {
   votesService
   session: Session
 
-  currentAlphaTemplate
-
   constructor(
     public socketService: SocketService,
     public projectService: ProjectService,
@@ -37,19 +35,29 @@ export class SessionSocketService extends SessionService {
     this.service = this.socketService.getService('sessions')
     this.statesService = this.socketService.getService('states')
     this.votesService = this.socketService.getService('votes')
-    // this.statesService.on('patched', result => {
-    //   this.currentState$.next({
-    //     ...result,
-    //     votes: this.projectService.getInfoMembers(result['votes'])
-    //   })
-    // })
-    this.votesService.on('created', result => {
-      console.log('nuevo voto')
-      this.getCurrentAlpha()
+
+    this.votesService.on('created', ({ checkpoint }) => {
+      const currentAlpha = this.currentAlpha$.getValue()
+      const currentState = this.currentState$.getValue()
+
+      if (this.canGetAlpha(currentAlpha.id, checkpoint)) {
+        this.setSelectedAlpha(currentAlpha)
+      }
+      if (this.canGetChecklist(currentState.id, checkpoint)) {
+        this.setSelectedState(currentState)
+      }
     })
 
     this.currentState$ = new BehaviorSubject<StateTemplate>(null)
-    this.currentAlpha$ = new BehaviorSubject(null)
+    this.currentAlpha$ = new BehaviorSubject({ states: [] })
+    this.currentChecklist$ = new BehaviorSubject([])
+  }
+
+  private canGetAlpha(currentAlphaId: string, checkpoint: any) {
+    return parseInt(currentAlphaId, 10) === Math.floor(checkpoint / 100)
+  }
+  private canGetChecklist(currentStateId: string, checkpoint: any) {
+    return parseInt(currentStateId, 10) === Math.floor(checkpoint / 10)
   }
 
   getSessions(projectId: string) {
@@ -113,51 +121,46 @@ export class SessionSocketService extends SessionService {
     this.service.patch(session.id, { finish: true })
   }
 
-  getAlpha(alpha: AlphaTemplate) {
-    this.currentAlphaTemplate = alpha
-    this.getCurrentAlpha().then(result => {
-      this.channels.join('alphas', `${this.session.id}-${alpha.id}`)
+  setSelectedAlpha(alphaTemplate: AlphaTemplate) {
+    this.getAlpha(alphaTemplate.id).then(states => {
+      this.currentAlpha$.next({ id: alphaTemplate.id, states })
     })
   }
 
-  getCurrentAlpha() {
-    // TODO: fix this (problem with client sending other date that the server doesn't know)
+  private getAlpha(alphaId: string): Promise<any> {
     const date = this.session.endDate ? this.session.endDate : new Date()
-    return this.socketService
-      .getService('states')
-      .find({
-        query: {
-          date,
-          project: this.session.projectId,
-          alpha: this.currentAlphaTemplate.id
-        }
-      })
-      .then(result => {
-        this.currentAlpha$.next(result)
-      })
+    return this.socketService.getService('states').find({
+      query: {
+        date,
+        project: this.session.projectId,
+        alpha: alphaId
+      }
+    })
   }
 
-  // can vote
   set state(state: StateTemplate) {
     this.currentState$.next(state)
   }
 
-  get checklist() {
+  setSelectedState(state: StateTemplate) {
+    this.getChecklist().then(checklist => {
+      this.currentChecklist$.next(checklist)
+    })
+  }
+
+  private getChecklist() {
     const date = this.session.endDate
       ? this.session.endDate
       : new Date(2018, 10, 30) // TODO: check this
     const state = this.currentState$.getValue()
-
-    return from(
-      this.socketService.getService('states').find({
-        query: {
-          date,
-          project: this.session.projectId,
-          state: state.id,
-          asCheckpoints: true
-        }
-      })
-    )
+    return this.socketService.getService('states').find({
+      query: {
+        date,
+        project: this.session.projectId,
+        state: state.id,
+        asCheckpoints: true
+      }
+    })
   }
 
   // mthods q aun no vemos al final

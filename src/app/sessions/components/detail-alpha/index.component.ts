@@ -2,18 +2,20 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { SessionService } from '../../services/session.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Params } from '@angular/router'
 import { AlphaTemplate, StateTemplate } from './kernel'
 import { CanLeaveChannel } from 'app/sessions/services/leave-session.guard'
 import { Observable } from 'rxjs/Observable'
 import { ChannelService } from 'app/sessions/services/channel.service'
+import { flatMap } from 'rxjs/operators'
+import { timer, combineLatest, of } from 'rxjs'
 
 @Component({
   selector: 'detail-alpha',
   templateUrl: 'index.component.html',
   styleUrls: ['index.component.css']
 })
-export class DetailAlphaComponent implements OnInit, CanLeaveChannel {
+export class DetailAlphaComponent implements OnInit {
   alphaTemplate: AlphaTemplate
   states: any
   stateTemplate: StateTemplate
@@ -33,22 +35,16 @@ export class DetailAlphaComponent implements OnInit, CanLeaveChannel {
       stateTemplate => (this.stateTemplate = stateTemplate)
     )
 
-    this.sessions.currentAlpha$.subscribe(states => {
+    this.sessions.currentAlpha$.subscribe(({ states }) => {
       this.states = states
     })
-    /*
-votes created sent to channel   sessionId/alphaId  emit  voto  
-join a  sessionId/alphaId when entry this component
-listen votes created -->  get state x alpha --> currentAlpha$
-leave  when  exit from current route
-*/
 
-    this.activeRoute.params.subscribe(params => {
-      this.kernel.getAlpha(params['id']).subscribe(alphaTemplate => {
+    this.activeRoute.params
+      .pipe(flatMap((params: Params) => this.kernel.getAlpha(params['id'])))
+      .subscribe((alphaTemplate: AlphaTemplate) => {
         this.alphaTemplate = alphaTemplate
-        this.sessions.getAlpha(this.alphaTemplate)
+        this.sessions.setSelectedAlpha(alphaTemplate)
       })
-    })
   }
 
   onSelectedState(template: StateTemplate) {
@@ -56,9 +52,5 @@ leave  when  exit from current route
       template.checklist = checklist
       this.sessions.state = template
     })
-  }
-  leaveChannel(): Observable<any> {
-    console.log('leave channel alphas', this.channels.subscriptions)
-    return this.channels.leave('alphas')
   }
 }

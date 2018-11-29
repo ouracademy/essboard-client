@@ -1,9 +1,4 @@
-import { OnInit, Component, Input, EventEmitter, Output } from '@angular/core'
-import {
-  StateMetadata,
-  CheckpointMetadata
-} from '@no-module/models/kernel/kernel'
-import { Alpha, State, Checkpoint } from '@shared/kernel/model/kernel'
+import { Component, Input, EventEmitter, Output } from '@angular/core'
 import { Goal } from '@no-module/models/goal'
 
 @Component({

@@ -9,6 +9,7 @@ import { CanLeaveChannel } from '../services/leave-session.guard'
 export abstract class SessionService implements CanLeaveChannel {
   currentState$: BehaviorSubject<StateTemplate>
   currentAlpha$: BehaviorSubject<any>
+  currentChecklist$: BehaviorSubject<any>
   channelSubscriptions$: Subject<any>
   abstract leaveChannel()
   abstract get selectedSession()
@@ -20,9 +21,9 @@ export abstract class SessionService implements CanLeaveChannel {
   abstract colaboreUsingSessionsIdInUser(idSession)
   abstract colaboreUsingUserIdInProject(idSession, idProject)
   abstract finish(session)
-  abstract getAlpha(alpha: AlphaTemplate)
+  abstract setSelectedAlpha(states)
   abstract getSessionChannelSubscriptions(sessionId)
   abstract set state(state: StateTemplate)
-  abstract get checklist()
   abstract voteCheckpoint(checkpointTemplate: CheckpointTemplate, vote: boolean)
+  abstract setSelectedState(state: StateTemplate)
 }

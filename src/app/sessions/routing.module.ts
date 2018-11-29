@@ -23,10 +23,7 @@ const routes: Routes = [
         children: [
           {
             path: ':id',
-            component: DetailAlphaComponent,
-            canDeactivate: enableChannelsSubscription
-              ? [CanDeactivateGuard]
-              : []
+            component: DetailAlphaComponent
           }
         ]
       }

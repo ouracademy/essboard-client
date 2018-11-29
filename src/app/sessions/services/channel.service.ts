@@ -22,15 +22,16 @@ export class ChannelService {
       })
       .catch(error => {
         // if error is already connected
+        console.log(error)
         this.subscriptions.set(aChannelName, error['data'])
       })
   }
 
   public leave(aChannelName): Observable<any> {
-    const { _id } = this.subscriptions.get(aChannelName)
+    const subscription = this.subscriptions.get(aChannelName)
     return from(
       this.service
-        .remove(_id)
+        .remove(subscription._id)
         .then(() => {
           this.subscriptions.delete(aChannelName)
           return true

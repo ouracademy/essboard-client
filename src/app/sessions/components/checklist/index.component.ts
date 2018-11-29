@@ -16,7 +16,7 @@ export class ChecklistComponent implements OnInit {
   @Input()
   set stateTemplate(arg: any) {
     this._stateTemplate = arg
-    this.getCheckpoints()
+    this.sessionService.setSelectedState(arg)
   }
 
   get stateTemplate() {
@@ -31,13 +31,11 @@ export class ChecklistComponent implements OnInit {
 
   checklist: any[] = []
 
-  getCheckpoints() {
-    this.sessionService.checklist.subscribe(checklist => {
-      this.checklist = checklist
-    })
+  ngOnInit() {
+    this.sessionService.currentChecklist$.subscribe(
+      checklist => (this.checklist = checklist)
+    )
   }
-
-  ngOnInit() {}
 
   vote(checkpointTemplate: CheckpointTemplate, $event: MatCheckboxChange) {
     this.sessionService.voteCheckpoint(checkpointTemplate, $event.checked)
