@@ -17,7 +17,7 @@
     </div>
     <app-online-users></app-online-users>
     <div class="row middle-xs pad-0-5">
-      <button mat-icon-button>
+      <button mat-icon-button *ngIf="!session.hasFinished">
         <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
       </button>
       <button mat-icon-button (click)="isChatVisible = !isChatVisible">
@@ -27,5 +27,10 @@
     </div>
   </div>
   <session-steps></session-steps>
-  <chat *ngIf="isChatVisible" [sessionId]="session.id"> </chat>
+  <chat
+    *ngIf="isChatVisible"
+    [sessionId]="session.id"
+    [isReadonly]="session.hasFinished"
+  >
+  </chat>
 </div>
