@@ -7,11 +7,14 @@
   height: 300px;
   overflow-x: hidden;
 }
-.list {
+.content-list {
   height: 85%;
 }
-.input {
-  height: 15%;
+.content-input {
+  max-height: 25%;
+  min-height: 15%;
+  border: solid 1px #8ea998;
+  resize: none;
 }
 .header {
   background: #8ea998;
