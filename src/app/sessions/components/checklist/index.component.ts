@@ -11,17 +11,9 @@ import { ProjectService } from 'app/projects/services/project.service'
   styleUrls: ['index.component.css']
 })
 export class ChecklistComponent implements OnInit {
-  _stateTemplate: StateTemplate
-
   @Input()
-  set stateTemplate(arg: any) {
-    this._stateTemplate = arg
-    this.sessionService.setSelectedState(arg)
-  }
-
-  get stateTemplate() {
-    return this._stateTemplate
-  }
+  stateTemplate: StateTemplate
+  isReadonly: boolean
 
   constructor(
     private sessionService: SessionService,
@@ -34,6 +26,10 @@ export class ChecklistComponent implements OnInit {
   ngOnInit() {
     this.sessionService.currentChecklist$.subscribe(
       checklist => (this.checklist = checklist)
+    )
+
+    this.sessionService.currentSession$.subscribe(
+      session => (this.isReadonly = session.hasFinished)
     )
   }
 

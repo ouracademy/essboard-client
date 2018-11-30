@@ -43,14 +43,14 @@ export class DetailAlphaComponent implements OnInit {
       .pipe(flatMap((params: Params) => this.kernel.getAlpha(params['id'])))
       .subscribe((alphaTemplate: AlphaTemplate) => {
         this.alphaTemplate = alphaTemplate
-        this.sessions.setSelectedAlpha(alphaTemplate)
+        this.sessions.selectedAlpha = alphaTemplate
       })
   }
 
   onSelectedState(template: StateTemplate) {
     this.kernel.getCheckpoints(template.id).subscribe(checklist => {
       template.checklist = checklist
-      this.sessions.state = template
+      this.sessions.selectedState = template
     })
   }
 }

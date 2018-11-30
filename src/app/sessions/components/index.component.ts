@@ -5,7 +5,6 @@ import { SessionService } from '../services/session.service'
 import { PrimaryKernelMockService } from '@shared/kernel/services/index'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { AlphaTemplate } from './detail-alpha/kernel'
-import { flatMap } from 'rxjs/operators'
 import { CanLeaveChannel } from '../services/leave-session.guard'
 @Component({
   selector: 'session',
@@ -32,11 +31,11 @@ export class SessionComponent implements OnInit, CanLeaveChannel {
   ) {}
 
   ngOnInit() {
-    this.route.params
-      .pipe(flatMap(params => this.service.getSession(params['id'])))
-      .subscribe((session: Session) => {
-        this.session = session
-      })
+    this.route.params.subscribe(
+      params => (this.service.selectedSession = params['id'])
+    )
+
+    this.service.currentSession$.subscribe(session => (this.session = session))
 
     this.kernelService.getAlphas().subscribe(alphas => {
       this.alphas = alphas
@@ -73,10 +72,6 @@ export class SessionComponent implements OnInit, CanLeaveChannel {
     this.router.navigate(['/me/projects', this.session.projectId])
   }
 
-  private colaborate(sessionId, projectId) {
-    this.service.colaboreUsingUserIdInProject(sessionId, projectId)
-    this.service.colaboreUsingSessionsIdInUser(sessionId)
-  }
   getWorkItems(workItem) {
     this.workItems.push(workItem)
   }

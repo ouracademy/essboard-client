@@ -16,6 +16,8 @@ import { Message } from '../../model/messages'
 export class ChatComponent implements OnInit, AfterViewChecked {
   @Input()
   sessionId
+  @Input()
+  isReadonly: boolean
 
   show = false
   messages: Message[] = []
@@ -51,5 +53,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   save() {
     this.chatService.addMessage(this.message, this.sessionId)
     this.message = ''
+  }
+
+  get placeholder() {
+    return this.isReadonly
+      ? 'Este chat esta en modo lectura. Le puede servir como auditoria.'
+      : 'Escriba aqui su mensaje'
   }
 }
