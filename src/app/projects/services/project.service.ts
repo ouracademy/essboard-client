@@ -1,14 +1,13 @@
 import { Subject } from 'rxjs'
+import { Member } from 'app/members/members.service'
 
 export abstract class ProjectService {
   currentProject$: Subject<any>
-  projectMembers$: Subject<any>
   abstract setName(name: string)
   abstract setDescription(description: string)
   abstract getProject(id: string)
   abstract delete()
-  abstract inviteTo(project, user)
-  abstract desinviteTo(user)
-  abstract getMembers(id)
-  abstract getInfoMembers(userIds: any[])
+
+  abstract invite(aUser): Promise<any>
+  abstract remove(aMember: Member): Promise<any>
 }

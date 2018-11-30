@@ -1,17 +1,16 @@
 <div class="">
   <div class="title">Comparte el proyecto a tus amigos</div>
   <div>
-    <search-user (onSelect)="getSelect($event)"></search-user>
-    <p>{{ message }}</p>
+    <search-user (onSelect)="handleUserSelected($event)"></search-user>
     <table class="table table-bordered">
       <tr>
         <th>Comparto mi proyecto con:</th>
         <th></th>
       </tr>
-      <tr *ngFor="let invited of inviteds">
-        <td>{{ invited.email }}</td>
+      <tr *ngFor="let member of members">
+        <td>{{ member.email }}</td>
         <td>
-          <button mat-icon-button (click)="delete(invited)">
+          <button mat-icon-button (click)="delete(member)">
             <mat-icon class="md-24">delete_forever</mat-icon>
           </button>
         </td>

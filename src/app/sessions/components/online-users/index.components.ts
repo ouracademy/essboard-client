@@ -28,6 +28,7 @@ export class OnlineUsersComponent implements OnInit, OnDestroy {
     //TODO: LISTEN NEW MEMBERS AND MEMBERS CONECTED combine
     this.subscription = this.service.channelSubscriptions$.subscribe(
       onlineMembers => {
+        // members
         this.onlineMembers = this.projectService.getInfoMembers(
           onlineMembers.map(member => member['userId'])
         )

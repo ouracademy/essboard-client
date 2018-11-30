@@ -3,25 +3,27 @@ import { Router } from '@angular/router'
 import { Subject } from 'rxjs/Subject'
 import { ProjectService } from './project.service'
 import { SocketService } from '@core/socket.service'
-import { Project, Session } from '@no-module/models/project'
-import { BuildDataToServer } from '@no-module/util/build-data-to-server'
-import { SessionService } from '../../sessions/services/session.service'
+import { Project } from '@no-module/models/project'
+import { Member, MembersService } from 'app/members/members.service'
+import { flatMap } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {
   currentProject$: Subject<any>
   project: Project
   service: any
-  otherService: any
-  projectMembers: any[] = []
 
-  constructor(public socketService: SocketService, private router: Router) {
+  constructor(
+    public socketService: SocketService,
+    private membersService: MembersService,
+    private router: Router
+  ) {
     super()
     this.service = this.socketService.getService('projects')
     this.service.on('removed', removedItem => this.onRemoved(removedItem))
     this.service.on('patched', patchedItem => this.onPatched(patchedItem))
     this.currentProject$ = new Subject<any>()
-    this.projectMembers$ = new Subject<any>()
     this.project = null
   }
   getProject(id: string) {
@@ -29,27 +31,6 @@ export class ProjectSocketService extends ProjectService {
       this.project = this.toProject(item)
       this.currentProject$.next(this.project)
     })
-  }
-
-  getMembers(id) {
-    this.socketService
-      .getService('members')
-      .find({ query: { projectId: id, withUserPopulate: true } })
-      .then((result: any[]) => {
-        this.projectMembers = result
-        this.projectMembers$.next(this.projectMembers)
-      })
-  }
-
-  getInfoMembers(userIds) {
-    return this.projectMembers.length > 0
-      ? userIds.map(userId => {
-          const memberTemp = this.projectMembers.find(
-            member => member['userId']['_id'] === userId
-          )
-          return memberTemp['userId']
-        })
-      : []
   }
 
   private toProject(item: any) {
@@ -78,23 +59,10 @@ export class ProjectSocketService extends ProjectService {
     const data = { name: name }
     this.patchData(data)
   }
+
   setDescription(description) {
     const data = { description: description }
     this.patchData(data)
-  }
-
-  inviteTo(project, user) {
-    this.socketService
-      .getService('members')
-      .create({ projectId: project.id, userId: user.id, role: 'invited' })
-  }
-
-  desinviteTo(user) {
-    this.service.patch(
-      this.project.id,
-      { $pull: { members: user.id } },
-      { query: { data: user.id } }
-    )
   }
 
   private onPatched(project: any) {
@@ -105,5 +73,19 @@ export class ProjectSocketService extends ProjectService {
     //  const index = this.getIndex(removedItem.id);
     //this.dataStore.checks.splice(index, 1);
     //this.itemsObserver.next(this.data);
+  }
+
+  invite(aUser: any): Promise<any> {
+    return this.membersService.invite(aUser, this.project.id)
+  }
+
+  remove(aMember: Member): Promise<any> {
+    return this.membersService.remove(aMember, this.project.id)
+  }
+
+  get projectMembers$(): Observable<Member[]> {
+    return this.currentProject$.pipe(
+      flatMap(project => this.membersService.find(project.id))
+    )
   }
 }

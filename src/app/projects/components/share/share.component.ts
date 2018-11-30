@@ -1,51 +1,33 @@
-import { Component, OnInit, Input, Inject } from '@angular/core'
-import { Project } from '@no-module/models/project'
+import { Component, OnInit } from '@angular/core'
 import { ProjectService } from '../../services/project.service'
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
+import { SharedService } from '@core/shared.service'
+import { Member } from 'app/members/members.service'
 
 @Component({
   selector: 'project-share-form',
   templateUrl: 'share.component.html'
 })
 export class ShareComponent implements OnInit {
-  @Input() project: Project
-  public invitedsEmail: any
-  public message: String
-  public inviteds: any
+  public members: Member[] = []
+
   constructor(
     private projectService: ProjectService,
-    private reference: MatDialogRef<ShareComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    this.project = data
-  }
+    private dialog: SharedService
+  ) {}
+
   ngOnInit() {
-    this.inviteds = []
-    this.invitedsEmail = null
-    this.message = ''
-  }
-  send() {
-    if (this.existsInUsers(this.invitedsEmail)) {
-      this.inviteds.push(this.invitedsEmail)
-    } else {
-      this.message = 'Ups . No encontramos este correo'
-    }
-  }
-  existsInUsers(email) {
-    return true
+    this.projectService.projectMembers$.subscribe(members => {
+      this.members = members
+    })
   }
 
-  getSelect(user) {
-    this.inviteTo(user)
-    // if (!this.project.haveThisMember(user)) {
-    //     this.inviteTo(user);
-    // }
+  handleUserSelected(user) {
+    this.projectService.invite(user).then(member => {
+      this.dialog.showSucces('Usuario invitado!')
+    })
   }
-  inviteTo(user) {
-    this.projectService.inviteTo(this.project, user)
-    this.inviteds.push(user)
-  }
-  delete(invited) {
-    this.projectService.desinviteTo(invited)
+
+  delete(member) {
+    this.projectService.remove(member)
   }
 }

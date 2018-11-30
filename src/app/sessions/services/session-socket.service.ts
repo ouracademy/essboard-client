@@ -77,7 +77,9 @@ export class SessionSocketService extends SessionService {
       .get(id)
       .pipe(
         map(item => {
+          // TODO: fix this
           this.projectService.getMembers(item['projectId'])
+
           this.channels.join('sessions', item['_id'])
           this.getSessionChannelSubscriptions(id)
           this.session = this.toSession(item)
