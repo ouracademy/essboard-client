@@ -51,7 +51,7 @@ export class SessionSocketService extends SessionService {
     this.currentState$ = new BehaviorSubject<StateTemplate>(null)
     this.currentAlpha$ = new BehaviorSubject({ states: [] })
     this.currentChecklist$ = new BehaviorSubject([])
-    this.currentSession$ = new BehaviorSubject(null)
+    this.currentSession$ = new BehaviorSubject<Session>(null)
   }
 
   private canGetAlpha(currentAlphaId: string, checkpoint: any) {

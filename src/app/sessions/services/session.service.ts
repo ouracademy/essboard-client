@@ -7,7 +7,7 @@ import {
 } from '../components/detail-alpha/kernel'
 import { CanLeaveChannel } from '../services/leave-session.guard'
 export abstract class SessionService implements CanLeaveChannel {
-  currentSession$: BehaviorSubject<any>
+  currentSession$: BehaviorSubject<Session>
   abstract set selectedSession(sessionId: string)
 
   currentState$: BehaviorSubject<StateTemplate>
