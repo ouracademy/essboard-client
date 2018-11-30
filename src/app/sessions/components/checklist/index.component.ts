@@ -3,7 +3,7 @@ import { StateTemplate, CheckpointTemplate } from '../detail-alpha/kernel'
 import { SessionService } from '../../services/session.service'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 import { AuthService } from '@core/auth.service'
-import { ProjectService } from 'app/projects/services/project.service'
+import { Member } from 'app/members/members.service'
 
 @Component({
   selector: 'checklist',
@@ -17,11 +17,11 @@ export class ChecklistComponent implements OnInit {
 
   constructor(
     private sessionService: SessionService,
-    private projectService: ProjectService,
     private authService: AuthService
   ) {}
 
   checklist: any[] = []
+  members: Member[] = []
 
   ngOnInit() {
     this.sessionService.currentChecklist$.subscribe(
@@ -31,6 +31,10 @@ export class ChecklistComponent implements OnInit {
     this.sessionService.currentSession$.subscribe(
       session => (this.isReadonly = session.hasFinished)
     )
+
+    this.sessionService.currentMembers$.subscribe(members => {
+      this.members = members
+    })
   }
 
   vote(checkpointTemplate: CheckpointTemplate, $event: MatCheckboxChange) {
@@ -44,9 +48,14 @@ export class ChecklistComponent implements OnInit {
   }
 
   voters(checkpointTemplate: CheckpointTemplate) {
-    return this.projectService.getInfoMembers(
-      this.getVotesFromCheckpoint(checkpointTemplate).map(vote => vote.from)
+    const voters = this.getVotesFromCheckpoint(checkpointTemplate).map(
+      vote => vote.from
     )
+    return this.getMembersInformation(voters)
+  }
+
+  private getMembersInformation(voters) {
+    return voters.map(voter => this.members.find(member => member.id === voter))
   }
 
   private getVotesFromCheckpoint(template: CheckpointTemplate) {

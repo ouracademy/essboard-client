@@ -16,7 +16,7 @@ export class ShareComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.projectService.projectMembers$.subscribe(members => {
+    this.projectService.members$.subscribe(members => {
       this.members = members
     })
   }

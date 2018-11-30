@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import { Subject } from 'rxjs/Subject'
 import { ProjectService } from './project.service'
 import { SocketService } from '@core/socket.service'
 import { Project } from '@no-module/models/project'
 import { Member, MembersService } from 'app/members/members.service'
-import { flatMap } from 'rxjs/operators'
-import { Observable } from 'rxjs'
+import { BehaviorSubject, of } from 'rxjs'
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {
-  currentProject$: Subject<any>
+  currentProject$: BehaviorSubject<any>
   project: Project
   service: any
 
@@ -23,13 +21,16 @@ export class ProjectSocketService extends ProjectService {
     this.service = this.socketService.getService('projects')
     this.service.on('removed', removedItem => this.onRemoved(removedItem))
     this.service.on('patched', patchedItem => this.onPatched(patchedItem))
-    this.currentProject$ = new Subject<any>()
+    this.currentProject$ = new BehaviorSubject<any>(null)
+    this.members$ = of([])
     this.project = null
   }
-  getProject(id: string) {
-    this.service.get(id).then(item => {
+
+  set selectedProject(projectId: string) {
+    this.service.get(projectId).then(item => {
       this.project = this.toProject(item)
       this.currentProject$.next(this.project)
+      this.members$ = this.membersService.until(projectId)
     })
   }
 
@@ -81,11 +82,5 @@ export class ProjectSocketService extends ProjectService {
 
   remove(aMember: Member): Promise<any> {
     return this.membersService.remove(aMember, this.project.id)
-  }
-
-  get projectMembers$(): Observable<Member[]> {
-    return this.currentProject$.pipe(
-      flatMap(project => this.membersService.find(project.id))
-    )
   }
 }

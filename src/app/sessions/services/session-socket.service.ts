@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
-import { Observable, from, BehaviorSubject, Subject } from 'rxjs'
+import { Observable, BehaviorSubject, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
-import { GetKeys } from '@no-module/util/get-keys-from-object'
-import { AuthService } from '@core/auth.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 import {
   StateTemplate,
@@ -15,6 +13,7 @@ import {
 import { AlphaTemplate } from '../components/detail-alpha/kernel'
 import { ProjectService } from 'app/projects/services/project.service'
 import { ChannelService } from './channel.service'
+import { MembersService } from 'app/members/members.service'
 
 @Injectable()
 export class SessionSocketService extends SessionService {
@@ -28,7 +27,7 @@ export class SessionSocketService extends SessionService {
     public projectService: ProjectService,
     public kernelKnowledgeService: KernelService,
     private channels: ChannelService,
-    private auth: AuthService,
+    private membersService: MembersService,
     private router: Router
   ) {
     super()
@@ -52,6 +51,7 @@ export class SessionSocketService extends SessionService {
     this.currentAlpha$ = new BehaviorSubject({ states: [] })
     this.currentChecklist$ = new BehaviorSubject([])
     this.currentSession$ = new BehaviorSubject<Session>(null)
+    this.currentMembers$ = of([])
   }
 
   private canGetAlpha(currentAlphaId: string, checkpoint: any) {
@@ -74,8 +74,10 @@ export class SessionSocketService extends SessionService {
 
   set selectedSession(sessionId: string) {
     this.service.get(sessionId).then(session => {
-      // TODO: fix this
-      this.projectService.getMembers(session['projectId'])
+      this.currentMembers$ = this.membersService.until(
+        session.projectId,
+        session.endDate ? session.endDate : session.createdAt
+      )
 
       this.channels.join('sessions', session['_id'])
       this.session = this.toSession(session)

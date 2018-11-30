@@ -6,6 +6,7 @@ import {
   CheckpointTemplate
 } from '../components/detail-alpha/kernel'
 import { CanLeaveChannel } from '../services/leave-session.guard'
+import { Member } from 'app/members/members.service'
 export abstract class SessionService implements CanLeaveChannel {
   currentSession$: BehaviorSubject<Session>
   abstract set selectedSession(sessionId: string)
@@ -19,6 +20,8 @@ export abstract class SessionService implements CanLeaveChannel {
   abstract set selectedState(state: StateTemplate)
 
   channelSubscriptions$: Subject<any>
+
+  currentMembers$: Observable<Member[]>
 
   abstract getSessions(projectId: string): Observable<Session[]>
   abstract addSession(projectId: string): Promise<any>

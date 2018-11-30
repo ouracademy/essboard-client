@@ -4,6 +4,7 @@ import { SocketService } from '@core/socket.service'
 
 export interface Member {
   id: string
+  name: string
   email: string
 }
 
@@ -17,28 +18,14 @@ export class MembersService {
     this.service = socketService.getService('members')
   }
 
-  getMembers(id) {
+  set selectedProject(projectId: string) {
     this.service
-      .find({ query: { projectId: id, withUserPopulate: true } })
-      .then((result: any[]) => {
-        this.projectMembers = result
-        this.projectMembers$.next(this.projectMembers)
-      })
+      .find({ query: { projectId } })
+      .then(members => this.projectMembers$.next(members))
   }
 
-  find(projectId, date?: Date) {
-    return of<Member[]>(this.service.find({ query: { projectId, date: date } }))
-  }
-
-  getInfoMembers(userIds) {
-    return this.projectMembers.length > 0
-      ? userIds.map(userId => {
-          const memberTemp = this.projectMembers.find(
-            member => member['userId']['_id'] === userId
-          )
-          return memberTemp['userId']
-        })
-      : []
+  until(projectId: string, date?: Date): Observable<Member[]> {
+    return this.service.watch().find({ query: { projectId, date } })
   }
 
   invite(aUser, projectId) {

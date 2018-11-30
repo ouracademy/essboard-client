@@ -8,9 +8,9 @@ import { NotificationService } from '@core/notification.service'
 interface Notification {
   _id: any
   to: any
-  message: String
+  message: string
   subject: any
-  data: { resource: String; id: String }
+  data: { resource: string; id: string }
   readed: Boolean
 }
 
@@ -21,7 +21,8 @@ interface Notification {
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon
           [matBadgeHidden]="notReadedNotifications.length === 0"
-          [matBadge]="notReadedNotifications.length" matBadgeColor="warn"
+          [matBadge]="notReadedNotifications.length"
+          matBadgeColor="warn"
           >home</mat-icon
         >
       </button>

@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { Subscription } from 'rxjs/Subscription'
-import { MatDialog, MatDialogRef } from '@angular/material'
+import { MatDialog } from '@angular/material'
 
 import { Project, Session } from '@no-module/models/project'
 import { ProjectService } from '../../services/project.service'
@@ -38,12 +37,10 @@ import { SessionService } from 'app/sessions/services/session.service'
   templateUrl: 'detail.component.html',
   styleUrls: ['detail.component.css']
 })
-export class DetailComponent implements OnInit, OnDestroy {
+export class DetailComponent implements OnInit {
   project: Project
   sessions: any[] = []
   selectedSession: Session
-  private subscription: Subscription
-  private subscription2: Subscription
 
   constructor(
     private route: ActivatedRoute,
@@ -54,20 +51,13 @@ export class DetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.subscription = this.service.currentProject$.subscribe(
-      (item: Project) => {
-        this.project = item
-      }
-    )
-
-    this.subscription2 = this.route.params.subscribe(params => {
-      this.service.getProject(params['id'])
+    this.service.currentProject$.subscribe((item: Project) => {
+      this.project = item
     })
-  }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe()
-    this.subscription2.unsubscribe()
+    this.route.params.subscribe(params => {
+      this.service.selectedProject = params['id']
+    })
   }
 
   addSession() {
