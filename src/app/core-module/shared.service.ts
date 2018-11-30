@@ -5,10 +5,10 @@ import { NgxAlertsService } from '@ngx-plus/ngx-alerts'
 export class SharedService {
   constructor(private alertService: NgxAlertsService) {}
 
-  showError(title, text) {
+  showError(title, text = '') {
     this.alertService.alertError({ title, text })
   }
-  showSucces(title, text) {
+  showSucces(title, text = '') {
     this.alertService.alertSuccess({ title, text })
   }
 }
