@@ -12,6 +12,7 @@
           <mat-checkbox
             (change)="vote(checkpointTemplate, $event)"
             [checked]="isChecked(checkpointTemplate)"
+            [disabled]="isReadonly"
           >
           </mat-checkbox>
         </td>

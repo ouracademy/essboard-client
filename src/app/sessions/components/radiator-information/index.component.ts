@@ -12,7 +12,7 @@ import { Session } from '@shared/no-module/models/project'
       <div class="row center-xs">
         <app-radar-chart
           class="col-xs-12 col-md-6"
-          [idSession]="session.id"
+          [idSession]="null"
           level="specific"
         ></app-radar-chart>
       </div>
@@ -25,6 +25,6 @@ export class RadiatorInformationComponent implements OnInit {
   constructor(private sessionService: SessionService) {}
 
   ngOnInit() {
-    this.session = this.sessionService.selectedSession
+    this.session = null
   }
 }

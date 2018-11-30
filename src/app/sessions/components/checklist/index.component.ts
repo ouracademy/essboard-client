@@ -13,15 +13,9 @@ import { ProjectService } from 'app/projects/services/project.service'
 export class ChecklistComponent implements OnInit {
   _stateTemplate: StateTemplate
 
+  @Input() isReadonly: boolean
   @Input()
-  set stateTemplate(arg: any) {
-    this._stateTemplate = arg
-    this.sessionService.setSelectedState(arg)
-  }
-
-  get stateTemplate() {
-    return this._stateTemplate
-  }
+  stateTemplate: StateTemplate
 
   constructor(
     private sessionService: SessionService,

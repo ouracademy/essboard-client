@@ -41,16 +41,17 @@ export class SessionSocketService extends SessionService {
       const currentState = this.currentState$.getValue()
 
       if (this.canGetAlpha(currentAlpha.id, checkpoint)) {
-        this.setSelectedAlpha(currentAlpha)
+        this.selectedAlpha = currentAlpha
       }
       if (this.canGetChecklist(currentState.id, checkpoint)) {
-        this.setSelectedState(currentState)
+        this.selectedState = currentState
       }
     })
 
     this.currentState$ = new BehaviorSubject<StateTemplate>(null)
     this.currentAlpha$ = new BehaviorSubject({ states: [] })
     this.currentChecklist$ = new BehaviorSubject([])
+    this.currentSession$ = new BehaviorSubject(null)
   }
 
   private canGetAlpha(currentAlphaId: string, checkpoint: any) {
@@ -71,35 +72,21 @@ export class SessionSocketService extends SessionService {
       )
   }
 
-  getSession(id: string): Observable<Session> {
-    return this.service
-      .watch()
-      .get(id)
-      .pipe(
-        map(item => {
-          this.projectService.getMembers(item['projectId'])
-          this.channels.join('sessions', item['_id'])
-          this.getSessionChannelSubscriptions(id)
-          this.session = this.toSession(item)
-          return this.session
-        })
-      )
+  set selectedSession(sessionId: string) {
+    this.service.get(sessionId).then(session => {
+      this.projectService.getMembers(session['projectId'])
+      this.channels.join('sessions', session['_id'])
+      this.session = this.toSession(session)
+      this.currentSession$.next(this.session)
+    })
   }
 
   leaveChannel(): Observable<any> {
     return this.channels.leave('sessions')
   }
 
-  getSessionChannelSubscriptions(sessionId) {
-    return this.channels.find('sessions', sessionId)
-  }
-
   get channelSubscriptions$() {
-    return this.getSessionChannelSubscriptions(this.session.id)
-  }
-
-  get selectedSession() {
-    return this.session
+    return this.channels.find('sessions', this.session.id)
   }
 
   toSession(item) {
@@ -121,7 +108,7 @@ export class SessionSocketService extends SessionService {
     this.service.patch(session.id, { finish: true })
   }
 
-  setSelectedAlpha(alphaTemplate: AlphaTemplate) {
+  set selectedAlpha(alphaTemplate: AlphaTemplate) {
     this.getAlpha(alphaTemplate.id).then(states => {
       this.currentAlpha$.next({ id: alphaTemplate.id, states })
     })
@@ -138,11 +125,8 @@ export class SessionSocketService extends SessionService {
     })
   }
 
-  set state(state: StateTemplate) {
+  set selectedState(state: StateTemplate) {
     this.currentState$.next(state)
-  }
-
-  setSelectedState(state: StateTemplate) {
     this.getChecklist().then(checklist => {
       this.currentChecklist$.next(checklist)
     })
@@ -163,22 +147,6 @@ export class SessionSocketService extends SessionService {
     })
   }
 
-  // mthods q aun no vemos al final
-
-  private addGoalsContainerBySession(sessionId: string) {
-    // old way but now this will change
-    let data = { sessionId: sessionId }
-    let goalService = this.socketService.getService('goals')
-    goalService.create(data)
-  }
-
-  colaboreUsingUserIdInProject(idSession: string, idProject: string) {
-    let userId = this.auth.user.id
-    let data = { participants: userId }
-    let action = { $addToSet: data }
-    this.patch(idSession, action, {})
-  }
-
   delete(id) {
     this.service
       .remove(id)
@@ -190,16 +158,6 @@ export class SessionSocketService extends SessionService {
       })
   }
 
-  setStateAsWorking(id, dimensionMetadataId, stateMetadataId) {
-    let indexs = GetKeys.getIndexs(dimensionMetadataId, stateMetadataId)
-    let base = 'alphas.' + indexs.dimension + '.states.' + indexs.state
-    let path = base + '.isWorking'
-    let params = {}
-    let data = { [path]: true }
-    let action = { $set: data }
-    this.patch(id, action, params)
-  }
-
   voteCheckpoint(checkpointTemplate: CheckpointTemplate, vote: boolean) {
     this.socketService.getService('votes').create({
       type: vote ? 'VOTE_EMITED' : 'VOTE_REMOVED',
@@ -207,20 +165,5 @@ export class SessionSocketService extends SessionService {
       session: this.session.id,
       project: this.session.projectId
     })
-  }
-
-  private patch(id, data, params) {
-    this.service
-      .patch(id, data, params)
-      .then(result => {})
-      .catch(function(error) {})
-  }
-
-  public colaboreUsingSessionsIdInUser(idSession) {
-    this.socketService
-      .getService('users')
-      .patch(this.auth.user.id, { $addToSet: { sessionsId: idSession } })
-      .then(result => {})
-      .catch(function(error) {})
   }
 }
