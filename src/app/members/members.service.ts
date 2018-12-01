@@ -25,7 +25,9 @@ export class MembersService {
   }
 
   until(projectId: string, date?: Date): Observable<Member[]> {
-    return this.service.watch().find({ query: { projectId, date } })
+    return this.service
+      .watch({ listStrategy: 'always' })
+      .find({ query: { projectId, date } })
   }
 
   invite(aUser, projectId) {
@@ -39,7 +41,7 @@ export class MembersService {
 
   remove(aMember: Member, projectId) {
     return this.service.create({
-      type: 'REMOVE_MEMBER',
+      type: 'MEMBER_REMOVED',
       projectId,
       userId: aMember.id
     })

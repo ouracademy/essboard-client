@@ -4,6 +4,7 @@ import { InsideLayoutModule } from '@layouts/inside'
 import { InsideLayoutComponent } from '@layouts/inside/layout.component'
 import { PROVIDERS_PROJECT } from './projects/providers.module'
 import { PROVIDERS_SESSION } from './sessions/providers.module'
+import { MembersService } from './members/members.service'
 
 const routes: Routes = [
   {
@@ -18,6 +19,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes), InsideLayoutModule],
   exports: [RouterModule],
-  providers: [...PROVIDERS_PROJECT, ...PROVIDERS_SESSION]
+  providers: [...PROVIDERS_PROJECT, ...PROVIDERS_SESSION, MembersService]
 })
 export class InsideRoutingModule {}

@@ -5,6 +5,7 @@ import { SocketService } from '@core/socket.service'
 import { Project } from '@no-module/models/project'
 import { Member, MembersService } from 'app/members/members.service'
 import { BehaviorSubject, of } from 'rxjs'
+import { ChannelService } from 'app/sessions/services/channel.service'
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {
@@ -15,6 +16,7 @@ export class ProjectSocketService extends ProjectService {
   constructor(
     public socketService: SocketService,
     private membersService: MembersService,
+    private channels: ChannelService,
     private router: Router
   ) {
     super()
@@ -27,8 +29,9 @@ export class ProjectSocketService extends ProjectService {
   }
 
   set selectedProject(projectId: string) {
-    this.service.get(projectId).then(item => {
-      this.project = this.toProject(item)
+    this.service.get(projectId).then(project => {
+      this.channels.join('projects', project['_id'])
+      this.project = this.toProject(project)
       this.currentProject$.next(this.project)
       this.members$ = this.membersService.until(projectId)
     })

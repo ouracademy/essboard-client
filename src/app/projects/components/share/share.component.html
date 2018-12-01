@@ -4,9 +4,10 @@
     <search-user (onSelect)="handleUserSelected($event)"></search-user>
     <table class="table table-bordered">
       <tr>
-        <th>Comparto mi proyecto con:</th>
+        <th>Colaboradores del proyecto:</th>
         <th></th>
       </tr>
+
       <tr *ngFor="let member of members">
         <td>{{ member.email }}</td>
         <td>
