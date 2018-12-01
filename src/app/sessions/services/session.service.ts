@@ -19,7 +19,7 @@ export abstract class SessionService implements CanLeaveChannel {
   currentChecklist$: BehaviorSubject<any>
   abstract set selectedState(state: StateTemplate)
 
-  channelSubscriptions$: Subject<any>
+  channelSubscriptions$: Observable<any>
 
   currentMembers$: Observable<Member[]>
 

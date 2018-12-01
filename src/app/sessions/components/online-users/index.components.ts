@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { SessionService } from 'app/sessions/services/session.service'
-import { combineLatest } from 'rxjs'
+import { combineLatest, Subscription } from 'rxjs'
 import { Member } from 'app/members/members.service'
 
 @Component({
@@ -8,9 +8,9 @@ import { Member } from 'app/members/members.service'
   template: `
     <div class="row center-xs middle-xs">
       <ngx-avatar
-        *ngFor="let onlineMember of members"
+        *ngFor="let member of members"
         size="30"
-        [name]="onlineMember.name"
+        [name]="member.name"
         [class.offline]="!member.isOnline"
       ></ngx-avatar>
     </div>
@@ -18,21 +18,23 @@ import { Member } from 'app/members/members.service'
   styles: [
     `
       .offline {
-        opacity: 0.1;
+        opacity: 0.25;
       }
     `
   ]
 })
-export class OnlineUsersComponent implements OnInit {
+export class OnlineUsersComponent implements OnInit, OnDestroy {
   members = []
+  subscription: Subscription
 
   constructor(private service: SessionService) {}
 
   ngOnInit() {
-    combineLatest(
+    this.subscription = combineLatest(
       this.service.channelSubscriptions$,
       this.service.currentMembers$
     ).subscribe(([onlineMembers, sessionMembers]) => {
+      console.log({ onlineMembers, sessionMembers })
       this.members = sessionMembers.map(x => ({
         ...x,
         isOnline: this.isOnline(onlineMembers, x)
@@ -40,7 +42,13 @@ export class OnlineUsersComponent implements OnInit {
     })
   }
 
-  private isOnline(onlineMembers: any, member: Member): any {
-    return onlineMembers.find(onlineMember => onlineMember.userId === member.id)
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
+  }
+
+  private isOnline(onlineMembers: any, member: Member): boolean {
+    return !!onlineMembers.find(
+      onlineMember => onlineMember.userId === member.id
+    )
   }
 }

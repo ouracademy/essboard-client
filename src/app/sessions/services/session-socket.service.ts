@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
 import { Observable, BehaviorSubject, of } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
 import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
 import { KernelService } from '@core/kernel-knowledge.service'
@@ -90,7 +90,9 @@ export class SessionSocketService extends SessionService {
   }
 
   get channelSubscriptions$() {
-    return this.channels.find('sessions', this.session.id)
+    return this.currentSession$.pipe(
+      switchMap(session => this.channels.find('sessions', session.id))
+    )
   }
 
   toSession(item) {
