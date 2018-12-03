@@ -9,6 +9,7 @@ import {
 import Chart from 'chart.js'
 const seedrandom = require('seedrandom')
 import { SocketService } from '@core/socket.service'
+import { KernelService } from '@core/kernel-knowledge.service'
 
 @Component({
   selector: 'app-radar-chart',
@@ -25,20 +26,20 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
   @ViewChild('chart') chart: ElementRef
   radarChart: Chart = null
 
-  radarChartLabels: string[] = [
-    'Oportunidad',
-    'Interesado',
-    'Requerimientos',
-    'Sistema de software',
-    'Equipo',
-    'Forma de trabajo',
-    'Trabajo'
-  ] //  es rgb
+  radarChartLabels: string[]
 
-  constructor(private socketService: SocketService) {
+  constructor(
+    private socketService: SocketService,
+    private kernel: KernelService
+  ) {
     this.service = this.socketService.getService('charts')
   }
-  ngOnInit() {}
+
+  ngOnInit() {
+    this.kernel.getAlphas().subscribe(alphas => {
+      this.radarChartLabels = alphas.map(alpha => alpha.name)
+    })
+  }
 
   ngAfterViewInit() {
     // this.service
@@ -56,8 +57,6 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
       { status: [1, 2, 1, 3, 4, 5, 2], id: '124', number: 3 }
     ]
 
-    // creo q taba mejor como antes uyyy ajjaja
-    // :P dianaap
     this.radarChart = toRadar(
       this.chart.nativeElement,
       result.map(toRadarData),
