@@ -44,6 +44,7 @@ export class DetailAlphaComponent implements OnInit {
       .subscribe((alphaTemplate: AlphaTemplate) => {
         this.alphaTemplate = alphaTemplate
         this.sessions.selectedAlpha = alphaTemplate
+        this.sessions.selectedState = null
       })
   }
 

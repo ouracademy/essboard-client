@@ -142,9 +142,13 @@ export class SessionSocketService extends SessionService {
 
   set selectedState(state: StateTemplate) {
     this.currentState$.next(state)
-    this.getChecklist().then(checklist => {
-      this.currentChecklist$.next(checklist)
-    })
+    if (state) {
+      this.getChecklist().then(checklist => {
+        this.currentChecklist$.next(checklist)
+      })
+    } else {
+      this.currentChecklist$.next(null)
+    }
   }
 
   private getChecklist() {
