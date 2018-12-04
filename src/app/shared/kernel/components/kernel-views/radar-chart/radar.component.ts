@@ -26,8 +26,6 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
   @ViewChild('chart') chart: ElementRef
   radarChart: Chart = null
 
-  radarChartLabels: string[]
-
   constructor(
     private socketService: SocketService,
     private kernel: KernelService
@@ -35,11 +33,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
     this.service = this.socketService.getService('charts')
   }
 
-  ngOnInit() {
-    this.kernel.getAlphas().subscribe(alphas => {
-      this.radarChartLabels = alphas.map(alpha => alpha.name)
-    })
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     // this.service
@@ -51,17 +45,19 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
     //     }
     //   })
     //   .then(result => {
+    this.kernel.getAlphas().subscribe(alphas => {
+      this.radarChart = toRadar(
+        this.chart.nativeElement,
+        result.map(toRadarData),
+        alphas.map(alpha => alpha.name)
+      )
+    })
     const result = [
       { status: [1, 2, 1, 2, 2, 1, 2], id: '122', number: 1 },
       { status: [1, 2, 1, 2, 2, 2, 2], id: '123', number: 2 },
       { status: [1, 2, 1, 3, 4, 5, 2], id: '124', number: 3 }
     ]
 
-    this.radarChart = toRadar(
-      this.chart.nativeElement,
-      result.map(toRadarData),
-      this.radarChartLabels
-    )
     // })
   }
 
