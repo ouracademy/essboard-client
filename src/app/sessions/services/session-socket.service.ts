@@ -54,11 +54,20 @@ export class SessionSocketService extends SessionService {
     this.currentMembers$ = of([])
   }
 
-  private canGetAlpha(currentAlphaId: string, checkpoint: any) {
-    return parseInt(currentAlphaId, 10) === Math.floor(checkpoint / 100)
+  private canGetAlpha(currentAlphaId: string, checkpoint: string) {
+    return parseInt(currentAlphaId, 10) === this.getAlphaFrom(checkpoint)
   }
-  private canGetChecklist(currentStateId: string, checkpoint: any) {
-    return parseInt(currentStateId, 10) === Math.floor(checkpoint / 10)
+
+  private canGetChecklist(currentStateId: string, checkpoint: string) {
+    return parseInt(currentStateId, 10) === this.getStateFrom(checkpoint)
+  }
+
+  getAlphaFrom(checkpoint) {
+    return Math.floor(this.getStateFrom(checkpoint) / 10)
+  }
+
+  getStateFrom(checkpoint: string): number {
+    return parseInt(checkpoint.split('-')[0], 10)
   }
 
   getSessions(projectId: string) {
@@ -141,7 +150,7 @@ export class SessionSocketService extends SessionService {
   private getChecklist() {
     const date = this.session.endDate
       ? this.session.endDate
-      : new Date(2018, 10, 30) // TODO: check this
+      : new Date(2018, 11, 30) // TODO: check this
     const state = this.currentState$.getValue()
     return this.socketService.getService('states').find({
       query: {
