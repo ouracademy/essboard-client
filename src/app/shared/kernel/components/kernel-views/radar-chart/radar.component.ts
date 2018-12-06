@@ -48,14 +48,50 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
     this.kernel.getAlphas().subscribe(alphas => {
       this.radarChart = toRadar(
         this.chart.nativeElement,
-        result.map(toRadarData),
+        result.map(session => toRadarData(session, alphas)),
         alphas.map(alpha => alpha.name)
       )
     })
     const result = [
-      { status: [1, 2, 1, 2, 2, 1, 2], id: '122', number: 1 },
-      { status: [1, 2, 1, 2, 2, 2, 2], id: '123', number: 2 },
-      { status: [1, 2, 1, 3, 4, 5, 2], id: '124', number: 3 }
+      {
+        status: [
+          { alphaId: '1', stateId: 1 },
+          { alphaId: '2', stateId: 2 },
+          { alphaId: '3', stateId: 1 },
+          { alphaId: '4', stateId: 2 },
+          { alphaId: '5', stateId: 2 },
+          { alphaId: '6', stateId: 1 },
+          { alphaId: '7', stateId: 2 }
+        ],
+        id: '122',
+        number: 1
+      },
+      {
+        status: [
+          { alphaId: '1', stateId: 1 },
+          { alphaId: '2', stateId: 2 },
+          { alphaId: '3', stateId: 1 },
+          { alphaId: '4', stateId: 2 },
+          { alphaId: '5', stateId: 2 },
+          { alphaId: '6', stateId: 2 },
+          { alphaId: '7', stateId: 2 }
+        ],
+        id: '123',
+        number: 2
+      },
+      {
+        status: [
+          { alphaId: '1', stateId: 1 },
+          { alphaId: '2', stateId: 2 },
+          { alphaId: '3', stateId: 1 },
+          { alphaId: '4', stateId: 3 },
+          { alphaId: '5', stateId: 4 },
+          { alphaId: '6', stateId: 5 },
+          { alphaId: '7', stateId: 2 }
+        ],
+        id: '124',
+        number: 3
+      }
     ]
 
     // })
@@ -94,8 +130,15 @@ const toRadar = (element, data, labels) => {
   })
 }
 
-const toRadarData = (session: any) => ({
-  data: session.status,
+const dataSet = (sessionStatus, alphas) => {
+  return alphas.reduce((acc, alpha) => {
+    const statusByAlpha = sessionStatus.find(x => x.alphaId === alpha.id)
+    return [...acc, statusByAlpha ? statusByAlpha.stateId : 0]
+  }, [])
+}
+
+const toRadarData = (session: any, alphas) => ({
+  data: dataSet(session.status, alphas),
   label: `Session ${session.number}`,
   fill: true,
   backgroundColor: randomColor(session.id),
