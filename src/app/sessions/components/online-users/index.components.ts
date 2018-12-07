@@ -34,7 +34,6 @@ export class OnlineUsersComponent implements OnInit, OnDestroy {
       this.service.channelSubscriptions$,
       this.service.currentMembers$
     ).subscribe(([onlineMembers, sessionMembers]) => {
-      console.log({ onlineMembers, sessionMembers })
       this.members = sessionMembers.map(x => ({
         ...x,
         isOnline: this.isOnline(onlineMembers, x)

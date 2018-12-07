@@ -10,6 +10,11 @@ import Chart from 'chart.js'
 const seedrandom = require('seedrandom')
 import { SocketService } from '@core/socket.service'
 import { KernelService } from '@core/kernel-knowledge.service'
+import { combineLatest, from } from 'rxjs'
+
+import format from 'date-fns/format'
+import { ProjectService } from 'app/projects/services/project.service'
+import { switchMap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-radar-chart',
@@ -18,8 +23,7 @@ import { KernelService } from '@core/kernel-knowledge.service'
   `
 })
 export class RadarChartComponent implements OnInit, AfterViewInit {
-  @Input() idProject
-  @Input() idSession
+  @Input() sessionId
   @Input() level = 'all' // all | specific -->  session
   service
 
@@ -28,7 +32,8 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
 
   constructor(
     private socketService: SocketService,
-    private kernel: KernelService
+    private kernel: KernelService,
+    private projectService: ProjectService
   ) {
     this.service = this.socketService.getService('charts')
   }
@@ -36,65 +41,24 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    // this.service
-    //   .find({
-    //     query: {
-    //       idProject: this.idProject,
-    //       idSession: this.idSession,
-    //       level: this.level
-    //     }
-    //   })
-    //   .then(result => {
-    this.kernel.getAlphas().subscribe(alphas => {
+    combineLatest(
+      this.projectService.currentProject$.pipe(
+        switchMap(project =>
+          from<any[]>(
+            this.service.find({
+              query: { projectId: project.id }
+            })
+          )
+        )
+      ),
+      this.kernel.getAlphas()
+    ).subscribe(([sessions, alphas]) => {
       this.radarChart = toRadar(
         this.chart.nativeElement,
-        result.map(session => toRadarData(session, alphas)),
+        sessions.map(session => toRadarData(session, alphas)),
         alphas.map(alpha => alpha.name)
       )
     })
-    const result = [
-      {
-        status: [
-          { alphaId: '1', stateId: 1 },
-          { alphaId: '2', stateId: 2 },
-          { alphaId: '3', stateId: 1 },
-          { alphaId: '4', stateId: 2 },
-          { alphaId: '5', stateId: 2 },
-          { alphaId: '6', stateId: 1 },
-          { alphaId: '7', stateId: 2 }
-        ],
-        id: '122',
-        number: 1
-      },
-      {
-        status: [
-          { alphaId: '1', stateId: 1 },
-          { alphaId: '2', stateId: 2 },
-          { alphaId: '3', stateId: 1 },
-          { alphaId: '4', stateId: 2 },
-          { alphaId: '5', stateId: 2 },
-          { alphaId: '6', stateId: 2 },
-          { alphaId: '7', stateId: 2 }
-        ],
-        id: '123',
-        number: 2
-      },
-      {
-        status: [
-          { alphaId: '1', stateId: 1 },
-          { alphaId: '2', stateId: 2 },
-          { alphaId: '3', stateId: 1 },
-          { alphaId: '4', stateId: 3 },
-          { alphaId: '5', stateId: 4 },
-          { alphaId: '6', stateId: 5 },
-          { alphaId: '7', stateId: 2 }
-        ],
-        id: '124',
-        number: 3
-      }
-    ]
-
-    // })
   }
 
   // events
@@ -139,7 +103,7 @@ const dataSet = (sessionStatus, alphas) => {
 
 const toRadarData = (session: any, alphas) => ({
   data: dataSet(session.status, alphas),
-  label: `Session ${session.number}`,
+  label: `Session ${format(session.date, 'DD/M')}`,
   fill: true,
   backgroundColor: randomColor(session.id),
   pointBackgroundColor: 'rgb(255, 99, 132)',

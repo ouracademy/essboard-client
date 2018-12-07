@@ -147,7 +147,7 @@ export class SessionSocketService extends SessionService {
         this.currentChecklist$.next(checklist)
       })
     } else {
-      this.currentChecklist$.next(null)
+      this.currentChecklist$.next([])
     }
   }
 

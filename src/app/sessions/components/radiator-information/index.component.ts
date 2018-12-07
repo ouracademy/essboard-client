@@ -12,7 +12,7 @@ import { Session } from '@shared/no-module/models/project'
       <div class="row center-xs">
         <app-radar-chart
           class="col-xs-12 col-md-6"
-          [idSession]="null"
+          [sessionId]="null"
           level="specific"
         ></app-radar-chart>
       </div>
