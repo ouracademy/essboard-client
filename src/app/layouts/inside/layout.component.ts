@@ -19,16 +19,6 @@ import { HeaderModule } from '@shared/header/index.module'
           #menu="matMenu"
         >
           <button mat-menu-item routerLink="/me/projects">Mis proyectos</button>
-          <button mat-menu-item routerLink="/me/projects">
-            Mis competencias
-          </button>
-          <button mat-menu-item routerLink="/me/practices">
-            Mis practicas
-          </button>
-          <button mat-menu-item>Ayuda</button>
-          <button mat-menu-item routerLink="/me/settings/profile">
-            Configuracion
-          </button>
           <button mat-menu-item (click)="logout()">Salir</button>
         </mat-menu>
         <button mat-icon-button class="avatar" [matMenuTriggerFor]="menu">
