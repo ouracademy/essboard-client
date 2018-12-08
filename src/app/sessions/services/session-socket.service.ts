@@ -85,8 +85,7 @@ export class SessionSocketService extends SessionService {
     this.service.get(sessionId).then(session => {
       this.currentMembers$ = this.membersService.until(
         session.projectId,
-        session.endDate ? session.endDate : session.createdAt
-      )
+        session.endDate       )
 
       this.channels.join('sessions', session['_id'])
       this.session = this.toSession(session)
