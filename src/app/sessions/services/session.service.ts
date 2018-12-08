@@ -8,7 +8,7 @@ import {
 import { CanLeaveChannel } from '../services/leave-session.guard'
 import { Member } from 'app/members/members.service'
 export abstract class SessionService implements CanLeaveChannel {
-  currentSession$: BehaviorSubject<Session>
+  currentSession$: Observable<Session>
   abstract set selectedSession(sessionId: string)
 
   currentState$: BehaviorSubject<StateTemplate>
@@ -26,7 +26,7 @@ export abstract class SessionService implements CanLeaveChannel {
   abstract getSessions(projectId: string): Observable<Session[]>
   abstract addSession(projectId: string): Promise<any>
   abstract delete(id)
-  abstract finish(session)
+  abstract finish()
 
   abstract voteCheckpoint(checkpointTemplate: CheckpointTemplate, vote: boolean)
   abstract leaveChannel()

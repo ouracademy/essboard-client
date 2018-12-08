@@ -63,7 +63,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel {
   }
 
   finishSession() {
-    this.service.finish(this.session)
+    this.service.finish()
   }
 
   delete() {}

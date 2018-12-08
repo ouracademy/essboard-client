@@ -20,6 +20,7 @@ export class SessionSocketService extends SessionService {
   service: any
   statesService
   votesService
+  selectedSessionId$: BehaviorSubject<string>
   session: Session
 
   constructor(
@@ -50,8 +51,22 @@ export class SessionSocketService extends SessionService {
     this.currentState$ = new BehaviorSubject<StateTemplate>(null)
     this.currentAlpha$ = new BehaviorSubject({ states: [] })
     this.currentChecklist$ = new BehaviorSubject([])
-    this.currentSession$ = new BehaviorSubject<Session>(null)
-    this.currentMembers$ = of([])
+
+    this.selectedSessionId$ = new BehaviorSubject(null)
+    this.currentSession$ = this.selectedSessionId$.pipe(
+      switchMap(sessionId =>
+        this.service
+          .watch()
+          .get(sessionId)
+          .pipe(
+            map(session => {
+              // TODO: remove this.session can have problems..
+              this.session = this.toSession(session)
+              return this.session
+            })
+          )
+      )
+    )
   }
 
   private canGetAlpha(currentAlphaId: string, checkpoint: string) {
@@ -82,15 +97,15 @@ export class SessionSocketService extends SessionService {
   }
 
   set selectedSession(sessionId: string) {
-    this.service.get(sessionId).then(session => {
-      this.currentMembers$ = this.membersService.until(
-        session.projectId,
-        session.endDate       )
+    this.selectedSessionId$.next(sessionId)
+    this.channels.join('sessions', sessionId)
+  }
 
-      this.channels.join('sessions', session['_id'])
-      this.session = this.toSession(session)
-      this.currentSession$.next(this.session)
-    })
+  get currentMembers$() {
+    return this.membersService.until(
+      this.session.projectId,
+      this.session.endDate
+    )
   }
 
   leaveChannel(): Observable<any> {
@@ -118,8 +133,8 @@ export class SessionSocketService extends SessionService {
     })
   }
 
-  finish(session) {
-    this.service.patch(session.id, { finish: true })
+  finish() {
+    this.service.patch(this.session.id, { finish: true })
   }
 
   set selectedAlpha(alphaTemplate: AlphaTemplate) {
