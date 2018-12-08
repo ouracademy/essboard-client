@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { api } from '@env/environment'
+import { coreApi } from '@env/environment'
 
 import feathers, { Application, Service } from '@feathersjs/feathers'
 import * as io from 'socket.io-client'
@@ -12,7 +12,7 @@ export class SocketService {
   public _app: Application
   public _url: string
   constructor() {
-    this._url = api
+    this._url = coreApi
     this.init()
   }
 
