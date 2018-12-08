@@ -12,7 +12,7 @@ import { SocketService } from '@core/socket.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { combineLatest, from } from 'rxjs'
 
-import format from 'date-fns/format'
+import { format } from 'date-fns'
 import { ProjectService } from 'app/projects/services/project.service'
 import { switchMap } from 'rxjs/operators'
 
