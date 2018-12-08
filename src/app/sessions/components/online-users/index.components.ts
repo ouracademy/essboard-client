@@ -7,21 +7,13 @@ import { Member } from 'app/members/members.service'
   selector: 'app-online-users',
   template: `
     <div class="row center-xs middle-xs">
-      <ngx-avatar
+      <app-our-avatar
         *ngFor="let member of members"
-        size="30"
-        [name]="member.name"
-        [class.offline]="!member.isOnline"
-      ></ngx-avatar>
+        [user]="member"
+        [isOnline]="member.isOnline"
+      ></app-our-avatar>
     </div>
-  `,
-  styles: [
-    `
-      .offline {
-        opacity: 0.25;
-      }
-    `
-  ]
+  `
 })
 export class OnlineUsersComponent implements OnInit, OnDestroy {
   members = []

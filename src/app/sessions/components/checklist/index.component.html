@@ -16,13 +16,12 @@
           </mat-checkbox>
         </td>
         <td class="voters row center-xs middle-xs">
-          <ngx-avatar
-            *ngFor="let voter of voters(checkpointTemplate)"
-            [name]="voter.name"
-            size="20"
+          <app-our-avatar
             class="pad-0-3"
-          >
-          </ngx-avatar>
+            size="20"
+            *ngFor="let voter of voters(checkpointTemplate)"
+            [user]="voter"
+          ></app-our-avatar>
         </td>
         <td class="text">{{ checkpointTemplate.description }}</td>
       </tr>

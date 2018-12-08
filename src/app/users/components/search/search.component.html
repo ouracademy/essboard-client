@@ -13,7 +13,7 @@
       class="selectable"
       (click)="select(user)"
     >
-      <img mat-list-avatar src="{{user.avatar()}}" alt="{{user.name}}" />
+      <app-our-avatar [user]="user"></app-our-avatar>
       <h3 mat-line>{{ user.name }}</h3>
       <p mat-line>
         <span> {{ user.email }} </span>

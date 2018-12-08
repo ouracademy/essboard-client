@@ -20,7 +20,7 @@ import 'hammerjs'
 import { RoutingModule } from './routing.module'
 
 import { KernelModule } from '@shared/kernel/kernel.module'
-import { AvatarModule } from 'ngx-avatar'
+
 import { UsersModule } from '../users/index.module'
 
 import { SessionComponent } from './components/index.component'
@@ -41,6 +41,7 @@ import { ChecklistComponent } from './components/checklist/index.component'
 import { ChatComponent } from './components/chat/index.component'
 
 import { OnlineUsersComponent } from './components/online-users/index.components'
+import { OurAvatarModule } from '@shared/avatar/index.module'
 
 @NgModule({
   imports: [
@@ -60,8 +61,7 @@ import { OnlineUsersComponent } from './components/online-users/index.components
     MatTabsModule,
     MatButtonToggleModule,
     MatListModule,
-
-    AvatarModule,
+    OurAvatarModule,
     RoutingModule
   ],
   declarations: [

@@ -9,6 +9,7 @@
 }
 .content-list {
   height: 85%;
+  overflow-y: auto;
 }
 .content-input {
   max-height: 25%;

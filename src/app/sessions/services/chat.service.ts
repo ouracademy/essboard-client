@@ -1,7 +1,6 @@
-import { Subject } from 'rxjs'
+import { Observable } from 'rxjs'
 
 export abstract class ChatService {
-  messages$: Subject<any>
-  abstract getMessages(sessionId)
+  abstract messages$(sessionId): Observable<any[]>
   abstract addMessage(text, sessionId)
 }

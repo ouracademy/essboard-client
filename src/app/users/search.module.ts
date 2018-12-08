@@ -11,6 +11,7 @@ import { SearchComponent } from './components/search/search.component'
 
 import { indexRouting } from './index.routing'
 import { UserSearchSocketService } from './services/user-search-socket.service'
+import { OurAvatarModule } from '@shared/avatar/index.module'
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { UserSearchSocketService } from './services/user-search-socket.service'
     indexRouting,
     MatFormFieldModule,
     MatInputModule,
-    MatListModule
+    MatListModule,
+    OurAvatarModule
   ],
   declarations: [SearchComponent],
   providers: [UserSearchSocketService],

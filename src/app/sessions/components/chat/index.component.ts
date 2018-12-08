@@ -29,10 +29,9 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   constructor(private chatService: ChatService) {}
 
   ngOnInit() {
-    this.chatService.messages$.subscribe(messages => {
-      this.messages = messages
+    this.chatService.messages$(this.sessionId).subscribe(messages => {
+      this.messages = messages['data']
     })
-    this.chatService.getMessages(this.sessionId)
     this.scrollToBottom()
   }
 

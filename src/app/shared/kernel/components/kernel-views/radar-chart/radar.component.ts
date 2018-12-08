@@ -7,7 +7,7 @@ import {
   AfterViewInit
 } from '@angular/core'
 import Chart from 'chart.js'
-const seedrandom = require('seedrandom')
+import { randomColor } from '@shared/utils/random-color'
 import { SocketService } from '@core/socket.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { combineLatest, from } from 'rxjs'
@@ -111,23 +111,3 @@ const toRadarData = (session: any, alphas) => ({
   pointHoverBackgroundColor: '#fff',
   pointHoverBorderColor: 'rgb(255, 99, 132)'
 })
-
-const defaultRandom = () => Math.random()
-const randomFrom = aText => () => {
-  return seedrandom(aText)()
-}
-const palettePastelColor = (random = defaultRandom) => {
-  const hBase = random()
-
-  return {
-    h: Math.floor(hBase * 360),
-    s: 100,
-    l: 60
-  }
-}
-
-const randomColor = text => {
-  const a = 0.5
-  const { h, s, l } = palettePastelColor(randomFrom(text))
-  return `hsla(${h}, ${s}%, ${l}%,${a})`
-}
