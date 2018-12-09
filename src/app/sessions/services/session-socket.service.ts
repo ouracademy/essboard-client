@@ -88,7 +88,14 @@ export class SessionSocketService extends SessionService {
   getSessions(projectId: string) {
     return this.service
       .watch()
-      .find({ query: { projectId } })
+      .find({
+        query: {
+          projectId,
+          $sort: {
+            createdAt: -1
+          }
+        }
+      })
       .pipe(
         map(result => {
           return result['data'].map(item => this.toSession(item))
