@@ -14,7 +14,7 @@ import { combineLatest, from } from 'rxjs'
 
 import { format } from 'date-fns'
 import { ProjectService } from 'app/projects/services/project.service'
-import { switchMap } from 'rxjs/operators'
+import { switchMap, filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-radar-chart',
@@ -43,6 +43,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     combineLatest(
       this.projectService.currentProject$.pipe(
+        filter(project => project),
         switchMap(project =>
           from<any[]>(
             this.service.find({
