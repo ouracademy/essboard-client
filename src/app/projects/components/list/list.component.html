@@ -9,8 +9,9 @@
     <div *ngIf="loaded && projects.length == 0" class="empty-proyects">
       <div class="shadow"><p>No tienes proyectos</p></div>
     </div>
-    <div class="container-elements">
+    <div class="container-elements row">
       <project-card
+        class="col-xs-12 col-md-3"
         *ngFor="let project of projects"
         [project]="project"
         [user]="user"
