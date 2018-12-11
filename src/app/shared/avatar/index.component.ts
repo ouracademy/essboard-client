@@ -13,7 +13,7 @@ export class OurAvatarComponent implements OnInit {
   }
 
   @Input() size = 30
-  @Input() isOnline
+  @Input() isOnline = true
 
   name = ''
   constructor() {}
