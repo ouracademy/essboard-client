@@ -28,12 +28,16 @@ import {
   CreateComponent,
   ShareComponent
 } from './index'
+import { RenderCtrlModule } from '@shared/render-ctrl/index.module'
+import { NotImplementedModule } from '@shared/not-implemented/index.module'
 
 @NgModule({
   imports: [
     CommonModule,
 
     ReactiveFormsModule,
+    RenderCtrlModule,
+    NotImplementedModule,
 
     MatCardModule,
     MatButtonModule,
