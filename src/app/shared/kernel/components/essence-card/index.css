@@ -15,7 +15,7 @@
 }
 .essence-card-content {
   background: white;
-  height: 29vh;
+  min-height: 29vh;
   padding: 2px;
 }
 .essence-card-footer {
