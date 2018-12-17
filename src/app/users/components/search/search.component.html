@@ -2,22 +2,21 @@
   <mat-form-field appearance="outline"
     ><input
       matInput
-      [(ngModel)]="keyToSearch"
-      (keyup)="onKey($event)"
+      #searchBox
+      (input)="search(searchBox.value)"
       placeholder="Escribe aqui su correo"
-      value="value"
   /></mat-form-field>
   <mat-list class="">
-    <mat-list-item
-      *ngFor="let user of users"
-      class="selectable"
-      (click)="select(user)"
-    >
-      <app-our-avatar [user]="user"></app-our-avatar>
+    <mat-list-item *ngFor="let user of users">
+      <app-our-avatar [user]="user" matListAvatar></app-our-avatar>
       <h3 mat-line>{{ user.name }}</h3>
       <p mat-line>
         <span> {{ user.email }} </span>
       </p>
+      <span *ngIf="isMember(user); else invite">Parte del equipo</span>
+      <ng-template #invite>
+        <button mat-flat-button (click)="select(user)">Invite</button>
+      </ng-template>
     </mat-list-item>
   </mat-list>
 </div>
