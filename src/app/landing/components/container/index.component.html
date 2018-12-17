@@ -1,6 +1,6 @@
 <app-header>
   <right-content>
-    <div *ngIf="!auth.isLoggedIn; else userLogged" class="row">
+    <div *ngIf="!auth.isLoggedIn; else: userLogged" class="row">
       <a
         class="button col-xs-12 col-sm-6"
         mat-button
@@ -23,7 +23,7 @@
     </ng-template>
   </right-content>
 </app-header>
-<div class="row center-xs middle-xs">
+<div class="row center-xs middle-xs pad-1">
   <h1 class="row mat-display-1 primary  col-6 center">{{ labels.slogan }}</h1>
   <h4 class="row mat-display-1 info col-6 center">{{ labels.description }}</h4>
   <div class="row center-xs middle-xs all-width">

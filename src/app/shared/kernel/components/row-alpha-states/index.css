@@ -1,7 +1,6 @@
 .separator {
   width: 250px;
   height: auto;
-  margin: 0px 5px 20px 5px;
   position: relative;
 }
 .container-selected {
@@ -11,4 +10,8 @@
   position: absolute;
   bottom: 1px;
   right: 0;
+}
+
+.button--alpha {
+  height: 3.5rem;
 }

@@ -1,13 +1,11 @@
-<mat-card
+<div
   *ngFor="let session of sessions"
-  class="mar-1 selectable"
+  class="mar-1 selectable shadow pad-0-5"
   (click)="goSession(session)"
 >
-  <mat-card-header>
+  <div class="row">
     <mat-icon *ngIf="!!session.endDate">lock</mat-icon>
-    <mat-card-title>Sesión</mat-card-title>
-    <mat-card-subtitle>{{
-      session.createdAt | date: "d 'de' MMMM"
-    }}</mat-card-subtitle>
-  </mat-card-header>
-</mat-card>
+    <p class="row subtitle">Sesión</p>
+  </div>
+  <p class="row info">{{ session.createdAt | date: "d 'de' MMMM" }}</p>
+</div>

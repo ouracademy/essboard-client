@@ -1,15 +1,17 @@
 <div class="">
-  <div class="title">Comparte el proyecto a tus amigos</div>
+  <div class="title font-md">Comparte el proyecto</div>
   <div>
     <search-user (onSelect)="handleUserSelected($event)"></search-user>
     <table class="table table-bordered">
       <tr>
+        <th></th>
         <th>Colaboradores del proyecto:</th>
         <th></th>
       </tr>
 
       <tr *ngFor="let member of members">
-        <td>{{ member.email }}</td>
+        <td><app-our-avatar [user]="member"></app-our-avatar></td>
+        <td class="pad-0-5">{{ member.email }}</td>
         <td>
           <button mat-icon-button (click)="delete(member)">
             <mat-icon class="md-24">delete_forever</mat-icon>

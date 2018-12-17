@@ -1,13 +1,14 @@
 <div *ngIf="project">
   <div class="row middle-xs row-detail">
-    <div class="title">{{ project.name }}</div>
-    <div class="title">{{ project.description }}</div>
+    <div class="title font-normal">{{ project.name }}</div>
+    <div class="title font-normal">{{ project.description }}</div>
     <span class="fill-remaining"></span>
     <span>Creado el: {{ project.createdAt | date: 'd/M/y' }} </span>
     <button
       mat-icon-button
       mat-tooltip="Elimina este proyecto"
       (click)="delete()"
+      app-not-implemented
     >
       <mat-icon class="md-24">delete_forever</mat-icon>
     </button>
@@ -21,16 +22,18 @@
   </div>
   <div class="content pad-1">
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-xs-12 last-xs first-md">
         <h2 class="title center">Tus sesiones de trabajo</h2>
         <div>
           <button class="main" (click)="addSession()">
             <mat-icon class="md-24">add</mat-icon>
           </button>
-          <sessions-list [projectId]="project.id"></sessions-list>
+          <app-render-ctrl>
+            <sessions-list #data [projectId]="project.id"></sessions-list>
+          </app-render-ctrl>
         </div>
       </div>
-      <div class="col-lg-9">
+      <div class="col-lg-9 col-xs-12">
         <h2 class="title center">Tu proyecto holisticamente</h2>
         <div class="row center-xs">
           <app-radar-chart

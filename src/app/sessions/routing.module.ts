@@ -5,6 +5,7 @@ import { SessionComponent } from './components/index.component'
 import { RadiatorInformationComponent } from './components/radiator-information/index.component'
 import { SetCurrentStateComponent } from './components/set-current-state/index.component'
 import { DetailAlphaComponent } from './components/detail-alpha/index.component'
+import { SetGoalStateComponent } from './components/set-goal-state/index.component'
 
 const enableChannelsSubscription = true
 

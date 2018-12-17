@@ -1,33 +1,44 @@
-<div class="wrapper">
+<div class="row around-xs">
+  <p class="subtitle">Estados logrados</p>
+  <p class="subtitle">Estados por lograr</p>
+</div>
+<div class="row middle-xs">
   <div class="achieved">
-    <div class="wrapper">
-      <state-card-view
-        *ngFor="let state of alpha.statesFulfilled"
-        [state]="state"
+    <div class="row middle-xs">
+      <div
+        *ngFor="let state of doneStates"
         (click)="select(state)"
-        [className]="isPosibleToSelect(state)? 'active' : 'disabled' "
-      ></state-card-view>
+        class=" {{alpha.area}} button--alpha selectable"
+      >
+        <p class="info center">{{ state.name }}</p>
+      </div>
     </div>
   </div>
-  <div [ngClass]="{'separator':true,'container-selected':isForSelected}">
-    <p *ngIf="!stateGoal && isForSelected">
+  <div
+    class="row middle-xs "
+    [ngClass]="{ separator: true, 'container-selected': isForSelected }"
+  >
+    <p *ngIf="!selectedState && isForSelected">
       Hacer click en un estado y se visualizara aqui
     </p>
-    <div *ngIf="stateGoal">
-      <state-card-view [state]="stateGoal"></state-card-view>
+    <div *ngIf="selectedState">
+      <div class=" button--alpha {{alpha.area }} selectable">
+        <p class="info center">{{ selectedState.name }}</p>
+      </div>
       <button class="quit" (click)="noSelect()">
         <mat-icon class="md-24">close</mat-icon>
       </button>
     </div>
   </div>
   <div class="no-achieved">
-    <div class="wrapper">
-      <state-card-view
-        *ngFor="let state of alpha.statesUnfulfilled"
-        [state]="state"
+    <div class="row middle-xs">
+      <div
+        *ngFor="let state of todoStates"
+        class=" {{alpha.area}} button--alpha selectable"
         (click)="select(state)"
-        [className]="isPosibleToSelect(state) ? 'active' : 'disabled' "
-      ></state-card-view>
+      >
+        <p class="info center">{{ state.name }}</p>
+      </div>
     </div>
   </div>
 </div>

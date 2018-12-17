@@ -1,11 +1,11 @@
 <div *ngIf="session">
   <div class="row row-detail between-xs middle-xs">
-    <div class="row middle-xs ">
+    <div class="row middle-xs col-xs-12 col-md-3 ">
       <span>Sesión </span>
       <div class="pad-0-5">
         <span> {{ session.createdAt | date: "d 'de' MMMM" }}</span>
 
-        <span *ngIf="session.hasFinished; else notFinished">
+        <span *ngIf="session.hasFinished; else: notFinished">
           a {{ session.endDate | date: "d 'de' MMMM" }}
         </span>
         <ng-template #notFinished>
@@ -15,11 +15,28 @@
         </ng-template>
       </div>
     </div>
-    <app-online-users></app-online-users>
-    <div class="row middle-xs pad-0-5">
-      <!-- <button mat-icon-button *ngIf="!session.hasFinished">
-        <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
-      </button> -->
+    <app-online-users class="col-xs-12 col-md-6"></app-online-users>
+    <div class="row middle-xs center-xs col-xs-12 col-md-3 pad-0-5">
+      <!--
+        <button mat-icon-button *ngIf="!session.hasFinished">
+
+
+
+
+
+
+
+          <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
+
+
+
+
+
+
+
+
+        </button>
+      -->
       <button mat-icon-button (click)="isChatVisible = !isChatVisible">
         <mat-icon class="md-24">chat</mat-icon>
       </button>
