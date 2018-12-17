@@ -30,6 +30,7 @@ import {
 } from './index'
 import { RenderCtrlModule } from '@shared/render-ctrl/index.module'
 import { NotImplementedModule } from '@shared/not-implemented/index.module'
+import { OurAvatarModule } from '@shared/avatar/index.module';
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ import { NotImplementedModule } from '@shared/not-implemented/index.module'
     RoutingModule,
 
     FormsModule,
-    KernelModule
+    KernelModule,
+    OurAvatarModule
   ],
   declarations: [
     ListComponent,
