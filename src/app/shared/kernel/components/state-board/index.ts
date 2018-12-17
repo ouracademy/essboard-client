@@ -7,9 +7,9 @@ import { StateMetadata } from '@no-module/models/kernel/kernel'
   templateUrl: 'index.html',
   styleUrls: ['index.css']
 })
-export class StateBoard {
+export class StateBoardComponent {
   @Input()
-  kernel: Kernel
+  alphas: any[]
   @Input()
   isForSelected: boolean
   @Input()

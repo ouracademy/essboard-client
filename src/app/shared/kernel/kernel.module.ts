@@ -5,12 +5,12 @@ import { MatCardModule, MatIconModule } from '@angular/material'
 import { EssenceCardComponent } from './components/essence-card/index'
 import { StateCardViewComponent } from './components/state-card-view/index'
 import { AlphaCardComponent } from './components/alpha-card/index'
-import { RowAlphaStates } from './components/row-alpha-states/index'
+import { RowAlphaStatesComponent } from './components/row-alpha-states/index'
 import {
   AlphaConnections,
   RadarChartComponent
 } from './components/kernel-views/index'
-import { StateBoard } from './components/state-board/index'
+import { StateBoardComponent } from './components/state-board/index'
 
 // services
 import { ActivitySpaceMockService } from './services/mock-activity-spaces/index.service'
@@ -24,19 +24,19 @@ import { PracticeMockService } from './services/mock-practices/index.service'
     EssenceCardComponent,
     StateCardViewComponent,
     AlphaCardComponent,
-    RowAlphaStates,
+    RowAlphaStatesComponent,
     AlphaConnections,
     RadarChartComponent,
-    StateBoard
+    StateBoardComponent
   ],
   exports: [
     EssenceCardComponent,
     StateCardViewComponent,
     AlphaCardComponent,
-    RowAlphaStates,
+    RowAlphaStatesComponent,
     RadarChartComponent,
     AlphaConnections,
-    StateBoard
+    StateBoardComponent
   ],
   providers: [
     PracticeMockService,

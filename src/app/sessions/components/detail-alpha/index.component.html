@@ -23,6 +23,9 @@
     <checklist class="mar-1" [stateTemplate]="stateTemplate"></checklist>
   </div>
 </div>
+<div *ngIf="alphaTemplate" class="row col-xs-12">
+  <set-goal-state [alpha]="alphaTemplate" [states]="states"></set-goal-state>
+</div>
 
 <audio #player preload="auto">
   <source

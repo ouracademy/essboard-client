@@ -12,7 +12,6 @@ export class StepsComponent implements OnInit {
       path: 'set-current-state',
       icon: 'looks_two'
     }
-    // { label: 'Establece las metas', path: 'set-goal-state', icon: 'looks_3' },
     // { label: 'Decide como lograrlo', path: '', icon: 'looks_4' }
   ]
 
