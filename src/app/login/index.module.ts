@@ -8,7 +8,7 @@ import {
   MatInputModule
 } from '@angular/material'
 import { ReactiveFormsModule } from '@angular/forms'
-
+import { LoadingWhenClickedModule } from '@shared/loading-when-clicked'
 import { LayoutAuthModule } from '../layouts/auth/layout.component'
 import { CommonAppModule } from '@shared/common'
 import { LoginComponent } from './components/index/index.component'
@@ -25,7 +25,8 @@ const routes: Routes = [{ path: '', component: LoginComponent }]
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    LoadingWhenClickedModule
   ],
   exports: [],
   declarations: [LoginComponent],

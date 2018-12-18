@@ -25,7 +25,13 @@
       <div class="col-lg-3 col-xs-12 last-xs first-md">
         <h2 class="title center">Tus sesiones de trabajo</h2>
         <div>
-          <button class="main" (click)="addSession()">
+          <button
+            class="main"
+            mat-icon-button
+            app-loading-clicked
+            identifierLoading="addSession"
+            (click)="addSession()"
+          >
             <mat-icon class="md-24">add</mat-icon>
           </button>
           <app-render-ctrl>

@@ -51,6 +51,7 @@ export class SessionSocketService extends SessionService {
     this.currentState$ = new BehaviorSubject<StateTemplate>(null)
     this.currentAlpha$ = new BehaviorSubject({ states: [] })
     this.currentChecklist$ = new BehaviorSubject([])
+    console.log('ff')
 
     this.selectedSessionId$ = new BehaviorSubject(null)
     this.currentSession$ = this.selectedSessionId$.pipe(

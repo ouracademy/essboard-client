@@ -19,7 +19,8 @@
             "assets": ["src/assets", "src/favicon.ico", "src/_redirects"],
             "styles": [
               "src/styles.scss",
-              "node_modules/flexboxgrid/css/flexboxgrid.min.css"
+              "node_modules/flexboxgrid/css/flexboxgrid.min.css",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": []
           },

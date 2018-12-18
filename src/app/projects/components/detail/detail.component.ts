@@ -7,6 +7,7 @@ import { ProjectService } from '../../services/project.service'
 import { SharedService } from '@core/shared.service'
 import { ShareComponent } from '../share/share.component'
 import { SessionService } from 'app/sessions/services/session.service'
+import { LoadingClickService } from '@shared/loading-when-clicked'
 
 /*
    <mat-form-field appearance="outline">
@@ -43,6 +44,7 @@ export class DetailComponent implements OnInit {
   selectedSession: Session
 
   constructor(
+    private loading: LoadingClickService,
     private route: ActivatedRoute,
     private service: ProjectService,
     private sharedService: SharedService,
@@ -62,6 +64,7 @@ export class DetailComponent implements OnInit {
 
   addSession() {
     this.sessionService.addSession(this.project.id).catch(error => {
+      this.loading.stopLoading('addSession')
       this.sharedService.showError(
         'Upps!',
         'Aun no haz concluido tu actual sesión'

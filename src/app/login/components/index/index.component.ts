@@ -5,6 +5,7 @@ import { Router } from '@angular/router'
 import { AuthService } from '@core/auth.service'
 import { SharedService } from '@core/shared.service'
 import { Credentials } from '@no-module/models/user'
+import { LoadingClickService } from '@shared/loading-when-clicked'
 @Component({
   selector: 'app-login',
   template: `
@@ -46,6 +47,8 @@ import { Credentials } from '@no-module/models/user'
               [disabled]="!loginForm.valid"
               mat-raised-button
               color="accent"
+              app-loading-clicked
+              identifierLoading="login"
             >
               Ingresa
             </button>
@@ -63,6 +66,7 @@ import { Credentials } from '@no-module/models/user'
 export class LoginComponent implements OnInit {
   loginForm: FormGroup
   constructor(
+    private loading: LoadingClickService,
     private router: Router,
     private auth: AuthService,
     private sharedService: SharedService,
@@ -91,8 +95,14 @@ export class LoginComponent implements OnInit {
           this.loginForm.value['password']
         )
       )
-      .then(() => this.onSuccess())
-      .catch(error => this.onError(error))
+      .then(() => {
+        this.loading.stopLoading('login')
+        this.onSuccess()
+      })
+      .catch(error => {
+        this.loading.stopLoading('login')
+        this.onError(error)
+      })
   }
 
   private onSuccess() {

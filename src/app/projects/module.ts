@@ -30,12 +30,12 @@ import {
 } from './index'
 import { RenderCtrlModule } from '@shared/render-ctrl/index.module'
 import { NotImplementedModule } from '@shared/not-implemented/index.module'
-import { OurAvatarModule } from '@shared/avatar/index.module';
-
+import { OurAvatarModule } from '@shared/avatar/index.module'
+import { LoadingWhenClickedModule } from '@shared/loading-when-clicked'
 @NgModule({
   imports: [
     CommonModule,
-
+    LoadingWhenClickedModule,
     ReactiveFormsModule,
     RenderCtrlModule,
     NotImplementedModule,
