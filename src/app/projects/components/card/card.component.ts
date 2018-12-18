@@ -5,7 +5,16 @@ import { User } from '@no-module/models/user'
 
 @Component({
   selector: 'project-card',
-  templateUrl: 'card.component.html'
+  templateUrl: 'card.component.html',
+  styles: [
+    `
+      .corner-tr {
+        top: 5px;
+        right: 5px;
+        position: absolute;
+      }
+    `
+  ]
 })
 export class CardComponent {
   @Input() project: Project
