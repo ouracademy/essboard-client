@@ -1,3 +1,5 @@
+import { Member } from 'app/members/members.service'
+
 export class User {
   public password: string
 
@@ -11,5 +13,9 @@ export class User {
 
   public avatar(size = 400): string {
     return `https://api.adorable.io/avatars/${size}/${this.name}`
+  }
+
+  isMember(members: Member[]): boolean {
+    return !!members.find(x => x.email === this.email)
   }
 }

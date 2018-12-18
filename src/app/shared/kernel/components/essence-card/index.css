@@ -11,10 +11,12 @@
   height: 6vh;
   width: 100%;
   color: black !important;
+  font-size: 17px;
 }
 .essence-card-content {
   background: white;
-  height: 29vh;
+  min-height: 29vh;
+  padding: 2px;
 }
 .essence-card-footer {
   height: 3vh;

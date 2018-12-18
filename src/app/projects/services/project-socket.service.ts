@@ -6,6 +6,7 @@ import { Project } from '@no-module/models/project'
 import { Member, MembersService } from 'app/members/members.service'
 import { BehaviorSubject, of } from 'rxjs'
 import { ChannelService } from 'app/sessions/services/channel.service'
+import { User } from 'app/users/model/user'
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {
@@ -79,7 +80,7 @@ export class ProjectSocketService extends ProjectService {
     //this.itemsObserver.next(this.data);
   }
 
-  invite(aUser: any): Promise<any> {
+  invite(aUser: User): Promise<any> {
     return this.membersService.invite(aUser, this.project.id)
   }
 

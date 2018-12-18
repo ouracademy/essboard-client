@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
   MatFormFieldModule,
   MatInputModule,
-  MatListModule
+  MatListModule,
+  MatButtonModule
 } from '@angular/material'
 
 import { SearchComponent } from './components/search/search.component'
@@ -22,6 +23,7 @@ import { OurAvatarModule } from '@shared/avatar/index.module'
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
+    MatButtonModule,
     OurAvatarModule
   ],
   declarations: [SearchComponent],
