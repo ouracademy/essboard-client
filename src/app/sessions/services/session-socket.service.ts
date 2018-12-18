@@ -40,10 +40,10 @@ export class SessionSocketService extends SessionService {
       const currentAlpha = this.currentAlpha$.getValue()
       const currentState = this.currentState$.getValue()
 
-      if (this.canGetAlpha(currentAlpha.id, checkpoint)) {
+      if (this.canGetAlpha(currentAlpha, checkpoint)) {
         this.selectedAlpha = currentAlpha
       }
-      if (this.canGetChecklist(currentState.id, checkpoint)) {
+      if (this.canGetState(currentState, checkpoint)) {
         this.selectedState = currentState
       }
     })
@@ -51,7 +51,6 @@ export class SessionSocketService extends SessionService {
     this.currentState$ = new BehaviorSubject<StateTemplate>(null)
     this.currentAlpha$ = new BehaviorSubject({ states: [] })
     this.currentChecklist$ = new BehaviorSubject([])
-    console.log('ff')
 
     this.selectedSessionId$ = new BehaviorSubject(null)
     this.currentSession$ = this.selectedSessionId$.pipe(
@@ -70,12 +69,12 @@ export class SessionSocketService extends SessionService {
     )
   }
 
-  private canGetAlpha(currentAlphaId: string, checkpoint: string) {
-    return parseInt(currentAlphaId, 10) === this.getAlphaFrom(checkpoint)
+  private canGetAlpha(currentAlpha: AlphaTemplate, checkpoint: string) {
+    return parseInt(currentAlpha.id, 10) === this.getAlphaFrom(checkpoint)
   }
 
-  private canGetChecklist(currentStateId: string, checkpoint: string) {
-    return parseInt(currentStateId, 10) === this.getStateFrom(checkpoint)
+  private canGetState(currentState: StateTemplate, checkpoint: string) {
+    return currentState && parseInt(currentState.id, 10) === this.getStateFrom(checkpoint)
   }
 
   getAlphaFrom(checkpoint) {
