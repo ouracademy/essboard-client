@@ -8,9 +8,9 @@
       <div
         *ngFor="let state of doneStates"
         (click)="select(state)"
-        class=" {{alpha.area}} button--alpha selectable"
+        class=" {{ alpha.area }} button--alpha selectable"
       >
-        <p class="info center">{{ state.name }}</p>
+        <p class="info align-center">{{ state.name }}</p>
       </div>
     </div>
   </div>
@@ -22,8 +22,8 @@
       Hacer click en un estado y se visualizara aqui
     </p>
     <div *ngIf="selectedState">
-      <div class=" button--alpha {{alpha.area }} selectable">
-        <p class="info center">{{ selectedState.name }}</p>
+      <div class=" button--alpha {{ alpha.area }} selectable">
+        <p class="info align-center">{{ selectedState.name }}</p>
       </div>
       <button class="quit" (click)="noSelect()">
         <mat-icon class="md-24">close</mat-icon>
@@ -34,10 +34,10 @@
     <div class="row middle-xs">
       <div
         *ngFor="let state of todoStates"
-        class=" {{alpha.area}} button--alpha selectable"
+        class=" {{ alpha.area }} button--alpha selectable"
         (click)="select(state)"
       >
-        <p class="info center">{{ state.name }}</p>
+        <p class="info align-center">{{ state.name }}</p>
       </div>
     </div>
   </div>

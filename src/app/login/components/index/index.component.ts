@@ -12,11 +12,15 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
     <app-auth-layout>
       <mat-card>
         <mat-card-content class="row">
-          <form class="center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <form
+            class="align-center"
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmit()"
+          >
             <mat-form-field
               floatLabel="never"
               appearance="outline"
-              class="all-width"
+              class="width-all"
             >
               <input
                 matInput
@@ -28,7 +32,7 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
             <mat-form-field
               floatLabel="never"
               appearance="outline"
-              class="all-width"
+              class="width-all"
             >
               <input
                 matInput
@@ -42,7 +46,7 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
               ></mat-error>
             </mat-form-field>
             <button
-              class="width-100 mar-0-1 btn-big"
+              class="width-all mar-0-1 btn-big"
               type="submit"
               [disabled]="!loginForm.valid"
               mat-raised-button
@@ -61,7 +65,8 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
         </mat-card-content>
       </mat-card>
     </app-auth-layout>
-  `
+  `,
+  styleUrls: ['index.component.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup

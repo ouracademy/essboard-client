@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router'
 @Component({
   selector: 'app-auth-layout',
   template: `
-    <div class="viewport row middle-xs center-xs">
+    <div class="viewport-full row middle-xs center-xs">
       <img
         src="assets/images/logo/logo-horizontal.png"
         alt="Essboard"
@@ -15,7 +15,8 @@ import { RouterModule } from '@angular/router'
         <ng-content></ng-content>
       </div>
     </div>
-  `
+  `,
+  styleUrls: ['layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
   ngOnInit() {}
