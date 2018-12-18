@@ -1,25 +1,26 @@
 /* alpha-card*/
 
 .essence-card {
-  width: 16vw;
-  height: 38vh;
+  width: 100%;
+  height: 310px;
   border: solid 1px currentColor;
   background-color: currentColor;
+  margin-bottom: 5px;
 }
 
 .essence-card-header {
-  height: 6vh;
+  height: 13%;
   width: 100%;
   color: black !important;
   font-size: 17px;
 }
 .essence-card-content {
   background: white;
-  min-height: 29vh;
+  height: 77%;
   padding: 2px;
 }
 .essence-card-footer {
-  height: 3vh;
+  height: 10%;
 }
 
 .state-wrapper {

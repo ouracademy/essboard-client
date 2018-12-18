@@ -1,30 +1,24 @@
 <div *ngIf="stateTemplate">
   <div>
-    <table class="table table-bordered">
-      <tr>
-        <th>¿Lo realizaste?</th>
-        <th>¿Lo realizamos?</th>
-        <th>Descripcion</th>
-      </tr>
-      <tr *ngFor="let checkpointTemplate of stateTemplate.checklist">
-        <td>
-          <mat-checkbox
-            (change)="vote(checkpointTemplate, $event)"
-            [checked]="isChecked(checkpointTemplate)"
-            [disabled]="isReadonly"
-          >
-          </mat-checkbox>
-        </td>
-        <td class="voters row center-xs middle-xs">
+    <p class="subtitle">Checklist</p>
+    <mat-card *ngFor="let checkpointTemplate of stateTemplate.checklist">
+      <p class="text">{{ checkpointTemplate.description }}</p>
+      <div class="row col-xs-12">
+        <mat-checkbox
+          (change)="vote(checkpointTemplate, $event)"
+          [checked]="isChecked(checkpointTemplate)"
+          [disabled]="isReadonly"
+        >
+        </mat-checkbox>
+        <div class="voters row center-xs middle-xs">
           <app-our-avatar
             class="pad-0-3"
             size="20"
             *ngFor="let voter of voters(checkpointTemplate)"
             [user]="voter"
           ></app-our-avatar>
-        </td>
-        <td class="text">{{ checkpointTemplate.description }}</td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </mat-card>
   </div>
 </div>

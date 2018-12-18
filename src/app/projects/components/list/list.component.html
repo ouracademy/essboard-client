@@ -1,10 +1,10 @@
 <div class="content-app">
-  <mat-toolbar>
-    <span class="title">{{ title }}</span> <span class="fill-remaining"></span>
+  <div class="row between-xs middle-xs">
+    <span class="title">{{ title }}</span>
     <button mat-icon-button class="main" (click)="createProject()">
       <mat-icon>add</mat-icon>
     </button>
-  </mat-toolbar>
+  </div>
   <div class="main-content mar-1">
     <div *ngIf="loaded && projects.length == 0" class="empty-proyects">
       <div class="shadow"><p>No tienes proyectos</p></div>

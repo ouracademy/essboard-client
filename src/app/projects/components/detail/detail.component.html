@@ -1,9 +1,14 @@
 <div *ngIf="project">
   <div class="row middle-xs row-detail">
-    <div class="title font-normal">{{ project.name }}</div>
-    <div class="title font-normal">{{ project.description }}</div>
+    <div class="title  font-normal">Nombre :</div>
+    <div
+      class="info  font-normal"
+      [matTooltip]="project.description"
+      matTooltipPosition="above"
+    >
+      {{ project.name }}
+    </div>
     <span class="fill-remaining"></span>
-    <span>Creado el: {{ project.createdAt | date: 'd/M/y' }} </span>
     <button
       mat-icon-button
       mat-tooltip="Elimina este proyecto"

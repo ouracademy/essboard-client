@@ -1,26 +1,24 @@
 <div *ngIf="alphaTemplate" class="row">
-  <div class="row  center-xs middle-xs col-xs-12 col-md-6 ">
-    <alpha-card
-      *ngIf="alphaTemplate && states"
-      class="col-xs-6"
-      [alpha]="alphaTemplate"
-      [states]="states"
-      (onChooseState)="onSelectedState($event)"
-    >
-    </alpha-card>
-    <div class="row col-xs-6" *ngIf="stateTemplate">
-      <div class="row  around-xs top-xs">
-        <state-card-view
-          class="mar-1"
-          [state]="stateTemplate"
-          [alpha]="alphaTemplate"
-        ></state-card-view>
-      </div>
+  <div class="row between-xs middle-xs col-xs-12">
+    <div class="row col-md-4 col-sm-12 col-xs-12">
+      <alpha-card
+        *ngIf="alphaTemplate && states"
+        class="col-xs-12 col-md-6 col-sm-6"
+        [alpha]="alphaTemplate"
+        [states]="states"
+        (onChooseState)="onSelectedState($event)"
+      >
+      </alpha-card>
+      <state-card-view
+        *ngIf="stateTemplate"
+        [state]="stateTemplate"
+        [alpha]="alphaTemplate"
+        class="row col-xs-12 col-md-6 col-sm-6"
+      ></state-card-view>
     </div>
-  </div>
-
-  <div class="row col-xs-12 col-md-6" *ngIf="stateTemplate">
-    <checklist class="mar-1" [stateTemplate]="stateTemplate"></checklist>
+    <div class="row col-xs-12 col-sm-12  col-md-8" *ngIf="stateTemplate">
+      <checklist [stateTemplate]="stateTemplate"></checklist>
+    </div>
   </div>
 </div>
 <div *ngIf="alphaTemplate" class="row col-xs-12">
