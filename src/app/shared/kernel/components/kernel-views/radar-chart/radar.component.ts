@@ -15,6 +15,7 @@ import { combineLatest, from } from 'rxjs'
 import { format } from 'date-fns'
 import { ProjectService } from 'app/projects/services/project.service'
 import { switchMap, filter } from 'rxjs/operators'
+import { Session } from '@shared/no-module/models/project'
 
 @Component({
   selector: 'app-radar-chart',
@@ -23,8 +24,7 @@ import { switchMap, filter } from 'rxjs/operators'
   `
 })
 export class RadarChartComponent implements OnInit, AfterViewInit {
-  @Input() sessionId
-  @Input() level = 'all' // all | specific -->  session
+  @Input() session: Session
   service
 
   @ViewChild('chart') chart: ElementRef
@@ -47,7 +47,10 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
         switchMap(project =>
           from<any[]>(
             this.service.find({
-              query: { projectId: project.id }
+              query: {
+                projectId: project.id,
+                ...(!!this.session && { sessionId: this.session.id })
+              }
             })
           )
         )

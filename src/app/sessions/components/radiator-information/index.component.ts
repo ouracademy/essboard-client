@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { SessionService } from 'app/sessions/services/session.service'
 import { Session } from '@shared/no-module/models/project'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'radiator-information',
@@ -12,19 +13,18 @@ import { Session } from '@shared/no-module/models/project'
       <div class="row center-xs">
         <app-radar-chart
           class="col-xs-12 col-md-6"
-          [sessionId]="null"
-          level="specific"
+          [session]="session | async"
         ></app-radar-chart>
       </div>
     </div>
   `
 })
 export class RadiatorInformationComponent implements OnInit {
-  session: Session
+  session: Observable<Session>
 
   constructor(private sessionService: SessionService) {}
 
   ngOnInit() {
-    this.session = null
+    this.session = this.sessionService.currentSession$
   }
 }
