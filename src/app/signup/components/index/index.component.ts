@@ -43,7 +43,7 @@ import { Credentials } from '@no-module/models/user'
               />
             </mat-form-field>
             <button
-              class="width-100 mar-0-1 btn-big"
+              class="width-all mar-0-1 btn-big"
               color="accent"
               type="submit"
               [disabled]="!signupForm.valid"

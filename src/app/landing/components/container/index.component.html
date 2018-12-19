@@ -1,6 +1,6 @@
 <app-header>
   <right-content>
-    <div *ngIf="!auth.isLoggedIn; else: userLogged" class="row">
+    <div *ngIf="!auth.isLoggedIn; else userLogged" class="row">
       <a
         class="button col-xs-12 col-sm-6"
         mat-button
@@ -24,9 +24,13 @@
   </right-content>
 </app-header>
 <div class="row center-xs middle-xs pad-1">
-  <h1 class="row mat-display-1 primary  col-6 center">{{ labels.slogan }}</h1>
-  <h4 class="row mat-display-1 info col-6 center">{{ labels.description }}</h4>
-  <div class="row center-xs middle-xs all-width">
+  <h1 class="row mat-display-1 primary  col-6 align-center">
+    {{ labels.slogan }}
+  </h1>
+  <h4 class="row mat-display-1 info col-6 align-center">
+    {{ labels.description }}
+  </h4>
+  <div class="row center-xs middle-xs width-all">
     <a
       class="btn-big"
       mat-stroked-button
@@ -35,17 +39,17 @@
       >{{ labels.start }}
     </a>
   </div>
-  <div class="all-width p-2">
+  <div class="width-all p-2">
     <div class="row center-xs middle-xs">
       <div class="row around-xs middle-xs">
-        <div class="icon center" *ngFor="let item of kernelIcons">
+        <div class="icon align-center" *ngFor="let item of kernelIcons">
           <div
             class="icon-image auto"
             [ngStyle]="{
               background: getBackground(item)
             }"
           ></div>
-          <h3 class="info center">{{ item.name }}</h3>
+          <h3 class="info align-center">{{ item.name }}</h3>
         </div>
       </div>
     </div>

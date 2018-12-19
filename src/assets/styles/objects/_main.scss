@@ -42,22 +42,8 @@ $spacer: 3rem;
   margin: $spacer;
 }
 
-.all-width {
-  width: 100%;
-}
-.middle-width {
-  width: 50%;
-}
-.center {
-  text-align: center;
-}
 .auto {
   margin: auto;
-}
-
-.viewport {
-  width: 100vw;
-  height: 100vh;
 }
 
 .pointer {
@@ -66,3 +52,5 @@ $spacer: 3rem;
 .shadow {
   box-shadow: 1px 2px 2px 1px rgba(224, 213, 213, 0.79);
 }
+
+/* fix center*/
