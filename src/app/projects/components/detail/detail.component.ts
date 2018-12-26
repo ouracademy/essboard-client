@@ -63,13 +63,16 @@ export class DetailComponent implements OnInit {
   }
 
   addSession() {
-    this.sessionService.addSession(this.project.id).catch(error => {
-      this.loading.stopLoading('addSession')
-      this.sharedService.showError(
-        'Upps!',
-        'Aun no haz concluido tu actual sesión'
-      )
-    })
+    this.sessionService
+      .addSession(this.project.id)
+      .then(() => this.loading.stopLoading('addSession'))
+      .catch(error => {
+        this.loading.stopLoading('addSession')
+        this.sharedService.showError(
+          'Upps!',
+          'Aun no haz concluido tu actual sesión'
+        )
+      })
   }
 
   share() {
