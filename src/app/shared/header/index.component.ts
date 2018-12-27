@@ -5,7 +5,7 @@ import { Component, OnInit, Input } from '@angular/core'
   template: `
     <div
       class="row between-xs middle-xs"
-      [ngStyle]="{ height: mode === 'toolbar' ? '10vh' : '20vh' }"
+      [ngStyle]="{ height: mode === 'toolbar' ? '10vh' : '15vh' }"
     >
       <a class="brand col-xs-4 col-sm-4 " routerLink="/">
         <img
