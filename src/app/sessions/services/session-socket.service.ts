@@ -74,7 +74,10 @@ export class SessionSocketService extends SessionService {
   }
 
   private canGetState(currentState: StateTemplate, checkpoint: string) {
-    return currentState && parseInt(currentState.id, 10) === this.getStateFrom(checkpoint)
+    return (
+      currentState &&
+      parseInt(currentState.id, 10) === this.getStateFrom(checkpoint)
+    )
   }
 
   getAlphaFrom(checkpoint) {
@@ -173,9 +176,7 @@ export class SessionSocketService extends SessionService {
   }
 
   private getChecklist() {
-    const date = this.session.endDate
-      ? this.session.endDate
-      : new Date(2018, 11, 30) // TODO: check this
+    const date = this.session.endDate ? this.session.endDate : new Date() // TODO: check this
     const state = this.currentState$.getValue()
     return this.socketService.getService('states').find({
       query: {
