@@ -15,7 +15,6 @@ import {
 
 import { ListComponent } from './components/list/list.component'
 import { UserDetailComponent } from './components/detail/detail.component'
-import { ProfileUserComponent } from './components/profile/index.component'
 import { ProfileSettingsComponent } from './components/settings/profile/index.component'
 import { TrelloSettingsComponent } from './components/settings/trello-api/index.component'
 
@@ -43,7 +42,6 @@ import { UserSocketService } from './services/user-socket.service'
   declarations: [
     ListComponent,
     UserDetailComponent,
-    ProfileUserComponent,
     ProfileSettingsComponent,
     TrelloSettingsComponent
   ],
@@ -51,7 +49,6 @@ import { UserSocketService } from './services/user-socket.service'
   exports: [
     ListComponent,
     UserDetailComponent,
-    ProfileUserComponent,
     ProfileSettingsComponent,
     TrelloSettingsComponent
   ]
