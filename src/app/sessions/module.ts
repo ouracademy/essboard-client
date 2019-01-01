@@ -43,13 +43,15 @@ import { ChatComponent } from './components/chat/index.component'
 import { OnlineUsersComponent } from './components/online-users/index.components'
 import { OurAvatarModule } from '@shared/avatar/index.module'
 
+import { ChatService } from './services/chat.service'
+import { ChatSocketService } from './services/chat-socket.service'
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     UsersModule,
     KernelModule,
-
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -81,7 +83,7 @@ import { OurAvatarModule } from '@shared/avatar/index.module'
   ],
 
   entryComponents: [],
-  providers: [],
+  providers: [{ provide: ChatService, useClass: ChatSocketService }],
   exports: []
 })
 export class SessionModule {}

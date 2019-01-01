@@ -1,6 +1,14 @@
-import { Observable } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 
 export abstract class ChatService {
-  abstract messages$(sessionId): Observable<any[]>
+  response$: BehaviorSubject<{
+    data: any[]
+    scrollToBottom: boolean
+    skip: number
+    canPaginate: boolean
+  }>
+  query: any
   abstract addMessage(text, sessionId)
+  abstract clear()
+  abstract init()
 }

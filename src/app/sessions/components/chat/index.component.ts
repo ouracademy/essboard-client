@@ -1,10 +1,9 @@
 import {
   Component,
   Input,
-  OnInit,
-  AfterViewChecked,
   ElementRef,
-  ViewChild
+  ViewChild,
+  AfterViewInit
 } from '@angular/core'
 import { ChatService } from '../../services/chat.service'
 import { Message } from '../../model/messages'
@@ -13,36 +12,46 @@ import { Message } from '../../model/messages'
   templateUrl: 'index.component.html',
   styleUrls: ['index.component.css']
 })
-export class ChatComponent implements OnInit, AfterViewChecked {
+export class ChatComponent implements AfterViewInit {
   @Input()
   sessionId
   @Input()
   isReadonly: boolean
 
-  show = false
+  show = true
   messages: Message[] = []
   message = ''
+  skip = 0
+  scrollHeight = 0
+  canPaginate = true
 
   @ViewChild('scrollMe')
   private myScrollContainer: ElementRef
 
   constructor(private chatService: ChatService) {}
 
-  ngOnInit() {
-    this.chatService.messages$(this.sessionId).subscribe(messages => {
-      this.messages = messages['data']
-    })
-    this.scrollToBottom()
+  ngAfterViewInit() {
+    this.chatService.response$.subscribe(
+      ({ data, canPaginate, scrollToBottom, skip }) => {
+        this.skip = skip
+        this.canPaginate = canPaginate
+
+        setTimeout(() => {
+          this.messages = data
+          if (scrollToBottom) {
+            this.scrollHeight = this.myScrollContainer.nativeElement.scrollHeight
+          } else {
+            this.scrollHeight = null
+          }
+        }, 10)
+      }
+    )
   }
 
-  ngAfterViewChecked() {
-    this.scrollToBottom()
-  }
-
-  scrollToBottom(): void {
-    try {
-      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight
-    } catch (err) {}
+  onScroll(event) {
+    if (event.target.scrollTop === 0 && this.canPaginate) {
+      this.chatService.query = { sessionId: this.sessionId, skip: this.skip }
+    }
   }
 
   showWindow() {
