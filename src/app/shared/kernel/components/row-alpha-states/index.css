@@ -3,9 +3,11 @@
   height: auto;
   position: relative;
 }
+
 .container-selected {
   border: dashed;
 }
+
 .quit {
   position: absolute;
   bottom: 1px;
@@ -14,4 +16,20 @@
 
 .button--alpha {
   height: 3.5rem;
+  margin: auto;
+}
+
+.space {
+  padding: 5px;
+  flex: 1 1;
+  pointer-events: none;
+}
+
+.space-content {
+  text-align: center;
+}
+
+.space-content+div,
+div+.space-content {
+  pointer-events: visible !important;
 }

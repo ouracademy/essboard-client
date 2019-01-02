@@ -26,18 +26,14 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   constructor(
     public kernelService: KernelService,
     private service: SessionService,
-    private chatService: ChatService,
     public kernel: PrimaryKernelMockService,
     private route: ActivatedRoute,
     private router: Router
-  ) {
-    this.chatService.init()
-  }
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.service.selectedSession = params['id']
-      this.chatService.query = { sessionId: params['id'] }
     })
 
     this.service.currentSession$.subscribe(session => (this.session = session))
@@ -82,6 +78,5 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   }
   ngOnDestroy() {
     console.log('on destory')
-    this.chatService.clear()
   }
 }

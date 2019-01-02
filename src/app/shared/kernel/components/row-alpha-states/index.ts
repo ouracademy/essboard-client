@@ -24,7 +24,7 @@ export class RowAlphaStatesComponent implements OnChanges {
   @Input() states
   doneStates = []
   todoStates = []
-
+  spaces = []
   @Output()
   onChooseStateGoal = new EventEmitter<StateMetadata>()
   @Output()
@@ -41,6 +41,10 @@ export class RowAlphaStatesComponent implements OnChanges {
           this.todoStates.push(element)
         }
       })
+      this.spaces = [...this.doneStates]
+
+      this.spaces.push({ isEmpty: true })
+      this.spaces = [...this.spaces, ...this.todoStates]
     }
   }
   select(state) {
