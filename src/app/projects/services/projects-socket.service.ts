@@ -27,11 +27,12 @@ export class ProjectsSocketService extends ProjectsService {
       err => console.log(err)
     )
   }
-  add(project: Project) {
+
+  add(name: string, description: string) {
     this.service
       .create({
-        name: project.name,
-        description: project.description,
+        name,
+        description,
         members: []
       })
       .then(result => {
