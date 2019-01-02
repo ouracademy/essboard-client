@@ -30,9 +30,7 @@ import { StepsComponent } from './components/steps/index.component'
 import { RadiatorInformationComponent } from './components/radiator-information/index.component'
 import { SetCurrentStateComponent } from './components/set-current-state/index.component'
 
-import { HowReachGoals } from './components/how-reach-goals/index.component'
-import { HowReachGoalComponent } from './components/how-reach-goal/index.component'
-import { ActOnWorkItemsComponent } from './components/act-on-work-items/index.component'
+import { ActionsByGoalComponent } from './components/actions-by-goal/index.component'
 
 import { DetailAlphaComponent } from './components/detail-alpha/index.component'
 import { SetGoalStateComponent } from './components/set-goal-state/index.component'
@@ -42,9 +40,6 @@ import { ChatComponent } from './components/chat/index.component'
 
 import { OnlineUsersComponent } from './components/online-users/index.components'
 import { OurAvatarModule } from '@shared/avatar/index.module'
-
-import { ChatService } from './services/chat.service'
-import { ChatSocketService } from './services/chat-socket.service'
 
 @NgModule({
   imports: [
@@ -67,23 +62,20 @@ import { ChatSocketService } from './services/chat-socket.service'
     RoutingModule
   ],
   declarations: [
+    SessionComponent,
     StepsComponent,
     RadiatorInformationComponent,
-
-    SetCurrentStateComponent,
     DetailAlphaComponent,
-    SetGoalStateComponent,
+    SetCurrentStateComponent,
     ChecklistComponent,
-    SessionComponent,
-    HowReachGoals,
-    HowReachGoalComponent,
-    ActOnWorkItemsComponent,
+    SetGoalStateComponent,
+    ActionsByGoalComponent,
     ChatComponent,
     OnlineUsersComponent
   ],
 
   entryComponents: [],
-  providers: [{ provide: ChatService, useClass: ChatSocketService }],
+  providers: [],
   exports: []
 })
 export class SessionModule {}
