@@ -77,11 +77,7 @@ export class Session {
     public createdAt: Date,
     public endDate: Date,
     public projectId: string
-  ) {
-    this.createdAt = createdAt
-    this.id = id
-    this.endDate = endDate
-  }
+  ) {}
 
   public get hasFinished(): boolean {
     return !!this.endDate
