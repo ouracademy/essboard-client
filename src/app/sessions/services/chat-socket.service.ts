@@ -2,12 +2,16 @@ import { Injectable, OnDestroy } from '@angular/core'
 import { ChatService } from './chat.service'
 import { SocketService } from '@core/socket.service'
 import { BehaviorSubject } from 'rxjs'
+import { SessionService } from './session.service'
 
 @Injectable()
 export class ChatSocketService extends ChatService {
   service: any
 
-  constructor(public socketService: SocketService) {
+  constructor(
+    public socketService: SocketService,
+    private sessionService: SessionService
+  ) {
     super()
 
     this.service = this.socketService.getService('chats')
@@ -18,6 +22,10 @@ export class ChatSocketService extends ChatService {
         skip: 0,
         canPaginate: this.response$.getValue().canPaginate
       })
+    })
+    this.sessionService.currentSession$.subscribe(session => {
+      this.init()
+      this.query = { sessionId: session.id }
     })
   }
 
@@ -45,8 +53,5 @@ export class ChatSocketService extends ChatService {
       skip: 0,
       canPaginate: true
     })
-  }
-  clear() {
-    this.response$.unsubscribe()
   }
 }
