@@ -11,8 +11,8 @@
     </div>
   </div>
 </div>
-<div *ngIf="alphaTemplate" class="row col-xs-12">
-  <set-goal-state [alpha]="alphaTemplate" [states]="states"></set-goal-state>
+<div *ngIf="alphaTemplate">
+  <set-goal-state class="row col-xs-12" [alpha]="alphaTemplate" [states]="states"></set-goal-state>
 </div>
 
 <audio #player preload="auto">

@@ -16,15 +16,24 @@ export class SetGoalStateComponent implements OnInit, OnChanges {
   sessionId: string
   selectedState = null
   constructor(private service: GoalService) {}
-  ngOnInit() {}
+  ngOnInit() {
+    this.service.goalStates$.subscribe(r => console.log('st', r))
+  }
   ngOnChanges() {}
 
   setGoalState(state: StateMetadata) {
     //this.service.addStateGoal(state.identifier)
+
+    this.service.save(this.sessionId, {
+      alphaId: this.alpha.id,
+      stateId: state.identifier
+    })
     this.selectedState = state
+    //
   }
   removeGoalState(state: StateMetadata) {
     //this.service.quitStateGoal(state.identifier)
     this.selectedState = null
   }
+  removePreviousGoalState() {}
 }
