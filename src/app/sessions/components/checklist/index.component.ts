@@ -4,6 +4,7 @@ import { SessionService } from '../../services/session.service'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 import { AuthService } from '@core/auth.service'
 import { Member } from 'app/members/members.service'
+import { VotesService } from 'app/sessions/services/votes.service'
 
 @Component({
   selector: 'checklist',
@@ -17,6 +18,7 @@ export class ChecklistComponent implements OnInit {
 
   constructor(
     private sessionService: SessionService,
+    private votesService: VotesService,
     private authService: AuthService
   ) {}
 
@@ -38,7 +40,7 @@ export class ChecklistComponent implements OnInit {
   }
 
   vote(checkpointTemplate: CheckpointTemplate, $event: MatCheckboxChange) {
-    this.sessionService.voteCheckpoint(checkpointTemplate, $event.checked)
+    this.votesService.voteCheckpoint(checkpointTemplate, $event.checked)
   }
 
   isChecked(checkpointTemplate: CheckpointTemplate) {

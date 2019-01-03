@@ -28,6 +28,5 @@ export abstract class SessionService implements CanLeaveChannel {
   abstract delete(id)
   abstract finish()
 
-  abstract voteCheckpoint(checkpointTemplate: CheckpointTemplate, vote: boolean)
   abstract leaveChannel()
 }
