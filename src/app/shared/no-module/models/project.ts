@@ -11,7 +11,7 @@ export class Project {
     public name: string,
     public description: string,
     private ownerId: string,
-    public createdAt: Date = new Date(),
+    public createdAt: Date,
     public progressPercent = 0
   ) {}
 

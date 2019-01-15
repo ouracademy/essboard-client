@@ -7,7 +7,7 @@ export class User {
     public id: string,
     public name: string,
     public email: string,
-    public createdAt = new Date(),
+    public createdAt: Date,
     public appKeyTrello?: string
   ) {}
 

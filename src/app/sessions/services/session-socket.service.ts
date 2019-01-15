@@ -94,11 +94,13 @@ export class SessionSocketService extends SessionService {
   toSession(item) {
     return new Session(
       item['_id'],
-      item['createdAt'],
-      item['endDate'],
+      this.toLocalDate(item['createdAt']),
+      this.toLocalDate(item['endDate']),
       item['projectId']
     )
   }
+
+  toLocalDate = utcDate => (utcDate ? new Date(utcDate) : null)
 
   addSession(projectId) {
     return this.service.create({
@@ -117,10 +119,9 @@ export class SessionSocketService extends SessionService {
   }
 
   private getAlpha(alphaId: string): Promise<any> {
-    const date = this.session.endDate ? this.session.endDate : new Date()
-    return this.statesService.find({
+    return this.socketService.getService('states').find({
       query: {
-        date,
+        date: this.sessionDate(),
         project: this.session.projectId,
         alpha: alphaId
       }
@@ -139,16 +140,19 @@ export class SessionSocketService extends SessionService {
   }
 
   private getChecklist() {
-    const date = this.session.endDate ? this.session.endDate : new Date() // TODO: check this
     const state = this.currentState$.getValue()
     return this.statesService.find({
       query: {
-        date,
+        date: this.sessionDate(),
         project: this.session.projectId,
         state: state.id,
         asCheckpoints: true
       }
     })
+  }
+
+  private sessionDate() {
+    return this.session.endDate ? this.session.endDate : new Date()
   }
 
   delete(id) {

@@ -4,5 +4,5 @@ import { Subject } from 'rxjs'
 export abstract class ProjectsService {
   items$: Subject<any>
   abstract getProjects()
-  abstract add(project: Project)
+  abstract add(name: string, description: string)
 }
