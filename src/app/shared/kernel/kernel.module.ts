@@ -6,18 +6,8 @@ import { EssenceCardComponent } from './components/essence-card/index'
 import { StateCardViewComponent } from './components/state-card-view/index'
 import { AlphaCardComponent } from './components/alpha-card/index'
 import { RowAlphaStatesComponent } from './components/row-alpha-states/index'
-import {
-  AlphaConnections,
-  RadarChartComponent
-} from './components/kernel-views/index'
-import { StateBoardComponent } from './components/state-board/index'
+import { RadarChartComponent } from './components/kernel-views/index'
 
-// services
-import { ActivitySpaceMockService } from './services/mock-activity-spaces/index.service'
-import { PrimaryKernelMockService } from './services/mock-primary-kernel/index.service'
-import { StateMockService } from './services/mock-states/index.service'
-import { AlphaMockService } from './services/mock-alphas/index.service'
-import { PracticeMockService } from './services/mock-practices/index.service'
 @NgModule({
   imports: [CommonModule, MatCardModule, MatIconModule],
   declarations: [
@@ -25,25 +15,15 @@ import { PracticeMockService } from './services/mock-practices/index.service'
     StateCardViewComponent,
     AlphaCardComponent,
     RowAlphaStatesComponent,
-    AlphaConnections,
-    RadarChartComponent,
-    StateBoardComponent
+    RadarChartComponent
   ],
   exports: [
     EssenceCardComponent,
     StateCardViewComponent,
     AlphaCardComponent,
     RowAlphaStatesComponent,
-    RadarChartComponent,
-    AlphaConnections,
-    StateBoardComponent
+    RadarChartComponent
   ],
-  providers: [
-    PracticeMockService,
-    ActivitySpaceMockService,
-    PrimaryKernelMockService,
-    AlphaMockService,
-    StateMockService
-  ]
+  providers: []
 })
 export class KernelModule {}

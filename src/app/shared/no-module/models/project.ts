@@ -1,5 +1,3 @@
-import { Alpha, Kernel } from './project-kernel'
-import { CheckpointMetadata } from './kernel/kernel'
 import { User } from '@no-module/models/user'
 
 export class Project {
@@ -21,14 +19,6 @@ export class Project {
     return this.ownerId === user.id
   }
 
-  public get currentKernel(): Kernel {
-    if (this.lastSession) {
-      return this.lastSession.kernel
-    } else {
-      return Kernel.empty()
-    }
-  }
-
   addSession(session: Session): void {
     this.sessions.push(session)
   }
@@ -46,7 +36,7 @@ export class Project {
         return item.email
       })
       .indexOf(member.email)
-    return index != -1
+    return index !== -1
   }
 
   getLastSession() {
@@ -58,10 +48,6 @@ export class Project {
       return this.sessions[this.sessions.length - 1].id
     }
     return null
-  }
-
-  fulfiledThisCheckpoint(check: CheckpointMetadata) {
-    return false
   }
 
   canCreateNewSession() {
@@ -77,11 +63,7 @@ export class Session {
     public createdAt: Date,
     public endDate: Date,
     public projectId: string
-  ) {
-    this.createdAt = createdAt
-    this.id = id
-    this.endDate = endDate
-  }
+  ) {}
 
   public get hasFinished(): boolean {
     return !!this.endDate

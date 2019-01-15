@@ -2,11 +2,10 @@ import { Component, OnInit, HostListener, OnDestroy } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
 import { SessionService } from '../services/session.service'
-import { PrimaryKernelMockService } from '@shared/kernel/services/index'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { AlphaTemplate } from './detail-alpha/kernel'
 import { CanLeaveChannel } from '../services/leave-session.guard'
-import { ChatService } from '../services/chat.service'
+
 @Component({
   selector: 'session',
   templateUrl: 'index.component.html',
@@ -26,7 +25,6 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   constructor(
     public kernelService: KernelService,
     private service: SessionService,
-    public kernel: PrimaryKernelMockService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
