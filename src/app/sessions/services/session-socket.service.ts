@@ -5,13 +5,11 @@ import { Observable, BehaviorSubject, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
-import { KernelService } from '@core/kernel-knowledge.service'
 import {
   StateTemplate,
   CheckpointTemplate
 } from '../components/detail-alpha/kernel'
 import { AlphaTemplate } from '../components/detail-alpha/kernel'
-import { ProjectService } from 'app/projects/services/project.service'
 import { ChannelService } from './channel.service'
 import { MembersService } from 'app/members/members.service'
 
@@ -19,38 +17,22 @@ import { MembersService } from 'app/members/members.service'
 export class SessionSocketService extends SessionService {
   service: any
   statesService
-  votesService
   selectedSessionId$: BehaviorSubject<string>
   session: Session
 
   constructor(
     public socketService: SocketService,
-    public projectService: ProjectService,
-    public kernelKnowledgeService: KernelService,
     private channels: ChannelService,
     private membersService: MembersService,
     private router: Router
   ) {
     super()
-    this.service = this.socketService.getService('sessions')
-    this.statesService = this.socketService.getService('states')
-    this.votesService = this.socketService.getService('votes')
-
-    this.votesService.on('created', ({ checkpoint }) => {
-      const currentAlpha = this.currentAlpha$.getValue()
-      const currentState = this.currentState$.getValue()
-
-      if (this.canGetAlpha(currentAlpha, checkpoint)) {
-        this.selectedAlpha = currentAlpha
-      }
-      if (this.canGetState(currentState, checkpoint)) {
-        this.selectedState = currentState
-      }
-    })
-
     this.currentState$ = new BehaviorSubject<StateTemplate>(null)
     this.currentAlpha$ = new BehaviorSubject({ states: [] })
     this.currentChecklist$ = new BehaviorSubject([])
+
+    this.service = this.socketService.getService('sessions')
+    this.statesService = this.socketService.getService('states')
 
     this.selectedSessionId$ = new BehaviorSubject(null)
     this.currentSession$ = this.selectedSessionId$.pipe(
@@ -67,25 +49,6 @@ export class SessionSocketService extends SessionService {
           )
       )
     )
-  }
-
-  private canGetAlpha(currentAlpha: AlphaTemplate, checkpoint: string) {
-    return parseInt(currentAlpha.id, 10) === this.getAlphaFrom(checkpoint)
-  }
-
-  private canGetState(currentState: StateTemplate, checkpoint: string) {
-    return (
-      currentState &&
-      parseInt(currentState.id, 10) === this.getStateFrom(checkpoint)
-    )
-  }
-
-  getAlphaFrom(checkpoint) {
-    return Math.floor(this.getStateFrom(checkpoint) / 10)
-  }
-
-  getStateFrom(checkpoint: string): number {
-    return parseInt(checkpoint.split('-')[0], 10)
   }
 
   getSessions(projectId: string) {
@@ -178,7 +141,7 @@ export class SessionSocketService extends SessionService {
 
   private getChecklist() {
     const state = this.currentState$.getValue()
-    return this.socketService.getService('states').find({
+    return this.statesService.find({
       query: {
         date: this.sessionDate(),
         project: this.session.projectId,
@@ -201,14 +164,5 @@ export class SessionSocketService extends SessionService {
       .catch(function(error) {
         alert('Error al eliminar  tu proyecto')
       })
-  }
-
-  voteCheckpoint(checkpointTemplate: CheckpointTemplate, vote: boolean) {
-    this.socketService.getService('votes').create({
-      type: vote ? 'VOTE_EMITED' : 'VOTE_REMOVED',
-      checkpoint: checkpointTemplate.id,
-      session: this.session.id,
-      project: this.session.projectId
-    })
   }
 }

@@ -1,13 +1,12 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core'
-import { Goal } from '@no-module/models/goal'
 
 @Component({
-  selector: 'how-reach-goal',
+  selector: 'actions-by-goal',
   templateUrl: 'index.component.html',
   styleUrls: ['index.component.css']
 })
-export class HowReachGoalComponent {
-  @Input() goal: Goal
+export class ActionsByGoalComponent {
+  @Input() goal: any
   @Output() onAddAction = new EventEmitter<any>()
   action = ''
   save(description) {

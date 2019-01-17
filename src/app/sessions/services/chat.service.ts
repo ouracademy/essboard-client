@@ -9,6 +9,5 @@ export abstract class ChatService {
   }>
   query: any
   abstract addMessage(text, sessionId)
-  abstract clear()
   abstract init()
 }

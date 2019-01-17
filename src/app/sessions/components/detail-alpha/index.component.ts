@@ -4,11 +4,8 @@ import { KernelService } from '@core/kernel-knowledge.service'
 
 import { ActivatedRoute, Params } from '@angular/router'
 import { AlphaTemplate, StateTemplate } from './kernel'
-import { CanLeaveChannel } from 'app/sessions/services/leave-session.guard'
-import { Observable } from 'rxjs/Observable'
-import { ChannelService } from 'app/sessions/services/channel.service'
+
 import { flatMap } from 'rxjs/operators'
-import { timer, combineLatest, of } from 'rxjs'
 
 @Component({
   selector: 'detail-alpha',
@@ -24,18 +21,17 @@ export class DetailAlphaComponent implements OnInit {
   public playerContainer: ElementRef
 
   constructor(
-    private sessions: SessionService,
+    private sessionService: SessionService,
     private activeRoute: ActivatedRoute,
-    private kernel: KernelService,
-    private channels: ChannelService
+    private kernel: KernelService
   ) {}
 
   ngOnInit() {
-    this.sessions.currentState$.subscribe(
+    this.sessionService.currentState$.subscribe(
       stateTemplate => (this.stateTemplate = stateTemplate)
     )
 
-    this.sessions.currentAlpha$.subscribe(({ states }) => {
+    this.sessionService.currentAlpha$.subscribe(({ states }) => {
       this.states = states
     })
 
@@ -43,15 +39,15 @@ export class DetailAlphaComponent implements OnInit {
       .pipe(flatMap((params: Params) => this.kernel.getAlpha(params['id'])))
       .subscribe((alphaTemplate: AlphaTemplate) => {
         this.alphaTemplate = alphaTemplate
-        this.sessions.selectedAlpha = alphaTemplate
-        this.sessions.selectedState = null
+        this.sessionService.selectedAlpha = alphaTemplate
+        this.sessionService.selectedState = null
       })
   }
 
   onSelectedState(template: StateTemplate) {
     this.kernel.getCheckpoints(template.id).subscribe(checklist => {
       template.checklist = checklist
-      this.sessions.selectedState = template
+      this.sessionService.selectedState = template
     })
   }
 }

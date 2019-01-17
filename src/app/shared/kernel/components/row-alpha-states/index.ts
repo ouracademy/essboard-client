@@ -6,7 +6,6 @@ import {
   OnChanges
 } from '@angular/core'
 
-import { StateMetadata } from '@no-module/models/kernel/kernel'
 import { AlphaTemplate } from 'app/sessions/components/detail-alpha/kernel'
 
 @Component({
@@ -18,17 +17,17 @@ export class RowAlphaStatesComponent implements OnChanges {
   @Input()
   isForSelected = true
   @Input()
-  selectedState: StateMetadata = null
+  selectedState: any = null
   @Input()
   alpha: AlphaTemplate
   @Input() states
   doneStates = []
   todoStates = []
-
+  spaces = []
   @Output()
-  onChooseStateGoal = new EventEmitter<StateMetadata>()
+  onChooseStateGoal = new EventEmitter<any>()
   @Output()
-  onNoChooseStateGoal = new EventEmitter<StateMetadata>()
+  onNoChooseStateGoal = new EventEmitter<any>()
   ngOnChanges() {
     if (this.alpha) {
       this.doneStates = []
@@ -41,6 +40,10 @@ export class RowAlphaStatesComponent implements OnChanges {
           this.todoStates.push(element)
         }
       })
+      this.spaces = [...this.doneStates]
+
+      this.spaces.push({ isEmpty: true })
+      this.spaces = [...this.spaces, ...this.todoStates]
     }
   }
   select(state) {

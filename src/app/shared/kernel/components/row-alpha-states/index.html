@@ -1,43 +1,25 @@
-<div class="row around-xs">
+<div class="row around-xs col-xs-12">
   <p class="subtitle">Estados logrados</p>
   <p class="subtitle">Estados por lograr</p>
 </div>
-<div class="row middle-xs">
-  <div class="achieved">
-    <div class="row middle-xs">
-      <div
-        *ngFor="let state of doneStates"
-        (click)="select(state)"
-        class=" {{ alpha.area }} button--alpha selectable"
-      >
-        <p class="info align-center">{{ state.name }}</p>
+<div class="row col-xs-12">
+  <div *ngFor="let space of spaces" class="space" [ngClass]="{  'space-content': space.isEmpty }">
+    <div class="space-content">
+      <div *ngIf="!space.isEmpty" (click)="select(space)" class=" {{ alpha.area }} button--alpha selectable">
+        <p class="info align-center">{{ space.name }}</p>
       </div>
-    </div>
-  </div>
-  <div
-    class="row middle-xs "
-    [ngClass]="{ separator: true, 'container-selected': isForSelected }"
-  >
-    <p *ngIf="!selectedState && isForSelected">
-      Hacer click en un estado y se visualizara aqui
-    </p>
-    <div *ngIf="selectedState">
-      <div class=" button--alpha {{ alpha.area }} selectable">
-        <p class="info align-center">{{ selectedState.name }}</p>
-      </div>
-      <button class="quit" (click)="noSelect()">
-        <mat-icon class="md-24">close</mat-icon>
-      </button>
-    </div>
-  </div>
-  <div class="no-achieved">
-    <div class="row middle-xs">
-      <div
-        *ngFor="let state of todoStates"
-        class=" {{ alpha.area }} button--alpha selectable"
-        (click)="select(state)"
-      >
-        <p class="info align-center">{{ state.name }}</p>
+      <div *ngIf="space.isEmpty" [ngClass]="{ separator: true, 'container-selected': isForSelected }">
+        <p *ngIf="!selectedState && isForSelected">
+          Hacer click en un estado y se visualizara aqui
+        </p>
+        <div *ngIf="selectedState">
+          <div class=" button--alpha {{ alpha.area }} selectable">
+            <p class="info align-center">{{ selectedState.name }}</p>
+          </div>
+          <button class="quit" (click)="noSelect()">
+            <mat-icon class="md-24">close</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
   </div>
