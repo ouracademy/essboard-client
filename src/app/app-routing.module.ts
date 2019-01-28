@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { AuthGuardService } from '@core/auth-guard.service'
+import { LandingGuardService } from '@core/landing-guard.service'
 
 const routes: Routes = [
   {
     path: '',
     children: [
-      { path: '', loadChildren: 'app/landing/index.module#LandingModule' },
+      {
+        path: '',
+        canActivate: [LandingGuardService],
+        loadChildren: 'app/landing/index.module#LandingModule'
+      },
       { path: 'login', loadChildren: 'app/login/index.module#LoginModule' },
       { path: 'signup', loadChildren: 'app/signup/index.module#SignupModule' }
     ]
