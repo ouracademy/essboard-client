@@ -10,25 +10,33 @@ import { HeaderModule } from '@shared/header/index.module'
 @Component({
   selector: 'app-inside-layout',
   template: `
-    <app-header mode="toolbar">
-      <right-content class="row">
-        <mat-menu
-          class="menu-options"
-          x-position="after"
-          y-position="below"
-          #menu="matMenu"
-        >
-          <button mat-menu-item routerLink="/me/projects">Mis proyectos</button>
-          <button mat-menu-item (click)="logout()">Salir</button>
-        </mat-menu>
-        <button mat-icon-button class="avatar" [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <app-notifications></app-notifications>
-      </right-content>
-    </app-header>
-    <div class="pad-0-5"><router-outlet></router-outlet></div>
-  `
+    <div class="container-column viewport-full">
+      <app-header mode="toolbar">
+        <right-content class="row">
+          <mat-menu
+            class="menu-options"
+            x-position="after"
+            y-position="below"
+            #menu="matMenu"
+          >
+            <button mat-menu-item routerLink="/me/projects">
+              Mis proyectos
+            </button>
+            <button mat-menu-item (click)="logout()">Salir</button>
+          </mat-menu>
+          <button mat-icon-button class="avatar" [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <app-notifications></app-notifications>
+        </right-content>
+      </app-header>
+      <div class="pad-0-5 container-complement">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    ,
+  `,
+  styleUrls: ['layout.component.scss']
 })
 export class InsideLayoutComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
