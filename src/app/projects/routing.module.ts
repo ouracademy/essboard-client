@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 
-import { ListComponent, DetailComponent } from './components'
+import { ProjectPortfolioComponent, ProjectDetailComponent } from './components'
 
 const routes: Routes = [
-  { path: '', component: ListComponent },
-  { path: ':id', component: DetailComponent }
+  { path: '', component: ProjectPortfolioComponent },
+  { path: ':id', component: ProjectDetailComponent }
 ]
 
 @NgModule({

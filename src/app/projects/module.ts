@@ -21,7 +21,8 @@ import { OurAvatarModule } from '@shared/avatar/index.module'
 import { LoadingWhenClickedModule } from '@shared/loading-when-clicked'
 
 import {
-  ListComponent,
+  ProjectPortfolioComponent,
+  ProjectListComponent,
   DetailComponent,
   CardComponent,
   SessionsListComponent,
@@ -54,7 +55,8 @@ import {
     RoutingModule
   ],
   declarations: [
-    ListComponent,
+    ProjectPortfolioComponent,
+    ProjectListComponent,
     CardComponent,
     DetailComponent,
     SessionsListComponent,
