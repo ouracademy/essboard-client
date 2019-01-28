@@ -15,3 +15,16 @@
   right: 0px;
   z-index: 1000;
 }
+
+.container-column{
+  display: flex;
+  flex-direction: column;
+  flex:1;
+}
+.container-complement {
+  flex-grow: 1;
+  display: flex;
+}
+.container-child{
+  display: flex;
+}
