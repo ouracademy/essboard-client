@@ -1,53 +1,58 @@
-<div *ngIf="session">
-  <div class="row row-detail between-xs middle-xs">
-    <div class="row middle-xs col-xs-12 col-md-3 ">
-      <span>Sesión </span>
-      <div class="pad-0-5">
-        <span> {{ session.createdAt | date: "d 'de' MMMM" }}</span>
+<mat-sidenav-container *ngIf="session">
+  <mat-sidenav #sidenav mode="side" [(opened)]="isSideNavOpen" position="end">
+    <mat-toolbar>
+      <span>Actividades</span> <span class="fill-remaining"></span>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon class="md-24">close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-list>
+      <mat-list-item *ngFor="let event of events">
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <h4 mat-line>{{ event.user }} {{ event.text }}</h4>
+        <p mat-line>{{ event.createdAt | date }}</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="row row-detail between-xs middle-xs">
+      <div class="row middle-xs col-xs-12 col-md-3 ">
+        <span>Sesión </span>
+        <div class="pad-0-5">
+          <span> {{ session.createdAt | date: "d 'de' MMMM" }}</span>
 
-        <span *ngIf="session.hasFinished; else: notFinished">
-          a {{ session.endDate | date: "d 'de' MMMM" }}
-        </span>
-        <ng-template #notFinished>
-          <button mat-stroked-button color="accent" (click)="finishSession()">
-            Dar por concluído
+          <span *ngIf="session.hasFinished; else notFinished">
+            a {{ session.endDate | date: "d 'de' MMMM" }}
+          </span>
+          <ng-template #notFinished>
+            <button mat-stroked-button color="accent" (click)="finishSession()">
+              Dar por concluído
+            </button>
+          </ng-template>
+        </div>
+      </div>
+      <app-online-users class="col-xs-12 col-md-6"></app-online-users>
+      <div class="row middle-xs center-xs col-xs-12 col-md-3 pad-0-5">
+        <!--
+          <button mat-icon-button *ngIf="!session.hasFinished">
+            <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
           </button>
-        </ng-template>
+        -->
+        <button mat-icon-button (click)="isChatVisible = !isChatVisible">
+          <mat-icon class="md-24">chat</mat-icon>
+        </button>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon class="md-24">history</mat-icon>
+        </button>
+        <button mat-button (click)="goToProject()">Ir a mi proyecto</button>
       </div>
     </div>
-    <app-online-users class="col-xs-12 col-md-6"></app-online-users>
-    <div class="row middle-xs center-xs col-xs-12 col-md-3 pad-0-5">
-      <!--
-        <button mat-icon-button *ngIf="!session.hasFinished">
-
-
-
-
-
-
-
-          <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
-
-
-
-
-
-
-
-
-        </button>
-      -->
-      <button mat-icon-button (click)="isChatVisible = !isChatVisible">
-        <mat-icon class="md-24">chat</mat-icon>
-      </button>
-      <button mat-button (click)="goToProject()">Ir a mi proyecto</button>
-    </div>
-  </div>
-  <session-steps></session-steps>
-  <chat
-    *ngIf="isChatVisible"
-    [sessionId]="session.id"
-    [isReadonly]="session.hasFinished"
-  >
-  </chat>
-</div>
+    <session-steps></session-steps>
+    <chat
+      *ngIf="isChatVisible"
+      [sessionId]="session.id"
+      [isReadonly]="session.hasFinished"
+    >
+    </chat>
+  </mat-sidenav-content>
+</mat-sidenav-container>

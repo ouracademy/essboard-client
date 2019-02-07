@@ -19,8 +19,17 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   selectedAlpha: AlphaTemplate = null
 
   isChatVisible = false
+  isSideNavOpen = true
 
   workItems: any[] = []
+
+  events = [
+    {
+      user: 'qpdian',
+      text: 'a movido The system Y de TODO a DOING',
+      createdAt: new Date()
+    }
+  ]
 
   constructor(
     public kernelService: KernelService,

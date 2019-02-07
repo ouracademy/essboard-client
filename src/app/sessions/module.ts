@@ -12,7 +12,8 @@ import {
   MatCheckboxModule,
   MatTabsModule,
   MatButtonToggleModule,
-  MatListModule
+  MatListModule,
+  MatSidenavModule
 } from '@angular/material'
 
 import 'hammerjs'
@@ -58,6 +59,7 @@ import { OurAvatarModule } from '@shared/avatar/index.module'
     MatTabsModule,
     MatButtonToggleModule,
     MatListModule,
+    MatSidenavModule,
     OurAvatarModule,
     RoutingModule
   ],
