@@ -53,7 +53,6 @@ export class OurRenderCtrlComponent implements OnInit, AfterContentInit {
   ngOnInit() {}
   ngAfterContentInit() {
     this.dataComponent.isLoaded$.subscribe(loaded => {
-      console.log('loaded', loaded)
       this.isLoaded = loaded
     })
     this.dataComponent.isEmpty$.subscribe(isEmpty => {
