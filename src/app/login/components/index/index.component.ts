@@ -52,6 +52,7 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
               mat-raised-button
               color="accent"
               app-loading-clicked
+              app-prevent-offline
               identifierLoading="login"
             >
               Ingresa
