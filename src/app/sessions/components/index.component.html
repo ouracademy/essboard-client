@@ -9,7 +9,12 @@
           a {{ session.endDate | date: "d 'de' MMMM" }}
         </span>
         <ng-template #notFinished>
-          <button mat-stroked-button color="accent" (click)="finishSession()">
+          <button
+            mat-stroked-button
+            color="accent"
+            app-prevent-offline
+            (click)="finishSession()"
+          >
             Dar por concluído
           </button>
         </ng-template>
@@ -47,7 +52,7 @@
   <chat
     *ngIf="isChatVisible"
     [sessionId]="session.id"
-    [isReadonly]="session.hasFinished"
+    [isReadonly]="session.hasFinished || !isOnline"
   >
   </chat>
 </div>

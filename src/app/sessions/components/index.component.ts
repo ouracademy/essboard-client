@@ -5,6 +5,7 @@ import { SessionService } from '../services/session.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { AlphaTemplate } from './detail-alpha/kernel'
 import { CanLeaveChannel } from '../services/leave-session.guard'
+import { SharedService } from '@core/shared.service'
 
 @Component({
   selector: 'session',
@@ -19,6 +20,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   selectedAlpha: AlphaTemplate = null
 
   isChatVisible = false
+  isOnline = false
 
   workItems: any[] = []
 
@@ -26,7 +28,8 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     public kernelService: KernelService,
     private service: SessionService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit() {
@@ -39,6 +42,10 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     this.kernelService.getAlphas().subscribe(alphas => {
       this.alphas = alphas
     })
+
+    this.sharedService.networkStatus.subscribe(
+      status => (this.isOnline = status)
+    )
   }
 
   @HostListener('window:beforeunload', ['$event'])

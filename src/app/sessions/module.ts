@@ -40,6 +40,7 @@ import { ChatComponent } from './components/chat/index.component'
 
 import { OnlineUsersComponent } from './components/online-users/index.components'
 import { OurAvatarModule } from '@shared/avatar/index.module'
+import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
 
 @NgModule({
   imports: [
@@ -59,6 +60,7 @@ import { OurAvatarModule } from '@shared/avatar/index.module'
     MatButtonToggleModule,
     MatListModule,
     OurAvatarModule,
+    PreventOfflineModule,
     RoutingModule
   ],
   declarations: [

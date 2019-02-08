@@ -5,6 +5,7 @@
       <p class="text">{{ checkpointTemplate.description }}</p>
       <div class="row col-xs-12">
         <mat-checkbox
+          app-prevent-offline
           (change)="vote(checkpointTemplate, $event)"
           [checked]="isChecked(checkpointTemplate)"
           [disabled]="isReadonly"
