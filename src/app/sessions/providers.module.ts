@@ -7,10 +7,12 @@ import { ChannelService } from './services/channel.service'
 import { ChatService } from './services/chat.service'
 import { ChatSocketService } from './services/chat-socket.service'
 import { VotesService } from './services/votes.service'
+import { EventsService } from './services/events.service'
 export const PROVIDERS_SESSION = [
   { provide: SessionService, useClass: SessionSocketService },
   { provide: GoalService, useClass: GoalSocketService },
   ChannelService,
   VotesService,
+  EventsService,
   { provide: ChatService, useClass: ChatSocketService }
 ]

@@ -12,7 +12,8 @@ import {
   MatCheckboxModule,
   MatTabsModule,
   MatButtonToggleModule,
-  MatListModule
+  MatListModule,
+  MatSidenavModule
 } from '@angular/material'
 
 import 'hammerjs'
@@ -59,6 +60,7 @@ import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
     MatTabsModule,
     MatButtonToggleModule,
     MatListModule,
+    MatSidenavModule,
     OurAvatarModule,
     PreventOfflineModule,
     RoutingModule

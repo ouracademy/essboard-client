@@ -16,15 +16,15 @@
   z-index: 1000;
 }
 
-.container-column{
+.container-column {
   display: flex;
   flex-direction: column;
-  flex:1;
+  flex: 1;
 }
 .container-complement {
   flex-grow: 1;
   display: flex;
 }
-.container-child{
+.container-child {
   display: flex;
 }
