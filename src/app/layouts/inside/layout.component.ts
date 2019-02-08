@@ -34,7 +34,6 @@ import { HeaderModule } from '@shared/header/index.module'
         <router-outlet></router-outlet>
       </div>
     </div>
-    ,
   `,
   styleUrls: ['layout.component.scss']
 })
