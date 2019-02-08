@@ -15,6 +15,7 @@ export class LoadingWhenClickedDirective implements OnInit, OnDestroy {
   nativeElement
   loadingChild = null
   children = []
+  isLoading = false
   constructor(
     private element: ElementRef,
     private renderer: Renderer2,
@@ -28,6 +29,12 @@ export class LoadingWhenClickedDirective implements OnInit, OnDestroy {
     this.children = Object.keys(childNodes).map(key => childNodes[key])
     this.loadingService.stopLoadingEmitter.on(this.identifierLoading, () => {
       this.stopLoading()
+    })
+
+    this.loadingService.stopLoadingEmitter.on('all', () => {
+      if (this.isLoading) {
+        this.stopLoading()
+      }
     })
   }
   private createLoadingElement() {
@@ -45,6 +52,7 @@ export class LoadingWhenClickedDirective implements OnInit, OnDestroy {
   }
 
   startLoading() {
+    this.isLoading = true
     this.renderer.addClass(this.nativeElement, 'disabled')
     this.removeOriginalContent()
     this.addLoadingContent()

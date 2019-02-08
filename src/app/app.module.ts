@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 
 import localeEs from '@angular/common/locales/es'
+import { LoadingClickService } from '@shared/loading-when-clicked'
+
 registerLocaleData(localeEs)
 
 @NgModule({
@@ -18,7 +20,7 @@ registerLocaleData(localeEs)
     AppRoutingModule
   ],
   declarations: [AppComponent],
-  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' }, LoadingClickService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

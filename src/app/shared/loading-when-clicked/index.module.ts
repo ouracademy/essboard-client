@@ -5,7 +5,7 @@ import { LoadingClickService } from './index.service'
 @NgModule({
   imports: [],
   exports: [LoadingWhenClickedDirective],
-  providers: [LoadingClickService],
+  providers: [],
   declarations: [LoadingWhenClickedDirective]
 })
 export class LoadingWhenClickedModule {}
