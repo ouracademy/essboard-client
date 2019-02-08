@@ -5,6 +5,9 @@ import { SessionService } from '../services/session.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { AlphaTemplate } from './detail-alpha/kernel'
 import { CanLeaveChannel } from '../services/leave-session.guard'
+import { EventsService } from '../services/events.service'
+import { flatMap } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'session',
@@ -22,28 +25,30 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   isSideNavOpen = true
 
   workItems: any[] = []
-
-  events = [
-    {
-      user: 'qpdian',
-      text: 'a movido The system Y de TODO a DOING',
-      createdAt: new Date()
-    }
-  ]
+  sessionEvents: any
 
   constructor(
     public kernelService: KernelService,
-    private service: SessionService,
+    private sessions: SessionService,
+    private events: EventsService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.service.selectedSession = params['id']
+      this.sessions.selectedSession = params['id']
     })
 
-    this.service.currentSession$.subscribe(session => (this.session = session))
+    this.sessions.currentSession$.subscribe(session => {
+      this.session = session
+    })
+
+    this.sessions.currentSession$
+      .pipe(flatMap(session => this.events.of(session)))
+      .subscribe(sessionEvents => {
+        this.sessionEvents = sessionEvents
+      })
 
     this.kernelService.getAlphas().subscribe(alphas => {
       this.alphas = alphas
@@ -63,7 +68,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   }
 
   leaveChannel() {
-    return this.service.leaveChannel()
+    return this.sessions.leaveChannel()
   }
 
   handleSelectionAlpha(alpha: any) {
@@ -71,7 +76,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   }
 
   finishSession() {
-    this.service.finish()
+    this.sessions.finish()
   }
 
   delete() {}
