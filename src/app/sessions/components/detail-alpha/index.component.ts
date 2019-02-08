@@ -35,13 +35,16 @@ export class DetailAlphaComponent implements OnInit {
       this.states = states
     })
 
-    this.activeRoute.params
-      .pipe(flatMap((params: Params) => this.kernel.getAlpha(params['id'])))
-      .subscribe((alphaTemplate: AlphaTemplate) => {
-        this.alphaTemplate = alphaTemplate
-        this.sessionService.selectedAlpha = alphaTemplate
-        this.sessionService.selectedState = null
-      })
+    this.activeRoute.params.subscribe(params => {
+      this.kernel.getAlpha(params['id']).subscribe(
+        (alphaTemplate: AlphaTemplate) => {
+          this.alphaTemplate = alphaTemplate
+          this.sessionService.selectedAlpha = alphaTemplate
+          this.sessionService.selectedState = null
+        },
+        err => {}
+      )
+    })
   }
 
   onSelectedState(template: StateTemplate) {
