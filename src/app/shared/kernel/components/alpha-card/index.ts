@@ -10,6 +10,7 @@ import {
   styleUrls: ['index.css']
 })
 export class AlphaCardComponent {
+  @Input() isReadonly = false
   @Input()
   alpha: AlphaTemplate
   @Input()
@@ -20,7 +21,9 @@ export class AlphaCardComponent {
   selectedState: StateTemplate = null
 
   select(template: StateTemplate) {
-    this.onChooseState.emit(template)
+    if (!this.isReadonly) {
+      this.onChooseState.emit(template)
+    }
   }
 
   isSelected(state: StateTemplate) {
@@ -32,11 +35,15 @@ export class AlphaCardComponent {
     const status = state ? state.status : 'todo'
     return {
       [status]: true,
-      selected: this.isSelected(stateTemplate)
+      selected: this.isSelected(stateTemplate),
+      readonlyButton: this.isReadonly
     }
   }
 
   getState(stateTemplate: StateTemplate) {
     return this.states.find(x => x.id === stateTemplate.id)
+  }
+  stop() {
+    this.onChooseState.complete()
   }
 }

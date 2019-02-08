@@ -41,3 +41,8 @@
 .selected {
   box-shadow: 1px 2px 30px 13px rgba(202, 188, 188, 0.79);
 }
+
+.readonlyButton{
+  pointer-events: none;
+  opacity: 0.2;
+}

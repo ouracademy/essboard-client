@@ -6,6 +6,7 @@ import { ActivatedRoute, Params } from '@angular/router'
 import { AlphaTemplate, StateTemplate } from './kernel'
 
 import { flatMap } from 'rxjs/operators'
+import { SharedService } from '@core/shared.service'
 
 @Component({
   selector: 'detail-alpha',
@@ -23,7 +24,8 @@ export class DetailAlphaComponent implements OnInit {
   constructor(
     private sessionService: SessionService,
     private activeRoute: ActivatedRoute,
-    private kernel: KernelService
+    private kernel: KernelService,
+    public sharedService: SharedService
   ) {}
 
   ngOnInit() {
