@@ -6,6 +6,7 @@ import { SocketService } from './socket.service'
 import { NgxAlertsModule } from '@ngx-plus/ngx-alerts'
 import { NotificationService } from './notification.service'
 import { KernelService } from './kernel-knowledge.service'
+import { LandingGuardService } from './landing-guard.service'
 
 import { HttpClientModule } from '@angular/common/http'
 
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http'
     AuthService,
     SharedService,
     NotificationService,
-    KernelService
+    KernelService,
+    LandingGuardService
   ]
 })
 export class CoreModule {}

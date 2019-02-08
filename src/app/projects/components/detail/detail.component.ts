@@ -38,7 +38,7 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
   templateUrl: 'detail.component.html',
   styleUrls: ['detail.component.css']
 })
-export class DetailComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit {
   project: Project
   sessions: any[] = []
   selectedSession: Session

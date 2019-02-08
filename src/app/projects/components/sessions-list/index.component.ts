@@ -1,34 +1,40 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
-import { SessionService } from 'app/sessions/services/session.service'
-import { Observable } from 'rxjs/Observable'
-import { Subject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 
+import { SessionService } from 'app/sessions/services/session.service'
 import { DataList } from '@shared/render-ctrl/index.component'
+
 @Component({
   selector: 'sessions-list',
   templateUrl: 'index.component.html'
 })
-export class SessionsListComponent implements DataList {
+export class SessionsListComponent implements OnDestroy, DataList {
   sessions = []
 
-  loaded$: Subject<{}>
-  isEmpty$: Subject<{}>
+  isLoaded$: BehaviorSubject<boolean>
+  isEmpty$: BehaviorSubject<boolean>
+
   @Input('projectId')
   set projectId(projectId) {
     this.sessionsService.getSessions(projectId).subscribe(sessions => {
       this.sessions = sessions
-      this.loaded$.next(true)
+      this.isLoaded$.next(true)
       this.isEmpty$.next(sessions.length === 0)
     })
   }
 
   constructor(private router: Router, public sessionsService: SessionService) {
-    this.loaded$ = new Subject()
-    this.isEmpty$ = new Subject()
+    this.isLoaded$ = new BehaviorSubject(false)
+    this.isEmpty$ = new BehaviorSubject(true)
   }
 
   goSession(session) {
     this.router.navigate(['/me/sessions', session.id])
+  }
+
+  ngOnDestroy() {
+    this.isLoaded$.unsubscribe()
+    this.isEmpty$.unsubscribe()
   }
 }

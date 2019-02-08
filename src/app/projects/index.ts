@@ -1,5 +1,11 @@
-export { ListComponent } from './components/list/list.component'
-export { DetailComponent } from './components/detail/detail.component'
+export {
+  ProjectPortfolioComponent,
+  ProjectListComponent
+} from './components/portfolio/portfolio.component'
+
+export {
+  ProjectDetailComponent as DetailComponent
+} from './components/detail/detail.component'
 export { CardComponent } from './components/card/card.component'
 export {
   SessionsListComponent
