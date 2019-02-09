@@ -9,7 +9,7 @@ export class StepsComponent implements OnInit {
     { label: 'Estado actual', path: 'holistic-view', icon: 'looks_one' },
     {
       label: 'Determina tu estado',
-      path: 'set-current-state',
+      path: 'set-state',
       icon: 'looks_two'
     }
     // { label: 'Decide como lograrlo', path: '', icon: 'looks_4' }

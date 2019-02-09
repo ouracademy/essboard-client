@@ -30,7 +30,7 @@ import { SessionComponent } from './components/index.component'
 /* steps for use essence in each session*/
 import { StepsComponent } from './components/steps/index.component'
 import { RadiatorInformationComponent } from './components/radiator-information/index.component'
-import { SetCurrentStateComponent } from './components/set-current-state/index.component'
+import { SetStateComponent } from './components/set-state/index.component'
 
 import { ActionsByGoalComponent } from './components/actions-by-goal/index.component'
 
@@ -71,7 +71,7 @@ import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
     StepsComponent,
     RadiatorInformationComponent,
     DetailAlphaComponent,
-    SetCurrentStateComponent,
+    SetStateComponent,
     ChecklistComponent,
     ActionsByGoalComponent,
     ChatComponent,

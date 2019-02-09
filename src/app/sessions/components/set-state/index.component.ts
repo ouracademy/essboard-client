@@ -3,10 +3,10 @@ import { KernelService } from '@core/kernel-knowledge.service'
 import { AlphaTemplate } from '../detail-alpha/kernel'
 
 @Component({
-  selector: 'set-current-state',
+  selector: 'set-state',
   templateUrl: 'index.component.html'
 })
-export class SetCurrentStateComponent implements OnInit {
+export class SetStateComponent implements OnInit {
   alphas: AlphaTemplate[]
   selectedAlpha: AlphaTemplate = null
 

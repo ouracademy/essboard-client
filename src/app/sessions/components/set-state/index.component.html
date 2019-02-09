@@ -1,0 +1,20 @@
+<div class="content-tab">
+  <div class="row middle-xs center-xs">
+    <h2 class="primary">Determina el estado de cualquier dimension</h2>
+    <h4 class="subtitle">
+      ( Selecciona una dimension y luego selecciona el estado que tú consideras
+      se encuentra el proyecto )
+    </h4>
+  </div>
+  <div class="row middle-xs center-xs">
+    <div
+      *ngFor="let alpha of alphas"
+      class=" {{ alpha.area }} button--alpha selectable"
+      [routerLink]="alpha.id"
+      routerLinkActive="active--alpha"
+    >
+      <div class="text">{{ alpha.name }}</div>
+    </div>
+  </div>
+  <div class="pad-1"><router-outlet></router-outlet></div>
+</div>
