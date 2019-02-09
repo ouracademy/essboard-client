@@ -35,7 +35,6 @@ import { SetCurrentStateComponent } from './components/set-current-state/index.c
 import { ActionsByGoalComponent } from './components/actions-by-goal/index.component'
 
 import { DetailAlphaComponent } from './components/detail-alpha/index.component'
-import { SetGoalStateComponent } from './components/set-goal-state/index.component'
 
 import { ChecklistComponent } from './components/checklist/index.component'
 import { ChatComponent } from './components/chat/index.component'
@@ -74,7 +73,6 @@ import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
     DetailAlphaComponent,
     SetCurrentStateComponent,
     ChecklistComponent,
-    SetGoalStateComponent,
     ActionsByGoalComponent,
     ChatComponent,
     OnlineUsersComponent
