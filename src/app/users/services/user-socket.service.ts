@@ -90,21 +90,4 @@ export class UserSocketService extends UserService {
   private toUser(source) {
     return new User(source._id, source.name, source.email, source.createdAt)
   }
-
-  search(email: string) {
-    this.service.find(
-      {
-        query: {
-          email: { $regex: email, $options: 'igm' }
-        }
-      },
-      (err, items: any) => {
-        if (err) {
-          return console.error('error', err)
-        }
-        this.users = items.data.map(x => this.toUser(x))
-        this.users$.next(this.users)
-      }
-    )
-  }
 }
