@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core'
 import { SocketService } from '@core/socket.service'
 import { Session } from '@shared/no-module/models/project'
-import { map } from 'rxjs/operators'
+import { map, flatMap } from 'rxjs/operators'
+import { from } from 'rxjs'
 
 export interface DomainEvent {
   aggregatedId: string
@@ -30,7 +31,29 @@ export class EventsService {
         map((events: DomainEvent[]) =>
           events.map(x => ({ ...x.data, createdAt: x.createdAt }))
         ),
-        map(events => events.map(format))
+        map(events => events.map(format)),
+        flatMap(events => {
+          const userIds = [...new Set<string>(events.map(x => x.userId))]
+          return from(
+            this.socketService
+              .getService('users')
+              .find({
+                query: {
+                  _id: {
+                    $in: userIds
+                  }
+                }
+              })
+              .then(result => {
+                const users = result['data']
+
+                return events.map(x => ({
+                  ...x,
+                  user: users.find(user => user._id === x.userId)
+                }))
+              })
+          )
+        })
       )
   }
 }
@@ -66,5 +89,5 @@ const format = event => {
       }
   }
 
-  return 'no conocido :('
+  throw new Error(`Event doesn't have a format`)
 }

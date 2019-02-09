@@ -8,9 +8,8 @@
     </mat-toolbar>
     <mat-list>
       <mat-list-item *ngFor="let event of sessionEvents">
-        <mat-icon mat-list-icon>folder</mat-icon>
-        <!-- <p>{{ event | json }}</p> -->
-        <h4 mat-line>{{ event.userId }} {{ event.text }}</h4>
+        <app-our-avatar [user]="event.user" matListAvatar></app-our-avatar>
+        <h4 mat-line>{{ event.user.name }} {{ event.text }}</h4>
         <p mat-line>{{ event.createdAt | date }}</p>
       </mat-list-item>
     </mat-list>
