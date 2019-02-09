@@ -46,10 +46,22 @@ const format = event => {
             : `fue invitado para ser ${event.role}`,
         createdAt: event.createdAt
       }
+    case 'MEMBER_REMOVED':
+      return {
+        userId: event.userId,
+        text: `dejo de ser miembro del equipo`,
+        createdAt: event.createdAt
+      }
     case 'VOTE_EMITED':
       return {
         userId: event.from,
         text: `voto al checkpoint ${event.checkpoint}`,
+        createdAt: event.createdAt
+      }
+    case 'VOTE_REMOVED':
+      return {
+        userId: event.from,
+        text: `removió su voto al checkpoint ${event.checkpoint}`,
         createdAt: event.createdAt
       }
   }
