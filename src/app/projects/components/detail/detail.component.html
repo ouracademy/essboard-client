@@ -1,8 +1,8 @@
 <div *ngIf="project" class="container-column">
   <div class="row middle-xs row-detail">
-    <div class="title  font-normal">Nombre :</div>
+    <div class="text--head primary">Nombre :</div>
     <div
-      class="info  font-normal"
+      class="info text--head"
       [matTooltip]="project.description"
       matTooltipPosition="above"
     >
@@ -28,7 +28,7 @@
   <div class="container-complement pad-1">
     <div class="row col-xs-12">
       <div class="col-lg-3 col-xs-12 last-xs first-md">
-        <h2 class="title center">Tus sesiones de trabajo</h2>
+        <h2 class="primary center">Tus sesiones de trabajo</h2>
         <div>
           <button
             class="main"
@@ -45,7 +45,7 @@
         </div>
       </div>
       <div class="col-lg-9 col-xs-12">
-        <h2 class="title align-center">Tu proyecto holisticamente</h2>
+        <h2 class="primary align-center">Tu proyecto holisticamente</h2>
         <div class="row center-xs">
           <app-radar-chart class="col-xs-12 col-md-6"></app-radar-chart>
           <!--

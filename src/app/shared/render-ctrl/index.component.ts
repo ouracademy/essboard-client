@@ -17,13 +17,11 @@ export interface DataList {
   template: `
     <div class="wrapper-render">
       <div *ngIf="!isEmpty"><ng-content></ng-content></div>
-      <div *ngIf="!isLoaded">
-        <div class="centered info font-md">Cargando ...</div>
-      </div>
+      <div *ngIf="!isLoaded"><h3 class="centered info">Cargando ...</h3></div>
       <div *ngIf="isLoaded">
-        <div *ngIf="isEmpty" class="centered info font-md ">
+        <h3 *ngIf="isEmpty" class="centered info">
           No se encontraron resultados
-        </div>
+        </h3>
       </div>
     </div>
   `,

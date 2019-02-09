@@ -1,0 +1,23 @@
+@import 'margin/margin';
+@import 'margin/margin-top';
+@import 'margin/margin-left';
+@import 'margin/margin-vertical';
+@import 'padding/padding';
+@import 'padding/padding-top';
+@import 'padding/padding-vertical';
+@import 'align-text';
+@import 'positions';
+@import 'text';
+
+.width-all {
+  width: 100% !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+.shadow {
+  box-shadow: 1px 2px 2px 1px rgba(224, 213, 213, 0.79);
+}
+
+

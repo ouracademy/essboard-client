@@ -58,9 +58,12 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
               Ingresa
             </button>
           </form>
+          <br />
           <div class="row aorund-xs middle-xs">
-            <span class="info"
-              ><a routerLink="/signup">No tienes una cuenta</a></span
+            <span
+              ><a class="info" routerLink="/signup"
+                >No tienes una cuenta</a
+              ></span
             >
           </div>
         </mat-card-content>

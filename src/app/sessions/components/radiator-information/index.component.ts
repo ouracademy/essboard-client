@@ -8,7 +8,7 @@ import { Observable } from 'rxjs'
   template: `
     <div class="content-tab">
       <div class="row middle-xs center-xs">
-        <h2 class="title">Mira como va tu proyecto</h2>
+        <h2 class="primary">Mira como va tu proyecto</h2>
       </div>
       <div class="row center-xs">
         <app-radar-chart

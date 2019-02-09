@@ -13,6 +13,9 @@ import { User } from '@no-module/models/user'
         right: 5px;
         position: absolute;
       }
+      .project-card {
+        height: 12vh;
+      }
     `
   ]
 })

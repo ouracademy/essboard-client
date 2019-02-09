@@ -12,6 +12,7 @@ import { AuthService } from '@core/auth.service'
       .icon-image {
         height: 100px;
         width: 100px;
+        margin: auto;
       }
     `
   ]

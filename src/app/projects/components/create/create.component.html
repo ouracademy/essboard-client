@@ -1,5 +1,5 @@
 <div>
-  <div class="title font-md">Cree su proyecto</div>
+  <h3 class="primary">Cree su proyecto</h3>
   <div>
     <form (ngSubmit)="onSubmit()" #projectForm="ngForm">
       <mat-form-field appearance="outline" class="width-all"
@@ -29,7 +29,7 @@
           [disabled]="!projectForm.form.valid"
           mat-raised-button
           color="accent"
-          class=" mar-0-1 btn-big"
+          class=" mar-0-1"
         >
           Guardar
         </button>
@@ -37,7 +37,7 @@
           type="button"
           mat-raised-button
           color="warn"
-          class=" mar-0-1 btn-big"
+          class=" mar-0-1"
           mat-dialog-close
         >
           Cancelar

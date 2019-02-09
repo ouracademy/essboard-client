@@ -13,7 +13,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
   template: `
     <div class="pad-1 container-column">
       <div class="row between-xs middle-xs">
-        <span class="title">{{ title }}</span>
+        <span class="primary">{{ title }}</span>
         <button mat-icon-button class="main" (click)="createProject()">
           <mat-icon>add</mat-icon>
         </button>

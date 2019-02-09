@@ -1,0 +1,91 @@
+@import '~@angular/material/theming';
+
+
+
+@include mat-core();
+
+$green-essboard: (
+  50: #ebf9f0,
+  100: #cdf0da,
+  200: #ace7c2,
+  300: #8addaa,
+  400: #71d597,
+  500: #58ce85,
+  600: #50c97d,
+  700: #47c272,
+  800: #3dbc68,
+  900: #2db055,
+  A100: #f3fff6,
+  A200: #c0ffd2,
+  A400: #8dffae,
+  A700: #74ff9c,
+  contrast: (
+    50: #ffffff,
+    100: #ffffff,
+    200: #ffffff,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #000000,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff
+  )
+);
+$blue-essboard: (
+  50: #ecf7f9,
+  100: #cfecf1,
+  200: #afdfe8,
+  300: #8fd2de,
+  400: #77c8d7,
+  500: #5fbed0,
+  600: #57b8cb,
+  700: #4dafc4,
+  800: #43a7be,
+  900: #3299b3,
+  A100: #fafeff,
+  A200: #c7f3ff,
+  A400: #94e9ff,
+  A700: #7ae3ff,
+  contrast: (
+    50: #ffffff,
+    100: #ffffff,
+    200: #ffffff,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #000000,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff
+  )
+);
+$app-primary: mat-palette($blue-essboard);
+$app-accent: mat-palette($green-essboard);
+$app-theme: mat-light-theme($app-primary, $app-accent);
+@include angular-material-theme($app-theme);
+
+$config: mat-typography-config();
+
+html{
+  font-family: mat-font-family($config);
+}
+
+
+.primary {
+  color: mat-color($app-primary);
+}
+.accent {
+  color: mat-color($app-accent);
+}
+.info {
+  color: #a2a69d;
+}

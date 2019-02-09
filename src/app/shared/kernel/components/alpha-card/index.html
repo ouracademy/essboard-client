@@ -1,6 +1,9 @@
 <essence-card [name]="alpha.name" [area]="alpha.area">
   <content class="states">
-    <div *ngFor="let state of alpha.states">
+    <div
+      *ngFor="let state of alpha.states"
+      (contextmenu)="onContextMenu($event, state)"
+    >
       <div
         class="state row middle-xs center-xs"
         [ngClass]="getClass(state)"

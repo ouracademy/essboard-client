@@ -9,12 +9,12 @@ import { Component, OnInit, Input } from '@angular/core'
     >
       <a class="brand col-xs-4 col-sm-4 " routerLink="/">
         <img
-          class="responsive-width"
+          class="logo"
           src="assets/images/logo/logo-horizontal.png"
           alt="Essboard"
         />
       </a>
-      <div class="p-1 row end-xs middle-xs">
+      <div class="pad-1 row end-xs middle-xs">
         <ng-content select="right-content"> </ng-content>
       </div>
     </div>
@@ -23,6 +23,10 @@ import { Component, OnInit, Input } from '@angular/core'
     `
       .brand {
         height: 100%;
+      }
+      .logo {
+        width: auto;
+        height: 90%;
       }
     `
   ]

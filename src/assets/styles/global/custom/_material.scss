@@ -1,0 +1,85 @@
+.mat-toolbar {
+  background-color: white !important;
+}
+
+.mat-toolbar-row {
+  height: 60px !important;
+}
+
+.toolbar-main {
+  z-index: 1000;
+}
+
+
+
+mat-card {
+  padding: 14px !important;
+}
+
+
+
+
+
+
+mat-list-item {
+  background: white !important;
+  display: block;
+  div:hover {
+    background: #f0f0f0 !important;
+    cursor: pointer;
+  }
+}
+
+
+
+.mat-nav-list .mat-list-item:hover,
+.mat-nav-list .mat-list-item.mat-list-item-focus {
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+
+
+.mat-tab-label-active {
+  background: white;
+  color: #002e4c !important;
+  font-weight: bold !important;
+}
+
+.mat-expansion-panel-header {
+  background: #e6e8ea;
+}
+
+
+
+textarea.mat-input-element {
+  text-align: justify;
+}
+
+
+
+.mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+  display: none !important;
+}
+
+
+
+.ele-select {
+  .mat-input-underline {
+    display: block !important;
+  }
+}
+
+.mat-list-option {
+  height: 4vh !important;
+}
+
+.mat-list-text p {
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.mat-form-field {
+  font-size: 17px !important;
+}
+.mat-raised-button {
+  color: white !important;
+}

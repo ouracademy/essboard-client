@@ -1,6 +1,9 @@
-<mat-card (click)="handleSelection()" class="relative box-md mar-1 selectable">
+<mat-card
+  (click)="handleSelection()"
+  class="project-card relative mar-1 selectable"
+>
   <div *ngIf="!isOwner" class="corner-tr ">
     <mat-icon>folder_shared</mat-icon>
   </div>
-  <h3 class="subtitle font-md text--truncate">{{ project.name }}</h3>
+  <h3 class="subtitle  text--truncate">{{ project.name }}</h3>
 </mat-card>
