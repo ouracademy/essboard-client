@@ -1,4 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core'
+import { ContextMenuComponent, ContextMenuService } from 'ngx-contextmenu'
 import {
   AlphaTemplate,
   StateTemplate
@@ -17,8 +18,11 @@ export class AlphaCardComponent {
   states: any[] = []
   @Output()
   onChooseState = new EventEmitter<StateTemplate>()
+  @Input() contextMenu: ContextMenuComponent
 
   selectedState: StateTemplate = null
+
+  constructor(private contextMenuService: ContextMenuService) {}
 
   select(template: StateTemplate) {
     if (!this.isReadonly) {
@@ -45,5 +49,14 @@ export class AlphaCardComponent {
   }
   stop() {
     this.onChooseState.complete()
+  }
+  public onContextMenu($event: MouseEvent, item: any): void {
+    this.contextMenuService.show.next({
+      contextMenu: this.contextMenu,
+      event: $event,
+      item: item
+    })
+    $event.preventDefault()
+    $event.stopPropagation()
   }
 }

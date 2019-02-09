@@ -7,6 +7,7 @@ import { AlphaTemplate, StateTemplate } from './kernel'
 
 import { flatMap } from 'rxjs/operators'
 import { SharedService } from '@core/shared.service'
+import { ContextMenuComponent } from 'ngx-contextmenu'
 
 @Component({
   selector: 'detail-alpha',
@@ -20,6 +21,8 @@ export class DetailAlphaComponent implements OnInit {
 
   @ViewChild('player')
   public playerContainer: ElementRef
+
+  @ViewChild(ContextMenuComponent) public contextMenu: ContextMenuComponent
 
   constructor(
     private sessionService: SessionService,

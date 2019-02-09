@@ -7,6 +7,7 @@
         [isReadonly]="!sharedService.isOnline"
         [alpha]="alphaTemplate"
         [states]="states"
+        [contextMenu]="contextMenu"
         (onChooseState)="onSelectedState($event)"
       >
       </alpha-card>
@@ -37,3 +38,7 @@
   />
   Your browser does not support the audio element.
 </audio>
+
+<context-menu #contextMenu>
+  <ng-template contextMenuItem> Marcar como meta </ng-template>
+</context-menu>

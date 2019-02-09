@@ -15,6 +15,7 @@ import {
   MatListModule,
   MatSidenavModule
 } from '@angular/material'
+import { ContextMenuModule } from 'ngx-contextmenu'
 
 import 'hammerjs'
 
@@ -48,6 +49,7 @@ import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
     CommonModule,
     FormsModule,
     UsersModule,
+    ContextMenuModule.forRoot(),
     KernelModule,
     MatCardModule,
     MatButtonModule,
