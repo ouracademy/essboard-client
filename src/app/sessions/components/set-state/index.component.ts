@@ -9,8 +9,14 @@ import { AlphaTemplate } from '../detail-alpha/kernel'
 export class SetStateComponent implements OnInit {
   alphas: AlphaTemplate[]
   selectedAlpha: AlphaTemplate = null
+  isCurrentStateDefined = false // read from backend
 
   constructor(public kernelService: KernelService) {}
+
+  defineCurrentState() {
+    this.isCurrentStateDefined = true
+    //set in backend  isCurrentStateDefined = true
+  }
 
   ngOnInit() {
     this.kernelService.getAlphas().subscribe(alphas => {

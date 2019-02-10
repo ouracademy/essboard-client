@@ -1,10 +1,19 @@
 <div class="content-tab">
   <div class="row middle-xs center-xs">
-    <h2 class="primary">Determina el estado de cualquier dimension</h2>
-    <h4 class="subtitle">
-      ( Selecciona una dimension y luego selecciona el estado que tú consideras
-      se encuentra el proyecto )
-    </h4>
+    <h2 class="primary pad-2">
+      Determina el estado
+      <mat-button-toggle-group
+        #group="matButtonToggleGroup"
+        [value]="isCurrentStateDefined ? 'goal' : 'current'"
+        (change)="defineCurrentState()"
+      >
+        <mat-button-toggle value="current" [disabled]="isCurrentStateDefined"
+          >actual
+        </mat-button-toggle>
+        <mat-button-toggle value="goal">objetivo</mat-button-toggle>
+      </mat-button-toggle-group>
+      de cualquier dimension de tu proyecto
+    </h2>
   </div>
   <div class="row middle-xs center-xs">
     <div
