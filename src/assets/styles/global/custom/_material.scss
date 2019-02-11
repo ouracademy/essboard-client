@@ -83,3 +83,19 @@ textarea.mat-input-element {
 .mat-raised-button {
   color: white !important;
 }
+
+.mat-button-toggle-group{
+  border:none;
+  .mat-button-toggle-checked {
+    border-bottom: #5fbed0 4px solid;
+  }
+  mat-button-toggle:not(.mat-button-toggle-checked) {
+    .mat-button-toggle-label-content{
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+  }
+  mat-button-toggle{
+    background: transparent !important;
+  }
+}

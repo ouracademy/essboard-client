@@ -1,19 +1,26 @@
 <div class="content-tab">
   <div class="row middle-xs center-xs">
-    <h2 class="primary pad-2">
+    <h2 class="primary pad-2 col-xs-12">
       Determina el estado
       <mat-button-toggle-group
         #group="matButtonToggleGroup"
-        [value]="isCurrentStateDefined ? 'goal' : 'current'"
-        (change)="defineCurrentState()"
+        (change)="changeModeState($event.value)"
       >
-        <mat-button-toggle value="current" [disabled]="isCurrentStateDefined"
-          >actual
-        </mat-button-toggle>
-        <mat-button-toggle value="goal">objetivo</mat-button-toggle>
+        <mat-button-toggle checked value="current">actual </mat-button-toggle>
+        <mat-button-toggle value="goal" [disabled]="!isCurrentStateDefined"
+          >objetivo</mat-button-toggle
+        >
       </mat-button-toggle-group>
       de cualquier dimension de tu proyecto
     </h2>
+    <div class="col-xs-12" *ngIf="canMarkStateAsDefined">
+      <mat-checkbox
+        [checked]="isCurrentStateDefined"
+        [disabled]="isCurrentStateDefined"
+        (change)="defineCurrentState()"
+        >¿ Ya se acordo el estado actual ?</mat-checkbox
+      >
+    </div>
   </div>
   <div class="row middle-xs center-xs">
     <div

@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
-import { Observable, BehaviorSubject, of } from 'rxjs'
+import { Observable, BehaviorSubject } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
-import { SessionService } from './session.service'
+import { SessionService, ModeStateDefinition } from './session.service'
 import { SocketService } from '@core/socket.service'
-import {
-  StateTemplate,
-  CheckpointTemplate
-} from '../components/detail-alpha/kernel'
+import { StateTemplate } from '../components/detail-alpha/kernel'
 import { AlphaTemplate } from '../components/detail-alpha/kernel'
 import { ChannelService } from './channel.service'
 import { MembersService } from 'app/members/members.service'
@@ -35,6 +32,7 @@ export class SessionSocketService extends SessionService {
     this.statesService = this.socketService.getService('states')
 
     this.selectedSessionId$ = new BehaviorSubject(null)
+    this.modeStateDefinition$ = new BehaviorSubject(ModeStateDefinition.Current)
     this.currentSession$ = this.selectedSessionId$.pipe(
       switchMap(sessionId =>
         this.service
@@ -42,6 +40,7 @@ export class SessionSocketService extends SessionService {
           .get(sessionId)
           .pipe(
             map(session => {
+              console.log(session)
               // TODO: remove this.session can have problems..
               this.session = this.toSession(session)
               return this.session
@@ -96,7 +95,8 @@ export class SessionSocketService extends SessionService {
       item['_id'],
       this.toLocalDate(item['createdAt']),
       this.toLocalDate(item['endDate']),
-      item['projectId']
+      item['projectId'],
+      item['isCurrentStateDefined']
     )
   }
 
@@ -164,5 +164,11 @@ export class SessionSocketService extends SessionService {
       .catch(function(error) {
         alert('Error al eliminar  tu proyecto')
       })
+  }
+  markCurrentStateAsDefined() {
+    this.service.patch(this.session.id, { isCurrentStateDefined: true })
+  }
+  setModeStateDefinition(modeStateDefinition) {
+    this.modeStateDefinition$.next(modeStateDefinition)
   }
 }

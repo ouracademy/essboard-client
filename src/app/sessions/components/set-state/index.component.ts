@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { AlphaTemplate } from '../detail-alpha/kernel'
+import { SessionService } from 'app/sessions/services/session.service'
 
 @Component({
   selector: 'set-state',
@@ -8,23 +9,32 @@ import { AlphaTemplate } from '../detail-alpha/kernel'
 })
 export class SetStateComponent implements OnInit {
   alphas: AlphaTemplate[]
-  selectedAlpha: AlphaTemplate = null
-  isCurrentStateDefined = false // read from backend
+  isCurrentStateDefined = false
+  canMarkStateAsDefined = false
 
-  constructor(public kernelService: KernelService) {}
+  constructor(
+    public kernelService: KernelService,
+    private sessionService: SessionService
+  ) {}
 
+  changeModeState(modeStateDefinition) {
+    this.sessionService.setModeStateDefinition(modeStateDefinition)
+  }
   defineCurrentState() {
-    this.isCurrentStateDefined = true
-    //set in backend  isCurrentStateDefined = true
+    this.canMarkStateAsDefined &&
+      this.sessionService.markCurrentStateAsDefined()
   }
 
   ngOnInit() {
+    this.sessionService.currentSession$.subscribe(
+      session => (this.isCurrentStateDefined = session.isCurrentStateDefined)
+    )
     this.kernelService.getAlphas().subscribe(alphas => {
       this.alphas = alphas
     })
   }
 
-  handleSelectionAlpha(alpha: any) {
-    this.selectedAlpha = alpha
+  handleSelectionAlpha() {
+    this.isCurrentStateDefined = true
   }
 }
