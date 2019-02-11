@@ -87,6 +87,12 @@ const format = event => {
         text: `removió su voto al checkpoint ${event.checkpoint}`,
         createdAt: event.createdAt
       }
+    case 'CURRENT_STATE_DEFINED':
+      return {
+        userId: event.from,
+        text: `marco que ya se acordo el estado actual de la sesion`,
+        createdAt: event.createdAt
+      }
   }
 
   throw new Error(`Event doesn't have a format`)
