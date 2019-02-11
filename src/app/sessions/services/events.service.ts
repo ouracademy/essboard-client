@@ -6,30 +6,12 @@ import { from } from 'rxjs'
 
 export interface DomainEvent {
   aggregatedId: string
+  type: string
   data: any
   createdAt: string
 }
 
 const unique = array => [...new Set(array)]
-
-const withUser = events =>
-  from(
-    getUsers(unique(events.map(x => x.userId))).then(({ data: users }) =>
-      events.map(event => ({
-        ...event,
-        user: users.find(user => user._id === event.userId)
-      }))
-    )
-  )
-
-const getUsers = userIds =>
-  this.socketService.getService('users').find({
-    query: {
-      _id: {
-        $in: userIds
-      }
-    }
-  })
 
 @Injectable()
 export class EventsService {
@@ -50,21 +32,37 @@ export class EventsService {
       })
       .pipe(
         map((events: DomainEvent[]) =>
-          events.map(x => ({ ...x.data, createdAt: x.createdAt }))
-        ),
-        map(events =>
           events.map(event => ({
-            ...format(event),
+            ...format(event.type, event.data),
             createdAt: event.createdAt
           }))
         ),
-        flatMap(withUser)
+        flatMap(this.withUser)
       )
   }
+
+  withUser = events =>
+    from(
+      this.getUsers(unique(events.map(x => x.userId))).then(result =>
+        events.map(event => ({
+          ...event,
+          user: result['data'].find(user => user._id === event.userId)
+        }))
+      )
+    )
+
+  getUsers = userIds =>
+    this.socketService.getService('users').find({
+      query: {
+        _id: {
+          $in: userIds
+        }
+      }
+    })
 }
 
-const format = event => {
-  switch (event.type) {
+const format = (type, event) => {
+  switch (type) {
     case 'MEMBER_INVITED':
       return {
         userId: event.userId,
@@ -91,8 +89,7 @@ const format = event => {
     case 'CURRENT_STATE_DEFINED':
       return {
         userId: event.from,
-        text: `marco que ya se acordo el estado actual de la sesion`,
-        createdAt: event.createdAt
+        text: `marco que ya se acordo el estado actual de la sesion`
       }
   }
 
