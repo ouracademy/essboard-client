@@ -10,6 +10,27 @@ export interface DomainEvent {
   createdAt: string
 }
 
+const unique = array => [...new Set(array)]
+
+const withUser = events =>
+  from(
+    getUsers(unique(events.map(x => x.userId))).then(({ data: users }) =>
+      events.map(event => ({
+        ...event,
+        user: users.find(user => user._id === event.userId)
+      }))
+    )
+  )
+
+const getUsers = userIds =>
+  this.socketService.getService('users').find({
+    query: {
+      _id: {
+        $in: userIds
+      }
+    }
+  })
+
 @Injectable()
 export class EventsService {
   constructor(public socketService: SocketService) {}
@@ -31,29 +52,13 @@ export class EventsService {
         map((events: DomainEvent[]) =>
           events.map(x => ({ ...x.data, createdAt: x.createdAt }))
         ),
-        map(events => events.map(format)),
-        flatMap(events => {
-          const userIds = [...new Set<string>(events.map(x => x.userId))]
-          return from(
-            this.socketService
-              .getService('users')
-              .find({
-                query: {
-                  _id: {
-                    $in: userIds
-                  }
-                }
-              })
-              .then(result => {
-                const users = result['data']
-
-                return events.map(x => ({
-                  ...x,
-                  user: users.find(user => user._id === x.userId)
-                }))
-              })
-          )
-        })
+        map(events =>
+          events.map(event => ({
+            ...format(event),
+            createdAt: event.createdAt
+          }))
+        ),
+        flatMap(withUser)
       )
   }
 }
@@ -66,26 +71,22 @@ const format = event => {
         text:
           event.role === 'owner'
             ? 'creo el proyecto'
-            : `fue invitado para ser ${event.role}`,
-        createdAt: event.createdAt
+            : `fue invitado para ser ${event.role}`
       }
     case 'MEMBER_REMOVED':
       return {
         userId: event.userId,
-        text: `dejo de ser miembro del equipo`,
-        createdAt: event.createdAt
+        text: `dejo de ser miembro del equipo`
       }
     case 'VOTE_EMITED':
       return {
         userId: event.from,
-        text: `voto al checkpoint ${event.checkpoint}`,
-        createdAt: event.createdAt
+        text: `voto al checkpoint ${event.checkpoint}`
       }
     case 'VOTE_REMOVED':
       return {
         userId: event.from,
-        text: `removió su voto al checkpoint ${event.checkpoint}`,
-        createdAt: event.createdAt
+        text: `removió su voto al checkpoint ${event.checkpoint}`
       }
   }
 
