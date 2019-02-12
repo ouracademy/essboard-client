@@ -8,9 +8,7 @@
           [value]="opinionOf(checkpointTemplate)"
           (change)="emitOpinion(checkpointTemplate, $event)"
         >
-          <mat-button-toggle value="achieved">
-            ha sido logrado
-          </mat-button-toggle>
+          <mat-button-toggle value="done"> ha sido logrado </mat-button-toggle>
           <mat-button-toggle value="goal"> sera una meta </mat-button-toggle>
           <mat-button-toggle value="nothing"> - </mat-button-toggle>
         </mat-button-toggle-group>
