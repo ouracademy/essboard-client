@@ -3,7 +3,7 @@ import { Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
 import { Observable, BehaviorSubject } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
-import { SessionService, ModeStateDefinition } from './session.service'
+import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
 import { StateTemplate } from '../components/detail-alpha/kernel'
 import { AlphaTemplate } from '../components/detail-alpha/kernel'
@@ -32,7 +32,6 @@ export class SessionSocketService extends SessionService {
     this.statesService = this.socketService.getService('states')
 
     this.selectedSessionId$ = new BehaviorSubject(null)
-    this.modeStateDefinition$ = new BehaviorSubject(ModeStateDefinition.Current)
     this.currentSession$ = this.selectedSessionId$.pipe(
       switchMap(sessionId =>
         this.service
@@ -95,8 +94,7 @@ export class SessionSocketService extends SessionService {
       item['_id'],
       this.toLocalDate(item['createdAt']),
       this.toLocalDate(item['endDate']),
-      item['projectId'],
-      item['isCurrentStateDefined']
+      item['projectId']
     )
   }
 
@@ -164,11 +162,5 @@ export class SessionSocketService extends SessionService {
       .catch(function(error) {
         alert('Error al eliminar  tu proyecto')
       })
-  }
-  markCurrentStateAsDefined() {
-    this.service.patch(this.session.id, { isCurrentStateDefined: true })
-  }
-  setModeStateDefinition(modeStateDefinition) {
-    this.modeStateDefinition$.next(modeStateDefinition)
   }
 }

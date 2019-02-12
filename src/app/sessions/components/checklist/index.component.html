@@ -1,6 +1,5 @@
 <div *ngIf="stateTemplate">
   <div>
-    <p class="primary text--head">{{ getMessage(modeStateDefinition) }}</p>
     <mat-card *ngFor="let checkpointTemplate of stateTemplate.checklist">
       <p class="text">{{ checkpointTemplate.description }}</p>
       <div class="row col-xs-12">

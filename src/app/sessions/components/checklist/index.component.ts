@@ -1,9 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { StateTemplate, CheckpointTemplate } from '../detail-alpha/kernel'
-import {
-  SessionService,
-  ModeStateDefinition
-} from '../../services/session.service'
+import { SessionService } from '../../services/session.service'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 import { AuthService } from '@core/auth.service'
 import { Member } from 'app/members/members.service'
@@ -20,7 +17,6 @@ export class ChecklistComponent implements OnInit {
   isReadonly: boolean
   checklist: any[] = []
   members: Member[] = []
-  modeStateDefinition = null
 
   constructor(
     private sessionService: SessionService,
@@ -29,9 +25,6 @@ export class ChecklistComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.sessionService.modeStateDefinition$.subscribe(mode => {
-      this.modeStateDefinition = mode
-    })
     this.sessionService.currentChecklist$.subscribe(
       checklist => (this.checklist = checklist)
     )
@@ -43,12 +36,6 @@ export class ChecklistComponent implements OnInit {
     this.sessionService.currentMembers$.subscribe(members => {
       this.members = members
     })
-  }
-
-  getMessage(mode) {
-    return mode === ModeStateDefinition.Current
-      ? 'Evalue si se ha cumplido lo siguiente'
-      : 'Seleccione que elementos se debe cumplir para la siguiente sesión'
   }
 
   vote(checkpointTemplate: CheckpointTemplate, $event: MatCheckboxChange) {
