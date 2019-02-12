@@ -76,15 +76,10 @@ const format = (type, event) => {
         userId: event.userId,
         text: `dejo de ser miembro del equipo`
       }
-    case 'VOTE_EMITED':
+    case 'OPINION_EMITED':
       return {
         userId: event.from,
-        text: `voto al checkpoint ${event.checkpoint}`
-      }
-    case 'VOTE_REMOVED':
-      return {
-        userId: event.from,
-        text: `removió su voto al checkpoint ${event.checkpoint}`
+        text: `voto al checkpoint ${event.for}`
       }
   }
 

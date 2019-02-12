@@ -20,7 +20,7 @@ export class VotesService {
     this.sessionService.currentSession$.subscribe(
       session => (this.session = session)
     )
-    this.service.on('created', ({ checkpoint }) => {
+    this.service.on('created', ({ for: checkpoint }) => {
       const currentAlpha = this.sessionService.currentAlpha$.getValue()
       const currentState = this.sessionService.currentState$.getValue()
 
@@ -33,10 +33,10 @@ export class VotesService {
     })
   }
 
-  voteCheckpoint(checkpointTemplate: CheckpointTemplate, vote: boolean) {
+  emitOpinion(checkpointTemplate: CheckpointTemplate, opinion: string) {
     this.socketService.getService('votes').create({
-      type: vote ? 'VOTE_EMITED' : 'VOTE_REMOVED',
-      checkpoint: checkpointTemplate.id,
+      for: checkpointTemplate.id,
+      is: opinion,
       session: this.session.id,
       project: this.session.projectId
     })

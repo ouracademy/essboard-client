@@ -10,16 +10,9 @@
   z-index: 1000;
 }
 
-
-
 mat-card {
   padding: 14px !important;
 }
-
-
-
-
-
 
 mat-list-item {
   background: white !important;
@@ -30,14 +23,10 @@ mat-list-item {
   }
 }
 
-
-
 .mat-nav-list .mat-list-item:hover,
 .mat-nav-list .mat-list-item.mat-list-item-focus {
   background: rgba(0, 0, 0, 0.04) !important;
 }
-
-
 
 .mat-tab-label-active {
   background: white;
@@ -49,19 +38,13 @@ mat-list-item {
   background: #e6e8ea;
 }
 
-
-
 textarea.mat-input-element {
   text-align: justify;
 }
 
-
-
 .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
   display: none !important;
 }
-
-
 
 .ele-select {
   .mat-input-underline {
@@ -84,18 +67,17 @@ textarea.mat-input-element {
   color: white !important;
 }
 
-.mat-button-toggle-group{
-  border:none;
+.mat-button-toggle-group {
+  border: none;
   .mat-button-toggle-checked {
     border-bottom: #5fbed0 4px solid;
   }
   mat-button-toggle:not(.mat-button-toggle-checked) {
-    .mat-button-toggle-label-content{
-      text-decoration: line-through;
+    .mat-button-toggle-label-content {
       opacity: 0.5;
     }
   }
-  mat-button-toggle{
+  mat-button-toggle {
     background: transparent !important;
   }
 }

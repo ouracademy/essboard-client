@@ -1,10 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { StateTemplate, CheckpointTemplate } from '../detail-alpha/kernel'
 import { SessionService } from '../../services/session.service'
-import { MatCheckboxChange } from '@angular/material/checkbox'
 import { AuthService } from '@core/auth.service'
 import { Member } from 'app/members/members.service'
 import { VotesService } from 'app/sessions/services/votes.service'
+import { MatButtonToggleChange } from '@angular/material'
+
+interface Checkpoint {
+  id: string
+  opinions: Opinion[]
+}
+
+interface Opinion {
+  from: string // user
+  is: string
+}
 
 @Component({
   selector: 'checklist',
@@ -15,7 +25,7 @@ export class ChecklistComponent implements OnInit {
   @Input()
   stateTemplate: StateTemplate
   isReadonly: boolean
-  checklist: any[] = []
+  checklist: Checkpoint[] = []
   members: Member[] = []
 
   constructor(
@@ -38,29 +48,28 @@ export class ChecklistComponent implements OnInit {
     })
   }
 
-  vote(checkpointTemplate: CheckpointTemplate, $event: MatCheckboxChange) {
-    this.votesService.voteCheckpoint(checkpointTemplate, $event.checked)
+  emitOpinion(
+    checkpointTemplate: CheckpointTemplate,
+    $event: MatButtonToggleChange
+  ) {
+    this.votesService.emitOpinion(checkpointTemplate, $event.value)
   }
 
-  isChecked(checkpointTemplate: CheckpointTemplate) {
-    return this.getVotesFromCheckpoint(checkpointTemplate).find(
+  opinionOf(checkpointTemplate: CheckpointTemplate) {
+    const myOpinion = this.opinionsOf(checkpointTemplate).find(
       vote => vote.from === this.authService.user.id
     )
+
+    return myOpinion ? myOpinion.is : 'nothing'
   }
 
-  voters(checkpointTemplate: CheckpointTemplate) {
-    const voters = this.getVotesFromCheckpoint(checkpointTemplate).map(
-      vote => vote.from
-    )
-    return this.getMembersInformation(voters)
+  reviewers(checkpointTemplate: CheckpointTemplate) {
+    const opinions = this.opinionsOf(checkpointTemplate)
+    return opinions.map(x => this.members.find(member => member.id === x.from))
   }
 
-  private getMembersInformation(voters) {
-    return voters.map(voter => this.members.find(member => member.id === voter))
-  }
-
-  private getVotesFromCheckpoint(template: CheckpointTemplate) {
+  private opinionsOf(template: CheckpointTemplate): Opinion[] {
     const checkpoint = this.checklist.find(x => template.id === x.id)
-    return checkpoint ? checkpoint.votes : []
+    return checkpoint ? checkpoint.opinions : []
   }
 }
