@@ -1,5 +1,5 @@
 html {
-  $font-size: 12px;
+  $font-size: 14px;
   // font-size: $font-size;
   @include for-size(phone-only) {
     font-size: $font-size !important;
