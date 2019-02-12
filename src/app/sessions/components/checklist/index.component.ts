@@ -9,6 +9,7 @@ import { MatButtonToggleChange } from '@angular/material'
 interface Checkpoint {
   id: string
   opinions: Opinion[]
+  is: string
 }
 
 interface Opinion {
@@ -27,6 +28,13 @@ export class ChecklistComponent implements OnInit {
   isReadonly: boolean
   checklist: Checkpoint[] = []
   members: Member[] = []
+
+  icons = {
+    goal: 'golf_course',
+    done: 'check_circle_outline',
+    'time-to-debate': 'priority_high',
+    nothing: 'indeterminate_check_box'
+  }
 
   constructor(
     private sessionService: SessionService,
@@ -63,13 +71,22 @@ export class ChecklistComponent implements OnInit {
     return myOpinion ? myOpinion.is : 'nothing'
   }
 
+  opinionOfTeam(template: CheckpointTemplate) {
+    const checkpoint = this.checkpointOf(template)
+    return checkpoint ? this.icons[checkpoint.is] : this.icons.nothing
+  }
+
   reviewers(checkpointTemplate: CheckpointTemplate) {
     const opinions = this.opinionsOf(checkpointTemplate)
     return opinions.map(x => this.members.find(member => member.id === x.from))
   }
 
   private opinionsOf(template: CheckpointTemplate): Opinion[] {
-    const checkpoint = this.checklist.find(x => template.id === x.id)
+    const checkpoint = this.checkpointOf(template)
     return checkpoint ? checkpoint.opinions : []
+  }
+
+  private checkpointOf(template: CheckpointTemplate) {
+    return this.checklist.find(x => template.id === x.id)
   }
 }
