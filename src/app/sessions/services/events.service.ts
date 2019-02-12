@@ -79,9 +79,13 @@ const format = (type, event) => {
     case 'OPINION_EMITED':
       return {
         userId: event.from,
-        text: `voto al checkpoint ${event.for}`
+        text:
+          event.is === 'nothing'
+            ? `prefirio no emitir una opinion sobre el check ${event.for}`
+            : `opinó que el check ${event.for} ${
+                event.is === 'goal' ? 'es una meta' : 'ha sido logrado'
+              }`
       }
   }
-
   throw new Error(`Event doesn't have a format`)
 }
