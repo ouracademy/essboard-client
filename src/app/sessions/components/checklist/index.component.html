@@ -1,33 +1,39 @@
 <div *ngIf="stateTemplate">
   <div>
     <mat-card *ngFor="let checkpointTemplate of stateTemplate.checklist">
-      <div class="row col-xs-12 between-xs">
+      <div class="row col-xs-12 between-xs middle-xs">
         <div class="row middle-xs col-xs-9">
-          <div class="col-xs-3">
+          <div class="">
             <!-- <span class="pad-1">Para mí este check</span> -->
             <mat-button-toggle-group
               [value]="opinionOf(checkpointTemplate)"
               (change)="emitOpinion(checkpointTemplate, $event)"
             >
               <mat-button-toggle value="done" matTooltip="ha sido logrado">
-                <mat-icon>{{ icons.goal }}</mat-icon>
+                <mat-icon>{{ icons.done }}</mat-icon>
               </mat-button-toggle>
               <mat-button-toggle value="goal" matTooltip="es una meta">
-                <mat-icon>{{ icons.done }}</mat-icon>
+                <mat-icon>{{ icons.goal }}</mat-icon>
               </mat-button-toggle>
               <mat-button-toggle value="nothing" matTooltip="aun no lo defino">
                 <mat-icon>{{ icons.nothing }}</mat-icon>
               </mat-button-toggle>
             </mat-button-toggle-group>
           </div>
-          <p class="col-xs-9 text">¿{{ checkpointTemplate.description }}?</p>
+          <div class="col-xs-9 text">
+            ¿{{ checkpointTemplate.description }}?
+          </div>
         </div>
 
-        <div class="row col-xs-3 ">
-          <mat-icon>people</mat-icon> :
-          <mat-icon>{{ opinionOfTeam(checkpointTemplate) }}</mat-icon>
+        <div class="row middle-xs">
+          <mat-icon>people</mat-icon> 
+          <mat-icon>trending_flat</mat-icon>
+          <div class="border">
+            <mat-icon class="centered">{{ opinionOfTeam(checkpointTemplate) }}</mat-icon>
+          </div>
+        </div>
 
-          <!-- <div class="reviewers row center-xs middle-xs">
+        <!-- <div class="reviewers row center-xs middle-xs">
           <app-our-avatar
             class="pad-0-3"
             size="20"
@@ -35,7 +41,6 @@
             [user]="reviewer"
           ></app-our-avatar>
         </div> -->
-        </div>
       </div>
     </mat-card>
   </div>

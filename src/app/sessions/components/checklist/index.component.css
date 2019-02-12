@@ -6,3 +6,12 @@
   flex-wrap: wrap;
   width: 10vw;
 }
+.border{
+  position: relative;
+  height: 40px;
+  width: 40px;
+  margin-left: 5px;
+  border: 1px solid #887e7e;
+}
+
+
