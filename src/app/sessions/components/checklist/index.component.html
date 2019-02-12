@@ -1,25 +1,40 @@
 <div *ngIf="stateTemplate">
   <div>
     <mat-card *ngFor="let checkpointTemplate of stateTemplate.checklist">
-      <p class="text">{{ checkpointTemplate.description }}</p>
-      <div class="row col-xs-12 middle-xs">
-        <span class="pad-1">Para mi este check</span>
-        <mat-button-toggle-group
-          [value]="opinionOf(checkpointTemplate)"
-          (change)="emitOpinion(checkpointTemplate, $event)"
-        >
-          <mat-button-toggle value="done"> ha sido logrado </mat-button-toggle>
-          <mat-button-toggle value="goal"> sera una meta </mat-button-toggle>
-          <mat-button-toggle value="nothing"> - </mat-button-toggle>
-        </mat-button-toggle-group>
+      <div class="row col-xs-12 between-xs">
+        <div class="row middle-xs col-xs-9">
+          <div class="col-xs-3">
+            <!-- <span class="pad-1">Para mí este check</span> -->
+            <mat-button-toggle-group
+              [value]="opinionOf(checkpointTemplate)"
+              (change)="emitOpinion(checkpointTemplate, $event)"
+            >
+              <mat-button-toggle value="done" matTooltip="ha sido logrado">
+                <mat-icon>{{ icons.goal }}</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle value="goal" matTooltip="es una meta">
+                <mat-icon>{{ icons.done }}</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle value="nothing" matTooltip="aun no lo defino">
+                <mat-icon>{{ icons.nothing }}</mat-icon>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+          <p class="col-xs-9 text">¿{{ checkpointTemplate.description }}?</p>
+        </div>
 
-        <div class="reviewers row center-xs middle-xs">
+        <div class="row col-xs-3 ">
+          <mat-icon>people</mat-icon> :
+          <mat-icon>{{ opinionOfTeam(checkpointTemplate) }}</mat-icon>
+
+          <!-- <div class="reviewers row center-xs middle-xs">
           <app-our-avatar
             class="pad-0-3"
             size="20"
             *ngFor="let reviewer of reviewers(checkpointTemplate)"
             [user]="reviewer"
           ></app-our-avatar>
+        </div> -->
         </div>
       </div>
     </mat-card>

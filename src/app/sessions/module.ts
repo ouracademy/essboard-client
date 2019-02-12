@@ -13,7 +13,8 @@ import {
   MatTabsModule,
   MatButtonToggleModule,
   MatListModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatTooltipModule
 } from '@angular/material'
 import { ContextMenuModule } from 'ngx-contextmenu'
 
@@ -56,6 +57,7 @@ import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
     MatInputModule,
     MatRadioModule,
     MatIconModule,
+    MatTooltipModule,
     MatToolbarModule,
     MatCheckboxModule,
     MatTabsModule,
