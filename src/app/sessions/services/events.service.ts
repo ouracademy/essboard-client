@@ -46,7 +46,10 @@ export class EventsService {
       this.getUsers(unique(events.map(x => x.userId))).then(result =>
         events.map(event => ({
           ...event,
-          user: result['data'].find(user => user._id === event.userId)
+          user:
+            'userId' in event
+              ? result['data'].find(user => user._id === event.userId)
+              : { name: 'Essboard' }
         }))
       )
     )
@@ -85,6 +88,15 @@ const format = (type, event) => {
             : `opinó que el check ${event.for} ${
                 event.is === 'goal' ? 'es una meta' : 'ha sido logrado'
               }`
+      }
+    case 'EVALUATION_STARTED':
+      return {
+        userId: event.from,
+        text: `inicio la evaluación que durara ${event.duration}ms`
+      }
+    case 'EVALUATION_FINISHED':
+      return {
+        text: ` acabo la evaluación`
       }
   }
   throw new Error(`Event doesn't have a format`)
