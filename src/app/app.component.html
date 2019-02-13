@@ -1,4 +1,4 @@
 <main class="mat-typography"><router-outlet></router-outlet></main>
-<p class="error-bar" *ngIf="!(sharedService.networkStatus | async)">
-  Ups, no tienes conexión
+<p class="toast {{ contentToast.type }}" *ngIf="contentToast">
+  {{ contentToast.message }}
 </p>
