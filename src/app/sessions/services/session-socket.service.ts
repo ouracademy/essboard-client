@@ -94,7 +94,8 @@ export class SessionSocketService extends SessionService {
       item['_id'],
       this.toLocalDate(item['createdAt']),
       this.toLocalDate(item['endDate']),
-      item['projectId']
+      item['projectId'],
+      item['timeEvaluating']
     )
   }
 
@@ -162,5 +163,14 @@ export class SessionSocketService extends SessionService {
       .catch(function(error) {
         alert('Error al eliminar  tu proyecto')
       })
+  }
+
+  startEvaluation() {
+    this.socketService
+      .getService('evaluations')
+      .create({ sessionId: this.session.id })
+  }
+  stopEvaluation() {
+    this.socketService.getService('evaluations').remove(this.session.id)
   }
 }
