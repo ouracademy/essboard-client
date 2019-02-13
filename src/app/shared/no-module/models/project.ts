@@ -62,8 +62,7 @@ export class Session {
     public id: string,
     public createdAt: Date,
     public endDate: Date,
-    public projectId: string,
-    public timeEvaluating: boolean
+    public projectId: string
   ) {}
 
   public get hasFinished(): boolean {

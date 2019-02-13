@@ -94,8 +94,7 @@ export class SessionSocketService extends SessionService {
       item['_id'],
       this.toLocalDate(item['createdAt']),
       this.toLocalDate(item['endDate']),
-      item['projectId'],
-      item['timeEvaluating']
+      item['projectId']
     )
   }
 
@@ -168,9 +167,9 @@ export class SessionSocketService extends SessionService {
   startEvaluation() {
     this.socketService
       .getService('evaluations')
-      .create({ sessionId: this.session.id })
+      .create({ projectId: this.session.projectId })
   }
   stopEvaluation() {
-    this.socketService.getService('evaluations').remove(this.session.id)
+    this.socketService.getService('evaluations').remove(this.session.projectId)
   }
 }

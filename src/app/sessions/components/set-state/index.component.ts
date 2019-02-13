@@ -21,9 +21,9 @@ export class SetStateComponent implements OnInit {
       this.alphas = alphas
     })
 
-    this.sessionService.currentSession$.subscribe(({ timeEvaluating }) => {
-      this.timeEvaluating = timeEvaluating
-    })
+    // this.sessionService.currentSession$.subscribe(({ timeEvaluating }) => {
+    //   this.timeEvaluating = timeEvaluating
+    // })
   }
   startEvaluation() {
     this.sessionService.startEvaluation()
