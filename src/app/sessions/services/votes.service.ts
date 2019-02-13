@@ -34,7 +34,7 @@ export class VotesService {
   }
 
   emitOpinion(checkpointTemplate: CheckpointTemplate, opinion: string) {
-    this.socketService.getService('votes').create({
+    this.service.create({
       for: checkpointTemplate.id,
       is: opinion,
       session: this.session.id,
