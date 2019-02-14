@@ -6,29 +6,46 @@ import {
   AlphaTemplate,
   StateTemplate
 } from '../components/detail-alpha/kernel'
+import { EvaluationService } from './evaluation.service'
+import { Subject, combineLatest } from 'rxjs'
 
 @Injectable()
 export class VotesService {
   session: any
   service: any
+  onCreated$: Subject<any>
 
   constructor(
     public socketService: SocketService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private evaluationService: EvaluationService
   ) {
     this.service = this.socketService.getService('votes')
     this.sessionService.currentSession$.subscribe(
       session => (this.session = session)
     )
-    this.service.on('created', ({ for: checkpoint }) => {
-      const currentAlpha = this.sessionService.currentAlpha$.getValue()
-      const currentState = this.sessionService.currentState$.getValue()
 
-      if (this.canGetAlpha(currentAlpha, checkpoint)) {
+    this.onCreated$ = new Subject<any>()
+
+    this.service.on('created', ({ for: checkpoint }) => {
+      console.log('oncreated')
+      this.onCreated$.next(checkpoint)
+    })
+
+    combineLatest(
+      this.evaluationService.getEvalutionStatus(),
+      this.onCreated$
+    ).subscribe(([status, checkpoint]) => {
+      if (!status.isEvaluating) {
+        const currentAlpha = this.sessionService.currentAlpha$.getValue()
+        const currentState = this.sessionService.currentState$.getValue()
+
         this.sessionService.selectedAlpha = currentAlpha
-      }
-      if (this.canGetState(currentState, checkpoint)) {
-        this.sessionService.selectedState = currentState
+        if (this.canGetAlpha(currentAlpha, checkpoint)) {
+        }
+        if (this.canGetState(currentState, checkpoint)) {
+          this.sessionService.selectedState = currentState
+        }
       }
     })
   }
