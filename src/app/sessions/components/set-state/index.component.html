@@ -15,14 +15,12 @@
       <div class="text">{{ alpha.name }}</div>
     </div>
   </div>
-  <div *ngIf="canStartEval">
-    <button *ngIf="!isEvaluating" (click)="startEvaluation()">
-      Iniciar evaluación
-    </button>
-    <button *ngIf="isEvaluating" (click)="stopEvaluation()">
-      Dejar de evaluar
-    </button>
-  </div>
+  <button *ngIf="!isEvaluating" (click)="startEvaluation()">
+    Iniciar evaluación
+  </button>
+  <button *ngIf="isEvaluating" (click)="stopEvaluation()">
+    Dejar de evaluar
+  </button>
 
   <div class="pad-1"><router-outlet></router-outlet></div>
 </div>

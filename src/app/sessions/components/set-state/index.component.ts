@@ -12,8 +12,6 @@ export class SetStateComponent implements OnInit {
   alphas: AlphaTemplate[]
   isEvaluating = false
 
-  canStartEval = true
-
   constructor(
     public kernelService: KernelService,
     public sharedService: SharedService,
