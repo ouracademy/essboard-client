@@ -21,6 +21,9 @@ import { SharedService } from '@core/shared.service'
       .success {
         background-color: green;
       }
+      .info {
+        background-color: blue;
+      }
       .error {
         background-color: red;
       }
