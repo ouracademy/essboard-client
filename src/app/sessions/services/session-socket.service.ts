@@ -117,7 +117,7 @@ export class SessionSocketService extends SessionService {
   }
 
   private getAlpha(alphaId: string): Promise<any> {
-    return this.socketService.getService('states').find({
+    return this.statesService.find({
       query: {
         date: this.sessionDate(),
         project: this.session.projectId,

@@ -1,34 +1,38 @@
 import { Injectable } from '@angular/core'
 import { SocketService } from '@core/socket.service'
 import { SessionService } from './session.service'
-import { map, flatMap } from 'rxjs/operators'
-import { of, Subject } from 'rxjs'
+import { Observable } from 'rxjs'
+import { Session } from '@shared/no-module/models/project'
+
+interface Status {
+  isEvaluating: boolean
+}
 
 @Injectable()
 export class EvaluationService {
   service: any
-  evaluationStatus: Subject<boolean>
+  session: Session
 
   constructor(
     private socketService: SocketService,
     private sessionService: SessionService
   ) {
     this.service = this.socketService.getService('evaluations')
-    this.evaluationStatus = new Subject<boolean>()
 
-    this.service.on('created', data => this.evaluationStatus.next(true))
-    this.service.on('removed', data => this.evaluationStatus.next(false))
+    this.sessionService.currentSession$.subscribe(
+      session => (this.session = session)
+    )
+  }
+
+  getEvalutionStatus(): Observable<Status> {
+    return this.service.watch().get(this.session.projectId)
   }
 
   startNewOne() {
-    this.sessionService.currentSession$.subscribe(session => {
-      this.service.create({ projectId: session.projectId })
-    })
+    this.service.create({ projectId: this.session.projectId })
   }
 
   stop() {
-    this.sessionService.currentSession$.toPromise().then(session => {
-      this.socketService.getService('evaluations').remove(session.projectId)
-    })
+    this.service.patch(this.session.projectId, { evaluate: false })
   }
 }

@@ -23,15 +23,15 @@ export class SetStateComponent implements OnInit {
       this.alphas = alphas
     })
 
-    this.evaluations.evaluationStatus.subscribe(isEvaluating => {
-      const content = isEvaluating
+    this.evaluations.getEvalutionStatus().subscribe(status => {
+      const content = status.isEvaluating
         ? {
             type: 'info',
             message: 'Estas en plena evaluación'
           }
         : null
       this.sharedService.showToast(content)
-      this.isEvaluating = isEvaluating
+      this.isEvaluating = status.isEvaluating
     })
   }
   startEvaluation() {
