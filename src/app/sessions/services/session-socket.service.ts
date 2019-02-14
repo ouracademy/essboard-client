@@ -13,7 +13,6 @@ import { MembersService } from 'app/members/members.service'
 @Injectable()
 export class SessionSocketService extends SessionService {
   service: any
-  statesService
   selectedSessionId$: BehaviorSubject<string>
   session: Session
 
@@ -29,7 +28,6 @@ export class SessionSocketService extends SessionService {
     this.currentChecklist$ = new BehaviorSubject([])
 
     this.service = this.socketService.getService('sessions')
-    this.statesService = this.socketService.getService('states')
 
     this.selectedSessionId$ = new BehaviorSubject(null)
     this.currentSession$ = this.selectedSessionId$.pipe(
@@ -117,10 +115,9 @@ export class SessionSocketService extends SessionService {
   }
 
   private getAlpha(alphaId: string): Promise<any> {
-    return this.statesService.find({
+    return this.socketService.getService('session-status').find({
       query: {
-        date: this.sessionDate(),
-        project: this.session.projectId,
+        sessionId: this.session.id,
         alpha: alphaId
       }
     })
@@ -139,18 +136,13 @@ export class SessionSocketService extends SessionService {
 
   private getChecklist() {
     const state = this.currentState$.getValue()
-    return this.statesService.find({
+    return this.socketService.getService('session-status').find({
       query: {
-        date: this.sessionDate(),
-        project: this.session.projectId,
+        sessionId: this.session.id,
         state: state.id,
         asCheckpoints: true
       }
     })
-  }
-
-  private sessionDate() {
-    return this.session.endDate ? this.session.endDate : new Date()
   }
 
   delete(id) {
