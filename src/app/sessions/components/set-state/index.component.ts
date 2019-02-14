@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { AlphaTemplate } from '../detail-alpha/kernel'
-import { SessionService } from 'app/sessions/services/session.service'
+import { EvaluationService } from 'app/sessions/services/evaluation.service'
+import { SharedService } from '@core/shared.service'
 
 @Component({
   selector: 'set-state',
@@ -9,11 +10,14 @@ import { SessionService } from 'app/sessions/services/session.service'
 })
 export class SetStateComponent implements OnInit {
   alphas: AlphaTemplate[]
-  timeEvaluating = false
-  canStartEval = false
+  isEvaluating = false
+
+  canStartEval = true
+
   constructor(
     public kernelService: KernelService,
-    public sessionService: SessionService
+    public sharedService: SharedService,
+    public evaluations: EvaluationService
   ) {}
 
   ngOnInit() {
@@ -21,14 +25,21 @@ export class SetStateComponent implements OnInit {
       this.alphas = alphas
     })
 
-    // this.sessionService.currentSession$.subscribe(({ timeEvaluating }) => {
-    //   this.timeEvaluating = timeEvaluating
-    // })
+    this.evaluations.evaluationStatus.subscribe(isEvaluating => {
+      const content = isEvaluating
+        ? {
+            type: 'info',
+            message: 'Estas en plena evaluación'
+          }
+        : null
+      this.sharedService.showToast(content)
+      this.isEvaluating = isEvaluating
+    })
   }
   startEvaluation() {
-    this.sessionService.startEvaluation()
+    this.evaluations.startNewOne()
   }
   stopEvaluation() {
-    this.sessionService.stopEvaluation()
+    this.evaluations.stop()
   }
 }

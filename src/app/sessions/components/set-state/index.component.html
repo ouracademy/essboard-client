@@ -16,13 +16,12 @@
     </div>
   </div>
   <div *ngIf="canStartEval">
-    <button *ngIf="!timeEvaluating" (click)="startEvaluation()">
+    <button *ngIf="!isEvaluating" (click)="startEvaluation()">
       Iniciar evaluación
     </button>
-    <button *ngIf="timeEvaluating" (click)="stopEvaluation()">
+    <button *ngIf="isEvaluating" (click)="stopEvaluation()">
       Dejar de evaluar
     </button>
-    <div *ngIf="timeEvaluating">Estas en plena evaluacion</div>
   </div>
 
   <div class="pad-1"><router-outlet></router-outlet></div>
