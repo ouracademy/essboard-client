@@ -26,7 +26,4 @@ export abstract class SessionService implements CanLeaveChannel {
   abstract finish()
 
   abstract leaveChannel()
-
-  abstract startEvaluation()
-  abstract stopEvaluation()
 }

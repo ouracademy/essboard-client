@@ -163,13 +163,4 @@ export class SessionSocketService extends SessionService {
         alert('Error al eliminar  tu proyecto')
       })
   }
-
-  startEvaluation() {
-    this.socketService
-      .getService('evaluations')
-      .create({ projectId: this.session.projectId })
-  }
-  stopEvaluation() {
-    this.socketService.getService('evaluations').remove(this.session.projectId)
-  }
 }
