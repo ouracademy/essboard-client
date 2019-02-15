@@ -1,19 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { StateTemplate, CheckpointTemplate } from '../detail-alpha/kernel'
 import { SessionService } from '../../services/session.service'
-import { AuthService } from '@core/auth.service'
 import { Member } from 'app/members/members.service'
-import { VotesService } from 'app/sessions/services/votes.service'
+import { VotesService, Opinion } from 'app/sessions/services/votes.service'
 import { MatButtonToggleChange } from '@angular/material'
 
 interface Checkpoint {
   id: string
   opinions: Opinion[]
-  is: string
-}
-
-interface Opinion {
-  from: string // user
   is: string
 }
 
@@ -28,6 +22,7 @@ export class ChecklistComponent implements OnInit {
   isReadonly: boolean
   checklist: Checkpoint[] = []
   members: Member[] = []
+  myOpinions: Opinion[] = []
 
   icons = {
     goal: 'golf_course',
@@ -38,8 +33,7 @@ export class ChecklistComponent implements OnInit {
 
   constructor(
     private sessionService: SessionService,
-    private votesService: VotesService,
-    private authService: AuthService
+    private votesService: VotesService
   ) {}
 
   ngOnInit() {
@@ -54,6 +48,10 @@ export class ChecklistComponent implements OnInit {
     this.sessionService.currentMembers$.subscribe(members => {
       this.members = members
     })
+
+    this.votesService.opinions(this.stateTemplate).then(opinions => {
+      this.myOpinions = opinions
+    })
   }
 
   emitOpinion(
@@ -64,10 +62,7 @@ export class ChecklistComponent implements OnInit {
   }
 
   opinionOf(checkpointTemplate: CheckpointTemplate) {
-    const myOpinion = this.opinionsOf(checkpointTemplate).find(
-      vote => vote.from === this.authService.user.id
-    )
-
+    const myOpinion = this.myOpinions.find(x => checkpointTemplate.id === x.for)
     return myOpinion ? myOpinion.is : 'nothing'
   }
 

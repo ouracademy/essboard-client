@@ -8,17 +8,26 @@ import {
 } from '../components/detail-alpha/kernel'
 import { EvaluationService } from './evaluation.service'
 import { Subject, combineLatest } from 'rxjs'
+import { Session } from '@shared/no-module/models/project'
+import { AuthService } from '@core/auth.service'
+
+export interface Opinion {
+  from: string // user
+  for: string // checkpoint
+  is: string
+}
 
 @Injectable()
 export class VotesService {
-  session: any
+  session: Session
   service: any
   onCreated$: Subject<any>
 
   constructor(
-    public socketService: SocketService,
+    private socketService: SocketService,
     private sessionService: SessionService,
-    private evaluationService: EvaluationService
+    private evaluationService: EvaluationService,
+    private auth: AuthService
   ) {
     this.service = this.socketService.getService('votes')
     this.sessionService.currentSession$.subscribe(
@@ -74,5 +83,21 @@ export class VotesService {
 
   private getStateFrom(checkpoint: string): number {
     return parseInt(checkpoint.split('-')[0], 10)
+  }
+
+  opinions(state: StateTemplate): Promise<Opinion[]> {
+    return this.service
+      .find({
+        query: {
+          project: this.session.projectId,
+          createdAt: {
+            $lte: this.session.hasFinished ? this.session.endDate : new Date()
+          },
+          from: this.auth.user.id
+        }
+      })
+      .then((opinions: Opinion[]) =>
+        opinions.filter(x => this.getStateFrom(x.for) === +state.id)
+      )
   }
 }
