@@ -46,10 +46,7 @@ export class EventsService {
       this.getUsers(unique(events.map(x => x.userId))).then(result =>
         events.map(event => ({
           ...event,
-          user:
-            'userId' in event
-              ? result['data'].find(user => user._id === event.userId)
-              : { name: 'Essboard' }
+          user: result['data'].find(user => user._id === event.userId)
         }))
       )
     )
@@ -96,6 +93,7 @@ const format = (type, event) => {
       }
     case 'EVALUATION_FINISHED':
       return {
+        userId: event.from,
         text: ` acabo la evaluación`
       }
   }
