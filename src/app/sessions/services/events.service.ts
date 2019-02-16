@@ -33,7 +33,8 @@ export class EventsService {
       .pipe(
         map((events: DomainEvent[]) =>
           events.map(event => ({
-            ...format(event.type, event.data),
+            userId: event.data.from,
+            text: format(event),
             createdAt: event.createdAt
           }))
         ),
@@ -61,43 +62,26 @@ export class EventsService {
     })
 }
 
-const format = (type, event) => {
-  switch (type) {
+const format = event => {
+  const { data } = event
+  switch (event.type) {
     case 'PROJECT_CREATED':
-      return {
-        userId: event.from,
-        text: 'creo el proyecto'
-      }
+      return 'creo el proyecto'
     case 'MEMBER_INVITED':
-      return {
-        userId: event.userId,
-        text: `fue invitado para ser ${event.role}`
-      }
+      return `invitó a XYZ a ser ${data.role}`
     case 'MEMBER_REMOVED':
-      return {
-        userId: event.userId,
-        text: `dejo de ser miembro del equipo`
-      }
+      return `dejo de ser miembro del equipo`
     case 'OPINION_EMITED':
-      return {
-        userId: event.from,
-        text:
-          event.is === 'nothing'
-            ? `prefirio no emitir una opinion sobre el check ${event.for}`
-            : `opinó que el check ${event.for} ${
-                event.is === 'goal' ? 'es una meta' : 'ha sido logrado'
-              }`
-      }
+      return data.is === 'nothing'
+        ? `prefirio no emitir una opinion sobre el check ${data.for}`
+        : `opinó que el check ${data.for} ${
+            data.is === 'goal' ? 'es una meta' : 'ha sido logrado'
+          }`
     case 'EVALUATION_STARTED':
-      return {
-        userId: event.from,
-        text: `inicio la evaluación que durara ${event.duration}ms`
-      }
+      return `inicio la evaluación que durara ${data.duration}ms`
+
     case 'EVALUATION_FINISHED':
-      return {
-        userId: event.from,
-        text: ` acabo la evaluación`
-      }
+      return ` acabo la evaluación`
   }
   throw new Error(`Event doesn't have a format`)
 }
