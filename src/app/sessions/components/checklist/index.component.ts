@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, OnChanges } from '@angular/core'
 import { StateTemplate, CheckpointTemplate } from '../detail-alpha/kernel'
 import { SessionService } from '../../services/session.service'
 import { Member } from 'app/members/members.service'
@@ -16,7 +16,7 @@ interface Checkpoint {
   templateUrl: 'index.component.html',
   styleUrls: ['index.component.css']
 })
-export class ChecklistComponent implements OnInit {
+export class ChecklistComponent implements OnInit, OnChanges {
   @Input()
   stateTemplate: StateTemplate
   isReadonly: boolean
@@ -48,7 +48,8 @@ export class ChecklistComponent implements OnInit {
     this.sessionService.currentMembers$.subscribe(members => {
       this.members = members
     })
-
+  }
+  ngOnChanges() {
     this.votesService.opinions(this.stateTemplate).then(opinions => {
       this.myOpinions = opinions
     })
