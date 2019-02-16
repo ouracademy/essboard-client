@@ -3,7 +3,12 @@ import { StateTemplate, CheckpointTemplate } from '../detail-alpha/kernel'
 import { SessionService } from '../../services/session.service'
 import { Member } from 'app/members/members.service'
 import { VotesService, Opinion } from 'app/sessions/services/votes.service'
-import { MatButtonToggleChange } from '@angular/material'
+import {
+  MatButtonToggleChange,
+  MatDialog,
+  MatDialogRef
+} from '@angular/material'
+import { CheckDetailComponent } from '../check-detail/index.component'
 
 interface Checkpoint {
   id: string
@@ -24,6 +29,11 @@ export class ChecklistComponent implements OnInit, OnChanges {
   members: Member[] = []
   myOpinions: Opinion[] = []
 
+  currentCheckDialog: {
+    ref: MatDialogRef<CheckDetailComponent>
+    template: CheckpointTemplate
+  } = null
+
   icons = {
     goal: 'golf_course',
     done: 'check_circle_outline',
@@ -33,13 +43,19 @@ export class ChecklistComponent implements OnInit, OnChanges {
 
   constructor(
     private sessionService: SessionService,
-    private votesService: VotesService
+    private votesService: VotesService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.sessionService.currentChecklist$.subscribe(
-      checklist => (this.checklist = checklist)
-    )
+    this.sessionService.currentChecklist$.subscribe(checklist => {
+      this.checklist = checklist
+      if (this.currentCheckDialog) {
+        this.currentCheckDialog.ref.componentInstance.updateReviewers(
+          this.reviewers(this.currentCheckDialog.template)
+        )
+      }
+    })
 
     this.sessionService.currentSession$.subscribe(
       session => (this.isReadonly = session.hasFinished)
@@ -74,7 +90,10 @@ export class ChecklistComponent implements OnInit, OnChanges {
 
   reviewers(checkpointTemplate: CheckpointTemplate) {
     const opinions = this.opinionsOf(checkpointTemplate)
-    return opinions.map(x => this.members.find(member => member.id === x.from))
+    return opinions.map(x => ({
+      user: this.members.find(member => member.id === x.from),
+      opinion: x.is
+    }))
   }
 
   private opinionsOf(template: CheckpointTemplate): Opinion[] {
@@ -84,5 +103,23 @@ export class ChecklistComponent implements OnInit, OnChanges {
 
   private checkpointOf(template: CheckpointTemplate) {
     return this.checklist.find(x => template.id === x.id)
+  }
+
+  seeDetail(template: CheckpointTemplate) {
+    this.currentCheckDialog = {
+      template: template,
+      ref: this.dialog.open(CheckDetailComponent, {
+        width: '50vw',
+        data: {
+          template: template,
+          myOpinion: this.opinionOf(template),
+          reviewers: this.reviewers(template)
+        }
+      })
+    }
+
+    this.currentCheckDialog.ref.afterClosed().subscribe(result => {
+      this.currentCheckDialog = null
+    })
   }
 }

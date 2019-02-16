@@ -1,0 +1,28 @@
+<h1 mat-dialog-title class="primary">{{ checkpointTemplate.description }}</h1>
+<div mat-dialog-content>
+  <div>
+    <div
+      *ngFor="let reviewer of reviewers"
+      class="reviewers row center-xs middle-xs"
+    >
+      <app-our-avatar
+        class="pad-0-3"
+        size="30"
+        [user]="reviewer.user"
+      ></app-our-avatar>
+      <mat-icon>trending_flat</mat-icon>
+      <mat-icon>{{ icons[reviewer.opinion] }}</mat-icon>
+    </div>
+    <mat-list>
+      <h3 mat-subheader>Comentarios</h3>
+
+      <mat-list-item *ngFor="let comment of comments">
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <p mat-line>{{ comment.says }}</p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
+</div>

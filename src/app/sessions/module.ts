@@ -14,7 +14,8 @@ import {
   MatButtonToggleModule,
   MatListModule,
   MatSidenavModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatDialogModule
 } from '@angular/material'
 import { ContextMenuModule } from 'ngx-contextmenu'
 
@@ -43,6 +44,7 @@ import { ChatComponent } from './components/chat/index.component'
 import { OnlineUsersComponent } from './components/online-users/index.components'
 import { OurAvatarModule } from '@shared/avatar/index.module'
 import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
+import { CheckDetailComponent } from './components/check-detail/index.component'
 
 @NgModule({
   imports: [
@@ -64,6 +66,7 @@ import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
     MatButtonToggleModule,
     MatListModule,
     MatSidenavModule,
+    MatDialogModule,
     OurAvatarModule,
     PreventOfflineModule,
     RoutingModule
@@ -77,10 +80,11 @@ import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
     ChecklistComponent,
     ActionsByGoalComponent,
     ChatComponent,
-    OnlineUsersComponent
+    OnlineUsersComponent,
+    CheckDetailComponent
   ],
 
-  entryComponents: [],
+  entryComponents: [CheckDetailComponent],
   providers: [],
   exports: []
 })

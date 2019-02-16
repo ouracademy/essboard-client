@@ -20,8 +20,11 @@
               </mat-button-toggle>
             </mat-button-toggle-group>
           </div>
-          <div class="col-xs-9 text">
+          <div class="row col-xs-9 text between-xs">
             ¿{{ checkpointTemplate.description }}?
+            <div (click)="seeDetail(checkpointTemplate)">
+              <mat-icon>fullscreen</mat-icon>
+            </div>
           </div>
         </div>
 
@@ -34,15 +37,6 @@
             }}</mat-icon>
           </div>
         </div>
-
-        <!-- <div class="reviewers row center-xs middle-xs">
-          <app-our-avatar
-            class="pad-0-3"
-            size="20"
-            *ngFor="let reviewer of reviewers(checkpointTemplate)"
-            [user]="reviewer"
-          ></app-our-avatar>
-        </div> -->
       </div>
     </mat-card>
   </div>
