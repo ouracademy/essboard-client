@@ -63,13 +63,15 @@ export class EventsService {
 
 const format = (type, event) => {
   switch (type) {
+    case 'PROJECT_CREATED':
+      return {
+        userId: event.from,
+        text: 'creo el proyecto'
+      }
     case 'MEMBER_INVITED':
       return {
         userId: event.userId,
-        text:
-          event.role === 'owner'
-            ? 'creo el proyecto'
-            : `fue invitado para ser ${event.role}`
+        text: `fue invitado para ser ${event.role}`
       }
     case 'MEMBER_REMOVED':
       return {
