@@ -14,4 +14,12 @@
   border: 1px solid #887e7e;
 }
 
-
+.description{
+  background: #f2f3f5;
+  border-radius: 10px;
+  padding:10px;
+  cursor: pointer;
+  &:hover{
+    background: #f2f3ff;
+  }
+}

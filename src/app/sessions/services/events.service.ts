@@ -94,7 +94,7 @@ const format = (type, event) => {
     case 'EVALUATION_FINISHED':
       return {
         userId: event.from,
-        text: ` acabo la evaluación`
+        text: `acabo la evaluación`
       }
   }
   throw new Error(`Event doesn't have a format`)

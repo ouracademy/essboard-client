@@ -45,6 +45,10 @@ export class SessionSocketService extends SessionService {
           )
       )
     )
+
+    this.socketService.getService('comments').on('created', data => {
+      console.log(data)
+    })
   }
 
   getSessions(projectId: string) {
@@ -154,5 +158,35 @@ export class SessionSocketService extends SessionService {
       .catch(function(error) {
         alert('Error al eliminar  tu proyecto')
       })
+  }
+  saveComment({ text, checkpoint }) {
+    console.log({ checkpoint, project: this.session.projectId })
+    this.socketService.getService('comments').create({
+      text,
+      checkpoint,
+      project: this.session.projectId
+    })
+  }
+  getComments(checkpoint): Observable<any> {
+    return this.socketService
+      .getService('comments')
+      .watch()
+      .find({
+        query: {
+          project: this.session.projectId,
+          checkpoint,
+          $sort: {
+            createdAt: -1
+          }
+        }
+      })
+  }
+  updateComment(commentId, text) {
+    this.socketService.getService('comments').patch(commentId, {
+      text: text
+    })
+  }
+  deleteComment(comment) {
+    this.socketService.getService('comments').remove(comment._id)
   }
 }

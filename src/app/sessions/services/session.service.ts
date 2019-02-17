@@ -26,4 +26,9 @@ export abstract class SessionService implements CanLeaveChannel {
   abstract finish()
 
   abstract leaveChannel()
+
+  abstract saveComment({ text, checkpoint })
+  abstract getComments(checkpoint): Observable<any>
+  abstract updateComment(comment, text)
+  abstract deleteComment(comment)
 }

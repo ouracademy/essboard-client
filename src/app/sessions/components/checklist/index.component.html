@@ -20,11 +20,11 @@
               </mat-button-toggle>
             </mat-button-toggle-group>
           </div>
-          <div class="row col-xs-9 text between-xs">
-            ¿{{ checkpointTemplate.description }}?
-            <div (click)="seeDetail(checkpointTemplate)">
-              <mat-icon>fullscreen</mat-icon>
-            </div>
+          <div
+            class="row col-xs-12 text  description"
+            (click)="seeDetail(checkpointTemplate)"
+          >
+            {{ checkpointTemplate.description }}
           </div>
         </div>
 

@@ -19,7 +19,7 @@ interface Checkpoint {
 @Component({
   selector: 'checklist',
   templateUrl: 'index.component.html',
-  styleUrls: ['index.component.css']
+  styleUrls: ['index.component.scss']
 })
 export class ChecklistComponent implements OnInit, OnChanges {
   @Input()
@@ -111,6 +111,7 @@ export class ChecklistComponent implements OnInit, OnChanges {
       ref: this.dialog.open(CheckDetailComponent, {
         width: '50vw',
         data: {
+          members: this.members,
           template: template,
           myOpinion: this.opinionOf(template),
           reviewers: this.reviewers(template)
