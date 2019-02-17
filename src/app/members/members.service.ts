@@ -34,7 +34,7 @@ export class MembersService {
     return this.service.create({
       type: 'MEMBER_INVITED',
       projectId,
-      userId: aUser.id,
+      to: aUser.id,
       role: 'collaborator'
     })
   }
@@ -43,7 +43,7 @@ export class MembersService {
     return this.service.create({
       type: 'MEMBER_REMOVED',
       projectId,
-      userId: aMember.id
+      to: aMember.id
     })
   }
 }
