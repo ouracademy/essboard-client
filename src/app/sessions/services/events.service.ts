@@ -8,6 +8,7 @@ export interface DomainEvent {
   aggregatedId: string
   type: string
   data: any
+  from: string
   createdAt: string
 }
 
@@ -44,14 +45,14 @@ export class EventsService {
   async format(events: DomainEvent[]) {
     return await Promise.all(
       events.map(async event => ({
-        user: await this.getUser(event.data.from),
+        user: await this.getUser(event.from),
         text: await this.getText(event),
         createdAt: event.createdAt
       }))
     )
   }
 
-  async getText(event) {
+  async getText(event: DomainEvent) {
     const { data } = event
     switch (event.type) {
       case 'PROJECT_CREATED':
