@@ -1,10 +1,15 @@
-<div class="chat corner-rb">
-  <div class="header" (click)="showWindow()">
-    <div>Conversacion</div>
-  </div>
-  <div *ngIf="show" class="chat-content">
-    <div class="content-list pad-1" #scrollMe [scrollTop]="scrollHeight" (scroll)="onScroll($event)">
-      <p class="align-center" *ngIf="!canPaginate">----Inicio de la conversación----</p>
+<div class="chat container-column">
+  <div class="chat-header" (click)="showWindow()"><div>Conversacion</div></div>
+  <div *ngIf="show" class="chat-content container-column container-complement">
+    <div
+      class="content-list pad-1"
+      #scrollMe
+      [scrollTop]="scrollHeight"
+      (scroll)="onScroll($event)"
+    >
+      <p class="align-center" *ngIf="!canPaginate">
+        ----Inicio de la conversación----
+      </p>
       <div class="row middle-xs " *ngFor="let message of messages">
         <app-our-avatar [user]="message.userId"></app-our-avatar>
         <p class="pad-0-5">
@@ -12,7 +17,13 @@
         </p>
       </div>
     </div>
-    <textarea class="content-input full-width" [placeholder]="placeholder" maxlength="100" [(ngModel)]="message"
-      (keyup.enter)="save()" [readonly]="isReadonly"></textarea>
+    <textarea
+      class="content-input full-width"
+      [placeholder]="placeholder"
+      maxlength="100"
+      [(ngModel)]="message"
+      (keyup.enter)="save()"
+      [readonly]="isReadonly"
+    ></textarea>
   </div>
 </div>

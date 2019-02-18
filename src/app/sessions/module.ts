@@ -84,7 +84,7 @@ import { CheckDetailComponent } from './components/check-detail/index.component'
     CheckDetailComponent
   ],
 
-  entryComponents: [CheckDetailComponent],
+  entryComponents: [CheckDetailComponent, ChatComponent],
   providers: [],
   exports: []
 })

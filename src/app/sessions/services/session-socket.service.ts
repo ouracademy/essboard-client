@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Session } from '@no-module/models/project'
-import { Observable, BehaviorSubject } from 'rxjs'
+import { Observable, BehaviorSubject, Subject } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
@@ -15,6 +15,7 @@ export class SessionSocketService extends SessionService {
   service: any
   selectedSessionId$: BehaviorSubject<string>
   session: Session
+  statusChat: Subject<any>
 
   constructor(
     public socketService: SocketService,
@@ -28,6 +29,7 @@ export class SessionSocketService extends SessionService {
     this.currentChecklist$ = new BehaviorSubject([])
 
     this.service = this.socketService.getService('sessions')
+    this.statusChat$ = new Subject<any>()
 
     this.selectedSessionId$ = new BehaviorSubject(null)
     this.currentSession$ = this.selectedSessionId$.pipe(

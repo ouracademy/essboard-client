@@ -8,6 +8,8 @@ import { CanLeaveChannel } from '../services/leave-session.guard'
 import { SharedService } from '@core/shared.service'
 import { EventsService } from '../services/events.service'
 import { flatMap } from 'rxjs/operators'
+import { MatDialog, MatDialogRef } from '@angular/material'
+import { ChatComponent } from './chat/index.component'
 
 @Component({
   selector: 'session',
@@ -25,6 +27,8 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   isSideNavOpen = true
   isOnline = true
 
+  refDialog: MatDialogRef<ChatComponent> = null
+
   workItems: any[] = []
   sessionEvents: any
 
@@ -34,7 +38,8 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     private events: EventsService,
     private route: ActivatedRoute,
     private router: Router,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -59,6 +64,19 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     this.sharedService.networkStatus.subscribe(
       status => (this.isOnline = status)
     )
+
+    this.sessions.statusChat$.subscribe(status => {
+      if (status === 'close') {
+        this.isChatVisible = false
+        this.closeChat()
+      } else {
+        if (this.isChatVisible) {
+          this.closeChat()
+        }
+        this.isChatVisible = true
+        this.openChat()
+      }
+    })
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -96,5 +114,35 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   }
   ngOnDestroy() {
     console.log('on destory')
+  }
+
+  toggleChat() {
+    this.isChatVisible = !this.isChatVisible
+
+    if (this.isChatVisible) {
+      this.openChat()
+    } else {
+      this.closeChat()
+    }
+  }
+
+  openChat() {
+    this.refDialog = this.dialog.open(ChatComponent, {
+      width: '300px',
+      height: '400px',
+      disableClose: true,
+      hasBackdrop: false,
+      panelClass: 'paddingless',
+      position: { bottom: '0', right: '0' },
+      data: {
+        sessionId: this.session.id,
+        isReadonly: this.session.hasFinished || !this.isOnline
+      }
+    })
+  }
+  closeChat() {
+    if (this.refDialog) {
+      this.refDialog.close()
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Observable, BehaviorSubject } from 'rxjs'
+import { Observable, BehaviorSubject, Subject } from 'rxjs'
 import { Session } from '@shared/no-module/models/project'
 import { StateTemplate } from '../components/detail-alpha/kernel'
 import { CanLeaveChannel } from '../services/leave-session.guard'
@@ -7,6 +7,8 @@ import { Member } from 'app/members/members.service'
 export abstract class SessionService implements CanLeaveChannel {
   currentSession$: Observable<Session>
   abstract set selectedSession(sessionId: string)
+
+  statusChat$: Subject<any>
 
   currentState$: BehaviorSubject<StateTemplate>
 

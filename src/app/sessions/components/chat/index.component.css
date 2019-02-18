@@ -1,10 +1,14 @@
 .chat {
-  width: 300px;
+  width: 100%;
   background: white;
   border: 1px solid #97a79e;
 }
+.chat-header {
+  background: #8ea998;
+  color: white;
+  padding: 10px;
+}
 .chat-content {
-  height: 300px;
   overflow-x: hidden;
 }
 .content-list {
@@ -17,11 +21,7 @@
   border: solid 1px #8ea998;
   resize: none;
 }
-.header {
-  background: #8ea998;
-  color: white;
-  padding: 10px;
-}
+
 span {
   font-size: 11px;
 }
