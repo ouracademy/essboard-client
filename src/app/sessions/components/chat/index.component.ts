@@ -8,7 +8,7 @@ import {
 } from '@angular/core'
 import { ChatService } from '../../services/chat.service'
 import { Message } from '../../model/messages'
-import { MAT_DIALOG_DATA } from '@angular/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 @Component({
   selector: 'chat',
   templateUrl: 'index.component.html',
@@ -32,6 +32,7 @@ export class ChatComponent implements AfterViewInit {
 
   constructor(
     private chatService: ChatService,
+    private dialogRef: MatDialogRef<ChatComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: {
       sessionId: any
@@ -46,9 +47,9 @@ export class ChatComponent implements AfterViewInit {
     this.chatService.response$.subscribe(
       ({ data, canPaginate, scrollToBottom, skip }) => {
         this.skip = skip
-        this.canPaginate = canPaginate
 
         setTimeout(() => {
+          this.canPaginate = canPaginate
           this.messages = data
           if (scrollToBottom) {
             this.scrollHeight = this.myScrollContainer.nativeElement.scrollHeight
@@ -68,6 +69,12 @@ export class ChatComponent implements AfterViewInit {
 
   showWindow() {
     this.show = !this.show
+
+    if (this.show) {
+      this.dialogRef.updateSize('300px', '400px')
+    } else {
+      this.dialogRef.updateSize('300px', '40px')
+    }
   }
 
   save() {

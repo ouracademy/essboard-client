@@ -88,4 +88,9 @@ export class CheckDetailComponent implements OnInit {
   editComment(comment, text) {
     this.sessionService.updateComment(comment._id, text)
   }
+
+  toggleChat() {
+    console.log('togle')
+    this.sessionService.statusChat$.next('toggle')
+  }
 }
