@@ -72,6 +72,8 @@ export class EventsService {
         return `inicio la evaluación que durara ${data.duration}ms`
       case 'EVALUATION_FINISHED':
         return ` acabo la evaluación`
+      case 'COMMENT_ADDED':
+        return `agregó un comentario al ${data.for}`
     }
 
     throw new Error(`Event doesn't have a format`)
