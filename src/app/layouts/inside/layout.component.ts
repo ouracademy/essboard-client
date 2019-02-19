@@ -13,6 +13,7 @@ import { HeaderModule } from '@shared/header/index.module'
     <div class="container-column viewport-full">
       <app-header mode="toolbar">
         <right-content class="row">
+          <app-notifications></app-notifications>
           <mat-menu
             class="menu-options"
             x-position="after"
@@ -25,9 +26,8 @@ import { HeaderModule } from '@shared/header/index.module'
             <button mat-menu-item (click)="logout()">Salir</button>
           </mat-menu>
           <button mat-icon-button class="avatar" [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
+            <mat-icon>arrow_drop_down</mat-icon>
           </button>
-          <app-notifications></app-notifications>
         </right-content>
       </app-header>
       <div class="pad-0-5 container-complement">
