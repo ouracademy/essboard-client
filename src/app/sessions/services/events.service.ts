@@ -61,7 +61,7 @@ export class EventsService {
         const user = await this.getUser(data.to)
         return `invitó a ${user.name} a ser ${data.role}`
       case 'MEMBER_REMOVED':
-        return `dejo de ser miembro del equipo`
+        return await this.formatEventRemoved(data)
       case 'OPINION_EMITED':
         return data.is === 'nothing'
           ? `prefirio no emitir una opinion sobre el check ${data.for}`
@@ -75,6 +75,11 @@ export class EventsService {
     }
 
     throw new Error(`Event doesn't have a format`)
+  }
+
+  private async formatEventRemoved(data: any) {
+    const user = await this.getUser(data.to)
+    return `ha removido a ${user.name} del equipo`
   }
 
   getUser(userId): Promise<{ name: string }> {
