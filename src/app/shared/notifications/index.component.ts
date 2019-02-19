@@ -23,7 +23,7 @@ interface Notification {
           [matBadgeHidden]="notReadedNotifications.length === 0"
           [matBadge]="notReadedNotifications.length"
           matBadgeColor="warn"
-          >home</mat-icon
+          >notifications</mat-icon
         >
       </button>
       <mat-menu #menu="matMenu">
