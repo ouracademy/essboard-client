@@ -7,7 +7,7 @@ import { AlphaTemplate } from './detail-alpha/kernel'
 import { CanLeaveChannel } from '../services/leave-session.guard'
 import { SharedService } from '@core/shared.service'
 import { EventsService } from '../services/events.service'
-import { flatMap } from 'rxjs/operators'
+import { flatMap, first } from 'rxjs/operators'
 import { MatDialog, MatDialogRef } from '@angular/material'
 import { ChatComponent } from './chat/index.component'
 
@@ -49,8 +49,11 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
 
     this.sessions.currentSession$.subscribe(session => {
       this.session = session
-      this.openChat()
     })
+
+    this.sessions.currentSession$
+      .pipe(first())
+      .subscribe(session => this.openChat(session['id']))
 
     this.sessions.currentSession$
       .pipe(flatMap(session => this.events.of(session)))
@@ -119,7 +122,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     this.workItems.push(workItem)
   }
   ngOnDestroy() {
-    console.log('on destory')
+    this.closeChat()
   }
 
   toggleChat() {
@@ -127,13 +130,12 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
 
     if (this.isChatVisible) {
       this.openChat()
-      console.log('open')
     } else {
       this.closeChat()
     }
   }
 
-  openChat() {
+  openChat(sessionId = null) {
     this.refDialog = this.dialog.open(ChatComponent, {
       width: '300px',
       height: '400px',
@@ -142,7 +144,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
       panelClass: 'paddingless',
       position: { bottom: '0', right: '0' },
       data: {
-        sessionId: this.session.id,
+        sessionId: sessionId || this.session.id,
         isReadonly: this.session.hasFinished || !this.isOnline
       }
     })

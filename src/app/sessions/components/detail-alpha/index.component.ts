@@ -5,7 +5,6 @@ import { KernelService } from '@core/kernel-knowledge.service'
 import { ActivatedRoute, Params } from '@angular/router'
 import { AlphaTemplate, StateTemplate } from './kernel'
 
-import { flatMap } from 'rxjs/operators'
 import { SharedService } from '@core/shared.service'
 import { ContextMenuComponent } from 'ngx-contextmenu'
 
@@ -18,9 +17,6 @@ export class DetailAlphaComponent implements OnInit {
   alphaTemplate: AlphaTemplate
   states: any
   stateTemplate: StateTemplate
-
-  @ViewChild('player')
-  public playerContainer: ElementRef
 
   @ViewChild(ContextMenuComponent) public contextMenu: ContextMenuComponent
 

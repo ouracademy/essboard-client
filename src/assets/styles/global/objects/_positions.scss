@@ -22,7 +22,7 @@
   flex: 1;
 }
 .container-complement {
-  flex-grow: 1;
+  flex-grow: 1 !important;
   display: flex;
 }
 .container-child {

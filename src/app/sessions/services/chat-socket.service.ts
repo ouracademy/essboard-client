@@ -3,14 +3,16 @@ import { ChatService } from './chat.service'
 import { SocketService } from '@core/socket.service'
 import { BehaviorSubject } from 'rxjs'
 import { SessionService } from './session.service'
-
+import { AuthService } from '@core/auth.service'
+const Tone = require('tone')
 @Injectable()
 export class ChatSocketService extends ChatService {
   service: any
 
   constructor(
     public socketService: SocketService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private auth: AuthService
   ) {
     super()
 
@@ -22,11 +24,20 @@ export class ChatSocketService extends ChatService {
         skip: 0,
         canPaginate: this.response$.getValue().canPaginate
       })
+      this.playSound(m)
     })
     this.sessionService.currentSession$.subscribe(session => {
       this.init()
       this.query = { sessionId: session.id }
     })
+  }
+
+  private playSound(message) {
+    const isMyMessage = this.auth.user.name === message.userId.name
+    if (!isMyMessage) {
+      const synth = new Tone.Synth().toMaster()
+      synth.triggerAttackRelease('C5', '7n')
+    }
   }
 
   set query({ sessionId, skip: skipQuery = 0 }) {
