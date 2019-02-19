@@ -122,11 +122,10 @@ export class ChecklistComponent implements OnInit, OnChanges {
       })
     }
     this.dialog.openDialogs.pop()
-    this.sessionService.statusChat$.next('open')
+    this.sessionService.statusChat$.next('openWithModal')
 
     this.currentCheckDialog.ref.afterClosed().subscribe(result => {
       this.currentCheckDialog = null
-      this.sessionService.statusChat$.next('close')
     })
   }
 }

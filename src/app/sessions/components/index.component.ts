@@ -23,7 +23,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   alphas: AlphaTemplate[]
   selectedAlpha: AlphaTemplate = null
 
-  isChatVisible = false
+  isChatVisible = true
   isSideNavOpen = true
   isOnline = true
 
@@ -49,6 +49,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
 
     this.sessions.currentSession$.subscribe(session => {
       this.session = session
+      this.openChat()
     })
 
     this.sessions.currentSession$
@@ -66,15 +67,20 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     )
 
     this.sessions.statusChat$.subscribe(status => {
-      if (status === 'close') {
-        this.isChatVisible = false
-        this.closeChat()
-      } else {
-        if (this.isChatVisible) {
+      switch (status) {
+        case 'close':
+          this.isChatVisible = false
           this.closeChat()
-        }
-        this.isChatVisible = true
-        this.openChat()
+          break
+        case 'openWithModal':
+          if (this.isChatVisible) {
+            this.closeChat()
+            this.openChat()
+          }
+          break
+        case 'toggle':
+          this.toggleChat()
+          break
       }
     })
   }
@@ -121,6 +127,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
 
     if (this.isChatVisible) {
       this.openChat()
+      console.log('open')
     } else {
       this.closeChat()
     }

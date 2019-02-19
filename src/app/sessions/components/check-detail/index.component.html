@@ -1,86 +1,90 @@
 <h1 mat-dialog-title class="primary">{{ checkpointTemplate.description }}</h1>
 <div mat-dialog-content>
-  <div>
-    <div
-      *ngFor="let reviewer of reviewers"
-      class="reviewers row center-xs middle-xs"
-    >
-      <app-our-avatar
-        class="pad-0-3"
-        size="30"
-        [user]="reviewer.user"
-      ></app-our-avatar>
-      <mat-icon>trending_flat</mat-icon>
-      <mat-icon>{{ icons[reviewer.opinion] }}</mat-icon>
-    </div>
-    <div>
-      <div class="row middle-xs">
-        <mat-icon>comment</mat-icon>
-        <h2 class="pad-1">Añadir comentario</h2>
-      </div>
-      <div class="row start-xs ">
-        <app-our-avatar class="pad-0-3" size="30" [user]="me"></app-our-avatar>
-        <mat-form-field appearance="outline" class="container-complement">
-          <textarea matInput #text></textarea>
-        </mat-form-field>
-      </div>
-
-      <button
-        mat-raised-button
-        color="primary"
-        [disabled]="text.value.length === 0"
-        (click)="saveComment(text)"
+  <div class="row between-xs">
+    <div class="row">
+      <div
+        *ngFor="let reviewer of reviewers"
+        class="reviewers row center-xs middle-xs"
       >
-        Guardar
+        <app-our-avatar
+          class="pad-0-3"
+          size="30"
+          [user]="reviewer.user"
+        ></app-our-avatar>
+        <mat-icon>trending_flat</mat-icon>
+        <mat-icon>{{ icons[reviewer.opinion] }}</mat-icon>
+      </div>
+    </div>
+    <div class="row">
+      <button mat-icon-button (click)="toggleChat()">
+        <mat-icon class="md-24">chat</mat-icon>
       </button>
     </div>
+  </div>
 
-    <h2>Comentarios</h2>
+  <div>
+    <div class="row middle-xs">
+      <mat-icon>comment</mat-icon>
+      <h2 class="pad-1">Añadir comentario</h2>
+    </div>
+    <div class="row start-xs ">
+      <app-our-avatar class="pad-0-3" size="30" [user]="me"></app-our-avatar>
+      <mat-form-field appearance="outline" class="container-complement">
+        <textarea matInput #text></textarea>
+      </mat-form-field>
+    </div>
 
-    <div *ngFor="let comment of comments" class="comment row  start-xs">
-      <app-our-avatar
-        class="pad-0-3"
-        size="30"
-        [user]="comment.user"
-      ></app-our-avatar>
-      <div class="complement">
-        <div *ngIf="!comment.isEditable; else editable">
-          <div class="comment__text">{{ comment.text }}</div>
-          <div class="row ">
-            <strong class="primary">{{ comment.timeAgo }}</strong>
-            <span *ngIf="comment.from === me.id">
-              <a class="info pad-1" (click)="deleteComment(comment)"
-                >Eliminar</a
-              >
-              <a class="info pad-1" (click)="activateEditable(comment)"
-                >Editar</a
-              >
-            </span>
-          </div>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="text.value.length === 0"
+      (click)="saveComment(text)"
+    >
+      Guardar
+    </button>
+  </div>
+
+  <h2>Comentarios</h2>
+
+  <div *ngFor="let comment of comments" class="comment row  start-xs">
+    <app-our-avatar
+      class="pad-0-3"
+      size="30"
+      [user]="comment.user"
+    ></app-our-avatar>
+    <div class="complement">
+      <div *ngIf="!comment.isEditable; else editable">
+        <div class="comment__text">{{ comment.text }}</div>
+        <div class="row ">
+          <strong class="primary">{{ comment.timeAgo }}</strong>
+          <span *ngIf="comment.from === me.id">
+            <a class="info pad-1" (click)="deleteComment(comment)">Eliminar</a>
+            <a class="info pad-1" (click)="activateEditable(comment)">Editar</a>
+          </span>
         </div>
-        <ng-template #editable>
-          <mat-form-field appearance="outline" class="full-width">
-            <textarea matInput #editText [value]="comment.text"></textarea>
-          </mat-form-field>
-          <button
-            mat-raised-button
-            class="pad-0-5"
-            color="primary"
-            [disabled]="editText.value.length === 0"
-            (click)="editComment(comment, editText.value)"
-          >
-            Guardar
-          </button>
-          <button
-            class="pad-0-5"
-            mat-icon-button
-            color="primary"
-            (click)="desactivateEditable(comment)"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
-        </ng-template>
       </div>
+      <ng-template #editable>
+        <mat-form-field appearance="outline" class="full-width">
+          <textarea matInput #editText [value]="comment.text"></textarea>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          class="pad-0-5"
+          color="primary"
+          [disabled]="editText.value.length === 0"
+          (click)="editComment(comment, editText.value)"
+        >
+          Guardar
+        </button>
+        <button
+          class="pad-0-5"
+          mat-icon-button
+          color="primary"
+          (click)="desactivateEditable(comment)"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </ng-template>
     </div>
   </div>
 </div>
