@@ -10,7 +10,7 @@ export class KernelService {
   constructor(private httpClient: HttpClient) {}
 
   getAlphas(): Observable<AlphaTemplate[]> {
-    return this.httpClient.get<any[]>(`${kernelApi}/kernel`)
+    return this.httpClient.get<any[]>(`${kernelApi}/kernel/alphas`)
   }
 
   getAlpha(alphaId): Observable<AlphaTemplate> {
