@@ -1,12 +1,17 @@
 .state-card-wrapper {
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
-.state-card .state-name {
+.state-card .rounded {
   border: solid currentColor 2px;
   border-radius: 5px;
   margin: 2px 4px;
+  font-size: 16px;
 }
-.state-card .state-name div {
+.state-card .rounded div {
   color: black;
 }
 .state-card ul {
@@ -19,6 +24,9 @@
   text-align: justify;
   margin: 3px 1px;
 }
+
 .checkpoints {
-  margin: 8px;
+  margin: 4px 2px;
+  padding: 0;
+  font-size: 12px;
 }

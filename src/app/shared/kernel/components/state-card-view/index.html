@@ -6,14 +6,19 @@
 >
   <content>
     <div class="state-card-wrapper">
-      <div class="state-name   row middle-xs center-xs">
-        <div>{{ state.name }}</div>
+      <div>
+        <div class="rounded row middle-xs center-xs">
+          <div>{{ state.name }}</div>
+        </div>
+        <ul class="checkpoints">
+          <li *ngFor="let checkpoint of cardCheckpoints">
+            {{ checkpoint.name }}
+          </li>
+        </ul>
       </div>
-      <ul class="checkpoints">
-        <li *ngFor="let checkpoint of cardCheckpoints">
-          {{ checkpoint.name }}
-        </li>
-      </ul>
+      <footer class="rounded row middle-xs center-xs">
+        <div>{{ getNumber(state) }}/{{ alpha.states.length }}</div>
+      </footer>
     </div>
   </content>
   <footer></footer>
