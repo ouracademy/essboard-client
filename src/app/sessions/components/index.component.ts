@@ -7,7 +7,7 @@ import { AlphaTemplate } from './detail-alpha/kernel'
 import { CanLeaveChannel } from '../services/leave-session.guard'
 import { SharedService } from '@core/shared.service'
 import { EventsService } from '../services/events.service'
-import { flatMap, first } from 'rxjs/operators'
+import { flatMap, first, filter } from 'rxjs/operators'
 import { MatDialog, MatDialogRef } from '@angular/material'
 import { ChatComponent } from './chat/index.component'
 
@@ -52,7 +52,10 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     })
 
     this.sessions.currentSession$
-      .pipe(first())
+      .pipe(
+        first(),
+        filter(session => !session.hasFinished)
+      )
       .subscribe(session => this.openChat(session['id']))
 
     this.sessions.currentSession$
