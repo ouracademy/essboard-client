@@ -43,13 +43,17 @@
               <mat-icon class="md-24" (click)="delete()">delete_forever</mat-icon>
             </button>
           -->
-        <button mat-icon-button (click)="toggleChat()">
+        <button mat-icon-button matTooltip="Chat" (click)="toggleChat()">
           <mat-icon class="md-24">chat</mat-icon>
         </button>
-        <button mat-icon-button (click)="sidenav.toggle()">
+        <button
+          mat-icon-button
+          matTooltip="Ver actividades"
+          (click)="sidenav.toggle()"
+        >
           <mat-icon class="md-24">history</mat-icon>
         </button>
-        <button mat-button (click)="goToProject()">Ir a mi proyecto</button>
+        <a class="link info" (click)="goToProject()">Ir a mi proyecto</a>
       </div>
     </div>
     <session-steps></session-steps>
