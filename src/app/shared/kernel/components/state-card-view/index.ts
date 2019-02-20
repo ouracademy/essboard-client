@@ -19,4 +19,8 @@ export class StateCardViewComponent {
   get cardCheckpoints(): CheckpointTemplate[] {
     return this.state.checklist.filter(x => x.isVisibleInCard)
   }
+
+  getNumber(state: StateTemplate) {
+    return parseInt(state.id, 10) % 10
+  }
 }
