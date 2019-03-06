@@ -20,8 +20,18 @@ import { Session } from '@shared/no-module/models/project'
 @Component({
   selector: 'app-radar-chart',
   template: `
-    <canvas class="chart" width="400" height="400" #chart> </canvas>
-  `
+    <div class="chart-container">
+      <canvas class="chart" width="400" height="400" #chart> </canvas>
+    </div>
+  `,
+  styles: [
+    `
+      .chart-container {
+        position: relative;
+        margin: auto;
+      }
+    `
+  ]
 })
 export class RadarChartComponent implements OnInit, AfterViewInit {
   @Input() session: Session
