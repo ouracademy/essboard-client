@@ -86,6 +86,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
 }
 
 const toRadar = (element, data, labels) => {
+  const fontSize = 18
   const options = {
     elements: {
       line: { tension: 0, borderWidth: 3 }
@@ -94,10 +95,14 @@ const toRadar = (element, data, labels) => {
       ticks: {
         suggestedMin: 0,
         suggestedMax: 6
+      },
+      pointLabels: {
+        fontSize
       }
     }
   }
 
+  Chart.defaults.global.defaultFontSize = fontSize
   return new Chart(element, {
     type: 'radar',
     data: {

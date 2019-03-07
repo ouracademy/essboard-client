@@ -112,7 +112,6 @@ export class ChecklistComponent implements OnInit, OnChanges {
         width: '50vw',
         disableClose: true,
         hasBackdrop: true,
-        panelClass: 'holas',
         data: {
           members: this.members,
           template: template,

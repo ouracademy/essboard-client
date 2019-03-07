@@ -12,7 +12,7 @@ import { Observable } from 'rxjs'
       </div>
       <div class="row center-xs">
         <app-radar-chart
-          class="col-xs-12 col-md-6"
+          class="col-xs-12 col-md-8"
           [session]="session | async"
         ></app-radar-chart>
       </div>
