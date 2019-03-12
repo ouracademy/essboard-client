@@ -14,8 +14,7 @@ import { Member } from 'app/members/members.service'
 
 @Component({
   selector: 'search-user',
-  templateUrl: 'search.component.html',
-  styleUrls: ['search.component.css']
+  templateUrl: 'search.component.html'
 })
 export class SearchComponent implements OnInit, OnDestroy {
   @Output() onSelect = new EventEmitter<User>()

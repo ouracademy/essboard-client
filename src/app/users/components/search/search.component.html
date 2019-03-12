@@ -6,7 +6,7 @@
       (input)="search(searchBox.value)"
       placeholder="Escribe aqui su correo"
   /></mat-form-field>
-  <mat-list class="">
+  <mat-list >
     <mat-list-item *ngFor="let user of users">
       <app-our-avatar [user]="user" matListAvatar></app-our-avatar>
       <h3 mat-line>{{ user.name }}</h3>
