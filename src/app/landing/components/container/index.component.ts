@@ -16,7 +16,7 @@ import { AuthService } from '@core/auth.service'
       }
 
       .mat-display-3 {
-        margin: 0 0 40px;
+        margin: 0 0 35px;
       }
     `
   ]
@@ -25,9 +25,8 @@ export class LandingComponent implements OnInit {
   labels = {
     slogan: 'Descubre como va tu desarrollo',
     description:
-      'Essboard es la herramienta que te ayuda a determinar el estado y las metas ' +
-      'de tu proyecto tomando en cuenta las opiniones de tu equipo y cada una de las dimensiones esenciales de un proyecto',
-    start: 'Inicia ahora '
+      'Essboard te ayuda a determinar el estado y las metas de tu proyecto ' +
+      'tomando en cuenta las opiniones de tu equipo y cada una de las dimensiones esenciales de un proyecto'
   }
   kernelIcons = [
     { name: 'Oportunidad', x: -134, y: -10 },
@@ -38,7 +37,6 @@ export class LandingComponent implements OnInit {
     { name: 'Trabajo', x: -10, y: -10 },
     { name: 'Forma de trabajo', x: -254, y: -10 }
   ]
-
   constructor(public auth: AuthService) {}
 
   getBackground(item) {
