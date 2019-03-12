@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import { Observable, Subject } from 'rxjs'
+import { Subject } from 'rxjs'
 import { UserService } from './user.service'
-import { User } from '../model/user'
+import { User } from '@models/user'
 import { SocketService } from '@core/socket.service'
 
 @Injectable()

@@ -6,7 +6,7 @@ import { Project } from '@models/project'
 import { Member, MembersService } from 'app/members/members.service'
 import { BehaviorSubject, of } from 'rxjs'
 import { ChannelService } from 'app/sessions/services/channel.service'
-import { User } from 'app/users/model/user'
+import { User } from '@models/user'
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {

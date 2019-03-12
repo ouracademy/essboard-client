@@ -1,4 +1,4 @@
-import { User } from '../../model/user'
+import { User } from '@models/user'
 import { UserSearchSocketService } from '../../services/user-search-socket.service'
 import {
   Component,

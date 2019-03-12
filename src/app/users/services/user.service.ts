@@ -1,6 +1,4 @@
-import { Injectable } from '@angular/core'
 import { Subject } from 'rxjs'
-import { User } from '../model/user'
 
 export abstract class UserService {
   users$: Subject<any>
