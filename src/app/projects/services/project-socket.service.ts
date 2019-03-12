@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { ProjectService } from './project.service'
 import { SocketService } from '@core/socket.service'
-import { Project } from '@no-module/models/project'
+import { Project } from '@models/project'
 import { Member, MembersService } from 'app/members/members.service'
 import { BehaviorSubject, of } from 'rxjs'
 import { ChannelService } from 'app/sessions/services/channel.service'
-import { User } from 'app/users/model/user'
+import { User } from '@models/user'
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {

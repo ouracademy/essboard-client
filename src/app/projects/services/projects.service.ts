@@ -1,4 +1,4 @@
-import { Project } from '@no-module/models/project'
+import { Project } from '@models/project'
 import { Subject } from 'rxjs'
 
 export abstract class ProjectsService {

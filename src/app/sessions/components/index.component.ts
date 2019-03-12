@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, OnDestroy } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Session } from '@no-module/models/project'
+import { Session } from '@models/project'
 import { SessionService } from '../services/session.service'
 import { KernelService } from '@core/kernel-knowledge.service'
 import { AlphaTemplate } from './detail-alpha/kernel'

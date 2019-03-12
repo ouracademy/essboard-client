@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { MatDialog } from '@angular/material'
 
-import { Project, Session } from '@no-module/models/project'
+import { Project, Session } from '@models/project'
 import { ProjectService } from '../../services/project.service'
 import { SharedService } from '@core/shared.service'
 import { ShareComponent } from '../share/share.component'

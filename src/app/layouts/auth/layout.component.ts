@@ -23,10 +23,9 @@ export class LayoutComponent implements OnInit {
 }
 
 import { NgModule } from '@angular/core'
-import { CommonAppModule } from '@shared/common'
 
 @NgModule({
-  imports: [CommonAppModule, RouterModule],
+  imports: [RouterModule],
   declarations: [LayoutComponent],
   exports: [LayoutComponent]
 })

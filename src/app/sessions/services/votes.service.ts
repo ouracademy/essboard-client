@@ -8,7 +8,7 @@ import {
 } from '../components/detail-alpha/kernel'
 import { EvaluationService } from './evaluation.service'
 import { Subject, combineLatest } from 'rxjs'
-import { Session } from '@shared/no-module/models/project'
+import { Session } from '@models/project'
 import { AuthService } from '@core/auth.service'
 
 export interface Opinion {

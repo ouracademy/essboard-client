@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { map } from 'rxjs/operators/map'
-import { User } from '../model/user'
+import { User } from '@models/user'
 import { SocketService } from '@core/socket.service'
 import { Observable, of } from 'rxjs'
 

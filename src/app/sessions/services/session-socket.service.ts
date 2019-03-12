@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import { Session } from '@no-module/models/project'
+import { Session } from '@models/project'
 import { Observable, BehaviorSubject, Subject } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { SessionService } from './session.service'

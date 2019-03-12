@@ -1,4 +1,4 @@
-import { User } from '@no-module/models/user'
+import { User } from '@models/user'
 
 export class Project {
   public members: any[] = []

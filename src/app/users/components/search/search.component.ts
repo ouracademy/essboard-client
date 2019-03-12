@@ -1,4 +1,4 @@
-import { User } from '../../model/user'
+import { User } from '@models/user'
 import { UserSearchSocketService } from '../../services/user-search-socket.service'
 import {
   Component,
@@ -14,8 +14,7 @@ import { Member } from 'app/members/members.service'
 
 @Component({
   selector: 'search-user',
-  templateUrl: 'search.component.html',
-  styleUrls: ['search.component.css']
+  templateUrl: 'search.component.html'
 })
 export class SearchComponent implements OnInit, OnDestroy {
   @Output() onSelect = new EventEmitter<User>()

@@ -1,5 +1,5 @@
 import { Observable, BehaviorSubject, Subject } from 'rxjs'
-import { Session } from '@shared/no-module/models/project'
+import { Session } from '@models/project'
 import { StateTemplate } from '../components/detail-alpha/kernel'
 import { CanLeaveChannel } from '../services/leave-session.guard'
 import { Member } from 'app/members/members.service'

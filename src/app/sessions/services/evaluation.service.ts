@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { SocketService } from '@core/socket.service'
 import { SessionService } from './session.service'
 import { Observable } from 'rxjs'
-import { Session } from '@shared/no-module/models/project'
+import { Session } from '@models/project'
 
 interface Status {
   isEvaluating: boolean

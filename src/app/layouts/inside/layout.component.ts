@@ -54,13 +54,12 @@ export class InsideLayoutComponent implements OnInit {
 }
 
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core'
-import { CommonAppModule } from '@shared/common'
+
 import { Router } from '@angular/router'
 import { NotificationsModule } from '@shared/notifications/index.module'
 import { RouterModule } from '@angular/router'
 @NgModule({
   imports: [
-    CommonAppModule,
     MatMenuModule,
     MatButtonModule,
     MatIconModule,

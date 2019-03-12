@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { SocketService } from '@core/socket.service'
-import { Session } from '@shared/no-module/models/project'
+import { Session } from '@models/project'
 import { flatMap } from 'rxjs/operators'
 import { from } from 'rxjs'
 

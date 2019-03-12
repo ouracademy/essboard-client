@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { ProjectService } from '../../services/project.service'
 import { SharedService } from '@core/shared.service'
 import { Member } from 'app/members/members.service'
-import { User } from 'app/users/model/user'
+import { User } from '@models/user'
 
 @Component({
   selector: 'project-share-form',
