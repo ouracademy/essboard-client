@@ -10,7 +10,7 @@ import {
 import { ReactiveFormsModule } from '@angular/forms'
 import { LoadingWhenClickedModule } from '@shared/loading-when-clicked'
 import { LayoutAuthModule } from '../layouts/auth/layout.component'
-import { CommonAppModule } from '@shared/common'
+
 import { LoginComponent } from './components/index/index.component'
 import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
 
@@ -21,7 +21,7 @@ const routes: Routes = [{ path: '', component: LoginComponent }]
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     CommonModule,
-    CommonAppModule,
+
     LayoutAuthModule,
     MatButtonModule,
     MatCardModule,

@@ -10,7 +10,7 @@ import {
 import { ReactiveFormsModule } from '@angular/forms'
 
 import { LayoutAuthModule } from '../layouts/auth/layout.component'
-import { CommonAppModule } from '@shared/common'
+
 import { SignupComponent } from './components/index/index.component'
 
 const routes: Routes = [{ path: '', component: SignupComponent }]
@@ -20,7 +20,7 @@ const routes: Routes = [{ path: '', component: SignupComponent }]
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     CommonModule,
-    CommonAppModule,
+
     LayoutAuthModule,
     MatButtonModule,
     MatCardModule,

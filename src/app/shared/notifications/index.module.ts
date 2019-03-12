@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
-import { CommonAppModule } from '@shared/common'
+
 import { NotificationsComponent } from './index.component'
 import {
   MatIconModule,
@@ -13,7 +13,7 @@ import {
 @NgModule({
   imports: [
     CommonModule,
-    CommonAppModule,
+
     RouterModule,
     MatMenuModule,
     MatIconModule,
