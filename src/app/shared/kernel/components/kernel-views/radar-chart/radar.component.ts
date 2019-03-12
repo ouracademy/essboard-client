@@ -6,6 +6,7 @@ import {
   ViewChild,
   AfterViewInit
 } from '@angular/core'
+import { MediaService } from '@angular/flex-layout'
 import Chart from 'chart.js'
 import { randomColor } from '@shared/utils/random-color'
 import { SocketService } from '@core/socket.service'
@@ -43,7 +44,8 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
   constructor(
     private socketService: SocketService,
     private kernel: KernelService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private mediaService: MediaService
   ) {
     this.service = this.socketService.getService('charts')
   }
@@ -70,7 +72,8 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
       this.radarChart = toRadar(
         this.chart.nativeElement,
         sessions.map(session => toRadarData(session, alphas)),
-        alphas.map(alpha => alpha.name)
+        alphas.map(alpha => alpha.name),
+        this.mediaService.isActive('xs')
       )
     })
   }
@@ -85,8 +88,9 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
   }
 }
 
-const toRadar = (element, data, labels) => {
-  const fontSize = 18
+const toRadar = (element, data, labels, isMobile) => {
+  const fontSize = isMobile ? 12 : 18
+
   const options = {
     elements: {
       line: { tension: 0, borderWidth: 3 }
@@ -106,12 +110,13 @@ const toRadar = (element, data, labels) => {
   return new Chart(element, {
     type: 'radar',
     data: {
-      labels,
+      labels: isMobile ? labels.map(wordsToLines) : labels,
       datasets: data
     },
     options
   })
 }
+const wordsToLines = text => text.split(' ')
 
 const dataSet = (sessionStatus, alphas) => {
   return alphas.reduce((acc, alpha) => {
