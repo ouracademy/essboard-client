@@ -1,9 +1,12 @@
 @import '~@angular/material/theming';
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic&amp;subset=latin-ext');
+
+$typography: mat-typography-config(
+  $font-family: 'Roboto, sans-serif'
+);
 
 
-
-@include mat-core();
-
+@include mat-core($typography);
 $green-essboard: (
   50: #ebf9f0,
   100: #cdf0da,
@@ -73,11 +76,8 @@ $app-accent: mat-palette($green-essboard);
 $app-theme: mat-light-theme($app-primary, $app-accent);
 @include angular-material-theme($app-theme);
 
-$config: mat-typography-config();
 
-html{
-  font-family: mat-font-family($config);
-}
+
 
 
 .primary {
