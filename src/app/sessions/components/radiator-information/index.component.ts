@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { SessionService } from 'app/sessions/services/session.service'
-import { Session } from '@shared/no-module/models/project'
+import { Session } from '@models/project'
 import { Observable } from 'rxjs'
 
 @Component({

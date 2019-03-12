@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { SocketService } from '@core/socket.service'
-import { Credentials, User } from '@no-module/models/user'
+import { Credentials, User } from '@models/user'
 import { tap } from 'rxjs/operators'
 
 @Injectable()

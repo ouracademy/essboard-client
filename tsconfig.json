@@ -13,7 +13,7 @@
     "paths": {
       "@shared/*": ["app/shared/*"],
       "@core/*": ["app/core-module/*"],
-      "@no-module/*": ["app/shared/no-module/*"],
+      "@models/*": ["app/shared/models/*"],
       "@layouts/*": ["app/layouts/*"],
       "@env/*": ["environments/*"]
     },

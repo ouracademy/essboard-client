@@ -15,7 +15,7 @@ import { combineLatest, from } from 'rxjs'
 import { format } from 'date-fns'
 import { ProjectService } from 'app/projects/services/project.service'
 import { switchMap, filter } from 'rxjs/operators'
-import { Session } from '@shared/no-module/models/project'
+import { Session } from '@models/project'
 
 @Component({
   selector: 'app-radar-chart',

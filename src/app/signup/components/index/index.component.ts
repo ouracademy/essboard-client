@@ -4,7 +4,7 @@ import { Router } from '@angular/router'
 
 import { AuthService } from '@core/auth.service'
 import { SharedService } from '@core/shared.service'
-import { Credentials } from '@no-module/models/user'
+import { Credentials } from '@models/user'
 @Component({
   selector: 'app-login',
   template: `

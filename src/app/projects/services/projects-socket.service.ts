@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Subject } from 'rxjs/Subject'
 import { ProjectsService } from './projects.service'
 import { SocketService } from '@core/socket.service'
-import { Project } from '@no-module/models/project'
+import { Project } from '@models/project'
 import { Router } from '@angular/router'
 @Injectable()
 export class ProjectsSocketService extends ProjectsService {
