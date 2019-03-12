@@ -29,6 +29,7 @@ import {
   CreateComponent,
   ShareComponent
 } from './index'
+import { FlexLayoutModule } from '@angular/flex-layout'
 
 @NgModule({
   imports: [
@@ -43,6 +44,8 @@ import {
     MatIconModule,
     MatDialogModule,
     MatTooltipModule,
+
+    FlexLayoutModule,
 
     SearchUsersModule,
     LoadingModule,
