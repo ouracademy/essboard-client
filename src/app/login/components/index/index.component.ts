@@ -61,7 +61,7 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
           <br />
           <div class="row aorund-xs middle-xs">
             <span
-              ><a class="info" routerLink="/signup"
+              ><a class="info mat-body-1" routerLink="/signup"
                 >No tienes una cuenta</a
               ></span
             >

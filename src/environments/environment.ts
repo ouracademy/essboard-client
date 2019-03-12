@@ -7,5 +7,5 @@ export const environment = {
   production: false
 }
 
-export const coreApi = 'http://localhost:3030' //'http://localhost:3030' //
-export const kernelApi = 'http://localhost:3000' //'https://essboard-kernel-api.herokuapp.com'
+export const coreApi = 'https://essboard-core-api.herokuapp.com' //'http://localhost:3030' //
+export const kernelApi = 'https://essboard-kernel-api.herokuapp.com' //'https://essboard-kernel-api.herokuapp.com'
