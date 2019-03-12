@@ -5,7 +5,9 @@
 >
   <div class="row">
     <mat-icon *ngIf="!!session.endDate">lock</mat-icon>
-    <p class="row subtitle">Sesión</p>
+    <p class="row mat-body-1 primary">Sesión</p>
   </div>
-  <p class="row info">{{ session.createdAt | date: "d 'de' MMMM" }}</p>
+  <p class="row info mat-caption">
+    {{ session.createdAt | date: "d 'de' MMMM" }}
+  </p>
 </div>

@@ -7,12 +7,12 @@
       [scrollTop]="scrollHeight"
       (scroll)="onScroll($event)"
     >
-      <p class="align-center col-xs-12" *ngIf="!canPaginate">
+      <p class="align-center col-xs-12 mat-caption accent" *ngIf="!canPaginate">
         ----Inicio de la conversación----
       </p>
       <div class="row middle-xs col-xs-12" *ngFor="let message of messages">
         <app-our-avatar [user]="message.userId"></app-our-avatar>
-        <p class="pad-0-5">
+        <p class="pad-0-5 mat-caption">
           <span>{{ message.text }} </span>
         </p>
       </div>

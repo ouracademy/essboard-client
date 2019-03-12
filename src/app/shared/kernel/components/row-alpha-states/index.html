@@ -1,14 +1,25 @@
 <div class="row around-xs col-xs-12">
-  <p class="subtitle">Estados logrados</p>
-  <p class="subtitle">Estados por lograr</p>
+  <p class="mat-caption">Estados logrados</p>
+  <p class="mat-caption">Estados por lograr</p>
 </div>
 <div class="row col-xs-12">
-  <div *ngFor="let space of spaces" class="space" [ngClass]="{  'space-content': space.isEmpty }">
+  <div
+    *ngFor="let space of spaces"
+    class="space"
+    [ngClass]="{ 'space-content': space.isEmpty }"
+  >
     <div class="space-content">
-      <div *ngIf="!space.isEmpty" (click)="select(space)" class=" {{ alpha.area }} button--alpha selectable">
+      <div
+        *ngIf="!space.isEmpty"
+        (click)="select(space)"
+        class=" {{ alpha.area }} button--alpha selectable"
+      >
         <p class="info align-center">{{ space.name }}</p>
       </div>
-      <div *ngIf="space.isEmpty" [ngClass]="{ separator: true, 'container-selected': isForSelected }">
+      <div
+        *ngIf="space.isEmpty"
+        [ngClass]="{ separator: true, 'container-selected': isForSelected }"
+      >
         <p *ngIf="!selectedState && isForSelected">
           Hacer click en un estado y se visualizara aqui
         </p>
