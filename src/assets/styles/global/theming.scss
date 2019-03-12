@@ -2,9 +2,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic&amp;subset=latin-ext');
 
 $typography: mat-typography-config(
-  $font-family: 'Roboto, sans-serif'
+  $font-family: 'Roboto, sans-serif',
+  $body-2: mat-typography-level(20px, 20px, 600),
+  $body-1: mat-typography-level(17px, 17px, 500),
+  $caption: mat-typography-level(15px, 15px, 500)
 );
-
 
 @include mat-core($typography);
 $green-essboard: (
