@@ -23,17 +23,18 @@
     </ng-template>
   </right-content>
 </app-header>
-<div class="row center-xs middle-xs pad-1">
-  <h1 class="row mat-display-1 primary pad-top-4  col-6 align-center">
-    {{ labels.slogan }}
-  </h1>
-  <h4 class="row mat-display-1 info col-6 align-center">
-    {{ labels.description }}
-  </h4>
-  <div class="row center-xs middle-xs width-all">
-    <a class="" mat-stroked-button color="accent" routerLink="/me/projects"
-      >{{ labels.start }}
-    </a>
+<div class="row center-xs middle-xs pad-2">
+  <div class="col-sm-8">
+    <h1 class="mat-display-3 primary pad-top-4 align-center">
+      {{ labels.slogan }}
+    </h1>
+    <h4 class="mat-headline info align-center">{{ labels.description }}</h4>
+
+    <div class="center-xs middle-xs width-all">
+      <a mat-stroked-button color="accent" routerLink="/me/projects"
+        >{{ labels.start }}
+      </a>
+    </div>
   </div>
   <div class="width-all pad-2">
     <div class="row center-xs middle-xs">
