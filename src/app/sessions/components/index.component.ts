@@ -10,7 +10,8 @@ import { EventsService } from '../services/events.service'
 import { flatMap, first, filter } from 'rxjs/operators'
 import { MatDialog, MatDialogRef } from '@angular/material'
 import { ChatComponent } from './chat/index.component'
-
+import { ObservableMedia, MediaChange } from '@angular/flex-layout'
+import { Subscription } from 'rxjs/Subscription'
 @Component({
   selector: 'session',
   templateUrl: 'index.component.html',
@@ -31,6 +32,8 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
 
   workItems: any[] = []
   sessionEvents: any
+  configSidenav
+  watcher: Subscription
 
   constructor(
     public kernelService: KernelService,
@@ -39,8 +42,18 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private sharedService: SharedService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    public mediaObserver: ObservableMedia
+  ) {
+    this.watcher = mediaObserver
+      .asObservable()
+      .subscribe((change: MediaChange) => {
+        this.configSidenav =
+          change.mqAlias === 'xs'
+            ? { width: '90vw', mode: 'over' }
+            : { width: '370px', mode: 'side' }
+      })
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {

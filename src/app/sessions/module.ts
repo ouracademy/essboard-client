@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
+import { FlexLayoutModule } from '@angular/flex-layout'
 import {
   MatCardModule,
   MatButtonModule,
@@ -50,6 +51,7 @@ import { CheckDetailComponent } from './components/check-detail/index.component'
   imports: [
     CommonModule,
     FormsModule,
+    FlexLayoutModule,
     UsersModule,
     ContextMenuModule.forRoot(),
     KernelModule,
