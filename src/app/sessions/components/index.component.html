@@ -1,11 +1,17 @@
 <mat-sidenav-container class="container-column" *ngIf="session">
-  <mat-sidenav #sidenav mode="side" [(opened)]="isSideNavOpen" position="end">
-    <mat-toolbar>
-      <span>Actividades</span> <span class="fill-remaining"></span>
+  <mat-sidenav
+    #sidenav
+    [mode]="configSidenav.mode"
+    [style.width]="configSidenav.width"
+    [(opened)]="isSideNavOpen"
+    position="end"
+  >
+    <div fxLayout="row" class="pad-1" fxLayoutAlign="space-between center">
+      <span>Actividades</span>
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon class="md-24">close</mat-icon>
       </button>
-    </mat-toolbar>
+    </div>
     <mat-list>
       <mat-list-item *ngFor="let event of sessionEvents">
         <app-our-avatar [user]="event.user" matListAvatar></app-our-avatar>
