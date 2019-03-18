@@ -7,9 +7,10 @@ import { StateCardViewComponent } from './components/state-card-view/index'
 import { AlphaCardComponent } from './components/alpha-card/index'
 import { RowAlphaStatesComponent } from './components/row-alpha-states/index'
 import { RadarChartComponent } from './components/kernel-views/index'
+import { FlexLayoutModule } from '@angular/flex-layout'
 
 @NgModule({
-  imports: [CommonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, FlexLayoutModule],
   declarations: [
     EssenceCardComponent,
     StateCardViewComponent,

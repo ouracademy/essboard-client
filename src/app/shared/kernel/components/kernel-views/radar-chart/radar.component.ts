@@ -6,7 +6,7 @@ import {
   ViewChild,
   AfterViewInit
 } from '@angular/core'
-import { MediaService } from '@angular/flex-layout'
+import { MediaObserver } from '@angular/flex-layout'
 import Chart from 'chart.js'
 import { randomColor } from '@shared/utils/random-color'
 import { SocketService } from '@core/socket.service'
@@ -21,15 +21,17 @@ import { Session } from '@models/project'
 @Component({
   selector: 'app-radar-chart',
   template: `
-    <div class="chart-container">
-      <canvas class="chart" width="400" height="400" #chart> </canvas>
+    <div ngClass.sm="mobile" ngClass.gt-sm="gt-mobile">
+      <canvas class="chart" width="320" height="320" #chart> </canvas>
     </div>
   `,
   styles: [
     `
-      .chart-container {
-        position: relative;
-        margin: auto;
+      .gt-mobile {
+        width: 70vh;
+      }
+      .mobile {
+        width: 45vh;
       }
     `
   ]
@@ -45,7 +47,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
     private socketService: SocketService,
     private kernel: KernelService,
     private projectService: ProjectService,
-    private mediaService: MediaService
+    private media: MediaObserver
   ) {
     this.service = this.socketService.getService('charts')
   }
@@ -73,7 +75,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
         this.chart.nativeElement,
         sessions.map(session => toRadarData(session, alphas)),
         alphas.map(alpha => alpha.name),
-        this.mediaService.isActive('xs')
+        this.media.isActive('xs')
       )
     })
   }

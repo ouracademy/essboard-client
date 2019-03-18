@@ -1,4 +1,4 @@
-<div *ngIf="project" class="container-column">
+<div *ngIf="project" fxLayout="column" fxFlex>
   <header
     fxLayout="row"
     fxLayoutAlign="space-between center"
@@ -32,36 +32,32 @@
       </button>
     </div>
   </header>
-  <div class="container-complement pad-1">
-    <div class="row col-xs-12">
-      <div class="col-lg-3 col-xs-12 last-xs first-md">
-        <h2 class="primary center">Tus sesiones de trabajo</h2>
-        <div>
-          <button
-            class="main"
-            mat-icon-button
-            app-loading-clicked
-            identifierLoading="addSession"
-            (click)="addSession()"
-          >
-            <mat-icon class="md-24">add</mat-icon>
-          </button>
-          <app-render-ctrl>
-            <sessions-list #data [projectId]="project.id"></sessions-list>
-          </app-render-ctrl>
-        </div>
+  <div fxLayout="column-reverse" fxLayout.gt-sm="row" class="pad-top-1">
+    <div fxFlex="100" fxFlex.gt-sm="20">
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <h2 class="primary">Tus sesiones de trabajo</h2>
+        <button
+          class="main"
+          mat-icon-button
+          app-loading-clicked
+          identifierLoading="addSession"
+          (click)="addSession()"
+        >
+          <mat-icon class="md-24">add</mat-icon>
+        </button>
       </div>
-      <div class="col-lg-9 col-xs-12">
+
+      <app-render-ctrl>
+        <sessions-list #data [projectId]="project.id"></sessions-list>
+      </app-render-ctrl>
+    </div>
+    <div fxFlex="100" fxFlex.gt-sm="80">
+      <div fxLayout="column" fxLayoutAlign="start center">
         <h2 class="primary align-center">Tu proyecto holisticamente</h2>
-        <div class="row center-xs">
-          <div class="col-xs-12 col-md-6">
-            <app-radar-chart></app-radar-chart>
-          </div>
-          <!--
-            <alpha-connections class="col-xs-12 col-md-6" *ngIf="project.currentKernel" [kernel]="project.currentKernel"></alpha-connections>
-          -->
-        </div>
+        <app-radar-chart fxFlex.gt-sm="40"></app-radar-chart>
       </div>
+      <!--<alpha-connections class="col-xs-12 col-md-6" *ngIf="project.currentKernel" [kernel]="project.currentKernel">
+      </alpha-connections> -->
     </div>
   </div>
 </div>
