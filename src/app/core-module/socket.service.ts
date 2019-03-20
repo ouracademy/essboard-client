@@ -30,27 +30,41 @@ export class SocketService {
           idField: '_id'
         })
       )
+
+    if (window.localStorage.getItem('feathers-jwt')) {
+      this._app.authenticate()
+    }
   }
 
-  // expose services
   public getService<T>(name: string): Service<T> {
     return this._app.service(name)
   }
 
-  public getValue(key) {
-    return this._app.get(key)
-  }
   public authenticate(credentials?): Promise<any> {
     return this._app
       .authenticate(credentials)
       .then(result => this._app.passport.verifyJWT(result.accessToken))
       .then(payload => this.getService('users').get(payload.userId))
-      .then(user => this._app.set('user', user))
+      .then(user => this.setItem('user', user))
   }
 
   public logout() {
     return this._app.logout().then(() => {
-      this._app.set('user', null)
+      this.setItem('user', null)
     })
   }
+
+  // TODO: move this to a Store Service
+  public setItem(key, item) {
+    const value = isObject(item) ? JSON.stringify(item) : item
+    window.localStorage.setItem(key, value)
+  }
+
+  public getItem(key) {
+    const item = window.localStorage.getItem(key)
+    return JSON.parse(item)
+  }
+}
+function isObject(item: any) {
+  return typeof item === 'object' && item !== null
 }
