@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Session } from '@models/project'
-import { Observable, BehaviorSubject, Subject } from 'rxjs'
+import { Observable, BehaviorSubject, Subject, of } from 'rxjs'
 import { map, switchMap } from 'rxjs/operators'
 import { SessionService } from './session.service'
 import { SocketService } from '@core/socket.service'
@@ -9,6 +9,7 @@ import { StateTemplate } from '../components/detail-alpha/kernel'
 import { AlphaTemplate } from '../components/detail-alpha/kernel'
 import { ChannelService } from './channel.service'
 import { MembersService } from 'app/members/members.service'
+import { AuthService } from '@core/auth.service'
 
 @Injectable()
 export class SessionSocketService extends SessionService {
@@ -21,7 +22,8 @@ export class SessionSocketService extends SessionService {
     public socketService: SocketService,
     private channels: ChannelService,
     private membersService: MembersService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     super()
     this.currentState$ = new BehaviorSubject<StateTemplate>(null)
@@ -84,7 +86,9 @@ export class SessionSocketService extends SessionService {
   }
 
   leaveChannel(): Observable<any> {
-    return this.channels.leave('sessions')
+    return this.authService.isLoggedIn
+      ? this.channels.leave('sessions')
+      : of(true)
   }
 
   get channelSubscriptions$() {

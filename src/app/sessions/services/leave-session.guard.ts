@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { CanDeactivate } from '@angular/router'
 
-import { SessionComponent } from '../components/index.component'
-import { SessionService } from './session.service'
-
 export interface CanLeaveChannel {
   leaveChannel(): Observable<any>
 }
