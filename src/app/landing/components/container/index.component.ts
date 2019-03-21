@@ -13,6 +13,7 @@ import { AuthService } from '@core/auth.service'
         height: 100px;
         width: 100px;
         margin: auto;
+        background-image: url(assets/images/kernel-icons.png);
       }
 
       .mat-display-3 {
@@ -39,8 +40,10 @@ export class LandingComponent implements OnInit {
   ]
   constructor(public auth: AuthService) {}
 
-  getBackground(item) {
-    return `url(assets/images/kernel-icons.png) ${item.x}px ${item.y}px`
+  getStyle(item) {
+    return {
+      'background-position': `${item.x}px ${item.y}px`
+    }
   }
 
   ngOnInit() {}

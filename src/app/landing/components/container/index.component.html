@@ -26,12 +26,7 @@
     <div class="row center-xs middle-xs">
       <div class="row around-xs middle-xs pad-top-2">
         <div class="icon align-center" *ngFor="let item of kernelIcons">
-          <div
-            class="icon-image auto"
-            [ngStyle]="{
-              background: getBackground(item)
-            }"
-          ></div>
+          <div class="icon-image auto" [ngStyle]="getStyle(item)"></div>
           <h3 class="info align-center">{{ item.name }}</h3>
         </div>
       </div>
