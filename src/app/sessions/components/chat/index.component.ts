@@ -3,7 +3,9 @@ import {
   Input,
   ElementRef,
   ViewChild,
-  AfterViewInit
+  AfterViewInit,
+  Output,
+  EventEmitter
 } from '@angular/core'
 import { ChatService } from '../../services/chat.service'
 import { Message } from '../../model/messages'
@@ -18,7 +20,9 @@ export class ChatComponent implements AfterViewInit {
   @Input()
   isReadonly: boolean
 
-  show = true
+  @Output() closeChat = new EventEmitter<any>()
+
+  contentIsVisible = true
   messages: Message[] = []
   message = ''
   skip = 0
@@ -54,10 +58,13 @@ export class ChatComponent implements AfterViewInit {
     }
   }
 
-  showWindow() {
-    this.show = !this.show
+  toggleContent() {
+    this.contentIsVisible = !this.contentIsVisible
   }
 
+  close() {
+    this.closeChat.emit()
+  }
   save() {
     this.chatService.addMessage(this.message, this.sessionId)
     this.message = ''
