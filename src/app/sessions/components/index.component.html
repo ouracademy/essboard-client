@@ -1,9 +1,8 @@
-<mat-sidenav-container class="container-column" *ngIf="session">
+<mat-sidenav-container class="container-column sidenav" *ngIf="session">
   <mat-sidenav
     #sidenav
-    [mode]="configSidenav.mode"
-    [style.width]="configSidenav.width"
-    [(opened)]="isSideNavOpen"
+    [mode]="configByViewport.mode"
+    [style.width]="configByViewport.width"
     position="end"
   >
     <div fxLayout="row" class="pad-1" fxLayoutAlign="space-between center">
@@ -22,7 +21,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="row row-detail between-xs middle-xs pad-0-5">
-      <div class="row middle-xs">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
         <span class="mat-body-1">Sesión </span>
         <div class="pad-0-5">
           <span> {{ session.createdAt | date: "d 'de' MMMM" }}</span>

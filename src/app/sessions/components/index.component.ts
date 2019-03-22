@@ -32,7 +32,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
 
   workItems: any[] = []
   sessionEvents: any
-  configSidenav
+  configByViewport
   watcher: Subscription
 
   constructor(
@@ -46,10 +46,10 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     public mediaObserver: MediaObserver
   ) {
     this.watcher = mediaObserver.media$.subscribe((change: MediaChange) => {
-      this.configSidenav =
+      this.configByViewport =
         change.mqAlias === 'xs'
-          ? { width: '90vw', mode: 'over' }
-          : { width: '370px', mode: 'side' }
+          ? { width: '85vw', mode: 'over', isChatVisible: false }
+          : { width: '370px', mode: 'side', isChatVisible: true }
     })
   }
 

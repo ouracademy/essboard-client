@@ -8,4 +8,6 @@ button {
   border: 0;
   outline: 0;
 }
-
+.sidenav{
+  width: 100vw;
+}
