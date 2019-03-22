@@ -7,8 +7,8 @@ import { AlphaTemplate } from './detail-alpha/kernel'
 import { CanLeaveChannel } from '../services/leave-session.guard'
 import { SharedService } from '@core/shared.service'
 import { EventsService } from '../services/events.service'
-import { flatMap, first, filter } from 'rxjs/operators'
-import { MatDialog, MatDialogRef } from '@angular/material'
+import { flatMap } from 'rxjs/operators'
+import { MatDialogRef } from '@angular/material'
 import { ChatComponent } from './chat/index.component'
 import { MediaObserver, MediaChange } from '@angular/flex-layout'
 import { Subscription } from 'rxjs/Subscription'
@@ -42,7 +42,6 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private sharedService: SharedService,
-    private dialog: MatDialog,
     public mediaObserver: MediaObserver
   ) {
     this.watcher = mediaObserver.media$.subscribe((change: MediaChange) => {
@@ -63,13 +62,6 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     })
 
     this.sessions.currentSession$
-      .pipe(
-        first(),
-        filter(session => !session.hasFinished)
-      )
-      .subscribe(session => this.openChat(session['id']))
-
-    this.sessions.currentSession$
       .pipe(flatMap(session => this.events.of(session)))
       .subscribe(sessionEvents => {
         this.sessionEvents = sessionEvents
@@ -82,24 +74,6 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     this.sharedService.networkStatus.subscribe(
       status => (this.isOnline = status)
     )
-
-    this.sessions.statusChat$.subscribe(status => {
-      switch (status) {
-        case 'close':
-          this.isChatVisible = false
-          this.closeChat()
-          break
-        case 'openWithModal':
-          if (this.isChatVisible) {
-            this.closeChat()
-            this.openChat()
-          }
-          break
-        case 'toggle':
-          this.toggleChat()
-          break
-      }
-    })
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -135,37 +109,9 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   getWorkItems(workItem) {
     this.workItems.push(workItem)
   }
-  ngOnDestroy() {
-    this.closeChat()
-  }
+  ngOnDestroy() {}
 
   toggleChat() {
-    this.isChatVisible = !this.isChatVisible
-
-    if (this.isChatVisible) {
-      this.openChat()
-    } else {
-      this.closeChat()
-    }
-  }
-
-  openChat(sessionId = null) {
-    this.refDialog = this.dialog.open(ChatComponent, {
-      width: '300px',
-      height: '400px',
-      disableClose: true,
-      hasBackdrop: false,
-      panelClass: 'paddingless',
-      position: { bottom: '0', right: '0' },
-      data: {
-        sessionId: sessionId || this.session.id,
-        isReadonly: this.session.hasFinished || !this.isOnline
-      }
-    })
-  }
-  closeChat() {
-    if (this.refDialog) {
-      this.refDialog.close()
-    }
+    this.configByViewport.isChatVisible = !this.configByViewport.isChatVisible
   }
 }

@@ -110,8 +110,6 @@ export class ChecklistComponent implements OnInit, OnChanges {
       template: template,
       ref: this.dialog.open(CheckDetailComponent, {
         width: '50vw',
-        disableClose: true,
-        hasBackdrop: true,
         data: {
           members: this.members,
           template: template,
@@ -120,8 +118,6 @@ export class ChecklistComponent implements OnInit, OnChanges {
         }
       })
     }
-    this.dialog.openDialogs.pop()
-    this.sessionService.statusChat$.next('openWithModal')
 
     this.currentCheckDialog.ref.afterClosed().subscribe(result => {
       this.currentCheckDialog = null
