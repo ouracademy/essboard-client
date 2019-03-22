@@ -1,4 +1,4 @@
-<h1 mat-dialog-title class="primary">{{ checkpointTemplate.description }}</h1>
+<h2 mat-dialog-title class="primary">{{ checkpointTemplate.description }}</h2>
 <div mat-dialog-content>
   <div class="row between-xs">
     <div class="row">
@@ -25,7 +25,7 @@
   <div>
     <div class="row middle-xs">
       <mat-icon>comment</mat-icon>
-      <h2 class="pad-1">Añadir comentario</h2>
+      <h3 class="pad-1">Añadir comentario</h3>
     </div>
     <div class="row start-xs ">
       <app-our-avatar class="pad-0-3" size="30" [user]="me"></app-our-avatar>
@@ -44,7 +44,7 @@
     </button>
   </div>
 
-  <h2>Comentarios</h2>
+  <h3>Comentarios</h3>
 
   <div *ngFor="let comment of comments" class="comment row  start-xs">
     <app-our-avatar

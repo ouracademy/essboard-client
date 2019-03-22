@@ -5,7 +5,7 @@ $typography: mat-typography-config(
   $font-family: 'Roboto, sans-serif',
   $body-2: mat-typography-level(20px, 20px, 600),
   $body-1: mat-typography-level(17px, 17px, 500),
-  $caption: mat-typography-level(15px, 15px, 500)
+  $caption: mat-typography-level(15px, 15px, 400)
 );
 
 @include mat-core($typography);
