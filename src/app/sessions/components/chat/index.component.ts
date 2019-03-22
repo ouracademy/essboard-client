@@ -3,12 +3,10 @@ import {
   Input,
   ElementRef,
   ViewChild,
-  AfterViewInit,
-  Inject
+  AfterViewInit
 } from '@angular/core'
 import { ChatService } from '../../services/chat.service'
 import { Message } from '../../model/messages'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 @Component({
   selector: 'chat',
   templateUrl: 'index.component.html',
@@ -30,18 +28,7 @@ export class ChatComponent implements AfterViewInit {
   @ViewChild('scrollMe')
   private myScrollContainer: ElementRef
 
-  constructor(
-    private chatService: ChatService,
-    private dialogRef: MatDialogRef<ChatComponent>,
-    @Inject(MAT_DIALOG_DATA)
-    public data: {
-      sessionId: any
-      isReadonly: any
-    }
-  ) {
-    this.sessionId = data.sessionId
-    this.isReadonly = data.isReadonly
-  }
+  constructor(private chatService: ChatService) {}
 
   ngAfterViewInit() {
     this.chatService.response$.subscribe(
@@ -69,12 +56,6 @@ export class ChatComponent implements AfterViewInit {
 
   showWindow() {
     this.show = !this.show
-
-    if (this.show) {
-      this.dialogRef.updateSize('300px', '400px')
-    } else {
-      this.dialogRef.updateSize('300px', '40px')
-    }
   }
 
   save() {

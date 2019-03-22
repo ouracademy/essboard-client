@@ -61,12 +61,14 @@
         <a class="link info" (click)="goToProject()">Ir a mi proyecto</a>
       </div>
     </div>
+    {{ configByViewport | json }}
     <session-steps></session-steps>
-    <!-- <chat
-      *ngIf="isChatVisible"
+    <chat
+      class="chat"
+      *ngIf="configByViewport.isChatVisible"
       [sessionId]="session.id"
       [isReadonly]="session.hasFinished || !isOnline"
     >
-    </chat> -->
+    </chat>
   </mat-sidenav-content>
 </mat-sidenav-container>
