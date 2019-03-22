@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core'
 import { SocketService } from '@core/socket.service'
 import { Credentials, User } from '@models/user'
-import { tap } from 'rxjs/operators'
 
 @Injectable()
 export class AuthService {
@@ -26,18 +25,6 @@ export class AuthService {
     })
   }
 
-  public reconnect() {
-    const token = window.localStorage.getItem('feathers-jwt')
-    if (token) {
-      this.socketService
-        .logout()
-        .then(() => {
-          this.socketService.authenticate({ type: 'token', token: token })
-        })
-        .catch(err => console.log('err', err))
-    }
-  }
-
   public get isLoggedIn(): boolean {
     return !!this.user
   }
@@ -47,7 +34,7 @@ export class AuthService {
   }
 
   public get user(): User {
-    const data = this.socketService.getValue('user')
+    const data = this.socketService.getItem('user')
     return data
       ? new User(
           data['_id'],
@@ -57,13 +44,6 @@ export class AuthService {
           data['appKeyTrello']
         )
       : null
-  }
-  public set user(user: User) {
-    window.localStorage['user'] = JSON.stringify(user)
-  }
-  haveThisSession(sessionId: string): boolean {
-    const data = JSON.parse(window.localStorage.getItem('user'))
-    return data.sessionsId.indexOf(sessionId) !== -1
   }
 
   signup(user: User) {
