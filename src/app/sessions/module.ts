@@ -20,6 +20,8 @@ import {
 } from '@angular/material'
 import { ContextMenuModule } from 'ngx-contextmenu'
 
+import { DragDropModule } from '@angular/cdk/drag-drop'
+
 import 'hammerjs'
 
 import { RoutingModule } from './routing.module'
@@ -71,6 +73,7 @@ import { CheckDetailComponent } from './components/check-detail/index.component'
     MatDialogModule,
     OurAvatarModule,
     PreventOfflineModule,
+    DragDropModule,
     RoutingModule
   ],
   declarations: [

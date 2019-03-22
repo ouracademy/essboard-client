@@ -1,20 +1,40 @@
 <div class="chat container-column">
-  <div class="chat-header" (click)="showWindow()"><div>Conversacion</div></div>
-  <div *ngIf="show" class="chat-content container-column container-complement">
+  <div class="chat-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div>Conversacion</div>
+    <div>
+      <button mat-icon-button (click)="toggleContent()">
+        <mat-icon *ngIf="contentIsVisible" class="md-24">minimize</mat-icon>
+        <mat-icon *ngIf="!contentIsVisible" class="md-24">maximize</mat-icon>
+      </button>
+      <button mat-icon-button (click)="close()">
+        <mat-icon class="md-24">close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div
+    *ngIf="contentIsVisible"
+    class="chat-content container-column container-complement"
+  >
     <div
-      class="container-complement row content-list pad-1"
+      fxLayout="column"
+      fxLayoutGap="5px"
+      class="container-complement  content-list pad-1"
       #scrollMe
       [scrollTop]="scrollHeight"
       (scroll)="onScroll($event)"
     >
-      <p class="align-center col-xs-12 mat-caption accent" *ngIf="!canPaginate">
+      <div class="align-center mat-caption accent" *ngIf="!canPaginate">
         ----Inicio de la conversación----
-      </p>
-      <div class="row middle-xs col-xs-12" *ngFor="let message of messages">
+      </div>
+      <div
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        *ngFor="let message of messages"
+      >
         <app-our-avatar [user]="message.userId"></app-our-avatar>
-        <p class="pad-0-5 mat-caption">
+        <div class="pad-0-5 mat-caption">
           <span>{{ message.text }} </span>
-        </p>
+        </div>
       </div>
     </div>
     <textarea

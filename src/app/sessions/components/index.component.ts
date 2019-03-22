@@ -114,4 +114,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   toggleChat() {
     this.configByViewport.isChatVisible = !this.configByViewport.isChatVisible
   }
+  closeChat() {
+    this.configByViewport.isChatVisible = false
+  }
 }
