@@ -11,9 +11,14 @@ button {
 .sidenav {
   width: 100%;
 }
-.chat{
+.chat {
   position: fixed;
   bottom: 0;
   right: 0;
   width: 300px;
+}
+
+h4.event.mat-line {
+  overflow: visible;
+  white-space: normal;
 }
