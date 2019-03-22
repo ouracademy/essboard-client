@@ -12,6 +12,7 @@ import { MatDialogRef } from '@angular/material'
 import { ChatComponent } from './chat/index.component'
 import { MediaObserver, MediaChange } from '@angular/flex-layout'
 import { Subscription } from 'rxjs/Subscription'
+import { timeAgo } from '@shared/time-ago'
 @Component({
   selector: 'session',
   templateUrl: 'index.component.html',
@@ -116,5 +117,9 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   }
   closeChat() {
     this.configByViewport.isChatVisible = false
+  }
+
+  timeAgo(date) {
+    return timeAgo(date)
   }
 }

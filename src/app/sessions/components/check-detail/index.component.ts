@@ -2,8 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core'
 import { SessionService } from 'app/sessions/services/session.service'
 import { MAT_DIALOG_DATA } from '@angular/material'
 import { AuthService } from '@core/auth.service'
-import { distanceInWordsToNow } from 'date-fns'
-const esLocale = require('date-fns/locale/es')
+import { timeAgo } from '../../../shared/time-ago'
 
 @Component({
   selector: 'check-detail',
@@ -60,7 +59,7 @@ export class CheckDetailComponent implements OnInit {
       .subscribe(comments => {
         this.comments = comments['data'].map(x => ({
           user: this.members.find(member => member.id === x.from),
-          timeAgo: distanceInWordsToNow(x.updatedAt, { locale: esLocale }),
+          timeAgo: timeAgo(x.updatedAt),
           ...x
         }))
       })
