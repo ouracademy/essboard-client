@@ -8,7 +8,17 @@ import { combineLatest } from 'rxjs'
 
 @Component({
   selector: 'set-state',
-  templateUrl: 'index.component.html'
+  templateUrl: 'index.component.html',
+  styles: [
+    `
+      .left-bottom {
+        top: auto !important;
+        right: auto !important;
+        bottom: 25px !important;
+        position: fixed !important;
+      }
+    `
+  ]
 })
 export class SetStateComponent implements OnInit {
   alphas: AlphaTemplate[]

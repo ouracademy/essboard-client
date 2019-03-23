@@ -16,14 +16,24 @@
     </div>
   </div>
 
-  <div *ngIf="canEvaluate">
-    <button *ngIf="!isEvaluating" (click)="startEvaluation()">
-      Iniciar evaluación
+  <div class="pad-1"><router-outlet></router-outlet></div>
+
+  <div *ngIf="canEvaluate" class="left-bottom">
+    <button
+      mat-fab
+      *ngIf="!isEvaluating"
+      (click)="startEvaluation()"
+      matTooltip="Iniciar evaluación"
+    >
+      <mat-icon aria-label="Iniciar evaluación">timer</mat-icon>
     </button>
-    <button *ngIf="isEvaluating" (click)="stopEvaluation()">
-      Dejar de evaluar
+    <button
+      mat-fab
+      *ngIf="isEvaluating"
+      (click)="stopEvaluation()"
+      matTooltip="Dejar de evaluar"
+    >
+      <mat-icon aria-label="Dejar de evaluar">timer_off</mat-icon>
     </button>
   </div>
-
-  <div class="pad-1"><router-outlet></router-outlet></div>
 </div>
