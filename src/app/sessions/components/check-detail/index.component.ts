@@ -1,8 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core'
 import { SessionService } from 'app/sessions/services/session.service'
-import { MAT_DIALOG_DATA } from '@angular/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 import { AuthService } from '@core/auth.service'
 import { timeAgo } from '../../../shared/time-ago'
+import { Subscription } from 'rxjs'
+import { MediaObserver, MediaChange } from '@angular/flex-layout'
 
 @Component({
   selector: 'check-detail',
@@ -24,7 +26,7 @@ import { timeAgo } from '../../../shared/time-ago'
     `
   ]
 })
-export class CheckDetailComponent implements OnInit {
+export class CheckDetailComponent implements OnInit, OnDestroy {
   reviewers = null
   checkpointTemplate = null
   icons = {
@@ -36,9 +38,12 @@ export class CheckDetailComponent implements OnInit {
   comments = []
   members
   me = null
+  watcher: Subscription
   constructor(
     private sessionService: SessionService,
+    public mediaObserver: MediaObserver,
     private auth: AuthService,
+    public dialogRef: MatDialogRef<CheckDetailComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: {
       members: any[]
@@ -51,6 +56,12 @@ export class CheckDetailComponent implements OnInit {
     this.reviewers = data.reviewers
     this.checkpointTemplate = data.template
     this.me = this.auth.user
+
+    this.watcher = mediaObserver.media$.subscribe((change: MediaChange) => {
+      const [width, height] =
+        change.mqAlias === 'xs' ? ['90vw', '95vh'] : ['50vw', null]
+      this.dialogRef.updateSize(width, height)
+    })
   }
 
   ngOnInit() {
@@ -63,6 +74,9 @@ export class CheckDetailComponent implements OnInit {
           ...x
         }))
       })
+  }
+  ngOnDestroy() {
+    this.watcher.unsubscribe()
   }
 
   updateReviewers(reviewers) {
