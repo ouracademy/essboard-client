@@ -9,6 +9,7 @@ import {
   MatDialogRef
 } from '@angular/material'
 import { CheckDetailComponent } from '../check-detail/index.component'
+import { Subscription } from 'rxjs'
 
 interface Checkpoint {
   id: string
@@ -40,6 +41,7 @@ export class ChecklistComponent implements OnInit, OnChanges {
     'time-to-debate': 'priority_high',
     nothing: 'indeterminate_check_box'
   }
+  watcher: Subscription
 
   constructor(
     private sessionService: SessionService,
@@ -110,6 +112,7 @@ export class ChecklistComponent implements OnInit, OnChanges {
       template: template,
       ref: this.dialog.open(CheckDetailComponent, {
         width: '50vw',
+        maxWidth: '100vw',
         data: {
           members: this.members,
           template: template,
