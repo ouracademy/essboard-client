@@ -16,13 +16,12 @@ import {
   MatListModule,
   MatSidenavModule,
   MatTooltipModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSliderModule
 } from '@angular/material'
 import { ContextMenuModule } from 'ngx-contextmenu'
 
 import { DragDropModule } from '@angular/cdk/drag-drop'
-
-import 'hammerjs'
 
 import { RoutingModule } from './routing.module'
 
@@ -48,6 +47,7 @@ import { OnlineUsersComponent } from './components/online-users/index.components
 import { OurAvatarModule } from '@shared/avatar/index.module'
 import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
 import { CheckDetailComponent } from './components/check-detail/index.component'
+import { EvaluationComponent } from './components/evaluation/index.component'
 
 @NgModule({
   imports: [
@@ -57,6 +57,7 @@ import { CheckDetailComponent } from './components/check-detail/index.component'
     UsersModule,
     ContextMenuModule.forRoot(),
     KernelModule,
+
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -71,6 +72,8 @@ import { CheckDetailComponent } from './components/check-detail/index.component'
     MatListModule,
     MatSidenavModule,
     MatDialogModule,
+    MatSliderModule,
+
     OurAvatarModule,
     PreventOfflineModule,
     DragDropModule,
@@ -86,10 +89,11 @@ import { CheckDetailComponent } from './components/check-detail/index.component'
     ActionsByGoalComponent,
     ChatComponent,
     OnlineUsersComponent,
-    CheckDetailComponent
+    CheckDetailComponent,
+    EvaluationComponent
   ],
 
-  entryComponents: [CheckDetailComponent, ChatComponent],
+  entryComponents: [CheckDetailComponent, EvaluationComponent, ChatComponent],
   providers: [],
   exports: []
 })

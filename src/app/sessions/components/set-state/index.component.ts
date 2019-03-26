@@ -5,6 +5,8 @@ import { EvaluationService } from 'app/sessions/services/evaluation.service'
 import { SharedService } from '@core/shared.service'
 import { SessionService } from 'app/sessions/services/session.service'
 import { combineLatest } from 'rxjs'
+import { EvaluationComponent } from '../evaluation/index.component'
+import { MatDialogRef, MatDialog } from '@angular/material'
 
 @Component({
   selector: 'set-state',
@@ -24,12 +26,14 @@ export class SetStateComponent implements OnInit {
   alphas: AlphaTemplate[]
   isEvaluating = false
   canEvaluate: boolean
+  ref: MatDialogRef<EvaluationComponent>
 
   constructor(
     public kernelService: KernelService,
     public sharedService: SharedService,
     public evaluations: EvaluationService,
-    public sessionService: SessionService
+    public sessionService: SessionService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -55,9 +59,15 @@ export class SetStateComponent implements OnInit {
       this.isEvaluating = status.isEvaluating
     })
   }
+
   startEvaluation() {
-    this.evaluations.startNewOne()
+    this.ref = this.dialog.open(EvaluationComponent, {
+      height: '360px',
+      width: '300px',
+      maxWidth: '82vw'
+    })
   }
+
   stopEvaluation() {
     this.evaluations.stop()
   }
