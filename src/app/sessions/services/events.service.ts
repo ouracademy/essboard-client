@@ -69,7 +69,7 @@ export class EventsService {
               data.is === 'goal' ? 'es una meta' : 'ha sido logrado'
             }`
       case 'EVALUATION_STARTED':
-        return `inicio la evaluación que durara ${data.duration}ms`
+        return `inicio la evaluación que durara ${formatTime(data.duration)}`
       case 'EVALUATION_FINISHED':
         return ` acabo la evaluación`
       case 'COMMENT_ADDED':
@@ -90,4 +90,9 @@ export class EventsService {
       .get(userId)
       .then(x => ({ name: x.name }))
   }
+}
+
+const formatTime = ms => {
+  const seconds = ms / 1000
+  return seconds < 60 ? `${seconds} s` : `${seconds / 60} min`
 }
