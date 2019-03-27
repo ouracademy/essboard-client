@@ -17,11 +17,11 @@ import { EvaluationService } from 'app/sessions/services/evaluation.service'
   ]
 })
 export class EvaluationComponent {
-  time = 15
+  duration = 15
 
   constructor(private evaluations: EvaluationService) {}
 
   start() {
-    this.evaluations.startNewOne()
+    this.evaluations.startNewOne(this.duration)
   }
 }

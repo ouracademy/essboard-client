@@ -28,8 +28,8 @@ export class EvaluationService {
     return this.service.watch().get(this.session.projectId)
   }
 
-  startNewOne() {
-    this.service.create({ projectId: this.session.projectId })
+  startNewOne(duration: number) {
+    this.service.create({ projectId: this.session.projectId, duration })
   }
 
   stop() {
