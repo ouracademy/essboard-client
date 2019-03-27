@@ -30,10 +30,6 @@ export class SocketService {
           idField: '_id'
         })
       )
-
-    if (window.localStorage.getItem('feathers-jwt')) {
-      this._app.authenticate()
-    }
   }
 
   public getService<T>(name: string): Service<T> {

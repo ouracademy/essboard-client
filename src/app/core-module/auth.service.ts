@@ -17,12 +17,16 @@ export class AuthService {
     return this._redirectURL ? this._redirectURL : '/me/projects'
   }
 
-  public login(credentials: Credentials): Promise<User> {
-    return this.socketService.authenticate({
-      strategy: 'local',
-      email: credentials.email,
-      password: credentials.password
-    })
+  public login(credentials?: Credentials): Promise<User> {
+    if (credentials) {
+      return this.socketService.authenticate({
+        strategy: 'local',
+        email: credentials.email,
+        password: credentials.password
+      })
+    } else {
+      return this.socketService.authenticate()
+    }
   }
 
   public get isLoggedIn(): boolean {
