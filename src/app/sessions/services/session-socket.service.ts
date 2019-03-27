@@ -41,7 +41,6 @@ export class SessionSocketService extends SessionService {
           .get(sessionId)
           .pipe(
             map(session => {
-              console.log(session)
               // TODO: remove this.session can have problems..
               this.session = this.toSession(session)
               return this.session
