@@ -1,5 +1,5 @@
 <div>
-  <h2 class="primary mat-title">Cree su proyecto</h2>
+  <h2 class="primary mat-title">Cree su proyecto g</h2>
   <div>
     <form (ngSubmit)="onSubmit()" #projectForm="ngForm">
       <mat-form-field appearance="outline" class="width-all"
@@ -10,9 +10,11 @@
           required
           [(ngModel)]="name"
           name="name"
+          maxlength="30"
+          #nameProject
         />
       </mat-form-field>
-      <mat-form-field appearance="outline" class="width-all"
+      <mat-form-field class="width-all"
         ><input
           matInput
           class="full-width"
@@ -20,10 +22,12 @@
           required
           [(ngModel)]="description"
           name="description"
+          maxlength="150"
+          #descriptionProject
         />
       </mat-form-field>
       <br />
-      <div class="align-right">
+      <div class="align-right" fxLayoutGap="10px">
         <button
           type="submit"
           [disabled]="!projectForm.form.valid"

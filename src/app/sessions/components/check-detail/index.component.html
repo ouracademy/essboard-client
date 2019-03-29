@@ -26,7 +26,7 @@
     <div class="row start-xs ">
       <app-our-avatar class="pad-0-3" size="30" [user]="me"></app-our-avatar>
       <mat-form-field appearance="outline" class="container-complement">
-        <textarea matInput #text></textarea>
+        <textarea matInput #text maxlength="200"></textarea>
       </mat-form-field>
     </div>
 
@@ -61,7 +61,12 @@
       </div>
       <ng-template #editable>
         <mat-form-field appearance="outline" class="full-width">
-          <textarea matInput #editText [value]="comment.text"></textarea>
+          <textarea
+            matInput
+            #editText
+            [value]="comment.text"
+            maxlength="200"
+          ></textarea>
         </mat-form-field>
         <button
           mat-raised-button
