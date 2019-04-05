@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
 import { MatDialog } from '@angular/material'
+import { Observable } from 'rxjs/Observable'
 
 import { Project, Session } from '@models/project'
 import { ProjectService } from '../../services/project.service'
@@ -36,16 +36,22 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
 @Component({
   selector: 'project-detail',
   templateUrl: 'detail.component.html',
-  styleUrls: ['detail.component.css']
+  styles: [
+    `
+      :host {
+        flex: 1;
+        display: flex;
+      }
+    `
+  ]
 })
 export class ProjectDetailComponent implements OnInit {
-  project: Project
+  project$: Observable<Project>
   sessions: any[] = []
   selectedSession: Session
 
   constructor(
     private loading: LoadingClickService,
-    private route: ActivatedRoute,
     private service: ProjectService,
     private sharedService: SharedService,
     public dialog: MatDialog,
@@ -53,18 +59,12 @@ export class ProjectDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.service.currentProject$.subscribe((item: Project) => {
-      this.project = item
-    })
-
-    this.route.params.subscribe(params => {
-      this.service.selectedProject = params['id']
-    })
+    this.project$ = this.service.currentProject$
   }
 
-  addSession() {
+  addSession(project) {
     this.sessionService
-      .addSession(this.project.id)
+      .addSession(project.id)
       .then(() => this.loading.stopLoading('addSession'))
       .catch(error => {
         this.loading.stopLoading('addSession')
@@ -75,8 +75,8 @@ export class ProjectDetailComponent implements OnInit {
       })
   }
 
-  share() {
-    this.dialog.open(ShareComponent, { data: this.project })
+  share(project) {
+    this.dialog.open(ShareComponent, { data: project })
   }
 
   delete() {

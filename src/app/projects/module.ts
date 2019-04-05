@@ -1,39 +1,35 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { Routes, RouterModule } from '@angular/router'
 import {
   MatCardModule,
   MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
   MatIconModule,
-  MatDialogModule,
-  MatTooltipModule
+  MatDialogModule
 } from '@angular/material'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 
-import { RoutingModule } from './routing.module'
-import { KernelModule } from '@shared/kernel/kernel.module'
-import { LoadingModule } from '@shared/loading/loading.module'
-import { SearchUsersModule } from '../users/search.module'
 import { RenderCtrlModule } from '@shared/render-ctrl/index.module'
-import { NotImplementedModule } from '@shared/not-implemented/index.module'
-import { OurAvatarModule } from '@shared/avatar/index.module'
-import { LoadingWhenClickedModule } from '@shared/loading-when-clicked'
+
+import { ProjectsService } from './services/projects.service'
+import { ProjectsSocketService } from './services/projects-socket.service'
 
 import {
   ProjectPortfolioComponent,
   ProjectListComponent,
-  DetailComponent,
   CardComponent,
-  SessionsListComponent,
-  CreateComponent,
-  ShareComponent
+  CreateComponent
 } from './index'
 import { FlexLayoutModule } from '@angular/flex-layout'
+
+const routes: Routes = [{ path: '', component: ProjectPortfolioComponent }]
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
 
@@ -43,29 +39,17 @@ import { FlexLayoutModule } from '@angular/flex-layout'
     MatInputModule,
     MatIconModule,
     MatDialogModule,
-    MatTooltipModule,
 
     FlexLayoutModule,
-
-    SearchUsersModule,
-    LoadingModule,
-    RenderCtrlModule,
-    NotImplementedModule,
-    LoadingWhenClickedModule,
-
-    KernelModule,
-    OurAvatarModule,
-    RoutingModule
+    RenderCtrlModule
   ],
   declarations: [
     ProjectPortfolioComponent,
     ProjectListComponent,
     CardComponent,
-    DetailComponent,
-    SessionsListComponent,
-    CreateComponent,
-    ShareComponent
+    CreateComponent
   ],
-  entryComponents: [CreateComponent, ShareComponent]
+  entryComponents: [CreateComponent],
+  providers: [{ provide: ProjectsService, useClass: ProjectsSocketService }]
 })
-export class ProjectModule {}
+export class ProjectsModule {}

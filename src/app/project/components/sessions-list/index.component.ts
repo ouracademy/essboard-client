@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core'
-import { Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 
 import { SessionService } from 'app/sessions/services/session.service'
@@ -24,13 +23,9 @@ export class SessionsListComponent implements OnDestroy, DataList {
     })
   }
 
-  constructor(private router: Router, public sessionsService: SessionService) {
+  constructor(public sessionsService: SessionService) {
     this.isLoaded$ = new BehaviorSubject(false)
     this.isEmpty$ = new BehaviorSubject(true)
-  }
-
-  goSession(session) {
-    this.router.navigate(['/me/sessions', session.id])
   }
 
   ngOnDestroy() {

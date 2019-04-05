@@ -33,6 +33,8 @@ export class ProjectSocketService extends ProjectService {
     this.service.get(projectId).then(project => {
       this.channels.join('projects', project['_id'])
       this.project = this.toProject(project)
+
+      console.log({ project: this.project })
       this.currentProject$.next(this.project)
       this.members$ = this.membersService.until(projectId)
     })

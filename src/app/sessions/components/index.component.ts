@@ -55,6 +55,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      console.log(params)
       this.sessions.selectedSession = params['id']
     })
 

@@ -1,5 +1,5 @@
 <mat-card
-  (click)="handleSelection()"
+  [routerLink]="[project.id]"
   class="project-card relative mar-1 selectable"
 >
   <div *ngIf="!isOwner" class="corner-tr ">

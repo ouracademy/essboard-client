@@ -14,7 +14,7 @@ import { KernelService } from '@core/kernel-knowledge.service'
 import { combineLatest, from } from 'rxjs'
 
 import { format } from 'date-fns'
-import { ProjectService } from 'app/projects/services/project.service'
+import { ProjectService } from 'app/project/services/project.service'
 import { switchMap, filter } from 'rxjs/operators'
 import { Session } from '@models/project'
 

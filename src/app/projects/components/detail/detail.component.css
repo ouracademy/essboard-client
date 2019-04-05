@@ -1,7 +1,0 @@
-.content {
-  min-height: 500px;
-}
-:host {
-  flex: 1;
-  display: flex;
-}

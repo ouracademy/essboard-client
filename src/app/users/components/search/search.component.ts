@@ -8,7 +8,7 @@ import {
   OnDestroy
 } from '@angular/core'
 import { Subscription, combineLatest, Subject, Observable } from 'rxjs'
-import { ProjectService } from 'app/projects/services/project.service'
+import { ProjectService } from 'app/project/services/project.service'
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators'
 import { Member } from 'app/members/members.service'
 

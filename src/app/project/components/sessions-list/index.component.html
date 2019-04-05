@@ -1,0 +1,11 @@
+<a *ngFor="let session of sessions" [routerLink]="['sessions', session.id]">
+  <div class="mar-1 selectable shadow pad-0-5">
+    <div class="row">
+      <mat-icon *ngIf="!!session.endDate">lock</mat-icon>
+      <p class="row mat-body-1 primary">Sesión</p>
+    </div>
+    <p class="row info mat-caption">
+      {{ session.createdAt | date: "d 'de' MMMM" }}
+    </p>
+  </div>
+</a>
