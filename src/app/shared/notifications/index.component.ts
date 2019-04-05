@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core'
-import { AuthService } from '@core/auth.service'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { SharedService } from '@core/shared.service'
 import { Router } from '@angular/router'
 import { path } from 'ramda'
 import { NotificationService } from '@core/notification.service'
+import { Subscription } from 'rxjs'
 
 interface Notification {
   _id: any
@@ -54,8 +54,9 @@ interface Notification {
     `
   ]
 })
-export class NotificationsComponent implements OnInit {
+export class NotificationsComponent implements OnInit, OnDestroy {
   notifications: Notification[] = []
+  subscription: Subscription
 
   subjectNotification: { invitation: {} } = {
     invitation: { message: 'Invitación', route: 'me/projects/' }
@@ -71,18 +72,14 @@ export class NotificationsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.notificationService.newNotification$.subscribe(
-      (notification: Notification) => {
-        this.share.showSucces(
-          this.subjectNotification[notification.subject].message,
-          notification.message
-        )
-      }
-    )
-
-    this.notificationService.notifications$.subscribe(re => {
-      this.notifications = re
-    })
+    this.subscription = this.notificationService
+      .notifications$()
+      .subscribe(re => {
+        this.notifications = re
+      })
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
   }
 
   handleClick(notification: Notification) {

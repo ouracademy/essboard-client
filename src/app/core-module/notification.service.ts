@@ -2,21 +2,15 @@ import { Injectable } from '@angular/core'
 import { SocketService } from '@core/socket.service'
 
 import { map } from 'rxjs/operators'
-import { Subject } from 'rxjs'
 
 @Injectable()
 export class NotificationService {
-  public newNotification$ = new Subject()
   notificationService
 
   constructor(public socketService: SocketService) {
     this.notificationService = this.socketService.getService('notifications')
-    this.notificationService.on('created', newItem =>
-      this.newNotification$.next(newItem)
-    )
   }
-
-  get notifications$() {
+  notifications$() {
     return this.notificationService
       .watch()
       .find({
