@@ -51,10 +51,15 @@ import { Credentials } from '@models/user'
             >
               Registrate
             </button>
-            <div class="more-options">
-              <span><a routerLink="/login">Ya tengo una cuenta</a></span>
-            </div>
           </form>
+          <br />
+          <div>
+            <span
+              ><a class="info mat-body-1" routerLink="/login"
+                >Ya tengo una cuenta</a
+              >
+            </span>
+          </div>
         </mat-card-content>
       </mat-card>
     </app-auth-layout>

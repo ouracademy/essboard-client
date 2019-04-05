@@ -59,7 +59,7 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
             </button>
           </form>
           <br />
-          <div class="row aorund-xs middle-xs">
+          <div>
             <span
               ><a class="info mat-body-1" routerLink="/signup"
                 >No tienes una cuenta</a
