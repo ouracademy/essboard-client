@@ -47,7 +47,10 @@
         </button>
       </div>
 
-      <app-render-ctrl>
+      <app-render-ctrl
+        (addButton)="addSession(project)"
+        [options]="optionsRender"
+      >
         <sessions-list #data [projectId]="project.id"></sessions-list>
       </app-render-ctrl>
     </div>

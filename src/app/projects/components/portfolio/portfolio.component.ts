@@ -14,11 +14,16 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
     <div class="pad-1 container-column">
       <div class="row between-xs middle-xs">
         <span class="primary mat-title">{{ title }}</span>
-        <button mat-icon-button class="main" (click)="createProject()">
+        <button mat-raised-button class="main" (click)="createProject()">
           <mat-icon>add</mat-icon>
+          Nuevo proyecto
         </button>
       </div>
-      <app-render-ctrl class="container-complement">
+      <app-render-ctrl
+        class="container-complement"
+        (addButton)="createProject()"
+        [options]="optionsRender"
+      >
         <project-list #data></project-list>
       </app-render-ctrl>
     </div>
@@ -34,6 +39,11 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 })
 export class ProjectPortfolioComponent {
   title = 'Mis proyectos'
+  optionsRender = {
+    message: 'Aún no tienes proyectos, empieza creando uno haciendo click',
+    image: 'assets/images/project.png',
+    addButton: { message: 'Aquí' }
+  }
 
   constructor(private matDialog: MatDialog) {}
 
