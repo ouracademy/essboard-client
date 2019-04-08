@@ -8,6 +8,7 @@ import {
   MatMenuModule
 } from '@angular/material'
 import { OurAvatarModule } from '@shared/avatar/index.module'
+import { RouterModule } from '@angular/router'
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { OurAvatarModule } from '@shared/avatar/index.module'
     OurAvatarModule,
     MatMenuModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterModule
   ],
   exports: [AccountComponent],
   declarations: [AccountComponent]
