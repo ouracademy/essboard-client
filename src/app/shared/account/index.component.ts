@@ -6,9 +6,12 @@ import { AuthService } from '@core/auth.service'
 @Component({
   selector: 'app-account',
   template: `
-    <button mat-icon-button class="avatar" [matMenuTriggerFor]="menu">
-      <mat-icon>arrow_drop_down</mat-icon>
-    </button>
+    <app-our-avatar
+      [matMenuTriggerFor]="menu"
+      class="pad-0-3"
+      size="30"
+      [user]="user"
+    ></app-our-avatar>
     <mat-menu
       class="menu-options"
       x-position="after"

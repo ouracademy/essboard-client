@@ -7,9 +7,16 @@ import {
   MatButtonModule,
   MatMenuModule
 } from '@angular/material'
+import { OurAvatarModule } from '@shared/avatar/index.module'
 
 @NgModule({
-  imports: [CommonModule, MatMenuModule, MatIconModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    OurAvatarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule
+  ],
   exports: [AccountComponent],
   declarations: [AccountComponent]
 })

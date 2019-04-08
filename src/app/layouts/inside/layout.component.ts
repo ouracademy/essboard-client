@@ -7,7 +7,7 @@ import { HeaderModule } from '@shared/header/index.module'
   template: `
     <div class="container-column viewport-full">
       <app-header mode="toolbar">
-        <right-content class="row">
+        <right-content class="row middle-xs">
           <app-notifications></app-notifications>
           <app-account></app-account>
         </right-content>
