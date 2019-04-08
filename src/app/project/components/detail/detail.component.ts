@@ -82,7 +82,7 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   share(project) {
-    this.dialog.open(ShareComponent, { data: project })
+    this.dialog.open(ShareComponent, { data: project, minWidth: '50vw' })
   }
 
   delete() {

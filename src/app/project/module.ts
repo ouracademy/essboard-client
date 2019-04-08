@@ -6,7 +6,8 @@ import {
   MatButtonModule,
   MatIconModule,
   MatDialogModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatMenuModule
 } from '@angular/material'
 import { FlexLayoutModule } from '@angular/flex-layout'
 
@@ -31,6 +32,7 @@ const routes: Routes = [{ path: '', component: ProjectDetailComponent }]
     MatIconModule,
     MatDialogModule,
     MatTooltipModule,
+    MatMenuModule,
     FlexLayoutModule,
 
     NotImplementedModule,
