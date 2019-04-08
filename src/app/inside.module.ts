@@ -53,7 +53,7 @@ export class ProjectGuardService implements CanActivate {
         >
           <div class="text--head" fxLayout="column">
             <span
-              class="info mat-title"
+              class="info title-project mat-title"
               [matTooltip]="project.description"
               matTooltipPosition="above"
             >
@@ -96,6 +96,10 @@ export class ProjectGuardService implements CanActivate {
       :host {
         flex: 1;
         display: flex;
+      }
+      .title-project {
+        text-transform: capitalize;
+        font-weight: bold;
       }
     `
   ]
