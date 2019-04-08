@@ -1,40 +1,4 @@
 <div *ngIf="(project$ | async) as project" fxLayout="column" fxFlex>
-  <header
-    fxLayout="row"
-    fxLayoutAlign="space-between center"
-    class="row-detail"
-  >
-    <div class="text--head">
-      <span class="mat-body-1 primary">Nombre:</span>
-      <span
-        class="info mat-body-1"
-        [matTooltip]="project.description"
-        matTooltipPosition="above"
-      >
-        {{ project.name }}
-      </span>
-    </div>
-    <div>
-      <button mat-raised-button color="primary" (click)="share(project)">
-        <mat-icon class="md-24">people</mat-icon>
-        &nbsp; <span class="mat-body-1">Comparte tu proyecto</span>
-      </button>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>settings</mat-icon>
-      </button>
-      <mat-menu
-        class="menu-options"
-        x-position="after"
-        y-position="below"
-        #menu="matMenu"
-      >
-        <button mat-menu-item (click)="delete()" app-not-implemented>
-          <mat-icon class="md-24">delete_forever</mat-icon>
-          Elimina este proyecto
-        </button>
-      </mat-menu>
-    </div>
-  </header>
   <div fxLayout="column-reverse" fxLayout.gt-sm="row" class="pad-top-1">
     <div fxFlex="100" fxFlex.gt-sm="20">
       <div fxLayout="row" fxLayoutAlign="space-around center">
