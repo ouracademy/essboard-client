@@ -4,19 +4,23 @@ import { Component, OnInit, Input } from '@angular/core'
   selector: 'app-header',
   template: `
     <div
-      class="row between-xs middle-xs"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
       [ngStyle]="{ height: mode === 'toolbar' ? '10vh' : '15vh' }"
     >
-      <a class="brand col-xs-4 col-sm-4 " routerLink="/">
-        <img
-          class="logo"
-          src="assets/images/logo/logo-horizontal.png"
-          alt="Essboard"
-        />
-      </a>
-      <div class="pad-1 row end-xs middle-xs">
-        <ng-content select="right-content"> </ng-content>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <a class="brand" fxFlex.xs="100" routerLink="/">
+          <img
+            class="logo"
+            src="assets/images/logo/logo-horizontal.png"
+            alt="Essboard"
+          />
+        </a>
+        <div fxFlex.xs="100">
+          <ng-content select="left-content"> </ng-content>
+        </div>
       </div>
+      <div class="pad-1"><ng-content select="right-content"> </ng-content></div>
     </div>
   `,
   styles: [
