@@ -23,12 +23,14 @@ import { AccountModule } from '@shared/account/index.module'
 import {
   MatMenuModule,
   MatButtonModule,
-  MatIconModule
+  MatIconModule,
+  MatDialogModule
 } from '@angular/material'
 import { Observable } from 'rxjs'
 import { Project } from '@shared/models/project'
 import { CommonModule } from '@angular/common'
 import { FlexLayoutModule } from '@angular/flex-layout'
+import { ShareComponent } from './project/components/share/share.component'
 
 @Injectable()
 export class ProjectGuardService implements CanActivate {
@@ -50,9 +52,8 @@ export class ProjectGuardService implements CanActivate {
           *ngIf="(project$ | async) as project"
         >
           <div class="text--head" fxLayout="column">
-            <span class="mat-body-1 primary">Nombre:</span>
             <span
-              class="info mat-body-1"
+              class="info mat-title"
               [matTooltip]="project.description"
               matTooltipPosition="above"
             >
@@ -64,7 +65,7 @@ export class ProjectGuardService implements CanActivate {
           <div *ngIf="(project$ | async) as project">
             <button mat-raised-button color="primary" (click)="share(project)">
               <mat-icon class="md-24">people</mat-icon>
-              &nbsp; <span class="mat-body-1">Comparte tu proyecto</span>
+              &nbsp; <span class="mat-body-1">Compartir</span>
             </button>
           </div>
           <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -110,6 +111,9 @@ export class ProjectLayoutComponent implements OnInit {
     this.project$ = this.service.currentProject$
   }
   delete() {}
+  share() {
+    this.service.showShareProject()
+  }
 }
 @NgModule({
   imports: [
@@ -121,10 +125,12 @@ export class ProjectLayoutComponent implements OnInit {
     MatIconModule,
     CommonModule,
     FlexLayoutModule,
-    RouterModule
+    RouterModule,
+    MatDialogModule
   ],
-  declarations: [ProjectLayoutComponent],
-  schemas: [NO_ERRORS_SCHEMA]
+  declarations: [ProjectLayoutComponent, ShareComponent],
+  schemas: [NO_ERRORS_SCHEMA],
+  entryComponents: [ShareComponent]
 })
 export class ProjectLayoutModule {}
 

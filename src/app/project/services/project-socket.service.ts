@@ -7,6 +7,8 @@ import { Member, MembersService } from 'app/members/members.service'
 import { BehaviorSubject, of } from 'rxjs'
 import { ChannelService } from 'app/sessions/services/channel.service'
 import { User } from '@models/user'
+import { MatDialog } from '@angular/material'
+import { ShareComponent } from '../components/share/share.component'
 
 @Injectable()
 export class ProjectSocketService extends ProjectService {
@@ -18,7 +20,8 @@ export class ProjectSocketService extends ProjectService {
     public socketService: SocketService,
     private membersService: MembersService,
     private channels: ChannelService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
     super()
     this.service = this.socketService.getService('projects')
@@ -34,7 +37,6 @@ export class ProjectSocketService extends ProjectService {
       this.channels.join('projects', project['_id'])
       this.project = this.toProject(project)
 
-      console.log({ project: this.project })
       this.currentProject$.next(this.project)
       this.members$ = this.membersService.until(projectId)
     })
@@ -88,5 +90,9 @@ export class ProjectSocketService extends ProjectService {
 
   remove(aMember: Member): Promise<any> {
     return this.membersService.remove(aMember, this.project.id)
+  }
+
+  showShareProject() {
+    this.dialog.open(ShareComponent, { data: this.project, minWidth: '50vw' })
   }
 }

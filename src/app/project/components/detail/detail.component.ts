@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable'
 import { Project, Session } from '@models/project'
 import { ProjectService } from '../../services/project.service'
 import { SharedService } from '@core/shared.service'
-import { ShareComponent } from '../share/share.component'
 import { SessionService } from 'app/sessions/services/session.service'
 import { LoadingClickService } from '@shared/loading-when-clicked'
 
@@ -60,7 +59,6 @@ export class ProjectDetailComponent implements OnInit {
     private loading: LoadingClickService,
     private service: ProjectService,
     private sharedService: SharedService,
-    public dialog: MatDialog,
     private sessionService: SessionService
   ) {}
 
@@ -79,10 +77,6 @@ export class ProjectDetailComponent implements OnInit {
           'Aun no haz concluido tu actual sesión'
         )
       })
-  }
-
-  share(project) {
-    this.dialog.open(ShareComponent, { data: project, minWidth: '50vw' })
   }
 
   delete() {

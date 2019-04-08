@@ -43,7 +43,6 @@ const routes: Routes = [{ path: '', component: ProjectDetailComponent }]
     RenderCtrlModule
   ],
   exports: [],
-  declarations: [SessionsListComponent, ProjectDetailComponent, ShareComponent],
-  entryComponents: [ShareComponent]
+  declarations: [SessionsListComponent, ProjectDetailComponent]
 })
 export class ProjectModule {}
