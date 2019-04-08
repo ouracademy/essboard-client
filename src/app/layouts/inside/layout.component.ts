@@ -1,10 +1,5 @@
-import { Component, OnInit } from '@angular/core'
-import { AuthService } from '@core/auth.service'
-import {
-  MatMenuModule,
-  MatButtonModule,
-  MatIconModule
-} from '@angular/material'
+import { Component } from '@angular/core'
+
 import { HeaderModule } from '@shared/header/index.module'
 
 @Component({
@@ -14,20 +9,7 @@ import { HeaderModule } from '@shared/header/index.module'
       <app-header mode="toolbar">
         <right-content class="row">
           <app-notifications></app-notifications>
-          <mat-menu
-            class="menu-options"
-            x-position="after"
-            y-position="below"
-            #menu="matMenu"
-          >
-            <button mat-menu-item routerLink="/me/projects">
-              Mis proyectos
-            </button>
-            <button mat-menu-item (click)="logout()">Salir</button>
-          </mat-menu>
-          <button mat-icon-button class="avatar" [matMenuTriggerFor]="menu">
-            <mat-icon>arrow_drop_down</mat-icon>
-          </button>
+          <app-account></app-account>
         </right-content>
       </app-header>
       <div class="pad-0-5 container-complement">
@@ -37,36 +19,15 @@ import { HeaderModule } from '@shared/header/index.module'
   `,
   styleUrls: ['layout.component.scss']
 })
-export class InsideLayoutComponent implements OnInit {
-  constructor(private auth: AuthService, private router: Router) {}
-  ngOnInit() {}
-  get isLoggedIn(): boolean {
-    return this.auth.isLoggedIn
-  }
-
-  get user() {
-    return this.auth.user
-  }
-
-  logout() {
-    this.auth.logout().then(() => this.router.navigate(['/']))
-  }
-}
+export class InsideLayoutComponent {}
 
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core'
 
-import { Router } from '@angular/router'
 import { NotificationsModule } from '@shared/notifications/index.module'
 import { RouterModule } from '@angular/router'
+import { AccountModule } from '@shared/account/index.module'
 @NgModule({
-  imports: [
-    MatMenuModule,
-    MatButtonModule,
-    MatIconModule,
-    RouterModule,
-    HeaderModule,
-    NotificationsModule
-  ],
+  imports: [RouterModule, HeaderModule, NotificationsModule, AccountModule],
   declarations: [InsideLayoutComponent],
   exports: [InsideLayoutComponent],
   schemas: [NO_ERRORS_SCHEMA]
