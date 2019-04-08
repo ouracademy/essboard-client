@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { SharedService } from '@core/shared.service'
-import { Meta } from '@angular/platform-browser'
+import { Angulartics2GoogleTagManager } from 'angulartics2/gtm'
 
 @Component({
   selector: 'app-root',
@@ -32,29 +32,16 @@ import { Meta } from '@angular/platform-browser'
 })
 export class AppComponent implements OnInit {
   contentToast = null
-  constructor(public sharedService: SharedService, private meta: Meta) {}
+  constructor(
+    public sharedService: SharedService,
+    googleTagManager: Angulartics2GoogleTagManager
+  ) {
+    googleTagManager.startTracking()
+  }
+
   ngOnInit() {
     this.sharedService.showToast$.subscribe(content => {
       this.contentToast = content
     })
-
-    const title = 'Essboard'
-    const description =
-      'Una herramienta colaborativa para definir como va tu proyecto y las metas que debes lograr, ' +
-      'tomando en cuenta varios aspectos del desarrollo de software según el framework SEMAT Essence'
-    const imageURL = 'https://our-academy.org/images/essboard.png'
-
-    this.meta.addTags([
-      { name: 'description', content: description },
-      { name: 'twitter:card', value: 'summary' },
-      { name: 'twitter:title', content: title },
-      { name: 'twitter:description', content: description },
-      { name: 'twitter:image', content: imageURL },
-
-      { property: 'og:type', content: 'website' },
-      { property: 'og:title', content: title },
-      { property: 'og:description', content: description },
-      { property: 'og:image', content: imageURL }
-    ])
   }
 }

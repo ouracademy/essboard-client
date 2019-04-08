@@ -11,6 +11,7 @@ import localeEs from '@angular/common/locales/es'
 import { LoadingClickService } from '@shared/loading-when-clicked'
 import { GestureConfig } from '@angular/material'
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser'
+import { Angulartics2Module } from 'angulartics2'
 
 registerLocaleData(localeEs)
 
@@ -20,7 +21,9 @@ registerLocaleData(localeEs)
 
     CommonModule,
     CoreModule,
-    AppRoutingModule
+    AppRoutingModule,
+
+    Angulartics2Module.forRoot()
   ],
   declarations: [AppComponent],
   providers: [
