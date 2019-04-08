@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { SharedService } from '@core/shared.service'
 import { Meta } from '@angular/platform-browser'
 
+import { Angulartics2GoogleTagManager } from 'angulartics2/gtm'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -32,7 +34,14 @@ import { Meta } from '@angular/platform-browser'
 })
 export class AppComponent implements OnInit {
   contentToast = null
-  constructor(public sharedService: SharedService, private meta: Meta) {}
+  constructor(
+    public sharedService: SharedService,
+    private meta: Meta,
+    googleTagManager: Angulartics2GoogleTagManager
+  ) {
+    googleTagManager.startTracking()
+  }
+
   ngOnInit() {
     this.sharedService.showToast$.subscribe(content => {
       this.contentToast = content
