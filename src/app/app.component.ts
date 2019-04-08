@@ -38,10 +38,11 @@ export class AppComponent implements OnInit {
       this.contentToast = content
     })
 
-    const title = 'Essboard'
+    const title =
+      'Essboard: Essence colaborativo en el monitoreo y dirección de software'
     const description =
       'Una herramienta colaborativa para definir como va tu proyecto y las metas que debes lograr, ' +
-      'tomando en cuenta varios aspectos del desarrollo de software según el framework SEMAT Essence'
+      'tomando en cuenta varios aspectos del desarrollo de software'
     const imageURL = 'https://our-academy.org/images/essboard.png'
 
     this.meta.addTags([
