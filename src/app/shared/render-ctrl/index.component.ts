@@ -3,7 +3,9 @@ import {
   OnInit,
   ContentChild,
   AfterContentInit,
-  Input
+  Input,
+  Output,
+  EventEmitter
 } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 
@@ -20,7 +22,22 @@ export interface DataList {
       <div *ngIf="!isLoaded"><h3 class="centered info">Cargando ...</h3></div>
       <div *ngIf="isLoaded">
         <h3 *ngIf="isEmpty" class="centered info">
-          No se encontraron resultados
+          <div class="section-image" *ngIf="options.image">
+            <img class="empty-image" [src]="options.image" />
+          </div>
+          <br />
+          <div class="mat-body-2">
+            {{ options.message || 'No se encontraron resultados' }}
+            <span *ngIf="options.addButton">
+              <button
+                mat-stroked-button
+                color="accent"
+                (click)="addButton.emit()"
+              >
+                {{ options.addButton.message }}
+              </button>
+            </span>
+          </div>
         </h3>
       </div>
     </div>
@@ -37,12 +54,23 @@ export interface DataList {
         width: 100%;
         position: relative;
       }
+      .empty-image {
+        opacity: 0.4;
+        max-width: 100%;
+        min-width: 50%;
+      }
     `
   ]
 })
 export class OurRenderCtrlComponent implements OnInit, AfterContentInit {
   @Input() height
+  @Input() options: { image: string; message: string; addButton: any } = {
+    image: null,
+    message: null,
+    addButton: null
+  }
   @ContentChild('data') dataComponent: DataList
+  @Output() addButton = new EventEmitter<any>()
 
   isLoaded = false
   isEmpty = false

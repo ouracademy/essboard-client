@@ -49,6 +49,12 @@ export class ProjectDetailComponent implements OnInit {
   project$: Observable<Project>
   sessions: any[] = []
   selectedSession: Session
+  optionsRender = {
+    message:
+      'Tu proyecto aun no tiene sesiones, empieza creando uno haciendo click',
+    image: 'assets/images/meeting.png',
+    addButton: { message: 'Aquí' }
+  }
 
   constructor(
     private loading: LoadingClickService,
@@ -76,7 +82,7 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   share(project) {
-    this.dialog.open(ShareComponent, { data: project })
+    this.dialog.open(ShareComponent, { data: project, minWidth: '50vw' })
   }
 
   delete() {
