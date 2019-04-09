@@ -31,6 +31,7 @@ import { Project } from '@shared/models/project'
 import { CommonModule } from '@angular/common'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { ShareComponent } from './project/components/share/share.component'
+import { SearchUsersModule } from './users/search.module'
 
 @Injectable()
 export class ProjectGuardService implements CanActivate {
@@ -130,7 +131,8 @@ export class ProjectLayoutComponent implements OnInit {
     CommonModule,
     FlexLayoutModule,
     RouterModule,
-    MatDialogModule
+    MatDialogModule,
+    SearchUsersModule
   ],
   declarations: [ProjectLayoutComponent, ShareComponent],
   schemas: [NO_ERRORS_SCHEMA],

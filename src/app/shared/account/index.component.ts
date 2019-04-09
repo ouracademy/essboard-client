@@ -22,7 +22,13 @@ import { AuthService } from '@core/auth.service'
       <button mat-menu-item (click)="logout()">Salir</button>
     </mat-menu>
   `,
-  styles: [``]
+  styles: [
+    `
+      :host {
+        padding: 5px;
+      }
+    `
+  ]
 })
 export class AccountComponent {
   constructor(public auth: AuthService, private router: Router) {}

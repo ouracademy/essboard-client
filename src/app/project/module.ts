@@ -37,7 +37,6 @@ const routes: Routes = [{ path: '', component: ProjectDetailComponent }]
 
     NotImplementedModule,
     KernelModule,
-    SearchUsersModule,
     LoadingWhenClickedModule,
     OurAvatarModule,
     RenderCtrlModule
