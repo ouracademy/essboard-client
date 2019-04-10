@@ -1,5 +1,8 @@
 <div class="">
-  <div class="primary mat-title">Comparte el proyecto con:</div>
+  <div class="align-right">
+    <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+  </div>
+  <h1 class="primary mat-headline">Comparte el proyecto con:</h1>
   <div>
     <search-user (onSelect)="handleUserSelected($event)"></search-user>
     <table class="table table-bordered">
@@ -19,10 +22,5 @@
         </td>
       </tr>
     </table>
-  </div>
-  <div class="align-right">
-    <button class="main" mat-dialog-close>
-      <mat-icon class="md-24">done</mat-icon>
-    </button>
   </div>
 </div>

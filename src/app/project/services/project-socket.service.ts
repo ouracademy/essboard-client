@@ -93,6 +93,10 @@ export class ProjectSocketService extends ProjectService {
   }
 
   showShareProject() {
-    this.dialog.open(ShareComponent, { data: this.project, minWidth: '50vw' })
+    this.dialog.open(ShareComponent, {
+      data: this.project,
+      minWidth: '50vw',
+      autoFocus: false
+    })
   }
 }
