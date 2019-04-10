@@ -22,6 +22,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   members: Member[]
   subscription: Subscription
   private searchTerms = new Subject<string>()
+  selectedUser: User
 
   constructor(
     private userService: UserSearchSocketService,
@@ -55,10 +56,15 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.searchTerms.next(term)
   }
 
+  invite() {
+    console.log(this.selectedUser)
+    this.onSelect.emit(this.selectedUser)
+    this.searchTerms.next('')
+  }
+
   select(user: User) {
     if (!user.isMember(this.members)) {
-      this.onSelect.emit(user)
-      this.searchTerms.next('')
+      this.selectedUser = user
     }
   }
 
