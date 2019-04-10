@@ -27,7 +27,7 @@ import { FormControl, Validators } from '@angular/forms'
   ]
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  @Output() onSelect = new EventEmitter<User>()
+  @Output() onSubmit = new EventEmitter<string>()
 
   searchControl = new FormControl('', [Validators.email, Validators.required])
 
@@ -40,7 +40,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private project: ProjectService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     // TODO: move to backend member service
     this.subscription = combineLatest(
       this.searchUsers(),
@@ -51,39 +51,24 @@ export class SearchComponent implements OnInit, OnDestroy {
     })
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
+  }
+
   private searchUsers(): Observable<User[]> {
     return this.searchControl.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((value: string | User) => {
         const term = typeof value === 'string' ? value : value.email
-
-        console.log({ term })
-
         return this.userService.search(term)
       })
     )
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe()
-  }
-
   invite(event) {
     event.stopPropagation()
-    // if (!user.isMember(this.members)) {
-    //   this.selectedUser = user
-    // }
-    console.log('in invite')
-    console.log({
-      value: this.searchControl.value
-    })
-
-    //this.onSelect.emit(this.selectedUser)
+    this.onSubmit.emit(this.searchControl.value)
     this.searchControl.reset('')
-  }
-
-  isMember(user: User) {
-    return user.isMember(this.members)
   }
 }

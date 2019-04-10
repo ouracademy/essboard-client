@@ -22,10 +22,11 @@ export class ShareComponent implements OnInit {
     })
   }
 
-  handleUserSelected(user: User) {
-    this.projectService.invite(user).then(member => {
-      this.dialog.showSucces('Usuario invitado!')
-    })
+  invite(email: string) {
+    console.log({ email })
+    // this.projectService.invite(user).then(member => {
+    //   this.dialog.showSucces('Usuario invitado!')
+    // })
   }
 
   delete(member) {
