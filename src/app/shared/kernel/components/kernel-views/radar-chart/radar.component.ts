@@ -57,7 +57,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     combineLatest(
       this.projectService.currentProject$.pipe(
-        filter(project => project),
+        filter(project => !!project),
         switchMap(project =>
           from<any[]>(
             this.service.find({

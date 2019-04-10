@@ -5,7 +5,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatListModule,
-  MatButtonModule
+  MatButtonModule,
+  MatAutocompleteModule
 } from '@angular/material'
 
 import { SearchComponent } from './components/search/search.component'
@@ -24,7 +25,8 @@ import { OurAvatarModule } from '@shared/avatar/index.module'
     MatInputModule,
     MatListModule,
     MatButtonModule,
-    OurAvatarModule
+    OurAvatarModule,
+    MatAutocompleteModule
   ],
   declarations: [SearchComponent],
   providers: [UserSearchSocketService],
