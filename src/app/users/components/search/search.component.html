@@ -8,8 +8,13 @@
       required
     />
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let user of users" [value]="user.email">
-        {{ user.name }}
+      <mat-option
+        *ngFor="let user of users"
+        [value]="user.email"
+        fxLayout="row"
+      >
+        <app-our-avatar class="avatar" [user]="user"></app-our-avatar>
+        <span>{{ user.name }}</span>
       </mat-option>
     </mat-autocomplete>
     <button
@@ -24,15 +29,4 @@
       <mat-icon>done</mat-icon>
     </button>
   </mat-form-field>
-
-  <!-- <mat-list>
-    <mat-list-item *ngFor="let user of users" (click)="select(user)">
-      <app-our-avatar [user]="user" matListAvatar></app-our-avatar>
-      <h3 mat-line>{{ user.name }}</h3>
-      <p mat-line>
-        <span> {{ user.email }} </span>
-      </p>
-      <span *ngIf="isMember(user)">Parte del equipo</span>
-    </mat-list-item>
-  </mat-list> -->
 </form>

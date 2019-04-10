@@ -15,7 +15,16 @@ import { FormControl, Validators } from '@angular/forms'
 
 @Component({
   selector: 'search-user',
-  templateUrl: 'search.component.html'
+  templateUrl: 'search.component.html',
+  styles: [
+    `
+      .avatar {
+        vertical-align: middle;
+        display: inline-block;
+        margin-right: 8px;
+      }
+    `
+  ]
 })
 export class SearchComponent implements OnInit, OnDestroy {
   @Output() onSelect = new EventEmitter<User>()
