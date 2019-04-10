@@ -1,24 +1,31 @@
-<div>
-  <mat-form-field class="width-all">
+<form>
+  <mat-form-field class="width-all" appearance="outline">
     <input
       matInput
-      #searchBox
-      (input)="search(searchBox.value)"
+      [formControl]="searchControl"
       placeholder="Escribe aqui su correo"
-      maxlength="30"
+      [matAutocomplete]="auto"
+      required
     />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let user of users" [value]="user.email">
+        {{ user.name }}
+      </mat-option>
+    </mat-autocomplete>
     <button
       matSuffix
+      mat-icon-button
+      aria-label="Invitar"
       color="primary"
       mat-flat-button
-      (click)="invite()"
-      [disabled]="!selectedUser"
+      (click)="invite($event)"
+      *ngIf="searchControl.valid"
     >
-      Invitar
+      <mat-icon>done</mat-icon>
     </button>
   </mat-form-field>
 
-  <mat-list>
+  <!-- <mat-list>
     <mat-list-item *ngFor="let user of users" (click)="select(user)">
       <app-our-avatar [user]="user" matListAvatar></app-our-avatar>
       <h3 mat-line>{{ user.name }}</h3>
@@ -27,5 +34,5 @@
       </p>
       <span *ngIf="isMember(user)">Parte del equipo</span>
     </mat-list-item>
-  </mat-list>
-</div>
+  </mat-list> -->
+</form>

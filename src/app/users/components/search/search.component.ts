@@ -7,10 +7,11 @@ import {
   EventEmitter,
   OnDestroy
 } from '@angular/core'
-import { Subscription, combineLatest, Subject, Observable } from 'rxjs'
+import { Subscription, combineLatest, Observable } from 'rxjs'
 import { ProjectService } from 'app/project/services/project.service'
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators'
 import { Member } from 'app/members/members.service'
+import { FormControl, Validators } from '@angular/forms'
 
 @Component({
   selector: 'search-user',
@@ -18,11 +19,12 @@ import { Member } from 'app/members/members.service'
 })
 export class SearchComponent implements OnInit, OnDestroy {
   @Output() onSelect = new EventEmitter<User>()
+
+  searchControl = new FormControl('', [Validators.email, Validators.required])
+
   users: User[]
   members: Member[]
   subscription: Subscription
-  private searchTerms = new Subject<string>()
-  selectedUser: User
 
   constructor(
     private userService: UserSearchSocketService,
@@ -41,10 +43,16 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   private searchUsers(): Observable<User[]> {
-    return this.searchTerms.pipe(
+    return this.searchControl.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) => this.userService.search(term))
+      switchMap((value: string | User) => {
+        const term = typeof value === 'string' ? value : value.email
+
+        console.log({ term })
+
+        return this.userService.search(term)
+      })
     )
   }
 
@@ -52,20 +60,18 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe()
   }
 
-  search(term: string) {
-    this.searchTerms.next(term)
-  }
+  invite(event) {
+    event.stopPropagation()
+    // if (!user.isMember(this.members)) {
+    //   this.selectedUser = user
+    // }
+    console.log('in invite')
+    console.log({
+      value: this.searchControl.value
+    })
 
-  invite() {
-    console.log(this.selectedUser)
-    this.onSelect.emit(this.selectedUser)
-    this.searchTerms.next('')
-  }
-
-  select(user: User) {
-    if (!user.isMember(this.members)) {
-      this.selectedUser = user
-    }
+    //this.onSelect.emit(this.selectedUser)
+    this.searchControl.reset('')
   }
 
   isMember(user: User) {

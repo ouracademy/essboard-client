@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
   MatFormFieldModule,
   MatInputModule,
-  MatListModule,
   MatButtonModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatIconModule
 } from '@angular/material'
 
 import { SearchComponent } from './components/search/search.component'
@@ -23,7 +23,7 @@ import { OurAvatarModule } from '@shared/avatar/index.module'
     indexRouting,
     MatFormFieldModule,
     MatInputModule,
-    MatListModule,
+    MatIconModule,
     MatButtonModule,
     OurAvatarModule,
     MatAutocompleteModule
