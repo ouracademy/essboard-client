@@ -1,8 +1,9 @@
 import { BehaviorSubject, Observable } from 'rxjs'
 import { Member } from 'app/members/members.service'
+import { Project } from '@shared/models/project'
 
 export abstract class ProjectService {
-  currentProject$: BehaviorSubject<any>
+  currentProject$: BehaviorSubject<Project>
   members$: Observable<Member[]>
 
   abstract showShareProject()
