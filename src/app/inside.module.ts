@@ -67,7 +67,12 @@ export class ProjectGuardService implements CanActivate {
         </left-content>
         <right-content class="row middle-xs">
           <div *ngIf="(project$ | async) as project">
-            <button mat-raised-button color="primary" (click)="share(project)">
+            <button
+              *ngIf="false"
+              mat-raised-button
+              color="primary"
+              (click)="share(project)"
+            >
               <mat-icon class="md-24">people</mat-icon>
               &nbsp; <span class="mat-body-1">Compartir</span>
             </button>
@@ -119,6 +124,8 @@ export class ProjectLayoutComponent implements OnInit {
     this.project$ = this.service.currentProject$
   }
   delete() {}
+
+  // TODO: remove ngIf=false
   share() {
     this.service.showShareProject()
   }
