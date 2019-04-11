@@ -1,36 +1,39 @@
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core'
-import { Routes, RouterModule } from '@angular/router'
-import { InsideLayoutModule } from '@layouts/inside'
-import { InsideLayoutComponent } from '@layouts/inside/layout.component'
-import { HeaderModule } from '@shared/header/index.module'
-import { PROVIDERS_SESSION } from './sessions/providers.module'
-import { MembersService } from './members/members.service'
-
-import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
-import { ProjectService } from './project/services/project.service'
-import { ProjectSocketService } from './project/services/project-socket.service'
-import { Injectable } from '@angular/core'
-
+import { CommonModule } from '@angular/common'
 import {
+  Component,
+  Injectable,
+  NgModule,
+  NO_ERRORS_SCHEMA,
+  OnInit
+} from '@angular/core'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import {
+  MatButtonModule,
+  MatDialogModule,
+  MatIconModule,
+  MatMenuModule
+} from '@angular/material'
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
   CanActivate,
   Router,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot
+  RouterModule,
+  RouterStateSnapshot,
+  Routes
 } from '@angular/router'
-import { NotificationsModule } from '@shared/notifications/index.module'
+import { InsideLayoutModule } from '@layouts/inside'
+import { InsideLayoutComponent } from '@layouts/inside/layout.component'
 import { AccountModule } from '@shared/account/index.module'
-import {
-  MatMenuModule,
-  MatButtonModule,
-  MatIconModule,
-  MatDialogModule
-} from '@angular/material'
-import { Observable } from 'rxjs'
+import { HeaderModule } from '@shared/header/index.module'
 import { Project } from '@shared/models/project'
-import { CommonModule } from '@angular/common'
-import { FlexLayoutModule } from '@angular/flex-layout'
+import { NotificationsModule } from '@shared/notifications/index.module'
+import { Observable } from 'rxjs'
+import { MembersService } from './members/members.service'
 import { ShareComponent } from './project/components/share/share.component'
+import { ProjectSocketService } from './project/services/project-socket.service'
+import { ProjectService } from './project/services/project.service'
+import { PROVIDERS_SESSION } from './sessions/providers.module'
 import { SearchUsersModule } from './users/search.module'
 
 @Injectable()
@@ -168,6 +171,10 @@ const routes: Routes = [
             loadChildren: 'app/sessions/module#SessionModule'
           }
         ]
+      },
+      {
+        path: 'invitations/:id',
+        loadChildren: 'app/invitation/invitation.module#InvitationModule'
       }
     ]
   }
