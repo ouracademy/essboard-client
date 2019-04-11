@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Subject, Observable, of } from 'rxjs'
+import { Subject, Observable } from 'rxjs'
 import { SocketService } from '@core/socket.service'
 
 export interface Member {
@@ -13,9 +13,13 @@ export class MembersService {
   projectMembers: any[] = []
   projectMembers$ = new Subject<any>()
   service: any
+  memberInvitationsService: any
 
   constructor(socketService: SocketService) {
     this.service = socketService.getService('members')
+    this.memberInvitationsService = socketService.getService(
+      'member-invitations'
+    )
   }
 
   set selectedProject(projectId: string) {
@@ -30,18 +34,16 @@ export class MembersService {
       .find({ query: { projectId, date } })
   }
 
-  invite(aUser, projectId) {
-    return this.service.create({
-      type: 'MEMBER_INVITED',
+  invite(email: string, projectId) {
+    return this.memberInvitationsService.create({
       projectId,
-      to: aUser.id,
+      to: email,
       role: 'collaborator'
     })
   }
 
   remove(aMember: Member, projectId) {
-    return this.service.create({
-      type: 'MEMBER_REMOVED',
+    return this.service.remove({
       projectId,
       to: aMember.id
     })

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core'
 import { ProjectService } from '../../services/project.service'
 import { SharedService } from '@core/shared.service'
 import { Member } from 'app/members/members.service'
-import { User } from '@models/user'
 
 @Component({
   selector: 'project-share-form',
@@ -23,10 +22,9 @@ export class ShareComponent implements OnInit {
   }
 
   invite(email: string) {
-    console.log({ email })
-    // this.projectService.invite(user).then(member => {
-    //   this.dialog.showSucces('Usuario invitado!')
-    // })
+    this.projectService.invite(email).then(member => {
+      this.dialog.showSucces('Usuario invitado!')
+    })
   }
 
   delete(member) {

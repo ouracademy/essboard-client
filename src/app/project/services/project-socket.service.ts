@@ -84,8 +84,8 @@ export class ProjectSocketService extends ProjectService {
     //this.itemsObserver.next(this.data);
   }
 
-  invite(aUser: User): Promise<any> {
-    return this.membersService.invite(aUser, this.project.id)
+  invite(email: string): Promise<any> {
+    return this.membersService.invite(email, this.project.id)
   }
 
   remove(aMember: Member): Promise<any> {
