@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { SharedService } from '@core/shared.service'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { path } from 'ramda'
 import { NotificationService } from '@core/notification.service'
+import { path } from 'ramda'
 import { Subscription } from 'rxjs'
 
 interface Notification {
@@ -34,7 +33,7 @@ interface Notification {
           [ngClass]="{ 'focus-not': !not.readed }"
           (click)="handleClick(not)"
         >
-          <span>{{ not.message }}</span>
+          {{ not.message }}
         </button>
       </mat-menu>
     </div>
@@ -42,14 +41,21 @@ interface Notification {
   styles: [
     `
       .not {
-        border-bottom: 0.5px solid #c3bcbc;
         border-radius: 0 !important;
+        border-bottom: 0.5px solid #c3bcbc;
         opacity: 0.5;
         background: #e6e0e0;
       }
       .focus-not {
         background: white;
         opacity: 1;
+      }
+
+      button.mat-menu-item {
+        height: 50px;
+        white-space: normal;
+        text-overflow: clip;
+        line-height: normal;
       }
     `
   ]
@@ -65,10 +71,10 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   routers = {
     project: 'me/projects/'
   }
+
   constructor(
     public notificationService: NotificationService,
-    private router: Router,
-    private share: SharedService
+    private router: Router
   ) {}
 
   ngOnInit() {
