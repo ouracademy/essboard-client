@@ -1,0 +1,9 @@
+@import 'to-import/viewport';
+:host {
+    flex: 1;
+    display: flex;
+  }
+  .title-project {
+    text-transform: capitalize;
+    font-weight: bold;
+  }
