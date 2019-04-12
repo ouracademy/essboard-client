@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { SocketService } from '@core/socket.service'
 import { Session } from '@models/project'
-import { flatMap } from 'rxjs/operators'
 import { from } from 'rxjs'
+import { flatMap } from 'rxjs/operators'
 
 export interface DomainEvent {
   aggregatedId: string
@@ -58,8 +58,9 @@ export class EventsService {
       case 'PROJECT_CREATED':
         return 'creo el proyecto'
       case 'MEMBER_INVITED':
-        const user = await this.getUser(data.to)
-        return `invitó a ${user.name} a ser ${data.role}`
+        return `invitó a ${data.to} a ser ${data.role}`
+      case 'MEMBER_JOINED':
+        return `se unió como ${data.role}`
       case 'MEMBER_REMOVED':
         return await this.formatEventRemoved(data)
       case 'OPINION_EMITED':
@@ -76,7 +77,7 @@ export class EventsService {
         return `agregó un comentario al ${data.for}`
     }
 
-    throw new Error(`Event doesn't have a format`)
+    throw new Error(`Event doesn't have a format ${JSON.stringify(event)}`)
   }
 
   private async formatEventRemoved(data: any) {
