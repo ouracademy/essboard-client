@@ -43,7 +43,7 @@ export class MembersService {
   }
 
   add(projectId: string, role: string) {
-    console.log({ projectId, role })
+    return Promise.resolve({ projectId, role })
     // return this.service.create({
     //   projectId: projectId,
     //   role

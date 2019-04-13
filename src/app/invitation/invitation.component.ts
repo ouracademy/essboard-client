@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute, ParamMap } from '@angular/router'
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { MembersService } from 'app/members/members.service'
 import { Observable } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
@@ -14,6 +14,7 @@ export class InvitationComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private service: InvitationsService,
     private memberService: MembersService
   ) {}
@@ -25,7 +26,9 @@ export class InvitationComponent implements OnInit {
   }
 
   accept(invitation: Invitation) {
-    this.memberService.add(invitation.project.id, 'collaborator')
+    this.memberService.add(invitation.project.id, 'collaborator').then(() => {
+      this.router.navigate(['/me/projects', invitation.project.id])
+    })
   }
 
   decline(id) {

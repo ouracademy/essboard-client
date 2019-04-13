@@ -21,7 +21,7 @@ export class InvitationsService {
       id,
       from: { name: 'Arthur' },
       to: { id: '1231das', email: 'qpdiam@gmail.com' },
-      project: { id: '123', name: 'clinica' }
+      project: { id: '5cafa0cb276f78631829787c', name: 'clinica' }
     })
     // return this.service.get(id)
   }
