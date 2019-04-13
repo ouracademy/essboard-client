@@ -4,6 +4,7 @@ import { Service } from '@feathersjs/feathers'
 
 export interface Invitation {
   id: string
+  is: 'accepted' | 'pending' | 'cancelled'
   from: { name: string }
   to: { id: string; email: string }
   project: { id: string; name: string }
@@ -17,12 +18,15 @@ export class InvitationsService {
   }
 
   get(id: string): Promise<Invitation> {
-    return Promise.resolve({
+    const invitation: Invitation = {
       id,
       from: { name: 'Arthur' },
       to: { id: '1231das', email: 'qpdiam@gmail.com' },
-      project: { id: '5cafa0cb276f78631829787c', name: 'clinica' }
-    })
+      project: { id: '5cafa0cb276f78631829787c', name: 'clinica' },
+      is: 'pending'
+    }
+
+    return Promise.resolve(invitation)
     // return this.service.get(id)
   }
 

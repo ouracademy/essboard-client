@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { MembersService } from 'app/members/members.service'
-import { Observable } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 import { Invitation, InvitationsService } from './invitation.service'
 
@@ -10,7 +9,7 @@ import { Invitation, InvitationsService } from './invitation.service'
   templateUrl: 'invitation.component.html'
 })
 export class InvitationComponent implements OnInit {
-  invitation$: Observable<Invitation>
+  invitation: Invitation
 
   constructor(
     private route: ActivatedRoute,
@@ -20,15 +19,25 @@ export class InvitationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.invitation$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.service.get(params.get('id')))
-    )
+    this.route.paramMap
+      .pipe(switchMap((params: ParamMap) => this.service.get(params.get('id'))))
+      .subscribe(invitation => {
+        if ((invitation.is = 'accepted')) {
+          this.redirectToProject(invitation.project.id)
+        } else {
+          this.invitation = invitation
+        }
+      })
   }
 
   accept(invitation: Invitation) {
     this.memberService.add(invitation.project.id, 'collaborator').then(() => {
-      this.router.navigate(['/me/projects', invitation.project.id])
+      this.redirectToProject(invitation.project.id)
     })
+  }
+
+  redirectToProject(id: string) {
+    this.router.navigate(['/me/projects', id])
   }
 
   decline(id) {
