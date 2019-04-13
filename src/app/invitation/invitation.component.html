@@ -1,15 +1,19 @@
-<div>
+<div *ngIf="(invitation$ | async) as invitation">
   <div background-color="#5fbed0" padding-bottom="5px" padding-top="0">
     <div width="100%">
       <h3 class="mat-title">
-        ¡Hola!, {{ from.name }} le ha invitado unirse al proyecto
-        {{ project.name }}
+        ¡Hola!, {{ invitation.from.name }} le ha invitado unirse al proyecto
+        {{ invitation.project.name }}
       </h3>
     </div>
   </div>
   <div fxLayout="row" fxLayoutALign="center center" fxLayoutGap="10px">
-    <button mat-flat-button color="primary" (click)="accept()">Aceptar invitación</button>
-    <button mat-stroked-button (click)="decline()">Rechazar</button>
+    <button mat-flat-button color="primary" (click)="accept(invitation)">
+      Aceptar invitación
+    </button>
+    <button mat-stroked-button (click)="decline(invitation.id)">
+      Rechazar
+    </button>
   </div>
   <!-- <div>
       <div width="50%">

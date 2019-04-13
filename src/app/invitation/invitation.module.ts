@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { MatButtonModule } from '@angular/material'
 import { RouterModule, Routes } from '@angular/router'
 import { InvitationComponent } from './invitation.component'
+import { InvitationsService } from './invitation.service'
 
 const routes: Routes = [{ path: '', component: InvitationComponent }]
 
@@ -14,6 +15,7 @@ const routes: Routes = [{ path: '', component: InvitationComponent }]
     RouterModule.forChild(routes),
     FlexLayoutModule,
     MatButtonModule
-  ]
+  ],
+  providers: [InvitationsService]
 })
 export class InvitationModule {}
