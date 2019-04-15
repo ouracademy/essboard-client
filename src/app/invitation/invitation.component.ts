@@ -6,7 +6,8 @@ import { Invitation, InvitationsService } from './invitation.service'
 
 @Component({
   selector: 'invitation',
-  templateUrl: 'invitation.component.html'
+  templateUrl: 'invitation.component.html',
+  styleUrls: ['invitation.component.scss']
 })
 export class InvitationComponent implements OnInit {
   invitation: Invitation
@@ -22,10 +23,13 @@ export class InvitationComponent implements OnInit {
     this.route.paramMap
       .pipe(switchMap((params: ParamMap) => this.service.get(params.get('id'))))
       .subscribe(invitation => {
-        if ((invitation.is = 'accepted')) {
-          this.redirectToProject(invitation.project.id)
-        } else {
+        if (invitation.is === 'pending') {
           this.invitation = invitation
+        } else {
+          const redirectRoute =
+            'me/projects/' +
+            (invitation.is === 'cancelled' ? '' : invitation.project.id)
+          this.router.navigate([redirectRoute])
         }
       })
   }
@@ -41,6 +45,6 @@ export class InvitationComponent implements OnInit {
   }
 
   decline(id) {
-    this.service.remove(id)
+    this.service.remove(id).then(() => this.router.navigate(['/me/projects']))
   }
 }
