@@ -65,11 +65,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   subscription: Subscription
 
   subjectNotification: { invitation: {} } = {
-    invitation: { message: 'Invitación', route: 'me/projects/' }
-  }
-
-  routers = {
-    project: 'me/projects/'
+    invitation: { message: 'Invitación', route: 'me/invitations/' }
   }
 
   constructor(
