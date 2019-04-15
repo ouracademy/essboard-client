@@ -58,8 +58,14 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'invitations/:id',
-        loadChildren: 'app/invitation/invitation.module#InvitationModule'
+        path: 'invitations',
+        component: InsideLayoutComponent,
+        children: [
+          {
+            path: ':id',
+            loadChildren: 'app/invitation/invitation.module#InvitationModule'
+          }
+        ]
       }
     ]
   }
