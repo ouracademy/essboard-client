@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core'
-import { SocketService } from '@core/socket.service'
-import { Service } from '@feathersjs/feathers'
+import { Injectable } from '@angular/core';
+import { SocketService } from '@core/socket.service';
+import { Service } from '@feathersjs/feathers';
 
 export interface Invitation {
   id: string
@@ -18,20 +18,12 @@ export class InvitationsService {
   }
 
   get(id: string): Promise<Invitation> {
-    const invitation: Invitation = {
-      id,
-      from: { name: 'Arthur' },
-      to: { id: '1231das', email: 'qpdiam@gmail.com' },
-      project: { id: '5cafa0cb276f78631829787c', name: 'clinica' },
-      is: 'pending'
-    }
 
-    return Promise.resolve(invitation)
-    // return this.service.get(id)
+    return this.service.get(id)
   }
 
   remove(id: string) {
-    return console.log({ id })
-    //return this.service.remove(id)
+
+    return this.service.remove(id)
   }
 }
