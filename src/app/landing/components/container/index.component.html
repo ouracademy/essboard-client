@@ -1,59 +1,70 @@
 <app-header> </app-header>
-<section fxLayout="row" fxLayoutAlign="center" class="pad-2">
-  <div fxFlex.gt-sm="60" class="align-center">
-    <h1 class="mat-display-3 primary pad-top-4">
-      {{ labels.slogan }}
-    </h1>
-    <h1 class="mat-headline info">{{ labels.description }}</h1>
-    <div>
-      <div
-        *ngIf="!auth.isLoggedIn; else userLogged"
-        fxLayout="row"
-        fxLayoutGap="20px"
-        fxLayoutAlign="center"
-        class="pad-1"
-      >
-        <a mat-raised-button color="accent" routerLink="/login">Ingresa </a>
-        <a mat-stroked-button color="accent" routerLink="/signup"
-          >Registrate
-        </a>
-      </div>
-      <ng-template #userLogged>
-        <a mat-button color="primary" routerLink="/me/projects">Entrar</a>
-      </ng-template>
-    </div>
-  </div>
-</section>
-<section fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center" class="pad-2">
-    <div class="icon align-center" *ngFor="let item of kernelIcons">
-      <div class="icon-image auto" [ngStyle]="getStyle(item)"></div>
-      <h3 class="info">{{ item.name }}</h3>
-    </div>  
-</section>
-<!--  
-<section class="row pad-2 center-xs">
-  <div class="row col-sm-8 middle-sm">
-    <div class="col-sm-6">
-      <div style="position: relative; padding-bottom: 56.25%; height: 0;">
-        <iframe
-          src="https://www.loom.com/embed/0613118a1145460d9d0014b69021b20c"
-          frameborder="0"
-          webkitallowfullscreen
-          mozallowfullscreen
-          allowfullscreen
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-        ></iframe>
+<div fxLayout="column" fxLayoutGap="4rem" class="pad-2">
+  <section>
+    <div fxLayout="row" fxLayoutAlign="center">
+      <div fxFlex.gt-sm="60" class="align-center">
+        <h1 class="mat-display-3 primary pad-top-4">{{ labels.slogan }}</h1>
+        <h2 class="mat-headline info">{{ labels.description }}</h2>
+        <div>
+          <div
+            *ngIf="!auth.isLoggedIn; else userLogged"
+            fxLayout="row"
+            fxLayoutGap="20px"
+            fxLayoutAlign="center"
+            class="pad-1"
+          >
+            <a mat-raised-button color="accent" routerLink="/login">Ingresa </a>
+            <a mat-stroked-button color="accent" routerLink="/signup"
+              >Registrate
+            </a>
+          </div>
+          <ng-template #userLogged>
+            <a mat-button color="primary" routerLink="/me/projects">Entrar</a>
+          </ng-template>
+        </div>
       </div>
     </div>
-    <div class="col-sm-6">
-      <h3 class="mat-display-3">Trabaja a tu manera.</h3>
-      <p>
-        Crea proyectos y sesiones que reflejen las iteraciones o Sprints de tu
-        proyecto. O incluso sesiones de auditoría!
-      </p>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="center">
+      <div class="icon align-center" *ngFor="let item of kernelIcons">
+        <div class="icon-image auto" [ngStyle]="getStyle(item)"></div>
+        <h3 class="info">{{ item.name }}</h3>
+      </div>
     </div>
-  </div>
-</section> -->
+  </section>
+  <section fxLayout="row" fxLayoutAlign="center">
+    <div fxFlex.gt-sm="70" fxLayout="column" fxLayoutGap="3rem">
+      <div fxLayout="row" fxLayoutGap="3rem">
+        <div fxFlex>
+          <app-video
+            src="https://www.loom.com/embed/0613118a1145460d9d0014b69021b20c"
+          ></app-video>
+        </div>
+        <div fxFlex fxLayout="column" fxLayoutAlign="center">
+          <h3 class="mat-display-3">Trabaja a tu manera.</h3>
+          <p class="info mat-subheading-2">
+            Crea proyectos y sesiones que reflejen las iteraciones o Sprints de
+            tu proyecto. O incluso sesiones de auditoría!
+          </p>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center">
+          <div fxFlex fxLayout="column" fxLayoutAlign="center">
+            <h3 class="mat-display-3">Comparte tu proyecto</h3>
+            <p class="info mat-subheading-2">
+              Tu equipo recibirá notificaciones o correo de manera instantánea.
+            </p>
+          </div>
+          <div fxFlex>
+            <app-video
+              src="https://www.loom.com/embed/ad91461e71af4b78a506ce12681a02e0"
+            ></app-video>
+          </div>
+        </div>
+    </div>
+    
+  </section>
+</div>
+
 <!--
 <div class="row col-sm-8 pad-2">
   <div class="col-sm-6">

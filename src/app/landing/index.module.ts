@@ -1,11 +1,13 @@
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core'
-import { RouterModule, Routes } from '@angular/router'
 import { CommonModule } from '@angular/common'
-import { MatButtonModule } from '@angular/material'
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core'
 import { FlexLayoutModule } from '@angular/flex-layout'
-
+import { MatButtonModule } from '@angular/material'
+import { RouterModule, Routes } from '@angular/router'
 import { HeaderModule } from '@shared/header/index.module'
-import { LandingComponent } from './components/container/index.component'
+import {
+  LandingComponent,
+  VideoComponent
+} from './components/container/index.component'
 
 const routes: Routes = [{ path: '', component: LandingComponent }]
 
@@ -19,7 +21,7 @@ const routes: Routes = [{ path: '', component: LandingComponent }]
     FlexLayoutModule
   ],
   exports: [],
-  declarations: [LandingComponent],
+  declarations: [LandingComponent, VideoComponent],
   providers: [],
   schemas: [NO_ERRORS_SCHEMA]
 })

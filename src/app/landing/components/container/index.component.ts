@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core'
-import { AuthService } from '@core/auth.service'
+import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from '@core/auth.service';
 
 @Component({
   selector: 'app-landing',
@@ -47,4 +48,30 @@ export class LandingComponent implements OnInit {
   }
 
   ngOnInit() {}
+}
+
+@Component({
+  selector: 'app-video',
+  template: `
+  <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+    <iframe
+      [src]="url"
+      frameborder="0"
+      webkitallowfullscreen
+      mozallowfullscreen
+      allowfullscreen
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+    ></iframe>
+  </div>
+  `
+})
+
+export class VideoComponent {
+  @Input() src: string
+
+  constructor(private sanitizer: DomSanitizer) {}
+
+  get url() {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.src);
+  }
 }
