@@ -13,5 +13,6 @@
   "editor.fontLigatures": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
-  }
+  },
+  "cSpell.language": "en,es"
 }
