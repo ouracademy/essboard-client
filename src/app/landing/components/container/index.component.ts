@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthService } from '@core/auth.service';
 
 @Component({
@@ -67,11 +67,12 @@ export class LandingComponent implements OnInit {
 })
 
 export class VideoComponent {
-  @Input() src: string
+  url: SafeResourceUrl
+
+  @Input()
+  set src(arg: string) {
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl(arg)
+  }
 
   constructor(private sanitizer: DomSanitizer) {}
-
-  get url() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.src);
-  }
 }
