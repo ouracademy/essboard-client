@@ -11,10 +11,12 @@
   opacity: 1;
   box-shadow: 0px 0px 1px #aabe8e;
 }
-
-mat-list-item.selectable:hover {
-  color: #77a880;
+.selectable:active {
+  background: #77a880;
+  color: white !important;
 }
+
+
 a.selectable:hover {
   color: #77a880;
 }

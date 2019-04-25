@@ -7,6 +7,10 @@
 
  }
 
+ a:-webkit-any-link {
+    color: #a2a69d;
+  }
+
  input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 30px white inset;
   }
