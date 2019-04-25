@@ -1,53 +1,42 @@
-import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { FormsModule } from '@angular/forms'
-import { FlexLayoutModule } from '@angular/flex-layout'
-import {
-  MatCardModule,
-  MatButtonModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatRadioModule,
-  MatIconModule,
-  MatToolbarModule,
-  MatCheckboxModule,
-  MatTabsModule,
-  MatButtonToggleModule,
-  MatListModule,
-  MatSidenavModule,
-  MatTooltipModule,
-  MatDialogModule,
-  MatSliderModule
-} from '@angular/material'
-import { ContextMenuModule } from 'ngx-contextmenu'
-
 import { DragDropModule } from '@angular/cdk/drag-drop'
-
-import { RoutingModule } from './routing.module'
-
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { FlexLayoutModule } from '@angular/flex-layout'
+import { FormsModule } from '@angular/forms'
+import {
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatRadioModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule
+} from '@angular/material'
+import { OurAvatarModule } from '@shared/avatar/index.module'
 import { KernelModule } from '@shared/kernel/kernel.module'
-
+import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
+import { ContextMenuModule } from 'ngx-contextmenu'
 import { UsersModule } from '../users/index.module'
-
+import { ChatComponent } from './components/chat/index.component'
+import { CheckDetailComponent } from './components/check-detail/index.component'
+import { ChecklistComponent } from './components/checklist/index.component'
+import { DetailAlphaComponent } from './components/detail-alpha/index.component'
+import { EvaluationComponent } from './components/evaluation/index.component'
 import { SessionComponent } from './components/index.component'
-
-/* steps for use essence in each session*/
-import { StepsComponent } from './components/steps/index.component'
+import { OnlineUsersComponent } from './components/online-users/index.components'
 import { RadiatorInformationComponent } from './components/radiator-information/index.component'
 import { SetStateComponent } from './components/set-state/index.component'
-
-import { ActionsByGoalComponent } from './components/actions-by-goal/index.component'
-
-import { DetailAlphaComponent } from './components/detail-alpha/index.component'
-
-import { ChecklistComponent } from './components/checklist/index.component'
-import { ChatComponent } from './components/chat/index.component'
-
-import { OnlineUsersComponent } from './components/online-users/index.components'
-import { OurAvatarModule } from '@shared/avatar/index.module'
-import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
-import { CheckDetailComponent } from './components/check-detail/index.component'
-import { EvaluationComponent } from './components/evaluation/index.component'
+/* steps for use essence in each session*/
+import { StepsComponent } from './components/steps/index.component'
+import { RoutingModule } from './routing.module'
 
 @NgModule({
   imports: [
@@ -86,7 +75,6 @@ import { EvaluationComponent } from './components/evaluation/index.component'
     DetailAlphaComponent,
     SetStateComponent,
     ChecklistComponent,
-    ActionsByGoalComponent,
     ChatComponent,
     OnlineUsersComponent,
     CheckDetailComponent,

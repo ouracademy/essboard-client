@@ -1,6 +1,4 @@
-.fill-remaining {
-  flex: 1 1 auto;
-}
+
 .full-width {
   width: 100%;
 }
@@ -20,9 +18,6 @@ a.selectable:hover {
   color: #77a880;
 }
 
-.item-wrapper {
-  margin: 10px 5px 5px 5px;
-}
 
 /** Material 2 : The overlay-container is an invisible element which contains all individual overlays. */
 .mat-overlay-container {
@@ -55,11 +50,6 @@ mat-input {
   margin-bottom: 10px;
 }
 
-mat-hint {
-  position: absolute;
-  font-size: 75%;
-  bottom: -0.5em;
-}
 
 /*TODO remove this in an angular 2 material future release*/
 mat-input.ng-invalid {
@@ -71,18 +61,10 @@ mat-input.ng-pristine {
 .mat-sidenav-content {
   overflow: initial;
 }
-.content-app {
-  min-height: 320px;
-}
-/*background*/
-.white {
-  background: white;
-}
 
-/*icons*/
-[mat-icon-button] {
-  background-color: transparent;
-}
+
+
+
 /* buttons*/
 
 .main {
@@ -125,10 +107,6 @@ mat-input.ng-pristine {
 }
 
 
-/*toolbar details*/
-.detail span {
-  margin-right: 10px;
-}
 .button--alpha {
   border: 2px solid currentColor;
   margin: 0.3rem;
@@ -139,6 +117,4 @@ mat-input.ng-pristine {
     text-align: center;
   }
 }
-.active--alpha {
-  background: currentColor;
-}
+
