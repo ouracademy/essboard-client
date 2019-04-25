@@ -9,11 +9,10 @@
 }
 .selectable:hover {
   opacity: 1;
-  box-shadow: 0px 0px 1px #aabe8e;
+  box-shadow: 1px 1px 1px #aabe8e;
 }
 .selectable:active {
-  background: #77a880;
-  color: white !important;
+  box-shadow: 2px 1px 2px #737573;
 }
 
 
