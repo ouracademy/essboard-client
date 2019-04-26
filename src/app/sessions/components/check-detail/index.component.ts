@@ -1,10 +1,9 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core'
-import { SessionService } from 'app/sessions/services/session.service'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core'
+import { MediaChange, MediaObserver } from '@angular/flex-layout'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { AuthService } from '@core/auth.service'
-import { timeAgo } from '../../../shared/time-ago'
+import { SessionService } from 'app/sessions/services/session.service'
 import { Subscription } from 'rxjs'
-import { MediaObserver, MediaChange } from '@angular/flex-layout'
 
 @Component({
   selector: 'check-detail',
@@ -69,9 +68,9 @@ export class CheckDetailComponent implements OnInit, OnDestroy {
       .getComments(this.checkpointTemplate['id'])
       .subscribe(comments => {
         this.comments = comments['data'].map(x => ({
+          ...x,
           user: this.members.find(member => member.id === x.from),
-          timeAgo: timeAgo(x.updatedAt),
-          ...x
+          updatedAt: new Date(x.updatedAt).getTime()
         }))
       })
   }
