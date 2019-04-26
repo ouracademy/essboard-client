@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import { SocketService } from '@core/socket.service';
-import { Service } from '@feathersjs/feathers';
+import { Injectable } from '@angular/core'
+import { SocketService } from '@core/socket.service'
 
 export interface Invitation {
   id: string
@@ -12,18 +11,20 @@ export interface Invitation {
 
 @Injectable()
 export class InvitationsService {
-  service: Service<Invitation>
+  service: any
   constructor(socketService: SocketService) {
     this.service = socketService.getService<Invitation>('member-invitations')
   }
 
-  get(id: string): Promise<Invitation> {
+  accept(invitationId: string) {
+    return this.service.patch(invitationId, { accept: true })
+  }
 
+  get(id: string): Promise<Invitation> {
     return this.service.get(id)
   }
 
   remove(id: string) {
-
     return this.service.remove(id)
   }
 }

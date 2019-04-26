@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { SocketService } from '@core/socket.service';
-import { Observable, Subject } from 'rxjs';
+import { Injectable } from '@angular/core'
+import { SocketService } from '@core/socket.service'
+import { Observable, Subject } from 'rxjs'
 
 export interface Member {
   id: string
@@ -42,18 +42,12 @@ export class MembersService {
     })
   }
 
-  add(projectId: string, role: string) {
-
-    return this.service.create({
-      projectId: projectId,
-      role
-    })
-  }
-
   remove(aMember: Member, projectId) {
-    return this.service.remove({
-      projectId,
-      to: aMember.id
+    return this.service.remove(null, {
+      query: {
+        projectId,
+        to: aMember.id
+      }
     })
   }
 }
