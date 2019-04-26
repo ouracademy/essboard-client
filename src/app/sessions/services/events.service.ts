@@ -47,7 +47,7 @@ export class EventsService {
       events.map(async event => ({
         user: await this.getUser(event.from),
         text: await this.getText(event),
-        createdAt: event.createdAt
+        createdAt: new Date(event.createdAt).getTime()
       }))
     )
   }

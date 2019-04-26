@@ -52,7 +52,7 @@
       <div *ngIf="!comment.isEditable; else editable">
         <div class="comment__text">{{ comment.text }}</div>
         <div class="row ">
-          <strong class="primary">{{ comment.timeAgo }}</strong>
+          <strong class="primary">{{ comment.updatedAt | timeago }}</strong>
           <span *ngIf="comment.from === me.id">
             <a class="info pad-1" (click)="deleteComment(comment)">Eliminar</a>
             <a class="info pad-1" (click)="activateEditable(comment)">Editar</a>

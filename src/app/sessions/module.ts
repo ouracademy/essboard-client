@@ -24,6 +24,12 @@ import { OurAvatarModule } from '@shared/avatar/index.module'
 import { KernelModule } from '@shared/kernel/kernel.module'
 import { PreventOfflineModule } from '@shared/prevent-when-offline/index.module'
 import { ContextMenuModule } from 'ngx-contextmenu'
+import {
+  TimeagoCustomFormatter,
+  TimeagoFormatter,
+  TimeagoIntl,
+  TimeagoModule
+} from 'ngx-timeago'
 import { UsersModule } from '../users/index.module'
 import { ChatComponent } from './components/chat/index.component'
 import { CheckDetailComponent } from './components/check-detail/index.component'
@@ -37,6 +43,10 @@ import { SetStateComponent } from './components/set-state/index.component'
 /* steps for use essence in each session*/
 import { StepsComponent } from './components/steps/index.component'
 import { RoutingModule } from './routing.module'
+
+export class MyIntl extends TimeagoIntl {
+  // do extra stuff here...
+}
 
 @NgModule({
   imports: [
@@ -66,6 +76,11 @@ import { RoutingModule } from './routing.module'
     OurAvatarModule,
     PreventOfflineModule,
     DragDropModule,
+
+    TimeagoModule.forChild({
+      intl: { provide: TimeagoIntl, useClass: MyIntl },
+      formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter }
+    }),
     RoutingModule
   ],
   declarations: [
