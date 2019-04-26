@@ -1,18 +1,18 @@
 import {
-  Component,
-  Input,
-  ElementRef,
-  ViewChild,
   AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
   Output,
-  EventEmitter
+  ViewChild
 } from '@angular/core'
-import { ChatService } from '../../services/chat.service'
 import { Message } from '../../model/messages'
+import { ChatService } from '../../services/chat.service'
 @Component({
   selector: 'chat',
   templateUrl: 'index.component.html',
-  styleUrls: ['index.component.css']
+  styleUrls: ['index.component.scss']
 })
 export class ChatComponent implements AfterViewInit {
   @Input()
