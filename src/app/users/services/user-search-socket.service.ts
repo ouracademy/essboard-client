@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
-import { map } from 'rxjs/operators/map'
-import { User } from '@models/user'
 import { SocketService } from '@core/socket.service'
+import { User } from '@models/user'
 import { Observable, of } from 'rxjs'
+import { map } from 'rxjs/operators/map'
 
 @Injectable()
 export class UserSearchSocketService {
@@ -28,8 +28,8 @@ export class UserSearchSocketService {
             }
           })
           .pipe(
-            map(items => {
-              return items['data'].map(x => this.toUser(x))
+            map((items: any[]) => {
+              return items.map(x => this.toUser(x))
             })
           )
       : of([])
