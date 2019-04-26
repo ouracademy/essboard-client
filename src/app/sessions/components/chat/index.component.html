@@ -1,5 +1,10 @@
-<div class="chat container-column">
-  <div class="chat-header" fxLayout="row" fxLayoutAlign="space-between center">
+<div cdkDrag class="chat container-column">
+  <div
+    cdkDragHandle
+    class="chat-header"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+  >
     <div>Conversacion</div>
     <div>
       <button mat-icon-button (click)="toggleContent()">
