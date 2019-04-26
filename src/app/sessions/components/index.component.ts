@@ -1,18 +1,20 @@
-import { Component, OnInit, HostListener, OnDestroy } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
-import { Session } from '@models/project'
-import { SessionService } from '../services/session.service'
-import { KernelService } from '@core/kernel-knowledge.service'
-import { AlphaTemplate } from './detail-alpha/kernel'
-import { CanLeaveChannel } from '../services/leave-session.guard'
-import { SharedService } from '@core/shared.service'
-import { EventsService } from '../services/events.service'
-import { flatMap } from 'rxjs/operators'
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core'
+import { MediaChange, MediaObserver } from '@angular/flex-layout'
 import { MatDialogRef } from '@angular/material'
-import { ChatComponent } from './chat/index.component'
-import { MediaObserver, MediaChange } from '@angular/flex-layout'
+import { ActivatedRoute, Router } from '@angular/router'
+import { KernelService } from '@core/kernel-knowledge.service'
+import { SharedService } from '@core/shared.service'
+import { Session } from '@models/project'
+import { TimeagoIntl } from 'ngx-timeago'
+import { strings as spanishStrings } from 'ngx-timeago/language-strings/es'
+import { flatMap } from 'rxjs/operators'
 import { Subscription } from 'rxjs/Subscription'
-import { timeAgo } from '@shared/time-ago'
+import { EventsService } from '../services/events.service'
+import { CanLeaveChannel } from '../services/leave-session.guard'
+import { SessionService } from '../services/session.service'
+import { ChatComponent } from './chat/index.component'
+import { AlphaTemplate } from './detail-alpha/kernel'
+
 @Component({
   selector: 'session',
   templateUrl: 'index.component.html',
@@ -43,7 +45,8 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private sharedService: SharedService,
-    public mediaObserver: MediaObserver
+    public mediaObserver: MediaObserver,
+    timeAgoIntl: TimeagoIntl
   ) {
     this.watcher = mediaObserver.media$.subscribe((change: MediaChange) => {
       this.configByViewport =
@@ -51,6 +54,9 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
           ? { width: '85vw', mode: 'over', isChatVisible: false }
           : { width: '370px', mode: 'side', isChatVisible: true }
     })
+
+    timeAgoIntl.strings = spanishStrings
+    timeAgoIntl.changes.next()
   }
 
   ngOnInit() {
@@ -118,9 +124,5 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   }
   closeChat() {
     this.configByViewport.isChatVisible = false
-  }
-
-  timeAgo(date) {
-    return timeAgo(date)
   }
 }

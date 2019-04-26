@@ -1,17 +1,15 @@
-import { NgModule, LOCALE_ID } from '@angular/core'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { CommonModule, registerLocaleData } from '@angular/common'
-
-import { CoreModule } from './core-module/index.module'
-
-import { AppRoutingModule } from './app-routing.module'
-import { AppComponent } from './app.component'
-
 import localeEs from '@angular/common/locales/es'
-import { LoadingClickService } from '@shared/loading-when-clicked'
+import { LOCALE_ID, NgModule } from '@angular/core'
 import { GestureConfig } from '@angular/material'
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { LoadingClickService } from '@shared/loading-when-clicked'
 import { Angulartics2Module } from 'angulartics2'
+import { TimeagoModule } from 'ngx-timeago'
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
+import { CoreModule } from './core-module/index.module'
 
 registerLocaleData(localeEs)
 
@@ -23,7 +21,8 @@ registerLocaleData(localeEs)
     CoreModule,
     AppRoutingModule,
 
-    Angulartics2Module.forRoot()
+    Angulartics2Module.forRoot(),
+    TimeagoModule.forRoot()
   ],
   declarations: [AppComponent],
   providers: [
