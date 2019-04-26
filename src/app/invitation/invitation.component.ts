@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
-import { MembersService } from 'app/members/members.service'
 import { switchMap } from 'rxjs/operators'
 import { Invitation, InvitationsService } from './invitation.service'
 
@@ -15,8 +14,7 @@ export class InvitationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: InvitationsService,
-    private memberService: MembersService
+    private service: InvitationsService
   ) {}
 
   ngOnInit() {
@@ -35,7 +33,7 @@ export class InvitationComponent implements OnInit {
   }
 
   accept(invitation: Invitation) {
-    this.memberService.add(invitation.project.id, 'collaborator').then(() => {
+    this.service.accept(invitation.id).then(() => {
       this.redirectToProject(invitation.project.id)
     })
   }
