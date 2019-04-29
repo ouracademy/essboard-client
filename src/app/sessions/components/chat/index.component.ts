@@ -1,14 +1,14 @@
 import {
-  Component,
-  Input,
-  ElementRef,
-  ViewChild,
   AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
   Output,
-  EventEmitter
+  ViewChild
 } from '@angular/core'
-import { ChatService } from '../../services/chat.service'
 import { Message } from '../../model/messages'
+import { ChatService } from '../../services/chat.service'
 @Component({
   selector: 'chat',
   templateUrl: 'index.component.html',
@@ -65,9 +65,14 @@ export class ChatComponent implements AfterViewInit {
   close() {
     this.closeChat.emit()
   }
+
   save() {
-    this.chatService.addMessage(this.message, this.sessionId)
-    this.message = ''
+    const text = this.message.trim()
+
+    if (text) {
+      this.chatService.addMessage(text, this.sessionId)
+      this.message = ''
+    }
   }
 
   get placeholder() {
