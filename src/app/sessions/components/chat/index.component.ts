@@ -12,7 +12,7 @@ import { ChatService } from '../../services/chat.service'
 @Component({
   selector: 'chat',
   templateUrl: 'index.component.html',
-  styleUrls: ['index.component.css']
+  styleUrls: ['index.component.scss']
 })
 export class ChatComponent implements AfterViewInit {
   @Input()

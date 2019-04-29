@@ -17,17 +17,26 @@
 .chat-content {
   overflow-x: hidden;
   height: 400px;
-}
-.content-list {
-  overflow-y: scroll;
-}
-.content-input {
-  border: solid 1px #8ea998;
-  resize: none;
-  height: 3rem;
-  font-size: 1rem;
+  .content-list {
+    overflow-y: scroll;
+    flex-wrap: nowrap;
+  }
+  .content-input {
+    border: solid 1px #8ea998;
+    resize: none;
+    min-height: 3.5rem;
+    font-size: 1rem;
+  }
 }
 
+.message{
+  min-height:30px;
+  span{
+    word-break: break-all;
+  }
+}
+
+
 span {
-  font-size: 11px;
+  font-size: 12px;
 }
