@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core'
       [ngStyle]="{ height: mode === 'toolbar' ? '10vh' : '15vh' }"
     >
       <div fxLayout="row" fxLayoutAlign="start center">
-        <a class="brand" fxFlex.xs="100" routerLink="/">
+        <a class="brand" fxFlex.xs="100" routerLink="/me/projects">
           <img
             class="logo"
             src="assets/images/logo/logo-horizontal.png"
