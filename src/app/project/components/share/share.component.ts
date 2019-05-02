@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
-import { ProjectService } from '../../services/project.service'
 import { SharedService } from '@core/shared.service'
+import { LoadingClickService } from '@shared/loading-when-clicked'
 import { Member } from 'app/members/members.service'
+import { ProjectService } from '../../services/project.service'
 
 @Component({
   selector: 'project-share-form',
@@ -9,10 +10,12 @@ import { Member } from 'app/members/members.service'
 })
 export class ShareComponent implements OnInit {
   public members: Member[] = []
+  message = null
 
   constructor(
     private projectService: ProjectService,
-    private dialog: SharedService
+    private dialog: SharedService,
+    private loading: LoadingClickService
   ) {}
 
   ngOnInit() {
@@ -22,9 +25,18 @@ export class ShareComponent implements OnInit {
   }
 
   invite(email: string) {
-    this.projectService.invite(email).then(member => {
-      this.dialog.showSucces('Usuario invitado!')
-    })
+    this.projectService
+      .invite(email)
+      .then(member => {
+        this.message = 'Invitacion enviada con exito'
+      })
+      .catch(() => {
+        this.message = 'La invitacion no se pudo enviar'
+      })
+      .then(() => {
+        this.loading.stopLoading('invite')
+        setTimeout(() => (this.message = null), 3000)
+      })
   }
 
   delete(member) {

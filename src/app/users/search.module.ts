@@ -1,19 +1,18 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
-  MatFormFieldModule,
-  MatInputModule,
-  MatButtonModule,
   MatAutocompleteModule,
-  MatIconModule
+  MatButtonModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule
 } from '@angular/material'
-
+import { OurAvatarModule } from '@shared/avatar/index.module'
+import { LoadingWhenClickedModule } from '@shared/loading-when-clicked'
 import { SearchComponent } from './components/search/search.component'
-
 import { indexRouting } from './index.routing'
 import { UserSearchSocketService } from './services/user-search-socket.service'
-import { OurAvatarModule } from '@shared/avatar/index.module'
 
 @NgModule({
   imports: [
@@ -26,7 +25,8 @@ import { OurAvatarModule } from '@shared/avatar/index.module'
     MatIconModule,
     MatButtonModule,
     OurAvatarModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    LoadingWhenClickedModule
   ],
   declarations: [SearchComponent],
   providers: [UserSearchSocketService],

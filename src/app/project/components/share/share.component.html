@@ -1,14 +1,18 @@
 <div class="">
-  <div class="align-right">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h1 class="primary mat-headline">Invita a colaborar en el proyecto a:</h1>
     <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
   </div>
-  <h1 class="primary mat-headline">Comparte el proyecto con:</h1>
+
   <div>
-    <search-user (onSubmit)="invite($event)"></search-user>
+    <search-user (onSubmit)="invite($event)"> </search-user>
+    <p class="align-center mat-body-1">{{ message }}</p>
+    <br />
+    <hr />
     <table class="table table-bordered">
       <tr>
         <th></th>
-        <th>Colaboradores del proyecto:</th>
+        <th>Actuales colaboradores:</th>
         <th></th>
       </tr>
 

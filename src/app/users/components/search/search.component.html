@@ -1,5 +1,5 @@
-<form>
-  <mat-form-field class="width-all" appearance="outline">
+<form class="row middle-xs">
+  <mat-form-field class="col-xs-10" appearance="outline">
     <input
       matInput
       [formControl]="searchControl"
@@ -17,16 +17,17 @@
         <span>{{ user.name }}</span>
       </mat-option>
     </mat-autocomplete>
-    <button
-      matSuffix
-      mat-icon-button
-      aria-label="Invitar"
-      color="primary"
-      mat-flat-button
-      (click)="invite($event)"
-      *ngIf="searchControl.valid"
-    >
-      <mat-icon>done</mat-icon>
-    </button>
   </mat-form-field>
+  <button
+    mat-flat-button
+    aria-label="Invitar"
+    color="primary"
+    mat-icon-button
+    (click)="invite($event)"
+    [disabled]="!searchControl.valid"
+    app-loading-clicked
+    identifierLoading="invite"
+  >
+    <mat-icon>send</mat-icon>
+  </button>
 </form>

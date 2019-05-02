@@ -1,26 +1,21 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { Routes, RouterModule } from '@angular/router'
-
+import { NgModule } from '@angular/core'
+import { FlexLayoutModule } from '@angular/flex-layout'
 import {
   MatButtonModule,
-  MatIconModule,
   MatDialogModule,
-  MatTooltipModule,
-  MatMenuModule
+  MatIconModule,
+  MatMenuModule,
+  MatTooltipModule
 } from '@angular/material'
-import { FlexLayoutModule } from '@angular/flex-layout'
-
-import { SearchUsersModule } from '../users/search.module'
-import { KernelModule } from '@shared/kernel/kernel.module'
-import { NotImplementedModule } from '@shared/not-implemented/index.module'
-import { LoadingWhenClickedModule } from '@shared/loading-when-clicked'
+import { RouterModule, Routes } from '@angular/router'
 import { OurAvatarModule } from '@shared/avatar/index.module'
+import { KernelModule } from '@shared/kernel/kernel.module'
+import { LoadingWhenClickedModule } from '@shared/loading-when-clicked'
+import { NotImplementedModule } from '@shared/not-implemented/index.module'
 import { RenderCtrlModule } from '@shared/render-ctrl/index.module'
-
 import { ProjectDetailComponent } from './components/detail/detail.component'
 import { SessionsListComponent } from './components/sessions-list/index.component'
-import { ShareComponent } from './components/share/share.component'
 
 const routes: Routes = [{ path: '', component: ProjectDetailComponent }]
 
@@ -34,7 +29,6 @@ const routes: Routes = [{ path: '', component: ProjectDetailComponent }]
     MatTooltipModule,
     MatMenuModule,
     FlexLayoutModule,
-
     NotImplementedModule,
     KernelModule,
     LoadingWhenClickedModule,
