@@ -65,9 +65,14 @@ export class ChatComponent implements AfterViewInit {
   close() {
     this.closeChat.emit()
   }
+
   save() {
-    this.chatService.addMessage(this.message, this.sessionId)
-    this.message = ''
+    const text = this.message.trim()
+
+    if (text) {
+      this.chatService.addMessage(text, this.sessionId)
+      this.message = ''
+    }
   }
 
   get placeholder() {
