@@ -69,7 +69,7 @@ export class ChatComponent implements AfterViewInit {
   save() {
     const text = this.message.trim()
 
-    if (text) {
+    if (text.length > 0) {
       this.chatService.addMessage(text, this.sessionId)
       this.message = ''
     }
