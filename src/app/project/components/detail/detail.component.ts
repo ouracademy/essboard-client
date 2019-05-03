@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material'
-import { Observable } from 'rxjs/Observable'
-
-import { Project, Session } from '@models/project'
-import { ProjectService } from '../../services/project.service'
+import { ActivatedRoute, Router } from '@angular/router'
 import { SharedService } from '@core/shared.service'
-import { SessionService } from 'app/sessions/services/session.service'
+import { Project, Session } from '@models/project'
 import { LoadingClickService } from '@shared/loading-when-clicked'
+import { SessionService } from 'app/sessions/services/session.service'
+import { Observable } from 'rxjs/Observable'
+import { ProjectService } from '../../services/project.service'
 
 /*
    <mat-form-field appearance="outline">
@@ -50,16 +49,18 @@ export class ProjectDetailComponent implements OnInit {
   selectedSession: Session
   optionsRender = {
     message:
-      'Tu proyecto aun no tiene sesiones, empieza creando uno haciendo click',
+      'Crea una sesión, para conocer cómo está tu proyecto y qué metas debes lograr.',
     image: 'assets/images/meeting.png',
-    addButton: { message: 'Aquí' }
+    addButton: { message: 'Haciendo click aquí' }
   }
 
   constructor(
     private loading: LoadingClickService,
     private service: ProjectService,
     private sharedService: SharedService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router,
+    private currentRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -69,7 +70,12 @@ export class ProjectDetailComponent implements OnInit {
   addSession(project) {
     this.sessionService
       .addSession(project.id)
-      .then(() => this.loading.stopLoading('addSession'))
+      .then(session => {
+        this.loading.stopLoading('addSession')
+        this.router.navigate(['sessions', session._id], {
+          relativeTo: this.currentRoute
+        })
+      })
       .catch(error => {
         this.loading.stopLoading('addSession')
         this.sharedService.showError(

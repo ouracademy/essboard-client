@@ -1,11 +1,11 @@
 import {
-  Component,
-  OnInit,
-  ContentChild,
   AfterContentInit,
+  Component,
+  ContentChild,
+  EventEmitter,
   Input,
-  Output,
-  EventEmitter
+  OnInit,
+  Output
 } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 
@@ -28,7 +28,7 @@ export interface DataList {
           <br />
           <div class="mat-body-2">
             {{ options.message || 'No se encontraron resultados' }}
-            <span *ngIf="options.addButton">
+            <span class="pad-0-5" *ngIf="options.addButton">
               <button
                 mat-stroked-button
                 color="accent"
