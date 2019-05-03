@@ -13,9 +13,13 @@ import { Component, OnInit } from '@angular/core'
 })
 export class StepsComponent implements OnInit {
   steps = [
-    { label: 'Estado actual', path: 'holistic-view', icon: 'looks_one' },
     {
-      label: 'Determina tu estado',
+      label: 'Mira como va tu proyecto',
+      path: 'holistic-view',
+      icon: 'looks_one'
+    },
+    {
+      label: 'Evalúa tu proyecto',
       path: 'set-state',
       icon: 'looks_two'
     }
