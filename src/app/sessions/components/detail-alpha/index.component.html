@@ -11,12 +11,6 @@
         (onChooseState)="onSelectedState($event)"
       >
       </alpha-card>
-      <state-card-view
-        *ngIf="stateTemplate"
-        [state]="stateTemplate"
-        [alpha]="alphaTemplate"
-        class="row col-xs-12 col-md-6 col-sm-6"
-      ></state-card-view>
     </div>
     <div class="row col-xs-12 col-sm-12  col-md-8" *ngIf="stateTemplate">
       <checklist [stateTemplate]="stateTemplate"></checklist>
