@@ -22,7 +22,7 @@ export class ChatComponent implements AfterViewInit {
 
   @Output() closeChat = new EventEmitter<any>()
 
-  contentIsVisible = true
+  contentIsVisible = false
   messages: Message[] = []
   message = ''
   skip = 0

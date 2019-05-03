@@ -27,7 +27,6 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
   alphas: AlphaTemplate[]
   selectedAlpha: AlphaTemplate = null
 
-  isChatVisible = true
   isSideNavOpen = true
   isOnline = true
 
@@ -61,7 +60,6 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      console.log(params)
       this.sessions.selectedSession = params['id']
     })
 
