@@ -43,7 +43,9 @@ export class ChatComponent implements AfterViewInit {
           this.canPaginate = canPaginate
           this.messages = data
           if (scrollToBottom) {
-            this.scrollHeight = this.myScrollContainer.nativeElement.scrollHeight
+            this.scrollHeight = this.myScrollContainer
+              ? this.myScrollContainer.nativeElement.scrollHeight
+              : null
           } else {
             this.scrollHeight = null
           }

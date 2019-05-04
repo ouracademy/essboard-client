@@ -15,7 +15,7 @@ const routes: Routes = [
     component: SessionComponent,
 
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'set-state' },
+      { path: '', pathMatch: 'full', redirectTo: 'set-state/1' },
       { path: 'holistic-view', component: RadiatorInformationComponent },
       {
         path: 'set-state',

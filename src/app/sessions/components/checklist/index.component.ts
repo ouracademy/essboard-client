@@ -1,15 +1,19 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core'
-import { StateTemplate, CheckpointTemplate } from '../detail-alpha/kernel'
-import { SessionService } from '../../services/session.service'
-import { Member } from 'app/members/members.service'
-import { VotesService, Opinion } from 'app/sessions/services/votes.service'
+import { Component, Input, OnChanges, OnInit } from '@angular/core'
 import {
   MatButtonToggleChange,
   MatDialog,
   MatDialogRef
 } from '@angular/material'
-import { CheckDetailComponent } from '../check-detail/index.component'
+import { Member } from 'app/members/members.service'
+import { Opinion, VotesService } from 'app/sessions/services/votes.service'
 import { Subscription } from 'rxjs'
+import { SessionService } from '../../services/session.service'
+import { CheckDetailComponent } from '../check-detail/index.component'
+import {
+  AlphaTemplate,
+  CheckpointTemplate,
+  StateTemplate
+} from '../detail-alpha/kernel'
 
 interface Checkpoint {
   id: string
@@ -25,6 +29,8 @@ interface Checkpoint {
 export class ChecklistComponent implements OnInit, OnChanges {
   @Input()
   stateTemplate: StateTemplate
+  @Input()
+  alphaTemplate: AlphaTemplate
   isReadonly: boolean
   checklist: Checkpoint[] = []
   members: Member[] = []

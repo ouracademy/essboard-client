@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core'
+import { MatDialog, MatDialogRef } from '@angular/material'
 import { KernelService } from '@core/kernel-knowledge.service'
-import { AlphaTemplate } from '../detail-alpha/kernel'
-import { EvaluationService } from 'app/sessions/services/evaluation.service'
 import { SharedService } from '@core/shared.service'
+import { EvaluationService } from 'app/sessions/services/evaluation.service'
 import { SessionService } from 'app/sessions/services/session.service'
 import { combineLatest } from 'rxjs'
+import { AlphaTemplate } from '../detail-alpha/kernel'
 import { EvaluationComponent } from '../evaluation/index.component'
-import { MatDialogRef, MatDialog } from '@angular/material'
 
 @Component({
   selector: 'set-state',
@@ -18,6 +18,10 @@ import { MatDialogRef, MatDialog } from '@angular/material'
         right: auto !important;
         bottom: 25px !important;
         position: fixed !important;
+      }
+
+      .active--alpha {
+        background: currentColor;
       }
     `
   ]

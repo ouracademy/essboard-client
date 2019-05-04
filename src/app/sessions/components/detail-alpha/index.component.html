@@ -1,23 +1,25 @@
 <div *ngIf="alphaTemplate" class="row">
-  <div class="row between-xs start-xs col-xs-12">
-    <div class="row col-md-4 col-sm-12 col-xs-12">
+  <div class="row start-xs col-xs-12">
+    <div class="row start-xs col-xs-12 col-md-2 col-sm-12 ">
       <alpha-card
         *ngIf="alphaTemplate && states"
-        class="col-xs-12 col-md-6 col-sm-6"
+        class="col-xs-12"
         [isReadonly]="!sharedService.isOnline"
         [alpha]="alphaTemplate"
         [states]="states"
-        [contextMenu]="contextMenu"
         (onChooseState)="onSelectedState($event)"
       >
       </alpha-card>
     </div>
-    <div class="row col-xs-12 col-sm-12  col-md-8" *ngIf="stateTemplate">
-      <checklist [stateTemplate]="stateTemplate"></checklist>
+    <div
+      class="row start-xs col-xs-12  col-md-10 col-sm-12 "
+      *ngIf="stateTemplate"
+    >
+      <checklist
+        class="col-xs-12"
+        [alphaTemplate]="alphaTemplate"
+        [stateTemplate]="stateTemplate"
+      ></checklist>
     </div>
   </div>
 </div>
-
-<context-menu #contextMenu>
-  <ng-template contextMenuItem> Marcar como meta </ng-template>
-</context-menu>

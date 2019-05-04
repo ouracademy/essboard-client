@@ -1,12 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
-import { SessionService } from '../../services/session.service'
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { KernelService } from '@core/kernel-knowledge.service'
-
-import { ActivatedRoute, Params } from '@angular/router'
-import { AlphaTemplate, StateTemplate } from './kernel'
-
 import { SharedService } from '@core/shared.service'
 import { ContextMenuComponent } from 'ngx-contextmenu'
+import { SessionService } from '../../services/session.service'
+import { AlphaTemplate, StateTemplate } from './kernel'
 
 @Component({
   selector: 'detail-alpha',
