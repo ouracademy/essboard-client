@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core'
-import { Project } from '@models/project'
-import { ProjectsService } from '../../services/projects.service'
-import { AuthService } from '@core/auth.service'
-import { User } from '@models/user'
 import { MatDialog } from '@angular/material'
-import { CreateComponent } from '../create/create.component'
+import { AuthService } from '@core/auth.service'
+import { Project } from '@models/project'
+import { User } from '@models/user'
 import { DataList } from '@shared/render-ctrl/index.component'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { ProjectsService } from '../../services/projects.service'
+import { CreateComponent } from '../create/create.component'
 
 @Component({
   selector: 'project-portfolio',
@@ -16,7 +16,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
         <span class="primary mat-title">{{ title }}</span>
         <button mat-raised-button class="main" (click)="createProject()">
           <mat-icon>add</mat-icon>
-          Nuevo proyecto
+          create project
         </button>
       </div>
       <app-render-ctrl
@@ -38,11 +38,11 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
   ]
 })
 export class ProjectPortfolioComponent {
-  title = 'Mis proyectos'
+  title = 'My projects'
   optionsRender = {
-    message: 'Aún no tienes proyectos, empieza creando uno haciendo click',
+    message: `You don't have any projects yet, start by creating one by clicking`,
     image: 'assets/images/project.png',
-    addButton: { message: 'Aquí' }
+    addButton: { message: 'Here' }
   }
 
   constructor(private matDialog: MatDialog) {}

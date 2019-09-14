@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit {
   private onError(error: any) {
     this.sharedService.showError(
       'Upps!',
-      `Essboard no recognize your credentials`
+      `Essboard couldn't recognize your credentials`
     )
   }
 }
