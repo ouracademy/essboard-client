@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { AuthService } from '@core/auth.service';
+import { Component, Input, OnInit } from '@angular/core'
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
+import { AuthService } from '@core/auth.service'
 
 @Component({
   selector: 'app-landing',
@@ -24,20 +24,14 @@ import { AuthService } from '@core/auth.service';
   ]
 })
 export class LandingComponent implements OnInit {
-  labels = {
-    slogan: 'Descubre como va tu desarrollo',
-    description:
-      'Essboard te ayuda a determinar el estado y las metas de tu proyecto ' +
-      'tomando en cuenta las opiniones de tu equipo y cada una de las dimensiones esenciales de un proyecto'
-  }
   kernelIcons = [
-    { name: 'Oportunidad', x: -134, y: -10 },
-    { name: 'Interesado', x: -254, y: -130 },
-    { name: 'Requerimientos', x: -10, y: -254 },
-    { name: 'Sistema de Software', x: -10, y: -134 },
-    { name: 'Equipo', x: -130, y: -134 },
-    { name: 'Trabajo', x: -10, y: -10 },
-    { name: 'Forma de trabajo', x: -254, y: -10 }
+    { name: 'Opportunity', x: -134, y: -10 },
+    { name: 'Stakeholder', x: -254, y: -130 },
+    { name: 'Requirements', x: -10, y: -254 },
+    { name: 'Software System', x: -10, y: -134 },
+    { name: 'Team', x: -130, y: -134 },
+    { name: 'Work', x: -10, y: -10 },
+    { name: 'Way of working', x: -254, y: -10 }
   ]
   constructor(public auth: AuthService) {}
 
@@ -53,19 +47,18 @@ export class LandingComponent implements OnInit {
 @Component({
   selector: 'app-video',
   template: `
-  <div style="position: relative; padding-bottom: 56.25%; height: 0;">
-    <iframe
-      [src]="url"
-      frameborder="0"
-      webkitallowfullscreen
-      mozallowfullscreen
-      allowfullscreen
-      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-    ></iframe>
-  </div>
+    <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+      <iframe
+        [src]="url"
+        frameborder="0"
+        webkitallowfullscreen
+        mozallowfullscreen
+        allowfullscreen
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+      ></iframe>
+    </div>
   `
 })
-
 export class VideoComponent {
   url: SafeResourceUrl
 
