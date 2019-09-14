@@ -6,7 +6,7 @@
     position="end"
   >
     <div fxLayout="row" class="pad-1" fxLayoutAlign="space-between center">
-      <span>Actividades</span>
+      <span>Activities</span>
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon class="md-24">close</mat-icon>
       </button>
@@ -22,7 +22,7 @@
   <mat-sidenav-content>
     <div class="row row-detail between-xs middle-xs pad-0-5">
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <span class="mat-body-1">Sesión </span>
+        <span class="mat-body-1">Session </span>
         <div class="pad-0-5">
           <span> {{ session.createdAt | date: "d 'de' MMMM" }}</span>
 
@@ -36,7 +36,7 @@
               app-prevent-offline
               (click)="finishSession()"
             >
-              Dar por concluído
+              End the session
             </button>
           </ng-template>
         </div>
@@ -53,12 +53,12 @@
         </button>
         <button
           mat-icon-button
-          matTooltip="Ver actividades"
+          matTooltip="See the activities"
           (click)="sidenav.toggle()"
         >
           <mat-icon class="md-24">history</mat-icon>
         </button>
-        <a class="link info" (click)="goToProject()">Ir a mi proyecto</a>
+        <a class="link info" (click)="goToProject()">Go to project page</a>
       </div>
     </div>
     <session-steps></session-steps>

@@ -14,35 +14,16 @@ import { Component, OnInit } from '@angular/core'
 export class StepsComponent implements OnInit {
   steps = [
     {
-      label: 'Mira como va tu proyecto',
+      label: 'See your proyect holisticly',
       path: 'holistic-view',
       icon: 'looks_one'
     },
     {
-      label: 'Evalúa tu proyecto',
+      label: 'Monitor your project',
       path: 'set-state',
       icon: 'looks_two'
     }
-    // { label: 'Decide como lograrlo', path: '', icon: 'looks_4' }
   ]
-
-  //   <mat-tab>
-  //   <div class="content-tab">
-  //     <set-goal-state
-  //       [kernel]="session.kernel"
-  //       [sessionId]="session.id"
-  //     ></set-goal-state>
-  //   </div>
-  // </mat-tab>
-
-  // <mat-tab>
-  //   <div class="content-tab">
-  //     <how-reach-goals
-  //       [sessionId]="session.id"
-  //       [sessionNumber]="session.num"
-  //     ></how-reach-goals>
-  //   </div>
-  // </mat-tab>
 
   constructor() {}
 
