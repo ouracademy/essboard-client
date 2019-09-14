@@ -79,7 +79,7 @@ export class ChatComponent implements AfterViewInit {
 
   get placeholder() {
     return this.isReadonly
-      ? 'Este chat esta en modo lectura. Le puede servir como auditoria.'
-      : 'Escriba aqui su mensaje'
+      ? 'This chat is in read mode. It can serve you as an audit.'
+      : 'Write your message here'
   }
 }
