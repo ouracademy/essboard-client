@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-
 import { AuthService } from '@core/auth.service'
 import { SharedService } from '@core/shared.service'
-import { Credentials } from '@models/user'
+
 @Component({
   selector: 'app-login',
   template: `
@@ -17,19 +16,19 @@ import { Credentials } from '@models/user'
                 matInput
                 formControlName="name"
                 required
-                placeholder="Nombre de usuario"
+                placeholder="Username"
               />
             </mat-form-field>
             <mat-form-field
               appearance="outline"
               class="full-width"
-              placeholder="Correo electrónico"
+              placeholder="Email"
               required
             >
               <input
                 matInput
                 formControlName="email"
-                placeholder="Correo electrónico"
+                placeholder="Email"
                 required
               />
             </mat-form-field>
@@ -38,7 +37,7 @@ import { Credentials } from '@models/user'
                 matInput
                 type="password"
                 formControlName="password"
-                placeholder="Contraseña"
+                placeholder="Password"
                 required
               />
             </mat-form-field>
@@ -49,14 +48,16 @@ import { Credentials } from '@models/user'
               [disabled]="!signupForm.valid"
               mat-raised-button
             >
-              Registrate
+              SIGN UP
             </button>
           </form>
           <br />
           <div>
             <span
-              ><a class="info mat-body-1" routerLink="/login"
-                >Ya tengo una cuenta</a
+              >Already have an account?<a
+                class="info mat-body-1"
+                routerLink="/login"
+                >Login here</a
               >
             </span>
           </div>
@@ -113,7 +114,7 @@ export class SignupComponent implements OnInit {
   private onError(error: any) {
     this.sharedService.showError(
       'Upps!',
-      `Ya existe un usuario para esa cuenta`
+      `Already there is a user with your username`
     )
   }
 }
