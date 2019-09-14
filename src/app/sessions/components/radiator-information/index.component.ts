@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { SessionService } from 'app/sessions/services/session.service'
 import { Session } from '@models/project'
+import { SessionService } from 'app/sessions/services/session.service'
 import { Observable } from 'rxjs'
 
 @Component({
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs'
   template: `
     <div class="content-tab">
       <div class="row middle-xs center-xs">
-        <h2 class="primary">Mira como va tu proyecto</h2>
+        <h2 class="primary">See the state by each project dimension</h2>
       </div>
       <div class="row center-xs">
         <app-radar-chart
