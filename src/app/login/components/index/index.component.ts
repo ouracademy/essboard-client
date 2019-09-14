@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-
 import { AuthService } from '@core/auth.service'
 import { SharedService } from '@core/shared.service'
 import { Credentials } from '@models/user'
 import { LoadingClickService } from '@shared/loading-when-clicked'
+
 @Component({
   selector: 'app-login',
   template: `
@@ -22,11 +22,7 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
               appearance="outline"
               class="width-all"
             >
-              <input
-                matInput
-                formControlName="email"
-                placeholder="Correo Electrónico"
-              />
+              <input matInput formControlName="email" placeholder="Email" />
               <mat-error errorMessage="email"></mat-error>
             </mat-form-field>
             <mat-form-field
@@ -37,7 +33,7 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
               <input
                 matInput
                 formControlName="password"
-                placeholder="Contraseña"
+                placeholder="Password"
                 type="password"
               />
               <mat-error
@@ -55,14 +51,15 @@ import { LoadingClickService } from '@shared/loading-when-clicked'
               app-prevent-offline
               identifierLoading="login"
             >
-              Ingresa
+              LOG IN
             </button>
           </form>
           <br />
           <div>
             <span
-              ><a class="info mat-body-1" routerLink="/signup"
-                >No tienes una cuenta</a
+              >Don't have an account?
+              <a class="info mat-body-1" routerLink="/signup"
+                >Sign up here!</a
               ></span
             >
           </div>
@@ -121,8 +118,7 @@ export class LoginComponent implements OnInit {
   private onError(error: any) {
     this.sharedService.showError(
       'Upps!',
-      `Lo sentimos, Essboard no renoce
-    a estas credenciales como un usuario.`
+      `Essboard no recognize your credentials`
     )
   }
 }
