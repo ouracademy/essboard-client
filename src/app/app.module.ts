@@ -1,6 +1,5 @@
-import { CommonModule, registerLocaleData } from '@angular/common'
-import localeEs from '@angular/common/locales/es'
-import { LOCALE_ID, NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
 import { GestureConfig } from '@angular/material'
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -10,8 +9,6 @@ import { TimeagoModule } from 'ngx-timeago'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { CoreModule } from './core-module/index.module'
-
-registerLocaleData(localeEs)
 
 @NgModule({
   imports: [
@@ -26,7 +23,6 @@ registerLocaleData(localeEs)
   ],
   declarations: [AppComponent],
   providers: [
-    { provide: LOCALE_ID, useValue: 'es' },
     LoadingClickService,
     {
       // See https://github.com/angular/material2/issues/4278#issuecomment-317832711
