@@ -28,10 +28,10 @@ export class ShareComponent implements OnInit {
     this.projectService
       .invite(email)
       .then(member => {
-        this.message = 'Invitacion enviada con exito'
+        this.message = 'Invitation sended'
       })
       .catch(() => {
-        this.message = 'La invitacion no se pudo enviar'
+        this.message = `Something failed, invitation couldn't be sended, try it again`
       })
       .then(() => {
         this.loading.stopLoading('invite')
