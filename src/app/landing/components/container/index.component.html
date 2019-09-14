@@ -3,8 +3,13 @@
   <section>
     <div fxLayout="row" fxLayoutAlign="center">
       <div fxFlex.gt-sm="60" class="align-center">
-        <h1 class="mat-display-3 primary pad-top-4">{{ labels.slogan }}</h1>
-        <h2 class="mat-headline info">{{ labels.description }}</h2>
+        <h1 class="mat-display-3 primary pad-top-4">
+          Discover how your development is going
+        </h1>
+        <h2 class="mat-headline info">
+          Essboard helps determine your project status and goals by taking into
+          account your team opinions in the Essential dimensions of any project
+        </h2>
         <div>
           <div
             *ngIf="!auth.isLoggedIn; else userLogged"
@@ -13,9 +18,9 @@
             fxLayoutAlign="center"
             class="pad-1"
           >
-            <a mat-raised-button color="accent" routerLink="/login">Ingresa </a>
+            <a mat-raised-button color="accent" routerLink="/login">Sign in </a>
             <a mat-stroked-button color="accent" routerLink="/signup"
-              >Registrate
+              >Sign up
             </a>
           </div>
           <ng-template #userLogged>
@@ -27,11 +32,6 @@
   </section>
   <section fxLayout="row" fxLayoutAlign="center">
     <div fxLayout="row" fxLayoutAlign="center center" fxFlex.gt-sm="70">
-      <h1 class="col-xs-4 mat-body-2 info ">
-        Si estas en un desarrollo software, debes evaluar los elementos que se
-        muestran a la derecha, y no lo decimos solo nosotros, sino personas muy
-        experimentadas, los cuales tradujeron estos elementos en Essence.
-      </h1>
       <div
         class="col-xs-8"
         fxLayout="column"
