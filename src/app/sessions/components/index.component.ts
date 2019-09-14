@@ -6,7 +6,7 @@ import { KernelService } from '@core/kernel-knowledge.service'
 import { SharedService } from '@core/shared.service'
 import { Session } from '@models/project'
 import { TimeagoIntl } from 'ngx-timeago'
-import { strings as spanishStrings } from 'ngx-timeago/language-strings/es'
+import { strings as englishStrings } from 'ngx-timeago/language-strings/en'
 import { flatMap } from 'rxjs/operators'
 import { Subscription } from 'rxjs/Subscription'
 import { EventsService } from '../services/events.service'
@@ -54,7 +54,7 @@ export class SessionComponent implements OnInit, CanLeaveChannel, OnDestroy {
           : { width: '370px', mode: 'side', isChatVisible: true }
     })
 
-    timeAgoIntl.strings = spanishStrings
+    timeAgoIntl.strings = englishStrings
     timeAgoIntl.changes.next()
   }
 
