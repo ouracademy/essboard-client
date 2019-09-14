@@ -27,7 +27,7 @@ interface Notification {
       </button>
       <mat-menu #menu="matMenu">
         <div mat-menu-item *ngIf="notifications.length < 1">
-          Aún no tienes notificaciones
+          You don't have notifications yet
         </div>
         <button
           mat-menu-item

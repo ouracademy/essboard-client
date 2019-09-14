@@ -1,6 +1,5 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
-
 import { AuthService } from '@core/auth.service'
 
 @Component({
@@ -18,8 +17,8 @@ import { AuthService } from '@core/auth.service'
       y-position="below"
       #menu="matMenu"
     >
-      <button mat-menu-item routerLink="/me/projects">Mis proyectos</button>
-      <button mat-menu-item (click)="logout()">Salir</button>
+      <button mat-menu-item routerLink="/me/projects">My projects</button>
+      <button mat-menu-item (click)="logout()">Sign out</button>
     </mat-menu>
   `,
   styles: [
