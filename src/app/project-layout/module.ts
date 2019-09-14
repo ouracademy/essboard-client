@@ -40,7 +40,7 @@ import { Observable } from 'rxjs'
           <div *ngIf="(project$ | async) as project">
             <button mat-raised-button color="primary" (click)="share(project)">
               <mat-icon class="md-24">people</mat-icon>
-              &nbsp; <span class="mat-body-1">Compartir</span>
+              &nbsp; <span class="mat-body-1">Share</span>
             </button>
           </div>
           <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -54,7 +54,7 @@ import { Observable } from 'rxjs'
           >
             <button mat-menu-item (click)="delete()" app-not-implemented>
               <mat-icon class="md-24">delete_forever</mat-icon>
-              Elimina este proyecto
+              Delete project
             </button>
           </mat-menu>
           <app-notifications></app-notifications>
