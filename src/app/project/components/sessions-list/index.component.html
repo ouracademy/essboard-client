@@ -2,10 +2,8 @@
   <div class="mar-1 selectable shadow pad-0-5">
     <div class="row middle-xs">
       <mat-icon *ngIf="!!session.endDate">lock</mat-icon>
-      <div class="row mat-body-1 primary">Sesión</div>
+      <div class="row mat-body-1 primary">Session</div>
     </div>
-    <p class="row info mat-caption">
-      {{ session.createdAt | date: "d 'de' MMMM" }}
-    </p>
+    <p class="row info mat-caption">{{ session.createdAt | date: 'MMMM d' }}</p>
   </div>
 </a>

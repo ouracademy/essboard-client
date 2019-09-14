@@ -1,22 +1,21 @@
 import {
+  AfterViewInit,
   Component,
-  OnInit,
-  Input,
   ElementRef,
-  ViewChild,
-  AfterViewInit
+  Input,
+  OnInit,
+  ViewChild
 } from '@angular/core'
 import { MediaObserver } from '@angular/flex-layout'
-import Chart from 'chart.js'
-import { randomColor } from '@shared/utils/random-color'
-import { SocketService } from '@core/socket.service'
 import { KernelService } from '@core/kernel-knowledge.service'
-import { combineLatest, from } from 'rxjs'
-
-import { format } from 'date-fns'
-import { ProjectService } from 'app/project/services/project.service'
-import { switchMap, filter } from 'rxjs/operators'
+import { SocketService } from '@core/socket.service'
 import { Session } from '@models/project'
+import { randomColor } from '@shared/utils/random-color'
+import { ProjectService } from 'app/project/services/project.service'
+import Chart from 'chart.js'
+import { format } from 'date-fns'
+import { combineLatest, from } from 'rxjs'
+import { filter, switchMap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-radar-chart',
@@ -129,7 +128,7 @@ const dataSet = (sessionStatus, alphas) => {
 
 const toRadarData = (session: any, alphas) => ({
   data: dataSet(session.status, alphas),
-  label: `Session ${format(session.date, 'DD/M')}`,
+  label: `Session ${format(session.date, 'MMM DD')}`,
   fill: true,
   backgroundColor: randomColor(session.id),
   pointBackgroundColor: 'rgb(255, 99, 132)',
