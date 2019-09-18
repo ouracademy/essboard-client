@@ -21,7 +21,7 @@
   <div>
     <div class="row middle-xs">
       <mat-icon>comment</mat-icon>
-      <h3 class="pad-1">Añadir comentario</h3>
+      <h3 class="pad-1">Add comment</h3>
     </div>
     <div class="row start-xs ">
       <app-our-avatar class="pad-0-3" size="30" [user]="me"></app-our-avatar>
@@ -36,11 +36,11 @@
       [disabled]="text.value.length === 0"
       (click)="saveComment(text)"
     >
-      Guardar
+      Save
     </button>
   </div>
 
-  <h3>Comentarios</h3>
+  <h3>Comments</h3>
 
   <div *ngFor="let comment of comments" class="comment row  start-xs">
     <app-our-avatar
@@ -54,8 +54,8 @@
         <div class="row ">
           <strong class="primary">{{ comment.updatedAt | timeago }}</strong>
           <span *ngIf="comment.from === me.id">
-            <a class="info pad-1" (click)="deleteComment(comment)">Eliminar</a>
-            <a class="info pad-1" (click)="activateEditable(comment)">Editar</a>
+            <a class="info pad-1" (click)="deleteComment(comment)">Delete</a>
+            <a class="info pad-1" (click)="activateEditable(comment)">Edit</a>
           </span>
         </div>
       </div>
@@ -75,7 +75,7 @@
           [disabled]="editText.value.length === 0"
           (click)="editComment(comment, editText.value)"
         >
-          Guardar
+          Save
         </button>
         <button
           class="pad-0-5"
@@ -90,5 +90,5 @@
   </div>
 </div>
 <div mat-dialog-actions class="row end-xs">
-  <button mat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>Close</button>
 </div>

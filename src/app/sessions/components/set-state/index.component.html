@@ -1,7 +1,7 @@
 <div class="content-tab">
   <div class="row middle-xs center-xs">
     <h2 class="primary  col-xs-12">
-      Evalúa tu proyecto tomando en cuenta estos aspectos:
+      Considere these dimensions in your proyect:
     </h2>
   </div>
   <div class="row middle-xs center-xs">
@@ -22,17 +22,17 @@
       mat-fab
       *ngIf="!isEvaluating"
       (click)="startEvaluation()"
-      matTooltip="Iniciar evaluación"
+      matTooltip="Start evaluation"
     >
-      <mat-icon aria-label="Iniciar evaluación">timer</mat-icon>
+      <mat-icon aria-label="Start evaluation">timer</mat-icon>
     </button>
     <button
       mat-fab
       *ngIf="isEvaluating"
       (click)="stopEvaluation()"
-      matTooltip="Dejar de evaluar"
+      matTooltip="Stop evaluation"
     >
-      <mat-icon aria-label="Dejar de evaluar">timer_off</mat-icon>
+      <mat-icon aria-label="Stop evaluation">timer_off</mat-icon>
     </button>
   </div>
 </div>
