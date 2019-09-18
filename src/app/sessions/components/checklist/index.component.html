@@ -1,7 +1,7 @@
 <h3 class=" mat-body-2 col-xs-12">
-  See if <strong class="primary">{{ alphaTemplate.name }} </strong> achieve
-  <strong class="primary">{{ stateTemplate.name }}</strong> state, evaluando
-  cada una de las siguientas metas:
+  Evaluate these state goals and know if
+  <strong class="primary">{{ alphaTemplate.name }} </strong> achieve
+  <strong class="primary">{{ stateTemplate.name }}</strong> state:
 </h3>
 <mat-card *ngIf="stateTemplate">
   <div class="row col-xs-12 between-xs middle-xs">
@@ -29,13 +29,13 @@
               [value]="opinionOf(checkpointTemplate)"
               (change)="emitOpinion(checkpointTemplate, $event)"
             >
-              <mat-button-toggle value="done" matTooltip="ha sido logrado">
+              <mat-button-toggle value="done" matTooltip="has been achieved">
                 <mat-icon>{{ icons.done }}</mat-icon>
               </mat-button-toggle>
-              <mat-button-toggle value="goal" matTooltip="por hacer">
+              <mat-button-toggle value="goal" matTooltip="to do">
                 <mat-icon>{{ icons.goal }}</mat-icon>
               </mat-button-toggle>
-              <mat-button-toggle value="nothing" matTooltip="aun no lo defino">
+              <mat-button-toggle value="nothing" matTooltip="not defined yed">
                 <mat-icon>{{ icons.nothing }}</mat-icon>
               </mat-button-toggle>
             </mat-button-toggle-group>

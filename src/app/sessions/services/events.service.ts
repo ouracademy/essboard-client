@@ -56,25 +56,27 @@ export class EventsService {
     const { data } = event
     switch (event.type) {
       case 'PROJECT_CREATED':
-        return 'creo el proyecto'
+        return 'created the project'
       case 'MEMBER_INVITED':
-        return `invitó a ${data.to} a ser ${data.role}`
+        return `invited to ${data.to} to be a ${data.role}`
       case 'MEMBER_JOINED':
-        return `se unió como ${data.role}`
+        return `joined as  ${data.role}`
       case 'MEMBER_REMOVED':
         return await this.formatEventRemoved(data)
       case 'OPINION_EMITED':
         return data.is === 'nothing'
-          ? `prefirio no emitir una opinion sobre el check ${data.for}`
-          : `opinó que el check ${data.for} ${
-              data.is === 'goal' ? 'es una meta' : 'ha sido logrado'
+          ? `prefer not emit a opinion about ${data.for} check`
+          : `emitted an opinion that the check ${data.for} ${
+              data.is === 'goal' ? 'is a goal' : 'is achieved'
             }`
       case 'EVALUATION_STARTED':
-        return `inicio la evaluación que durara ${formatTime(data.duration)}`
+        return `started the evaluation (with a duration of ${formatTime(
+          data.duration
+        )})`
       case 'EVALUATION_FINISHED':
-        return ` acabo la evaluación`
+        return `stopped the evaluation`
       case 'COMMENT_ADDED':
-        return `agregó un comentario al ${data.for}`
+        return `added a comment to the ${data.for} checkpoint`
     }
 
     throw new Error(`Event doesn't have a format ${JSON.stringify(event)}`)
@@ -82,7 +84,7 @@ export class EventsService {
 
   private async formatEventRemoved(data: any) {
     const user = await this.getUser(data.to)
-    return `ha removido a ${user.name} del equipo`
+    return `has removed ${user.name} from the project`
   }
 
   getUser(userId): Promise<{ name: string }> {

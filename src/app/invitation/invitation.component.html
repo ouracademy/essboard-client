@@ -2,16 +2,16 @@
   <div *ngIf="invitation">
     <div background-color="#5fbed0" padding-bottom="5px" padding-top="0">
       <h3 class="mat-display-1">
-        ¡Hola!, <strong>{{ invitation.from.name }}</strong> te ha invitado
-        unirse al proyecto <strong>{{ invitation.project.name }}</strong>
+        Hi!, <strong>{{ invitation.from.name }}</strong> invited you to join the
+        <strong>{{ invitation.project.name }}</strong> project.
       </h3>
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
       <button mat-flat-button color="primary" (click)="accept(invitation)">
-        Aceptar invitación
+        Accept invitation
       </button>
       <button mat-stroked-button (click)="decline(invitation.id)">
-        Rechazar
+        Decline
       </button>
     </div>
     <!-- <div>

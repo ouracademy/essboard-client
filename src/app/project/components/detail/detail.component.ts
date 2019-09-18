@@ -7,30 +7,6 @@ import { SessionService } from 'app/sessions/services/session.service'
 import { Observable } from 'rxjs/Observable'
 import { ProjectService } from '../../services/project.service'
 
-/*
-   <mat-form-field appearance="outline">
-      <input
-        matInput
-        placeholder="Nombre del proyecto"
-        maxlength="200"
-        [(ngModel)]="project.name"
-        #name
-        (keyup.enter)="setName(name.value)"
-        (blur)="setName(name.value)"
-      />
-    </mat-form-field>
-    <mat-form-field appearance="outline"
-      ><input
-        matInput
-        placeholder="Descripcion del proyecto"
-        maxlength="350"
-        [(ngModel)]="project.description"
-        #description
-        (keyup.enter)="setDescription(description.value)"
-        (blur)="setDescription(description.value)"
-      />
-    </mat-form-field>
-*/
 @Component({
   selector: 'project-detail',
   templateUrl: 'detail.component.html',
@@ -48,10 +24,9 @@ export class ProjectDetailComponent implements OnInit {
   sessions: any[] = []
   selectedSession: Session
   optionsRender = {
-    message:
-      'Crea una sesión, para conocer cómo está tu proyecto y qué metas debes lograr.',
+    message: 'Create a session, to know how is the project being',
     image: 'assets/images/meeting.png',
-    addButton: { message: 'Haciendo click aquí' }
+    addButton: { message: 'Click here' }
   }
 
   constructor(
@@ -79,8 +54,8 @@ export class ProjectDetailComponent implements OnInit {
       .catch(error => {
         this.loading.stopLoading('addSession')
         this.sharedService.showError(
-          'Upps!',
-          'Aun no haz concluido tu actual sesión'
+          'Oops!',
+          'You have not finished your current session'
         )
       })
   }
