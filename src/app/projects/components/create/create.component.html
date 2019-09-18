@@ -1,12 +1,12 @@
 <div>
-  <h2 class="primary mat-title">Cree su proyecto</h2>
+  <h2 class="primary mat-title">Create new project</h2>
   <div>
     <form (ngSubmit)="onSubmit()" #projectForm="ngForm">
       <mat-form-field appearance="outline" class="width-all"
         ><input
           matInput
           class="full-width"
-          placeholder="Nombre"
+          placeholder="Name"
           required
           [(ngModel)]="name"
           name="name"
@@ -18,7 +18,7 @@
         ><input
           matInput
           class="full-width"
-          placeholder="Descripcion"
+          placeholder="Description"
           required
           [(ngModel)]="description"
           name="description"
@@ -35,7 +35,7 @@
           color="accent"
           class=" mar-0-1"
         >
-          Guardar
+          Save
         </button>
         <button
           type="button"
@@ -44,7 +44,7 @@
           class=" mar-0-1"
           mat-dialog-close
         >
-          Cancelar
+          Cancel
         </button>
       </div>
     </form>
