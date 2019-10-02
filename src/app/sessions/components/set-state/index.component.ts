@@ -56,7 +56,7 @@ export class SetStateComponent implements OnInit {
       const content = status.isEvaluating
         ? {
             type: 'info',
-            message: 'Estas en plena evaluación'
+            message: 'In evaluation.'
           }
         : null
       this.sharedService.showToast(content)
