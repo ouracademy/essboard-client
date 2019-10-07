@@ -24,10 +24,10 @@
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <span class="mat-body-1">Session </span>
         <div class="pad-0-5">
-          <span> {{ session.createdAt | date: "d 'de' MMMM" }}</span>
+          <span> {{ session.createdAt | date: 'MMMM d' }}</span>
 
           <span *ngIf="session.hasFinished; else notFinished">
-            a {{ session.endDate | date: "d 'de' MMMM" }}
+            to {{ session.endDate | date: 'MMMM d' }}
           </span>
           <ng-template #notFinished>
             <button
